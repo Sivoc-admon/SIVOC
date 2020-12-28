@@ -40,7 +40,7 @@
                                     <td>{{ $project->name }}</td>
                                     <td>{{ $project->client }}</td>
                                     <td>{{ $project->status }}</td>
-                                    <td><button type="button" class="btn btn-success">Editar</button></td>
+                                    <td><a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a></td>
                                 </tr>
                             @endforeach
                             
@@ -59,20 +59,45 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md6">
+            <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Estatus de Proyecto</h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 348px;" width="435" height="312" class="chartjs-render-monitor"></canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+        </div>
+    </div>
 @stop
 
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#tableProjects').DataTable({
-                /*dom: 'Bfrtip',
-                buttons: [
-                    'copyHtml5',
-                    'excelHtml5',
-                    'csvHtml5',
-                    'pdfHtml5'
-                ]*/
-            });
+            let statusGrafica="";
+            console.log('{{$projects}}');
+            console.log(JSON.parse('{{$projects}}'));
+            //JSON.parse(text[, reviver]);
+            /*for each (var projects in project) {
+                console.log('id:'+'{{ $project->id }}', 'estatus:'+'{{ $project->status }}');
+            }*/
+            
+            table('tableProjects');
+            grafica(1,'donutChart', 'pie');
         } );
 </script>
+
 @stop

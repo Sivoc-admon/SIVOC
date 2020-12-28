@@ -29,11 +29,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //USERS
 Route::resource('users', 'UserController');
+Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
+		
 /*Route::get('/users', 'UserController@index')->name('users');
 Route::post('/register_user', 'UserController@store');*/
 
 //PROJECTS
-Route::get('/projects', 'ProjectController@index')->name('projects');
+Route::resource('users', 'ProjectController');
+Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
 
 //DOCUMENTS POR AREA
