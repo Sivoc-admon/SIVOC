@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Response;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,7 +17,13 @@ class UserController extends Controller
         //
         $users = User::get();
         
-        return view('users.users')->with('users', $users);
+      
+        return view('users.users',compact('users'));
+        
+        
+        //return view('users.users')->with('users', $users);
+  
+        //return view('users.index')->with('users', $users);
     }
 
     /**
@@ -39,26 +46,57 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
-        /*$request->validate([
-            'nombre' => 'required',
-            'apellido_paterno' => 'required',
-        ]);*/
+        $request->validate([
+            'inputName' => 'required',
+            'inputLastName' => 'required',
+            'inputMotherLastName' => 'required',
+            'inputEmail' => 'required',
+            'inputPassword' => 'required',
+            
+        ]);
+        $msg="";
+        $error=false;
         $user = new User;
-       
-        $user->name = $request->input('inputName');
-        $user->last_name = $request->input('inputLastName');
-        $user->mother_last_name = $request->input('inputMotherLastName');
-        $user->mail = $request->input('inputEmail');
-        $user->password = Hash::make($request->input('inputPassword'));
-        $user->gender = $request->input('sltGenero');
-        $user->marital_status = $request->input('inputEstadoCivil');
-        $user->nss = $request->input('inputNSS');
+        $count = User::where('mail', $request->input('inputEmail'))->count();
         
-        $user->save();
+        if ($count>0) {
+            $msg="El correo ya existe, intente con otro.";
+            $error=true;
+            
+        }else{
+            User::create([
+                'name' => $request->input('inputName'),            
+                'last_name' => $request->input('inputLastName'),
+                'mother_last_name' => $request->input('inputMotherLastName'),
+                'mail' => $request->input('inputEmail'),
+                'password' => Hash::make($request->input('inputPassword')),
+                'gender' => $request->input('sltGenero'),
+                'marital_status' => $request->input('inputEstadoCivil'),
+                'nss' => $request->input('inputNSS'),
+            ]);
+            
+            
+            /*$user->name = $request->input('inputName');
+            $user->last_name = $request->input('inputLastName');
+            $user->mother_last_name = $request->input('inputMotherLastName');
+            $user->mail = $request->input('inputEmail');
+            $user->password = Hash::make($request->input('inputPassword'));
+            $user->gender = $request->input('sltGenero');
+            $user->marital_status = $request->input('inputEstadoCivil');
+            $user->nss = $request->input('inputNSS');
+            
+            $user->save();*/
+        }
 
-        return redirect()->route('users');
+        $array=["msg"=>$msg, "error"=>$error];
+        if ($error===true) {
+            //return Response::json($array);
+            return response()->json($array);
+        }else{
+            return response()->json($array);
+            //return redirect()->route('users.users');
+        }
+  
     }
 
     /**
@@ -69,9 +107,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->users->find($id);
-
-        return view('users.profile', ['users' => $user]);
+        return view('products.show',compact('product'));
     }
 
     /**
@@ -123,6 +159,6 @@ class UserController extends Controller
         //
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('users');
+        return redirect()->route('users.index');
     }
 }

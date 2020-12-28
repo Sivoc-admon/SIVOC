@@ -14,9 +14,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterUser">
-                        Nuevo Usuario
-                    </button>
+                    <span data-toggle="modal" data-target="#ModalRegisterUser">
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Usuario">
+                            <i class="fas fa-user-plus"></i>
+                        </button>
+                    </span>
                     @include('users.register')
 
                    
@@ -37,6 +39,7 @@
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
                                 <th>Correo</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +49,17 @@
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->mother_last_name }}</td>
                                     <td>{{ $user->mail }}</td>
+                                    <td>
+                                        <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                           
+                                            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                           
+                                            @csrf
+                                            @method('DELETE')
+                              
+                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             
@@ -69,13 +83,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#tableUsers').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'pdf'
-                ]
-            });
+            
+            table('tableUsers');
         } );
-</script>
+    </script>  
+    <script src="{{ asset('vendor/myjs/users.js') }}"></script> 
 @stop
 
