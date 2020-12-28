@@ -18,8 +18,6 @@
                         Nuevo Usuario
                     </button>-->
                     @include('areafolders.modals')
-
-                   
                 </div>
             </div>
         </div>
