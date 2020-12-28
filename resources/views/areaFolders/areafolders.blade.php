@@ -17,7 +17,7 @@
                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterUser">
                         Nuevo Usuario
                     </button>-->
-                    @include('users.register')
+                    @include('areafolders.modals')
 
                    
                 </div>
@@ -36,7 +36,7 @@
                             <option value="{{ $folder['nivel'] }}">{{ $folder['name'] }}</option>
                             @endforeach
                           </select><br>
-                          <button id="btnLevel1" type="button" class="btn btn-primary form-button">Agregar carpeta</button>
+                          <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">Agregar carpeta</button>
                     </div>
                 </div>
             </div>

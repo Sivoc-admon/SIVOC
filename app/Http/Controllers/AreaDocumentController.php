@@ -24,13 +24,11 @@ class AreaDocumentController extends Controller
 
         if(in_array($area, $ariasValidas)){
             foreach($aria as $ariax){
-                #dd($ariax->id);
                 $areaId = $ariax->id;
                 $folders = $this->getFolderByNivel($areaId, 1);
                 $folders->each(function($f){
                     $f->areaDocuments;
                 });
-                #dd($folders->toArray());
             }
         }
         return view('areafolders.areafolders')->with('folders', $folders->toArray());
@@ -116,12 +114,11 @@ class AreaDocumentController extends Controller
     }
 
     public function getFoldersAndFiles($areaId, $nivel){
+        $nivel = intval($nivel) + 1;
         $folders = $this->getFolderByNivel($areaId, $nivel);
         $folders->each(function($f){
             $f->areaDocuments;
         });
-
-        #return $this->successResponse($folders);
         return response()->json(['data' => $folders], Response::HTTP_OK);
     }
 }

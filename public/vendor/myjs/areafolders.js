@@ -1,5 +1,4 @@
 function getFoldersAndFiles(areaId, nivel) {
-    console.log(`areaId: ${areaId}, nivel: ${nivel}`);
     let selectTag = `#selectNivel${nivel}`;
     let selectVal = $(selectTag).val();
     if (selectVal !== '') {
@@ -33,4 +32,12 @@ function getFoldersAndFiles(areaId, nivel) {
             }
         });
     }
+}
+
+
+function newFolder(areaId, nivel) {
+    console.log(`MODAL==> areaId: ${areaId}, nivel: ${nivel}`);
+    $("#nivelFolder").val(nivel);
+    $("#areaIdFolder").val(areaId);
+    $("#ModalCreateFolder").modal('show');
 }
