@@ -14,26 +14,30 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterUser">
+                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterUser">
                         Nuevo Usuario
-                    </button>
-                    @include('users.register')
+                    </button>-->
+                    @include('areafolders.modals')
 
                    
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
-                        <select class="form-control">
-                            <option value="{{$datos->nivel}}">{{$datos->folder}}</option>
-                          </select>
-                    </form>
+                    <h4>Carpetas</h4>
+                    <div class="form-group" id="divFolders">
+                        <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
+                            <option value="">Seleccione</option>
+                            @foreach($folders as $folder)
+                            <option value="{{ $folder['nivel'] }}">{{ $folder['name'] }}</option>
+                            @endforeach
+                          </select><br>
+                          <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">Agregar carpeta</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,26 +51,31 @@
                     <table id="tableDocuments" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Nombre</th>
-                                <th>Fecha</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
-                           <td></td>
-                            
-                            
-                            
+                            @foreach($folders as $folder)
+                                @foreach($folder['area_documents'] as $document)
+                                <tr>
+                                    <td>
+                                        {{ $document['name'] }}
+                                    </td>
+                                    <td>
+                                        {{ $document['id'] }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endforeach
                         </tbody>
-                        <tfoot>
+                        <!--<tfoot>
                             <tr>
                                 <th>Nombre</th>
                                 <th>fecha</th>
                                 <th>Accion</th>
                             </tr>
-                        </tfoot>
+                        </tfoot>-->
                     </table>
                 </div>
             </div>
@@ -80,9 +89,10 @@
             $('#tableDocuments').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    'csv', 'excel', 'pdf'
+                    //'csv', 'excel', 'pdf'
                 ]
             });
         } );
 </script>
+<script src="{{ asset('vendor/myjs/areafolders.js') }}"></script>
 @stop
