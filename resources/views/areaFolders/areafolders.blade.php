@@ -36,7 +36,7 @@
                             <option value="{{ $folder['nivel'] }}">{{ $folder['name'] }}</option>
                             @endforeach
                           </select><br>
-                          <button id="btnLevel1" type="button" class="btn btn-primary form-button" style="display: none;">Agregar carpeta</button>
+                          <button id="btnLevel1" type="button" class="btn btn-primary form-button">Agregar carpeta</button>
                     </div>
                 </div>
             </div>
