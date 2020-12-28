@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Area;
 use App\AreaDocument;
+use App\FolderArea;
+use App\Traits\ApiResponser;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class AreaDocumentController extends Controller
 {
@@ -12,15 +17,23 @@ class AreaDocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($area)
     {
-        //
-        $areaDocument = AreaDocument::get();
-        $datos = array('nivel' => 1, "folder"=>"Almacen");
-        $datos ="Almacen";
-        DD($datos);
-        return view('areafolders.areafolders')->with('almacen', $datos);
-        
+        $ariasValidas = ['almacen', 'calidad', 'control operacional', 'compras', 'direccion', 'finanzas', 'ingenieria', 'manufactura', 'recursos humanos', 'ventas'];
+        $aria = Area::where('name', 'like', '%'.$area.'%')->take(1)->get();
+
+        if(in_array($area, $ariasValidas)){
+            foreach($aria as $ariax){
+                #dd($ariax->id);
+                $areaId = $ariax->id;
+                $folders = $this->getFolderByNivel($areaId, 1);
+                $folders->each(function($f){
+                    $f->areaDocuments;
+                });
+                #dd($folders->toArray());
+            }
+        }
+        return view('areafolders.areafolders')->with('folders', $folders->toArray());
     }
 
     /**
@@ -94,5 +107,21 @@ class AreaDocumentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getFolderByNivel($areaId, $nivel){
+
+        $folders = FolderArea::where('area_id', $areaId)->where('nivel', $nivel)->get();
+        return $folders;
+    }
+
+    public function getFoldersAndFiles($areaId, $nivel){
+        $folders = $this->getFolderByNivel($areaId, $nivel);
+        $folders->each(function($f){
+            $f->areaDocuments;
+        });
+
+        #return $this->successResponse($folders);
+        return response()->json(['data' => $folders], Response::HTTP_OK);
     }
 }
