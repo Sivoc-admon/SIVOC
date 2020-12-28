@@ -86,6 +86,7 @@
 
         {{-- Configured Scripts --}}
         @include('adminlte::plugins', ['type' => 'js'])
+        <script src="{{ asset('vendor/myjs/general_functions.js') }}" ></script>
 
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @else
