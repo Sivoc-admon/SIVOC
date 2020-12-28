@@ -22,6 +22,7 @@ class AreaDocumentController extends Controller
         $ariasValidas = ['almacen', 'calidad', 'control operacional', 'compras', 'direccion', 'finanzas', 'ingenieria', 'manufactura', 'recursos humanos', 'ventas'];
         $aria = Area::where('name', 'like', '%'.$area.'%')->take(1)->get();
 
+        $folders=[];
         if(in_array($area, $ariasValidas)){
             foreach($aria as $ariax){
                 #dd($ariax->id);
