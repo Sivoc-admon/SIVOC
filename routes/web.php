@@ -28,8 +28,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //USERS
-Route::get('/users', 'UserController@index')->name('users');
-Route::post('/register_user', 'UserController@store');
+Route::resource('users', 'UserController');
+/*Route::get('/users', 'UserController@index')->name('users');
+Route::post('/register_user', 'UserController@store');*/
 
 //PROJECTS
 Route::get('/projects', 'ProjectController@index')->name('projects');
@@ -43,4 +44,34 @@ Route::post('/register_project', 'ProjectController@store');
 Route::get('/folder/almacen', 'AreaDocumentController@index')->name('almacen');
 Route::post('/register_user', 'UserController@store');
 
+
+/*Auth::routes();
+ 
+Route::get('/home', 'HomeController@index')->name('home');
+ 
+//Roles y Permisos
+ 
+Route::middleware(['auth'])->group(function(){
+ 
+	//Products
+	Route::post('products/store', 'ProductController@store')->name('products.store')
+		->middleware('permission:products.create');
+ 
+	Route::get('products', 'ProductController@index')->name('products.index')
+		->middleware('permission:products.index');
+ 
+	Route::get('products/create', 'ProductController@create')->name('products.create')
+		->middleware('permission:products.create');
+ 
+	Route::put('products/{product}', 'ProductController@update')->name('products.update')
+		->middleware('permission:products.edit');
+ 
+	Route::get('products/{product}', 'ProductController@show')->name('products.show')
+		->middleware('permission:products.show');
+ 
+	Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')
+		->middleware('permission:products.destroy');
+ 
+	Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
+		->middleware('permission:products.edit'); */
 

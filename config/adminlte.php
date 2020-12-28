@@ -250,9 +250,9 @@ return [
         ],
         ['header' => 'Administrador'],
         [
-            'text' => 'Nuevo Usuario',
-            'url'  => '/users',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Usuarios',
+            'url'  => 'users',
+            'icon' => 'fas fa-users',
         ],
         [
             'text' => 'change_password',
@@ -313,7 +313,7 @@ return [
         ],
         [
             'text'    => 'Areas',
-            'icon'    => 'fas fa-fa-folders',
+            'icon'    => 'fas fa-folder',
             'submenu' => [
                 [
                     'text' => 'Almacen',
@@ -492,8 +492,13 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2/sweetalert2.min.js/',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2/sweetalert2.min.css/',
                 ],
             ],
         ],
