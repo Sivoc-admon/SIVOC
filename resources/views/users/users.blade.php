@@ -83,12 +83,8 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#tableUsers').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'pdf'
-                ]
-            });
+            
+            table('tableUsers');
         } );
     </script>  
     <script src="{{ asset('vendor/myjs/users.js') }}"></script> 
