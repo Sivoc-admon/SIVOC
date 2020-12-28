@@ -35,7 +35,7 @@ Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
 Route::post('/register_user', 'UserController@store');*/
 
 //PROJECTS
-Route::resource('users', 'ProjectController');
+Route::resource('projects', 'ProjectController');
 Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
 
