@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AreaDocument extends Model
 {
     //
-    public function folder()
+    public function areaFolder()
     {
-        return $this->hasOne('App\AreaFolder');
+        return $this->belongsTo(FolderArea::class)->orderBy('id','ASC');
     }
 }
