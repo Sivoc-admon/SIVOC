@@ -131,11 +131,13 @@ class AreaDocumentController extends Controller
         $idFolder = $request->get('idFolder');
         $r = $this->getPathFolder($idFolder);
         $area = Area::where('id', $areaId)->get()[0];
+        $folderPadre = FolderArea::where('id', $idFolder)->get()[0];
         $folderAreaName = $area->name;
         $folderArea = new FolderArea;
         $folderArea->area_id = $areaId;
-        $folderArea->nivel = $nivel;
+        $folderArea->nivel = $nivel + 1;
         $folderArea->name = $folderName;
+        $folderArea->id_padre = $folderPadre->id;
         
         $folderArea->save();
         Storage::makeDirectory('public/Documents/'.$folderAreaName.$r.$folderName);
