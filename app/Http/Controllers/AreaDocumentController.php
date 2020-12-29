@@ -9,6 +9,7 @@ use App\FolderArea;
 use App\Traits\ApiResponser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AreaDocumentController extends Controller
 {
@@ -31,8 +32,10 @@ class AreaDocumentController extends Controller
                     $f->areaDocuments;
                 });
             }
+        }else{
+            $area = 'almacen';
         }
-        return view('areafolders.areafolders')->with('folders', $folders->toArray());
+        return view('areafolders.areafolders')->with('folders', $folders->toArray())->with('area', $area);
     }
 
     /**
@@ -121,5 +124,37 @@ class AreaDocumentController extends Controller
             $f->areaDocuments;
         });
         return response()->json(['data' => $folders], Response::HTTP_OK);
+    }
+
+    public function createFolder($areaId, $nivel, Request $request){
+        $folderName = $request->get('folderName');
+        $idFolder = $request->get('idFolder');
+        $r = $this->getPathFolder($idFolder);
+        $area = Area::where('id', $areaId)->get()[0];
+        $folderAreaName = $area->name;
+        $folderArea = new FolderArea;
+        $folderArea->area_id = $areaId;
+        $folderArea->nivel = $nivel;
+        $folderArea->name = $folderName;
+        
+        $folderArea->save();
+        Storage::makeDirectory('public/Documents/'.$folderAreaName.$r.$folderName);
+        sleep(2);
+        return response()->json(['data' => array('msje' => "Carpeta \"$folderName\" creada correctamente.")], Response::HTTP_OK);
+    }
+
+    private function getPathFolder($folderId){
+        $path = '/';
+
+        $folder = FolderArea::where('id', $folderId)->get()[0];
+        $idPadre = $folder->id_padre;
+        $nameFolder = $folder->name;
+        $folderIdAux = $folder->id;
+        $path .= $nameFolder.'/';
+        while($idPadre != 0){
+            $this->getPathFolder($folderIdAux);
+        }
+
+        return $path;
     }
 }
