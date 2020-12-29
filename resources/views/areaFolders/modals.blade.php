@@ -1,6 +1,7 @@
  <!-- Modal -->
- <div class="modal fade" id="ModalCreateFolder" tabindex="-1" aria-labelledby="ModalRegisterUser" aria-hidden="true">
-     <div class="modal-dialog modal-xl modal-dialog-scrollable">
+ <div class="modal fade" id="ModalCreateFolder" tabindex="-1" aria-labelledby="ModalRegisterUser" aria-hidden="true"
+ data-controls-modal="ModalCreateFolder" data-backdrop="static" data-keyboard="false">
+     <div class="modal-dialog modal-md modal-dialog-scrollable">
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title" id="exampleModalLabel">Registro Usuario</h5>
