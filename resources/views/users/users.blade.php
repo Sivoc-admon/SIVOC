@@ -48,7 +48,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->mother_last_name }}</td>
-                                    <td>{{ $user->mail }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>
                                         <form action="{{ route('users.destroy',$user->id) }}" method="POST">
                            
@@ -71,6 +71,7 @@
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
                                 <th>Correo</th>
+                                <th>Area</th>
                             </tr>
                         </tfoot>
                     </table>
