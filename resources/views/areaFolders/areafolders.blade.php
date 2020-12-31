@@ -33,8 +33,8 @@
                             @foreach($folders as $folder)
                             <option value="{{ $folder['id'] }}">{{ $folder['name'] }}</option>
                             @endforeach
-                          </select><br>
-                          <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
+                        </select><br>
+                        <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
                           style="display:none;">
                           Agregar carpeta</button>
                     </div>
