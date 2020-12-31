@@ -46,6 +46,7 @@ Route::post('/register_project', 'ProjectController@store');
 
 Route::get('/folder/{area}', 'AreaDocumentController@index');#->name('almacen');
 Route::get('/folder/{areaId}/{nivel}', 'AreaDocumentController@getFoldersAndFiles');
+Route::post('/folder/create/{areaId}/{nivel}', 'AreaDocumentController@createFolder');
 Route::post('/register_user', 'UserController@store');
 
 

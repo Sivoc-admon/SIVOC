@@ -5,7 +5,7 @@
 @section ( ' plugins.Datatables ' , true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Usuarios</h1>
+    <h1 class="m-0 text-dark">{{ ucwords($area) }}</h1>
 @stop
 
 @section('content')
@@ -14,12 +14,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterUser">
-                        Nuevo Usuario
-                    </button>-->
+                    <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
+                        Agregar carpeta en el primer nivel
+                    </button>
                     @include('areafolders.modals')
-
-                   
                 </div>
             </div>
         </div>
@@ -33,10 +31,12 @@
                         <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                             <option value="">Seleccione</option>
                             @foreach($folders as $folder)
-                            <option value="{{ $folder['nivel'] }}">{{ $folder['name'] }}</option>
+                            <option value="{{ $folder['id'] }}">{{ $folder['name'] }}</option>
                             @endforeach
                           </select><br>
-                          <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">Agregar carpeta</button>
+                          <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
+                          style="display:none;">
+                          Agregar carpeta</button>
                     </div>
                 </div>
             </div>
