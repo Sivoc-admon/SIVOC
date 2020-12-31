@@ -88,8 +88,8 @@
     <script>
         $(document).ready(function() {
             let statusGrafica="";
-            console.log('{{$projects}}');
-            console.log(JSON.parse('{{$projects}}'));
+            /*console.log('{{$projects}}');
+            console.log(JSON.parse('{{$projects}}'));*/
             //JSON.parse(text[, reviver]);
             /*for each (var projects in project) {
                 console.log('id:'+'{{ $project->id }}', 'estatus:'+'{{ $project->status }}');

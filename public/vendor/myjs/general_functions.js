@@ -19,7 +19,7 @@ function messageAlert(title, icon, text) {
 function grafica(data, div, tipo) {
     var ctx = document.getElementById(div).getContext('2d');
     var myChart = new Chart(ctx, {
-        type: tipo,
+        type: 'doughnut',
         data: {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
