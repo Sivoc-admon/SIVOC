@@ -27,7 +27,7 @@ class AreaDocumentController extends Controller
         if(in_array($area, $ariasValidas)){
             foreach($aria as $ariax){
                 $areaId = $ariax->id;
-                $folders = $this->getFolderByNivel($areaId, 1);
+                $folders = $this->getFolderByNivel($areaId, 1, 0);
                 $folders->each(function($f){
                     $f->areaDocuments;
                 });
@@ -111,15 +111,15 @@ class AreaDocumentController extends Controller
         //
     }
 
-    private function getFolderByNivel($areaId, $nivel){
+    private function getFolderByNivel($areaId, $nivel, $idPadre){
 
-        $folders = FolderArea::where('area_id', $areaId)->where('nivel', $nivel)->get();
+        $folders = FolderArea::where('area_id', $areaId)->where('nivel', $nivel)->where('id_padre', $idPadre)->get();
         return $folders;
     }
 
-    public function getFoldersAndFiles($areaId, $nivel){
-        $nivel = intval($nivel) + 1;
-        $folders = $this->getFolderByNivel($areaId, $nivel);
+    public function getFoldersAndFiles($areaId, $nivel, $idPadre){
+        $nivel = intval($nivel);
+        $folders = $this->getFolderByNivel($areaId, $nivel, $idPadre);
         $folders->each(function($f){
             $f->areaDocuments;
         });
@@ -131,13 +131,13 @@ class AreaDocumentController extends Controller
         $idFolder = $request->get('idFolder');
         $r = $this->getPathFolder($idFolder);
         $area = Area::where('id', $areaId)->get()[0];
-        $folderPadre = FolderArea::where('id', $idFolder)->get()[0];
+        $folderPadre = ($idFolder != 0)?FolderArea::where('id', $idFolder)->get()[0]:$idFolder;
         $folderAreaName = $area->name;
         $folderArea = new FolderArea;
         $folderArea->area_id = $areaId;
-        $folderArea->nivel = $nivel + 1;
+        $folderArea->nivel = $nivel;
         $folderArea->name = $folderName;
-        $folderArea->id_padre = $folderPadre->id;
+        $folderArea->id_padre = ($idFolder != 0)?$folderPadre->id : 0;
         
         $folderArea->save();
         Storage::makeDirectory('public/Documents/'.$folderAreaName.$r.$folderName);
@@ -147,14 +147,16 @@ class AreaDocumentController extends Controller
 
     private function getPathFolder($folderId){
         $path = '/';
-
-        $folder = FolderArea::where('id', $folderId)->get()[0];
-        $idPadre = $folder->id_padre;
-        $nameFolder = $folder->name;
-        $folderIdAux = $folder->id;
-        $path .= $nameFolder.'/';
-        while($idPadre != 0){
-            $this->getPathFolder($folderIdAux);
+        
+        if($folderId != 0){
+            $folder = FolderArea::where('id', $folderId)->get()[0];
+            $idPadre = $folder->id_padre;
+            $nameFolder = $folder->name;
+            $folderIdAux = $folder->id;
+            $path .= $nameFolder.'/';
+            while($idPadre != 0){
+                $this->getPathFolder($folderIdAux);
+            }
         }
 
         return $path;
