@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->string('marital_status')->nullable();
             $table->bigInteger('nss')->nullable();
-            $table->string('mail')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
             $table->softDeletes();
