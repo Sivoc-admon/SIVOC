@@ -150,12 +150,12 @@ class AreaDocumentController extends Controller
         
         if($folderId != 0){
             $folder = FolderArea::where('id', $folderId)->get()[0];
-            $idPadre = $folder->id_padre;
+            $idPadre = intval($folder->id_padre);
             $nameFolder = $folder->name;
-            $folderIdAux = $folder->id;
+            #$folderIdAux = $folder->id;
             $path .= $nameFolder.'/';
-            while($idPadre != 0){
-                $this->getPathFolder($folderIdAux);
+            if($idPadre != 0){
+                $this->getPathFolder($idPadre);
             }
         }
 
