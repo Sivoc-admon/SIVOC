@@ -87,8 +87,8 @@
                 <div class="links">
                     <a href="{{asset('storage/Documents/welcome/MISION.pdf')}}" target="_blank"><b>Misión</b></a>
                     <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank"><b>Visión</b></a>
-                    <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank"><b>COVID 19</b></a>
                     <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank"><b>Politica de Calidad</b></a>
+                    <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank"><b>COVID 19</b></a>
                     <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank"><b>Brigadad de Emergencia</b></a>
                 </div>
             </div>
