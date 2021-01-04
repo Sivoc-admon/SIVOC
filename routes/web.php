@@ -21,11 +21,11 @@ Auth::routes();
 
 //autentificacion quitar los comentarios en produccion
 
-Route::get('/home', function() {
+/*Route::get('/home', function() {
     return view('home');
-})->name('home')->middleware('auth');
+})->name('home')->middleware('auth');*/
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //USERS
 Route::resource('users', 'UserController');

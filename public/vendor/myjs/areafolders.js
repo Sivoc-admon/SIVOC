@@ -7,12 +7,15 @@ $(function() {
     });
 });
 
-function getFoldersAndFiles(areaId, nivel, idPadre) {
+function getFoldersAndFiles(areaId, nivel) {
     let level = nivel + 1;
     let selectTag = `#selectNivel${nivel}`;
     let selectVal = $(selectTag).val();
     let selectTagText = $(`${selectTag} option:selected`).text();
     let botonNameTag = `#btnLevel${nivel}`;
+    let levels = recorreNiveles();
+    console.log(`se borraran los siguientes niveles: ${levels}`);
+    borrarDivNiveles(nivel, levels);
     $(botonNameTag).html(`Agregar carpeta dentro de "${selectTagText}"`);
     if (selectVal !== '') {
         $.ajax({
@@ -38,7 +41,7 @@ function getFoldersAndFiles(areaId, nivel, idPadre) {
                     if ($(`#divNivel${level}`).length) {
                         $(`#divNivel${level}`).html(selectHTML);
                     } else {
-                        $(`#divFolders`).append(`<br><div id="divNivel${level}"><br>${selectHTML}</div>`);
+                        $(`#divFolders`).append(`<div id="divNivel${level}"><br>${selectHTML}</div>`);
                     }
                 } else {
                     if ($(`#divNivel${level}`).length) {
@@ -53,6 +56,27 @@ function getFoldersAndFiles(areaId, nivel, idPadre) {
         });
     } else {
         $(botonNameTag).hide();
+    }
+}
+
+function recorreNiveles() {
+    var res = 2;
+    for (let level = 2; level < 70; level++) {
+        if (!$(`#divNivel${level}`).length) {
+            res = level;
+            break;
+        }
+    }
+    return res;
+}
+
+function borrarDivNiveles(nivelx, nivelxx) {
+    levelx = nivelx + 1;
+    for (let level = levelx; level <= nivelxx; level++) {
+        if ($(`#divNivel${level}`).length) {
+            console.log(`se borró el nivel: ${level}`);
+            $(`#divNivel${level}`).remove();
+        }
     }
 }
 
@@ -76,7 +100,7 @@ function createFolder() {
     let selectTag = `#selectNivel${nivel}`;
     let selectVal = $(selectTag).val();
     if (folderName.trim() !== '') {
-        $("#divMsge").html(`<i class="fas fa-circle-notch"></i>
+        $("#divMsge").html(`<i class="fas fa-circle-notch fa-spin"></i>
         <br><label class="control-label">Creando carpeta</label>`);
         $("#formFolder").fadeOut();
         $("#divMsge").fadeIn();
@@ -98,35 +122,21 @@ function createFolder() {
                             let folders = data.data;
                             let selectHTML = `<select id="selectNivel${nivel}" class="form-control" onchange="getFoldersAndFiles(${areaId}, ${nivel})">
                                         <option value="">Seleccione</option>`;
-                    for (var k in folders) {
-                        let documents = folders[k].area_documents;
-                        selectHTML += `<option value="${folders[k].id}">${folders[k].name}</option>`;
-                        for (var j in documents) {
-                            
-                        }
-                    }
-                    selectHTML += `</select><br>
-                    <button id="btnLevel${nivel}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${nivel})"
-                    style="display:none;">Agregar carpeta</button>`;
-                            /*$(selectTag).empty().append('<option value="">Seleccione</option>');
-                            for (var k in folders) {
-                                $(selectTag).append(`<option value="${folders[k].id}">${folders[k].name}</option>`);
-                                let documents = folders[k].area_documents;
+                        for (var k in folders) {
+                            let documents = folders[k].area_documents;
+                            selectHTML += `<option value="${folders[k].id}">${folders[k].name}</option>`;
+                            for (var j in documents) {
                                 
-                                /*for (var j in documents) {
-        
-                                    selectHTML += `
-                                <select>
-                                    <option></option>
-                                </select>
-                                `;
-                                }
-
-                            }*/
-                            if ($(`#divNivel${level}`).length) {
-                                $(`#divNivel${level}`).html(selectHTML);
+                            }
+                        }
+                        selectHTML += `</select><br>
+                        <button id="btnLevel${nivel}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${nivel})"
+                        style="display:none;">Agregar carpeta</button>`;
+                            if ($(`#divNivel${nivel}`).length) {
+                                console.log("se hizo un html al crear la carpeta");
+                                $(`#divNivel${nivel}`).html(selectHTML);
                             } else {
-                                $(`#divFolders`).append(`<br><div id="divNivel${level}"><br>${selectHTML}</div>`);
+                                $(`#divFolders`).append(`<div id="divNivel${nivel}"><br>${selectHTML}</div>`);
                             }
                             $(selectTag).val(selectVal);
                         } else {
@@ -148,4 +158,8 @@ function createFolder() {
     } else {
         $("#errorFolder").html('Debe proporcionar el nombre de la carpeta');
     }
+}
+
+function newFile(areaId, nivel){
+    console.log("ya cambio el input we ;)");
 }
