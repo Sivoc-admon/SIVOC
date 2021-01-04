@@ -28,7 +28,7 @@
                              </div>
                          </form>
                      </div>
-                     <div id="divMsge">
+                     <div id="divMsge" class="text-center">
                          
                      </div>
                  </div>

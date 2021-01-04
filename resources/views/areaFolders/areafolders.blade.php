@@ -17,6 +17,8 @@
                     <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
                         Agregar carpeta en el primer nivel
                     </button>
+
+                    <input type="file" class="btn btn-warning" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
                     @include('areafolders.modals')
                 </div>
             </div>
