@@ -146,19 +146,17 @@ class AreaDocumentController extends Controller
     }
 
     private function getPathFolder($folderId){
-        $path = '/';
-        
-        if($folderId != 0){
+
+        $idPadre = -70;
+        $path = '';
+        do{
             $folder = FolderArea::where('id', $folderId)->get()[0];
             $idPadre = intval($folder->id_padre);
             $nameFolder = $folder->name;
-            #$folderIdAux = $folder->id;
-            $path .= $nameFolder.'/';
-            if($idPadre != 0){
-                $this->getPathFolder($idPadre);
-            }
-        }
+            $folderId = $idPadre;
+            $path = $nameFolder.'/'.$path;
+        }while($idPadre != 0);
 
-        return $path;
+        return '/'.$path;
     }
 }
