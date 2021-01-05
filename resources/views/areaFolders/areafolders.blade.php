@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-
+    <input type="hidden" id="hiddenAriaId" value="{{ $folders[0]['area_id'] }}">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -18,7 +18,7 @@
                         Agregar carpeta en el primer nivel
                     </button>
 
-                    <input type="file" class="btn btn-warning" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
+                    <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
                     @include('areafolders.modals')
                 </div>
             </div>
@@ -39,6 +39,7 @@
                         <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
                           style="display:none;">
                           Agregar carpeta</button>
+                        <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_{{ $folders[0]['nivel'] }}" onchange="newFile({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})" multiple style="display:none;"/>
                     </div>
                 </div>
             </div>
@@ -57,27 +58,8 @@
                                 <th>Accion</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($folders as $folder)
-                                @foreach($folder['area_documents'] as $document)
-                                <tr>
-                                    <td>
-                                        {{ $document['name'] }}
-                                    </td>
-                                    <td>
-                                        {{ $document['id'] }}
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endforeach
+                        <tbody id="tableFiles">
                         </tbody>
-                        <!--<tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>fecha</th>
-                                <th>Accion</th>
-                            </tr>
-                        </tfoot>-->
                     </table>
                 </div>
             </div>
