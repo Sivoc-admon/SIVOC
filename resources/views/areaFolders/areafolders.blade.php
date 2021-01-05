@@ -55,7 +55,8 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Accion</th>
+                                <th>Ruta del archivo</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tableFiles">

@@ -144,7 +144,6 @@ class AreaDocumentController extends Controller
 
     public function createFolder($areaId, $nivel, Request $request)
     {
-        sleep(2);
         $folderName = $request->get('folderName');
         $idFolder = $request->get('idFolder');
         $r = $this->getPathFolder($idFolder);
@@ -159,7 +158,7 @@ class AreaDocumentController extends Controller
 
         $folderArea->save();
         Storage::makeDirectory('public/Documents/' . $folderAreaName . $r . $folderName);
-        sleep(2);
+        sleep(1);
         return response()->json(['data' => array('msje' => "Carpeta \"$folderName\" creada correctamente.")], Response::HTTP_OK);
     }
 
@@ -182,6 +181,7 @@ class AreaDocumentController extends Controller
 
     public function createFiles($areaId, $nivel, Request $request)
     {
+        sleep(2);
         $idFolder = $request->folderId;
         $area = Area::where('id', $areaId)->get()[0];
         $folderAreaName = $area->name;
@@ -192,9 +192,10 @@ class AreaDocumentController extends Controller
             for ($x = 0; $x < $request->TotalFiles; $x++) {
                 if ($request->hasFile('files' . $x)) {
                     $file = $request->file('files' . $x);
-                    $path = $pathFile . '/' . $file->getClientOriginalName();
+                    $path = $file->storeAs(
+                        $pathFile, $file->getClientOriginalName()
+                    );
                     $name = $file->getClientOriginalName();
-                    Storage::disk('local')->put($path, $request->file);
                     $areaDocument = new AreaDocument;
                     $areaDocument->area_id = $areaId;
                     $areaDocument->folder_area_id = $idFolder;
@@ -208,5 +209,33 @@ class AreaDocumentController extends Controller
             return response()->json(["message" => "No se recibió ningún archivo."], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         #*/
+    }
+
+    public function deleteFile(Request $request){
+        $documentId = $request->documentId;
+        $areaDocument = AreaDocument::where('id', $documentId)->get()[0];
+        $areaId = $areaDocument->area_id;
+        $documentName = $areaDocument->name;
+        $idFolder = $request->idFolder;
+        $area = Area::where('id', $areaId)->get()[0];
+        $folderAreaName = $area->name;
+        $r = $this->getPathFolder($idFolder);
+        $pathFile = 'public/Documents/' . $folderAreaName . $r.$documentName;
+        Storage::delete($pathFile);
+        AreaDocument::find($documentId)->delete();
+        return response()->json(['success' => ''], Response::HTTP_OK);
+    }
+
+    public function downloadFile($documentId, $idFolder){
+        $areaDocument = AreaDocument::where('id', $documentId)->get()[0];
+        $areaId = $areaDocument->area_id;
+        $documentName = $areaDocument->name;
+        $area = Area::where('id', $areaId)->get()[0];
+        $folderAreaName = $area->name;
+        $r = $this->getPathFolder($idFolder);
+        $pathFile = storage_path().'/app/public/Documents/' . $folderAreaName . $r.$documentName;
+        if (file_exists($pathFile)) {
+            return response()->download($pathFile);
+        }
     }
 }
