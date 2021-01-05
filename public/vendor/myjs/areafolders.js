@@ -17,10 +17,19 @@ function getFilesLevelZero(folderId) {
         dataType: 'json',
         success: function(data) {
             let tablaHTML = ``;
+            console.log(data);
             for (var k in data) {
                 tablaHTML += `<tr>
                 <td>${data[k].name}</td>
                 <td>${data[k].ruta}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data[k].name}', ${data[k].id}, ${data[k].folder_area_id})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <a class="btn btn-sm btn-warning" href="/file/download/${data[k].id}/${data[k].folder_area_id}">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </td>
                 </tr>`;
             }
             $("#tableFiles").empty().html(tablaHTML);
@@ -53,11 +62,7 @@ function getFoldersAndFiles(areaId, nivel) {
                     let selectHTML = `<select id="selectNivel${level}" class="form-control" onchange="getFoldersAndFiles(${areaId}, ${level})">
                                         <option value="">Seleccione</option>`;
                     for (var k in folders) {
-                        let documents = folders[k].area_documents;
                         selectHTML += `<option value="${folders[k].id}">${folders[k].name}</option>`;
-                        for (var j in documents) {
-
-                        }
                     }
                     selectHTML += `</select><br>
                     <button id="btnLevel${level}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${level})"
@@ -150,11 +155,7 @@ function createFolder() {
                             let selectHTML = `<select id="selectNivel${nivel}" class="form-control" onchange="getFoldersAndFiles(${areaId}, ${nivel})">
                                         <option value="">Seleccione</option>`;
                         for (var k in folders) {
-                            let documents = folders[k].area_documents;
                             selectHTML += `<option value="${folders[k].id}">${folders[k].name}</option>`;
-                            for (var j in documents) {
-                                
-                            }
                         }
                         selectHTML += `</select><br>
                         <button id="btnLevel${nivel}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${nivel})"
@@ -234,4 +235,37 @@ function newFile(areaId, nivel){
             }
         });
     }
+}
+
+function deleteFile(documentName, documentId, folderId){
+
+    Swal.fire({
+        title: `¿Está seguro de eliminar "${documentName}"?`,
+        text: "Esta operación ya no se podrá deshacer.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borrar!',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+          if (result) {
+              let token = $("input[name=_token]").val();
+              console.log(`token: ${token}`);
+            $.ajax({
+                type:'POST',
+                url: `/file/delete`,
+                data: {'_token':token, 'documentId': documentId, 'idFolder':folderId},
+                dataType: 'json',
+                success: (data) => {
+                    getFilesLevelZero(folderId);
+                    messageAlert("Operación exitosa!", "success", "Archivo eliminado correctamente");
+                },
+                error: function(data){
+                    console.log(data);
+                    messageAlert("Ha ocurrido un problema.", "error", "Ocurrió un error al eliminar eliminar el archivo, intente mas tarde.");
+                }
+            });
+        }
+      });
 }

@@ -49,6 +49,8 @@ Route::get('/folder2/{area}/{filesLevelZero}', 'AreaDocumentController@filesLeve
 Route::get('/folder/{areaId}/{nivel}/{idPadre}', 'AreaDocumentController@getFoldersAndFiles');
 Route::post('/folder/create/{areaId}/{nivel}', 'AreaDocumentController@createFolder');
 Route::post('/file/create/{areaId}/{nivel}', 'AreaDocumentController@createFiles');
+Route::post('/file/delete', 'AreaDocumentController@deleteFile');
+Route::get('/file/download/{documentId}/{idFolder}', 'AreaDocumentController@downloadFile');
 Route::post('/register_user', 'UserController@store');
 
 
