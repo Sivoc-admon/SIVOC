@@ -148,7 +148,7 @@ function createFolder() {
                             $.ajax({
                                         type: "GET",
                                         url: `/folder/${areaId}/${nivel}/${$(`#selectNivel${level}`).val()}`,
-                    dataType: 'json',
+                        dataType: 'json',
                     success: function(data) {
                         if (data.data.length > 0) {
                             let folders = data.data;

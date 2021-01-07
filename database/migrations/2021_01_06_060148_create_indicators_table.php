@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFolderAreasTable extends Migration
+class CreateIndicatorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateFolderAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('folder_areas', function (Blueprint $table) {
+        Schema::create('indicators', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignId('area_id');
-            $table->integer('id_padre');
-            $table->integer('nivel');
-            $table->string('name', 100);
+            $table->integer('area_id');
+            $table->integer('indicator_type_id');
+            $table->double('value', 8, 2);
+            $table->date('registration_date');
             $table->timestamps();
             $table->softDeletes();
         });
+        
     }
 
     /**
@@ -31,6 +32,6 @@ class CreateFolderAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('folder_areas');
+        Schema::dropIfExists('indicators');
     }
 }

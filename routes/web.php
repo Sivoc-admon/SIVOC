@@ -29,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //USERS
 Route::resource('users', 'UserController');
+Route::post('/register_user', 'UserController@store');
 Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
 		
 /*Route::get('/users', 'UserController@index')->name('users');
@@ -38,6 +39,9 @@ Route::post('/register_user', 'UserController@store');*/
 Route::resource('projects', 'ProjectController');
 Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
+
+//INDICADORES
+Route::get('/indicators', 'IndicatorController@index');
 
 //DOCUMENTS POR AREA
 /*Route::get('/masteer', function() {
@@ -51,7 +55,7 @@ Route::post('/folder/create/{areaId}/{nivel}', 'AreaDocumentController@createFol
 Route::post('/file/create/{areaId}/{nivel}', 'AreaDocumentController@createFiles');
 Route::post('/file/delete', 'AreaDocumentController@deleteFile');
 Route::get('/file/download/{documentId}/{idFolder}', 'AreaDocumentController@downloadFile');
-Route::post('/register_user', 'UserController@store');
+
 
 
 /*Auth::routes();

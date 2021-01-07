@@ -273,32 +273,32 @@ return [
         [
             'text' => 'Auditoria Interna',
             'url'  => '/internal_audit',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-user-secret',
         ],
         [
             'text' => 'Documentos SGC',
             'url'  => '/sgc',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-book',
         ],
         [
             'text' => 'Normas',
             'url'  => '/norms',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-scroll',
         ],
         [
             'text' => 'Acciones Correctivas',
             'url'  => '/corrective_actions',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-tasks',
         ],
         [
             'text' => 'Indicadores',
             'url'  => '/indicators',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-chart-bar',
         ],
         [
             'text' => 'Activos',
             'url'  => '/active',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'far fa-check-square',
         ],
         [
             'text'    => 'Recursos Humanos',
@@ -321,44 +321,44 @@ return [
                 ],
                 [
                     'text' => 'Calidad',
-                    'url'  => '/calidad',
+                    'url'  => '/folder/calidad',
                 ],
                 [
                     'text' => 'Control Operacional',
-                    'url'  => '#',
+                    'url'  => '/folder/control operacional',
                 ],
                 [
                     'text' => 'Compras',
-                    'url'  => '#',
+                    'url'  => '/folder/compras',
                 ],
                 [
                     'text' => 'Direccion',
-                    'url'  => '#',
+                    'url'  => '/folder/direccion',
                 ],
                 [
                     'text' => 'Finanzas',
-                    'url'  => '#',
+                    'url'  => '/folder/finanzas',
                 ],
                 [
                     'text' => 'Ingenieria',
-                    'url'  => '#',
+                    'url'  => 'ingenieria',
                 ],
                 [
                     'text' => 'Manufactura',
-                    'url'  => '#',
+                    'url'  => 'manufactura',
                 ],
                 [
                     'text' => 'Recursos Humanos',
-                    'url'  => '#',
+                    'url'  => '/folder/recursos humanos',
                 ],
                 [
                     'text' => 'Ventas',
-                    'url'  => '#',
+                    'url'  => '/folder/ventas',
                 ],
                 
             ],
         ],
-        ['header' => 'labelsx'],
+        /*['header' => 'labelsx'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -373,7 +373,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
