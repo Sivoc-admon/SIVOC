@@ -16,8 +16,9 @@ class CreateAreaDocumentsTable extends Migration
         Schema::create('area_documents', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('area_id');
+            $table->foreignId('folder_area_id');
             $table->string('name', 250);
-            $table->string('ruta', 500);
+            $table->text('ruta');
             $table->timestamps();
             $table->softDeletes();
             

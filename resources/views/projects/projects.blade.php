@@ -35,14 +35,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($projects as $project)
-                                <tr>
-                                    <td>{{ $project->name }}</td>
-                                    <td>{{ $project->client }}</td>
-                                    <td>{{ $project->status }}</td>
-                                    <td><a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a></td>
-                                </tr>
-                            @endforeach
+                            @isset($projects)
+                                @foreach ($projects as $project)
+                                    <tr>
+                                        <td>{{ $project->name }}</td>
+                                        <td>{{ $project->client }}</td>
+                                        <td>{{ $project->status }}</td>
+                                        <td><a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a></td>
+                                    </tr>
+                                @endforeach
+                            @endisset
+                            
                             
                             
                         </tbody>
@@ -88,14 +91,14 @@
     <script>
         $(document).ready(function() {
             let statusGrafica="";
-            /*console.log('{{$projects}}');
-            console.log(JSON.parse('{{$projects}}'));*/
-            //JSON.parse(text[, reviver]);
-            /*for each (var projects in project) {
-                console.log('id:'+'{{ $project->id }}', 'estatus:'+'{{ $project->status }}');
-            }*/
+
+            $("#tableProjects").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf'
+                ]
+            });
             
-            table('tableProjects');
             grafica(1,'donutChart', 'pie');
         } );
 </script>
