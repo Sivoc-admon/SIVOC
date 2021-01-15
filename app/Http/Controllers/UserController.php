@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
+use App\UserRole;
 use Response;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,9 +18,10 @@ class UserController extends Controller
     {
         //
         $users = User::get();
+        $roles = Role::get();
         
       
-        return view('users.users',compact('users'));
+        return view('users.users',compact('users','roles'));
         
         
         //return view('users.users')->with('users', $users);
@@ -57,14 +60,14 @@ class UserController extends Controller
         $msg="";
         $error=false;
         $user = new User;
-        $count = User::where('mail', $request->input('inputEmail'))->count();
+        $count = User::where('email', $request->input('inputEmail'))->count();
         
         if ($count>0) {
             $msg="El correo ya existe, intente con otro.";
             $error=true;
             
         }else{
-            User::create([
+            $user=User::create([
                 'name' => $request->input('inputName'),            
                 'last_name' => $request->input('inputLastName'),
                 'mother_last_name' => $request->input('inputMotherLastName'),
@@ -74,6 +77,15 @@ class UserController extends Controller
                 'marital_status' => $request->input('inputEstadoCivil'),
                 'nss' => $request->input('inputNSS'),
             ]);
+
+            
+            if ($user->save()) {
+                $user->roles()->attach(Role::where('id', $request->input('inputRole'))->first());
+            }else{
+                $error=true;
+            }
+
+            
             
             
             /*$user->name = $request->input('inputName');

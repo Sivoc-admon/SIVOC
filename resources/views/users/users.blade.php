@@ -14,11 +14,15 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <span data-toggle="modal" data-target="#ModalRegisterUser">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Usuario">
-                            <i class="fas fa-user-plus"></i>
-                        </button>
-                    </span>
+                    @if(Auth::user()->hasRole('admin'))
+                        <span data-toggle="modal" data-target="#ModalRegisterUser">
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Usuario">
+                                <i class="fas fa-user-plus"></i>
+                            </button>
+                        </span>
+                    
+                    @endif
+                    
                     @include('users.register')
 
                    
@@ -84,8 +88,14 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            $("#tableUsers").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf'
+                ]
+            });
             
-            table('tableUsers');
+            //table('tableUsers');
         } );
     </script>  
     <script src="{{ asset('vendor/myjs/users.js') }}"></script> 

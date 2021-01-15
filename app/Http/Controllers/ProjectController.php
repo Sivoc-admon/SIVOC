@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\User;
 
 class ProjectController extends Controller
 {
@@ -15,8 +16,16 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::get();
+        $role = new User;
+        
+        if ($role->authorizeRoles(['admin'])) {
+            return view('projects.projects')->with('projects', $projects);
+        }else{
+            return redirect()->route('home');
+        }
 
-        return view('projects.projects')->with('projects', $projects);
+        
+        
         
     }
 
@@ -46,7 +55,7 @@ class ProjectController extends Controller
         
         $project->save();
 
-        return redirect()->route('projects');
+        return redirect()->action([ProjectController::class, 'index']);
     }
 
     /**

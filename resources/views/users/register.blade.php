@@ -49,6 +49,18 @@
                         <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
                       </div>
                     </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputRole">Role</label>
+                        <select class="form-control" id="inputRole" name="inputRole" required>
+                          <option value="0">---</option>
+                          @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                
+                            @endforeach
+                        </select>
+                      </div>
+                    </div>
                 </div>
                
 

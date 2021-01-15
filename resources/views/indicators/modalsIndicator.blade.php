@@ -1,93 +1,47 @@
-<!-- Modal -->
-<div class="modal fade" id="ModalRegisterUser" tabindex="-1" aria-labelledby="ModalRegisterUser" aria-hidden="true">
+<!-- Modal TIPO DE INDICADOR -->
+<div class="modal fade" id="ModalRegisterTypeIndicador" tabindex="-1" aria-labelledby="ModalRegisterTypeIndicador" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
+    <div class="modal-content" style="background-color: #17a2b8">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Registro Tipo de Indicador</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <form id="formRegisterUser">
+            <form id="formRegisterTypeIndicador">
               @csrf
                 <div class="row">
-                  <h4>Datos Empleado</h4>
+                  <h4>Typo de Indicador</h4>
                 </div>
                   
-                <div class="row" style="background-color: #17a2b8">
+                <div class="row" >
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputName">Nombre</label>
+                        <label for="inputName">Tipo de Indicador:</label>
                         <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nombre" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputLastName">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Apellido Paterno" required>
+                        <label for="inputLastName">Formula: </label>
+                        <input type="text" class="form-control" id="inputFormula" name="inputFormula" placeholder="Formula" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputMotherLastName">Apellido Materno</label>
-                        <input type="text" class="form-control" id="inputMotherLastName" name="inputMotherLastName" placeholder="Apellido Materno" required>
+                        <label for="inputMinimo">Minimo: </label>
+                        <input type="number" class="form-control" id="inputMinimo" name="inputMinimo" placeholder="Minimo" required>
                       </div>
                     </div>
-
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" required>
+                        <label for="inputMaximo">Maximo: </label>
+                        <input type="number" class="form-control" id="inputMaximo" name="inputMaximo" placeholder="Maximo" required>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="inputPassword">Contraseña</label>
-                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
-                      </div>
-                    </div>
-                </div>
-               
-
-                <div class="row">
-                  <h4>Antecedentes Académicos</h4>
-                </div>
-                <div class="row">
-                  <h4>Datos Personales</h4>
-                </div>
-                <div class="row" style="background-color: #5da1acc2">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="inputEdad">Edad</label>
-                      <input type="number" class="form-control" id="inputEdad" name="inputEdad">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="inputGenero">Genero</label>
-                      <select class="form-control" name="sltGenero" id="sltGenero">
-                        <option value="">Seleccione Genero</option>
-                        <option value="Hombre">Hombre</option>
-                        <option value="Mujer">Mujer</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="inputEstadoCivil">Estado Civil</label>
-                      <input type="text" class="form-control" id="inputEstadoCivil" name="inputEstadoCivil">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="inputNSS">NSS</label>
-                      <input type="number" class="form-control" id="inputNSS" name="inputNSS">
-                    </div>
-                  </div>
-                  
                 </div>
 
             </form>
@@ -95,9 +49,168 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" onclick="saveUser();">Guardar</button>
+          <button type="button" class="btn btn-success" onclick="saveTypeIndicator();">Guardar</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
     </div>
     </div>
+</div>
+
+<!-- Modal INDICADOR -->
+<div class="modal fade" id="ModalRegisterIndicator" tabindex="-1" aria-labelledby="ModalRegisterIndicator" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content" style="background-color: #17a2b8">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Registro Tipo de Indicador</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form id="formRegisterIndicador">
+            @csrf
+              <div class="row">
+                <h4>Indicador</h4>
+              </div>
+                
+              <div class="row" >
+                
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="sltArea">Area:</label>
+                      <select class="form-control" name="sltArea" id="sltArea">
+                        @foreach ($areas as $area)
+                          <option value="{{$area->id}}"> {{$area->name}}</option>
+                                
+                        @endforeach
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputLastName">Tipo de Indicador: </label>
+                      <select class="form-control" name="inputIndicatorType" id="inputIndicatorType" onchange="minMax()">
+                          <option value="0">--</option>
+                        @foreach ($indicatorTypes as $indicatorType)
+                          <option value="{{$indicatorType->id}}"> {{$indicatorType->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="minimo">Minimo</label>
+                      <input type="number" class="form-control" id="minimo" name="minimo" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="maximo">Maximo:</label>
+                      <input type="number" class="form-control" id="maximo" name="maximo" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputValue">Valor Obtenido:</label>
+                      <input type="number" class="form-control" id="inputValue" name="inputValue" placeholder="valor">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputreRegistrationDate">Fecha de registro:</label>
+                      <input type="date" class="form-control" id="inputreRegistrationDate" name="inputreRegistrationDate" >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="formFile" class="form-label">Documentos</label>
+                      <input class="form-control" type="file" id="formFile">
+                    </div>
+                  </div>
+              </div>
+
+          </form>
+        </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="saveIndicator();">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+  </div>
+  </div>
+</div>
+
+<!-- Modal filtro GRAFICA -->
+<div class="modal fade" id="ModalGraficaIndicator" tabindex="-1" aria-labelledby="ModalGraficaIndicator" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content" style="background-color: #17a2b8">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Registro Tipo de Indicador</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form id="formGraficaIndicador">
+            @csrf
+              <div class="row">
+                <h4>Grafica</h4>
+              </div>
+                
+              <div class="row" >
+                
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="sltAreaGrafica">Area:</label>
+                      <select class="form-control" name="sltAreaGrafica" id="sltAreaGrafica">
+                        @foreach ($areas as $area)
+                          <option value="{{$area->id}}"> {{$area->name}}</option>
+                                
+                        @endforeach
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputIndicatorTypeGrafica">Tipo de Indicador: </label>
+                      <select class="form-control" name="inputIndicatorTypeGrafica" id="inputIndicatorTypeGrafica">
+                          <option value="0">--</option>
+                        @foreach ($indicatorTypes as $indicatorType)
+                          <option value="{{$indicatorType->id}}"> {{$indicatorType->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="fechaInicial">Fecha Inicial:</label>
+                      <input type="date" class="form-control" id="fechaInicial" name="fechaInicial" >
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="fechaFinal">Fecha Final:</label>
+                      <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" >
+                    </div>
+                  </div>
+                  
+              </div>
+
+          </form>
+        </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="graficaIndicador();">Graficar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+  </div>
+  </div>
 </div>

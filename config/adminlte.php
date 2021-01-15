@@ -341,11 +341,11 @@ return [
                 ],
                 [
                     'text' => 'Ingenieria',
-                    'url'  => 'ingenieria',
+                    'url'  => '/folder/ingenieria',
                 ],
                 [
                     'text' => 'Manufactura',
-                    'url'  => 'manufactura',
+                    'url'  => '/folder/manufactura',
                 ],
                 [
                     'text' => 'Recursos Humanos',

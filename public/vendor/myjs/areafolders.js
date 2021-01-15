@@ -71,7 +71,8 @@ function getFoldersAndFiles(areaId, nivel) {
                     if ($(`#divNivel${level}`).length) {
                         $(`#divNivel${level}`).html(selectHTML);
                     } else {
-                        $(`#divFolders`).append(`<div id="divNivel${level}"><br>${selectHTML}</div>`);
+                        let pading = 10 * level;
+                        $(`#divFolders`).append(`<div id="divNivel${level}" style="padding-left: ${pading}px;"><br>${selectHTML}</div>`);
                     }
                 } else {
                     if ($(`#divNivel${level}`).length) {
@@ -169,7 +170,7 @@ function createFolder() {
                             }
                             $(selectTag).val(selectVal);
                         } else {
-                            console.log("no hay mas carpetas we :(");
+                            console.log("no hay mas carpetas");
                         }
                     },
                     error: function(data) {
@@ -191,7 +192,7 @@ function createFolder() {
 
 function newFile(areaId, nivel){
     let token = $("input[name=_token]").val();
-    console.log("ya cambio el input we ;)");
+    console.log("ya cambio el input;)");
     let tagInputFiles = `#files_${areaId}_${nivel}`;
     var formData = new FormData();
     let TotalFiles = $(tagInputFiles)[0].files.length; //Total files

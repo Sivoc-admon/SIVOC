@@ -15,8 +15,10 @@ class CreateIndicatorTypeTable extends Migration
     {
         Schema::create('indicator_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('name');
+            $table->string('name');
             $table->string('formula');
+            $table->integer('min');
+            $table->integer('max');
             $table->timestamps();
             $table->softDeletes();
         });

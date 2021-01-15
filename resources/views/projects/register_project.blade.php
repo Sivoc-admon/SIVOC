@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             <div class="container-fluid">
-                <form method="POST" action="/projects">
+                <form method="POST" action="projects">
                   @csrf
                     <div class="row">
                       <h4>Datos de Proyecto</h4>

@@ -41,7 +41,12 @@ Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
 
 //INDICADORES
-Route::get('/indicators', 'IndicatorController@index');
+Route::resource('indicators', 'IndicatorController');
+//Route::get('/indicators', 'IndicatorController@index');
+Route::post('/indicators/create', 'IndicatorController@store');
+Route::post('/indicators/create/typeIndicator', 'IndicatorController@createIndicatorType');
+Route::post('/indicators/create/minMax', 'IndicatorController@getMinMax');
+Route::post('/indicators/grafica', 'IndicatorController@graph');
 
 //DOCUMENTS POR AREA
 /*Route::get('/masteer', function() {

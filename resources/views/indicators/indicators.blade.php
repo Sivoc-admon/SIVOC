@@ -14,14 +14,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <span data-toggle="modal" data-target="#ModalRegisterUser">
+                    <span data-toggle="modal" data-target="#ModalRegisterTypeIndicador">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tipo de indicador">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </span>
+                    <span data-toggle="modal" data-target="#ModalRegisterIndicator">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Registro de indicador">
                             <i class="fas fa-user-plus"></i>
                         </button>
                     </span>
-                    <span data-toggle="modal" data-target="#ModalRegisterUser">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registro de indicador">
-                            <i class="fas fa-user-plus"></i>
+                    <span data-toggle="modal" data-target="#ModalGraficaIndicator">
+                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Graficar">
+                            <i class="fas fa-chart-bar"></i>
                         </button>
                     </span>
                     @include('indicators.modalsIndicator')
@@ -37,36 +42,24 @@
             <div class="card">
                 <div class="card-body">
                     <!-- class="table table-striped table-bordered" -->
-                    <table id="tableUsers" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tableIndicators" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
-                                <th>Correo</th>
-                                <th>Accion</th>
+                                <th>Area</th>
+                                <th>Tipo Indicador</th>
+                                <th>Valor</th>
+                                <th>Fecha Registro</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @isset($users)
+                            @isset($indicators)
     
-                            @foreach ($users as $user)
+                            @foreach ($indicators as $indicator)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->last_name }}</td>
-                                    <td>{{ $user->mother_last_name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                           
-                                            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
-                           
-                                            @csrf
-                                            @method('DELETE')
-                              
-                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                        </form>
-                                    </td>
+                                    <td>{{ $indicator->area }}</td>
+                                    <td>{{ $indicator->tipo_indicador }}</td>
+                                    <td>{{ $indicator->value }}</td>
+                                    <td>{{ $indicator->registration_date }}</td>
                                 </tr>
                             @endforeach
                             
@@ -76,11 +69,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
-                                <th>Correo</th>
                                 <th>Area</th>
+                                <th>Tipo Indicador</th>
+                                <th>Valor</th>
+                                <th>Fecha Registro</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -88,15 +80,38 @@
             </div>
         </div>
     </div>
+
+    <!--<div class="card-body">
+        <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand">
+                <div class=""></div>
+            </div>
+            <div class="chartjs-size-monitor-shrink">
+                <div class=""></div>
+            </div>
+        </div>
+        <canvas id="chartIndicator" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 348px;" width="435" height="312" class="chartjs-render-monitor"></canvas>
+    </div>-->
+    <div class="row">
+        <canvas id="chartIndicator"></canvas>
+    </div>
 @stop
 
 @section('js')
+    
     <script>
+        
         $(document).ready(function() {
+            $("#tableIndicators").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf'
+                ]
+            });
+
             
-            table('tableUsers');
         } );
     </script>  
-    <script src="{{ asset('vendor/myjs/users.js') }}"></script> 
+    <script src="{{ asset('vendor/myjs/indicators.js') }}"></script> 
 @stop
 
