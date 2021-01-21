@@ -32,12 +32,25 @@ class AreaDocumentController extends Controller
                     $f->areaDocuments;
                 });
                 $folders->files = AreaDocument::where('area_id', $areaId)->where('folder_area_id', 0)->get();
-                ##dd($folders);
+                if(count($folders->toArray()) < 1){
+                    $folders = $folders->files->toArray();
+                    $aux = [];
+                    foreach ($folders as $f)
+                    {
+                        $f['nivel'] = 0;
+                        $f['empty'] = true;
+                        array_push($aux, $f);
+                    }
+                    $folders = $aux;
+                }
             }
         } else {
             $area = 'almacen';
         }
-        return view('areafolders.areafolders')->with('folders', $folders->toArray())->with('area', $area);
+        
+        if(!is_array($folders))$folders = $folders->toArray();
+
+        return view('areafolders.areafolders')->with('folders', $folders)->with('area', $area);
     }
 
     public function filesLevelZero($area, $folderId)
