@@ -63,7 +63,7 @@
             }
         </style>
     </head>
-    <body class="img-responsive" style="background-image: url({{asset('storage/img/background.jfif')}}); opacity: 0.6;">
+    <body class="img-responsive" style="background-image: url({{asset('storage/img/background.jpeg')}}); opacity: 0.6;">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links" >
