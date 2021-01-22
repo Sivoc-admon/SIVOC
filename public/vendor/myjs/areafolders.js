@@ -1,10 +1,10 @@
 $(function() {
-    $("#inputName").keypress(function(event) {
+    /*$("#inputName").keypress(function(event) {
         var inputValue = event.charCode;
         if (!(inputValue >= 65 && inputValue <= 122) && (inputValue != 32 && inputValue != 0) && !(inputValue >= 48 && inputValue <= 57)) {
             event.preventDefault();
         }
-    });
+    });*/
 
     getFilesLevelZero(0);
 });
@@ -166,7 +166,8 @@ function createFolder() {
                                 console.log("se hizo un html al crear la carpeta");
                                 $(`#divNivel${nivel}`).html(selectHTML);
                             } else {
-                                $(`#divFolders`).append(`<div id="divNivel${nivel}"><br>${selectHTML}</div>`);
+                                let pading = 10 * level;
+                                $(`#divFolders`).append(`<div id="divNivel${nivel}" style="padding-left: ${pading}px;"><br>${selectHTML}</div>`);
                             }
                             $(selectTag).val(selectVal);
                         } else {

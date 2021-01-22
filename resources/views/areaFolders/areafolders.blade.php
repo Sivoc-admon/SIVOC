@@ -30,6 +30,7 @@
                 <div class="card-body">
                     <h4>Carpetas</h4>
                     <div class="form-group" id="divFolders">
+                    @if(!isset($folders[0]['empty']))
                         <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                             <option value="">Seleccione</option>
                             @foreach($folders as $folder)
@@ -40,6 +41,7 @@
                           style="display:none;">
                           Agregar carpeta</button>
                         <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_{{ $folders[0]['nivel'] }}" onchange="newFile({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})" multiple style="display:none;"/>
+                        @endif
                     </div>
                 </div>
             </div>
