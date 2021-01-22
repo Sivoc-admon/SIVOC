@@ -1,10 +1,10 @@
 $(function() {
-    $("#inputName").keypress(function(event) {
+    /*$("#inputName").keypress(function(event) {
         var inputValue = event.charCode;
         if (!(inputValue >= 65 && inputValue <= 122) && (inputValue != 32 && inputValue != 0) && !(inputValue >= 48 && inputValue <= 57)) {
             event.preventDefault();
         }
-    });
+    });*/
 
     getFilesLevelZero(0);
 });
