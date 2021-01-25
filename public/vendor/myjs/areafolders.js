@@ -172,7 +172,8 @@ function createFolder() {
                                 console.log("se hizo un html al crear la carpeta");
                                 $(`#divNivel${nivel}`).html(selectHTML);
                             } else {
-                                $(`#divFolders`).append(`<div id="divNivel${nivel}"><br>${selectHTML}</div>`);
+                                let pading = 10 * level;
+                                $(`#divFolders`).append(`<div id="divNivel${nivel}" style="padding-left: ${pading}px;"><br>${selectHTML}</div>`);
                             }
                             $(selectTag).val(selectVal);
                         } else {
