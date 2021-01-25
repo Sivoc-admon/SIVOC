@@ -40,6 +40,9 @@
                         <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
                           style="display:none;">
                           Agregar carpeta</button>
+                          <button id="btnLevelModify1" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder({{$folders[0]['id']}})"
+                          style="display:none;">
+                          Cambiar nombre a</button>
                         <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_{{ $folders[0]['nivel'] }}" onchange="newFile({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})" multiple style="display:none;"/>
                         @endif
                     </div>
