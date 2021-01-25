@@ -251,43 +251,43 @@ return [
         ['header' => 'Administrador'],
         [
             'text' => 'Usuarios',
-            'url'  => 'users',
+            /*'url'  => 'users',*/
             'icon' => 'fas fa-users',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            /*'url'  => 'admin/settings',*/
             'icon' => 'fas fa-fw fa-lock',
         ],
         ['header' => 'Procesos'],
         [
             'text' => 'Proyectos',
-            'url'  => '/projects',
+            'url'  => 'projects',
             'icon' => 'fas fa-project-diagram',
         ],
         [
             'text' => 'Minutas',
-            'url'  => '/minutes',
+            'url'  => 'minutes',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'text' => 'Auditoria Interna',
-            'url'  => '/internal_audit',
+            'url'  => 'internal_audit',
             'icon' => 'fas fa-user-secret',
         ],
         [
             'text' => 'Documentos SGC',
-            'url'  => '/sgc',
+            'url'  => '/gc',
             'icon' => 'fas fa-book',
         ],
         [
             'text' => 'Normas',
-            'url'  => '/norms',
+            'url'  => 'norms',
             'icon' => 'fas fa-scroll',
         ],
         [
             'text' => 'Acciones Correctivas',
-            'url'  => '/corrective_actions',
+            'url'  => 'corrective_actions',
             'icon' => 'fas fa-tasks',
         ],
         [
@@ -297,12 +297,12 @@ return [
         ],
         [
             'text' => 'Activos',
-            'url'  => '/active',
+            'url'  => 'active',
             'icon' => 'far fa-check-square',
         ],
         [
             'text'    => 'Recursos Humanos',
-            'url'     => '/rh',
+            'url'     => 'rh',
             'icon'    => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
