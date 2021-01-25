@@ -51,11 +51,20 @@ class IndicatorController extends Controller
     {
         //CREAR INDICADORES
         $indicator = new Indicator;
-
+        $pathFile = 'public/Documents/Indicadores';
+        $file = $request->files;
+        dd($request);
+        die();
         $indicator->area_id = $request->input('sltArea');
         $indicator->indicator_type_id = $request->input('inputIndicatorType');
         $indicator->value = $request->input('inputValue');
         $indicator->registration_date = $request->input('inputreRegistrationDate');
+        $indicator->ruta = 'storage/app/' . $pathFile;
+        $file = $request->file('fileIndicador');
+        $indicator->file_name = $file->getClientOriginalName();
+        $path = $file->storeAs(
+            $pathFile, $file->getClientOriginalName()
+        );
 
         $indicator->save();
 
@@ -89,12 +98,16 @@ class IndicatorController extends Controller
     {
         $indicatorType = new IndicatorType;
 
+        
         $indicatorType->name = $request->input('inputName');
         $indicatorType->formula = $request->input('inputFormula');
         $indicatorType->min = $request->input('inputMinimo');
         $indicatorType->max = $request->input('inputMaximo');
+        
 
         $indicatorType->save();
+
+        
         return redirect()->action([IndicatorController::class, 'index']);
         
     }

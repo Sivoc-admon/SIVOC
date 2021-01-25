@@ -14,7 +14,7 @@ function saveTypeIndicator() {
                 $("#ModalRegisterTypeIndicador").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
-
+                location.reload();
             }
 
         },
@@ -31,10 +31,22 @@ function saveTypeIndicator() {
 }
 
 function saveIndicator() {
+    let data = new FormData();
+    data.append("file", $('#fileIndicador')[0].files);
+    console.log($('#fileIndicador')[0].files);
+
+    //data.append("file", $('#fileIndicador')[0]);
+    //$("#formRegisterIndicador").serialize()
     $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         type: "POST",
         url: "/indicators/create",
-        data: $("#formRegisterIndicador").serialize(),
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
         //dataType: 'json',
         success: function(data) {
 
