@@ -68,7 +68,7 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <form id="formRegisterIndicador">
+          <form id="formRegisterIndicador" enctype="multipart/form-data">
             @csrf
               <div class="row">
                 <h4>Indicador</h4>
@@ -125,8 +125,8 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="formFile" class="form-label">Documentos</label>
-                      <input class="form-control" type="file" id="formFile">
+                      <label for="fileIndicador" class="form-label">Documentos</label>
+                      <input class="form-control" type="file" id="fileIndicador" name="fileIndicador">
                     </div>
                   </div>
               </div>

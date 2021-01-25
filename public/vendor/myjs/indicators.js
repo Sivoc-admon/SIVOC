@@ -14,7 +14,7 @@ function saveTypeIndicator() {
                 $("#ModalRegisterTypeIndicador").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
-
+                location.reload();
             }
 
         },
@@ -31,10 +31,31 @@ function saveTypeIndicator() {
 }
 
 function saveIndicator() {
+    let idArea = $("#sltArea").val();
+    let typeIndicator = $("#inputIndicatorType").val();
+    let valorOptenido = $("#inputValue").val();
+    let fechaRegistro = $("#inputreRegistrationDate").val();
+    let data = new FormData();
+    let file = $('#fileIndicador')[0];
+    data.append("file", file.files[0]);
+    data.append("idArea", idArea);
+    data.append("typeIndicator", typeIndicator);
+    data.append("valorOptenido", valorOptenido);
+    data.append("fechaRegistro", fechaRegistro);
+    console.log(data);
+
+    //data.append("file", $('#fileIndicador')[0]);
+    //$("#formRegisterIndicador").serialize()
     $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         type: "POST",
         url: "/indicators/create",
-        data: $("#formRegisterIndicador").serialize(),
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
         //dataType: 'json',
         success: function(data) {
 
@@ -45,6 +66,7 @@ function saveIndicator() {
                 $("#ModalRegisterIndicator").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
+                location.reload();
 
             }
 

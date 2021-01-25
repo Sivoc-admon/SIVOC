@@ -19,6 +19,8 @@ class CreateIndicatorsTable extends Migration
             $table->integer('indicator_type_id');
             $table->double('value', 8, 2);
             $table->date('registration_date');
+            $table->string('file_name');
+            $table->string('ruta');
             $table->timestamps();
             $table->softDeletes();
         });

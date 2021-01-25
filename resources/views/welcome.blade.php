@@ -12,17 +12,30 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                height: 100%;
+                width: 100%;
+                /*background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
-                margin: 0;
+                margin: 0;*/
             }
+            body {
+                height: 100%;
+                background-image: url({{asset('storage/img/background.jpeg')}});
+                
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                
+            }
+            /*
 
             .full-height {
                 height: 100vh;
-            }
+            }*/
 
             .flex-center {
                 align-items: center;
@@ -60,41 +73,44 @@
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
+            }*/
         </style>
     </head>
-    <body class="img-responsive" style="background-image: url({{asset('storage/img/background.jpeg')}}); opacity: 0.6;">
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links" >
-                    @auth
-                        <a href="{{ url('/home') }}" style="color: white; font-size:15px;">Home</a>
-                    @else
-                    <a href="{{ route('login') }}" style="color: white; font-size:15px;"><button>Login</button></a>
-
-                        @if (Route::has('register'))
-                            <!--<a href="{{ route('register') }}">Register</a> -->
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content" style="margin-top: 150px;">
-                <!-- <div class="title m-b-md">
-                    <img src="{{asset('storage/img/SIVOC_logo.png')}}" class="img-fluid" alt="Responsive image">
-                </div> -->
-
-                <div class="links">
-                    <a href="{{asset('storage/Documents/welcome/MISION.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button> <b>Misión</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Visión</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Politica de Calidad</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/MAPA DE PROCESOS.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Mapa de procesos</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/POLITICAS SIVOC.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Políticas SIVOC</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>COVID 19</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Brigadad de Emergencia</b></button></a>
-                    <a href="{{asset('storage/Documents/welcome/PROXIMOS EVENTOS.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Próximos eventos</b></button></a>
+    <body >
+        <div class="container-fluid">
+            <div class="flex-center position-ref full-height">
+                @if (Route::has('login'))
+                    <div class="top-right links" >
+                        @auth
+                            <a href="{{ url('/home') }}" style="color: white; font-size:15px;">Home</a>
+                        @else
+                        <a href="{{ route('login') }}" style="color: white; font-size:15px;"><button>Login</button></a>
+    
+                            @if (Route::has('register'))
+                                <!--<a href="{{ route('register') }}">Register</a> -->
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+    
+                <div class="content" style="margin-top: 250px;">
+                    <!-- <div class="title m-b-md">
+                        <img src="{{asset('storage/img/SIVOC_logo.png')}}" class="img-fluid" alt="Responsive image">
+                    </div> -->
+    
+                    <div class="links">
+                        <a href="{{asset('storage/Documents/welcome/MISION.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button> <b>Misión</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Visión</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Politica de Calidad</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/MAPA DE PROCESOS.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Mapa de procesos</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/POLITICAS SIVOC.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Políticas SIVOC</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>COVID 19</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Brigadad de Emergencia</b></button></a>
+                        <a href="{{asset('storage/Documents/welcome/PROXIMOS EVENTOS.pdf')}}" target="_blank" style="color: white; font-size:12px;"><button><b>Próximos eventos</b></button></a>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </body>
 </html>

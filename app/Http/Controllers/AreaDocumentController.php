@@ -33,14 +33,26 @@ class AreaDocumentController extends Controller
                 });
                 $folders->files = AreaDocument::where('area_id', $areaId)->where('folder_area_id', 0)->get();
                 if(count($folders->toArray()) < 1){
-                    $folders = $folders->files->toArray();
                     $aux = [];
-                    foreach ($folders as $f)
-                    {
+                    if(count($folders->files->toArray()) > 0){
+                        $folders = $folders->files->toArray();
+                        foreach ($folders as $f)
+                        {
+                            $f['nivel'] = 0;
+                            $f['empty'] = true;
+                            array_push($aux, $f);
+                        }
+                    }else{
+                        $f = [];
+                        $f['id'] = 0;
+                        $f['area_id'] = $areaId;
+                        $f['folder_area_id'] = 0;
+                        $f['name'] = '';
+                        $f['ruta'] = '';
                         $f['nivel'] = 0;
                         $f['empty'] = true;
                         array_push($aux, $f);
-                    }
+                    }                    
                     $folders = $aux;
                 }
             }
