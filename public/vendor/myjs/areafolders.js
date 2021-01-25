@@ -43,11 +43,13 @@ function getFoldersAndFiles(areaId, nivel) {
     let selectVal = $(selectTag).val();
     let selectTagText = $(`${selectTag} option:selected`).text();
     let botonNameTag = `#btnLevel${nivel}`;
+    let botonNameModifyTag = `#btnLevelModify${nivel}`;
     let botonFilesTag = `#files_${areaId}_${nivel}`
     let levels = recorreNiveles();
     console.log(`se borraran los siguientes niveles: ${levels}`);
     borrarDivNiveles(nivel, levels);
     $(botonNameTag).html(`Agregar carpeta dentro de "${selectTagText}"`);
+    $(botonNameModifyTag).html(`Cambiar nombre a la carpeta "${selectTagText}"`);
     if (selectVal !== '') {
         $.ajax({
             type: "GET",
@@ -56,6 +58,7 @@ function getFoldersAndFiles(areaId, nivel) {
             success: function(data) {
                 getFilesLevelZero(selectVal);
                 $(botonNameTag).fadeIn();
+                $(botonNameModifyTag).fadeIn();
                 $(botonFilesTag).fadeIn();
                 if (data.data.length > 0) {
                     let folders = data.data;
@@ -67,6 +70,7 @@ function getFoldersAndFiles(areaId, nivel) {
                     selectHTML += `</select><br>
                     <button id="btnLevel${level}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${level})"
                     style="display:none;">Agregar carpeta</button>
+                    <button id="btnLevelModify${level}" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder(${selectVal})" style="display:none;">Cambiar nombre a</button>
                     <input type="file" class="btn btn-warning" id="files_${areaId}_${level}" onchange="newFile(${areaId}, ${level})" multiple style="display:none;"/>`;
                     if ($(`#divNivel${level}`).length) {
                         $(`#divNivel${level}`).html(selectHTML);
@@ -161,6 +165,8 @@ function createFolder() {
                         selectHTML += `</select><br>
                         <button id="btnLevel${nivel}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${nivel})"
                         style="display:none;">Agregar carpeta</button>
+                        <button id="btnLevelModify${nivel}" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder(${selectVal})"
+                        style="display:none;">Cambiar nombre a</button>
                         <input type="file" class="btn btn-warning" id="files_${areaId}_${nivel}" onchange="newFile(${areaId}, ${nivel})" multiple style="display:none;"/>`;
                             if ($(`#divNivel${nivel}`).length) {
                                 console.log("se hizo un html al crear la carpeta");
@@ -269,4 +275,8 @@ function deleteFile(documentName, documentId, folderId){
             });
         }
       });
+}
+
+function cambiaNombreFolder(folderId){
+    console.log("el id del folder en la BD es " + folderId);
 }
