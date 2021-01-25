@@ -53,14 +53,13 @@ class IndicatorController extends Controller
         $indicator = new Indicator;
         $pathFile = 'public/Documents/Indicadores';
         $file = $request->files;
-        dd($request);
-        die();
-        $indicator->area_id = $request->input('sltArea');
-        $indicator->indicator_type_id = $request->input('inputIndicatorType');
-        $indicator->value = $request->input('inputValue');
-        $indicator->registration_date = $request->input('inputreRegistrationDate');
+        
+        $indicator->area_id = $request->idArea;
+        $indicator->indicator_type_id = $request->typeIndicator;
+        $indicator->value = $request->valorOptenido;
+        $indicator->registration_date = $request->fechaRegistro;
         $indicator->ruta = 'storage/app/' . $pathFile;
-        $file = $request->file('fileIndicador');
+        $file = $request->file('file');
         $indicator->file_name = $file->getClientOriginalName();
         $path = $file->storeAs(
             $pathFile, $file->getClientOriginalName()

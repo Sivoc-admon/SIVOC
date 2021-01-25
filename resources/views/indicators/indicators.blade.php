@@ -48,6 +48,7 @@
                                 <th>Area</th>
                                 <th>Tipo Indicador</th>
                                 <th>Valor</th>
+                                <th>Archivo</th>
                                 <th>Fecha Registro</th>
                             </tr>
                         </thead>
@@ -59,6 +60,7 @@
                                     <td>{{ $indicator->area }}</td>
                                     <td>{{ $indicator->tipo_indicador }}</td>
                                     <td>{{ $indicator->value }}</td>
+                                    <td><a href="{{asset('storage/Documents/Indicadores/'.$indicator->file_name)}}">{{ $indicator->file_name }}</a></td>
                                     <td>{{ $indicator->registration_date }}</td>
                                 </tr>
                             @endforeach

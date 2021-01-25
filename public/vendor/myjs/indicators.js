@@ -31,9 +31,18 @@ function saveTypeIndicator() {
 }
 
 function saveIndicator() {
+    let idArea = $("#sltArea").val();
+    let typeIndicator = $("#inputIndicatorType").val();
+    let valorOptenido = $("#inputValue").val();
+    let fechaRegistro = $("#inputreRegistrationDate").val();
     let data = new FormData();
-    data.append("file", $('#fileIndicador')[0].files);
-    console.log($('#fileIndicador')[0].files);
+    let file = $('#fileIndicador')[0];
+    data.append("file", file.files[0]);
+    data.append("idArea", idArea);
+    data.append("typeIndicator", typeIndicator);
+    data.append("valorOptenido", valorOptenido);
+    data.append("fechaRegistro", fechaRegistro);
+    console.log(data);
 
     //data.append("file", $('#fileIndicador')[0]);
     //$("#formRegisterIndicador").serialize()
@@ -57,6 +66,7 @@ function saveIndicator() {
                 $("#ModalRegisterIndicator").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
+                location.reload();
 
             }
 
