@@ -17,6 +17,7 @@ class ProjectController extends Controller
     {
         $projects = Project::get();
         $role = new User;
+        dd($role->hasRole('admin'));
         
         if ($role->authorizeRoles(['admin'])) {
             return view('projects.projects')->with('projects', $projects);
