@@ -23,7 +23,7 @@
             }
             body {
                 height: 100%;
-                background-image: url({{asset('storage/img/background.jpeg')}});
+                background-image: url({{asset('storage/img/SIVOC.jpg')}});
                 
                 /* Center and scale the image nicely */
                 background-position: center;
@@ -93,7 +93,7 @@
                     </div>
                 @endif
     
-                <div class="content" style="margin-top: 250px;">
+                <div class="content" style="margin-top: 550px;">
                     <!-- <div class="title m-b-md">
                         <img src="{{asset('storage/img/SIVOC_logo.png')}}" class="img-fluid" alt="Responsive image">
                     </div> -->
