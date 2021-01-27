@@ -57,6 +57,7 @@ Route::get('/folder/{area}', 'AreaDocumentController@index');#->name('almacen');
 Route::get('/folder2/{area}/{filesLevelZero}', 'AreaDocumentController@filesLevelZero');#->name('almacen');
 Route::get('/folder/{areaId}/{nivel}/{idPadre}', 'AreaDocumentController@getFoldersAndFiles');
 Route::post('/folder/create/{areaId}/{nivel}', 'AreaDocumentController@createFolder');
+Route::post('/folder/update/{folderId}', 'AreaDocumentController@updateFolder');
 Route::post('/file/create/{areaId}/{nivel}', 'AreaDocumentController@createFiles');
 Route::post('/file/delete', 'AreaDocumentController@deleteFile');
 Route::get('/file/download/{documentId}/{idFolder}', 'AreaDocumentController@downloadFile');
