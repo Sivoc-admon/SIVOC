@@ -46,10 +46,10 @@ function getFoldersAndFiles(areaId, nivel) {
     let botonNameModifyTag = `#btnLevelModify${nivel}`;
     let botonFilesTag = `#files_${areaId}_${nivel}`
     let levels = recorreNiveles();
-    console.log(`se borraran los siguientes niveles: ${levels}`);
     borrarDivNiveles(nivel, levels);
     $(botonNameTag).html(`Agregar carpeta dentro de "${selectTagText}"`);
     $(botonNameModifyTag).html(`Cambiar nombre a la carpeta "${selectTagText}"`);
+    $(botonNameModifyTag).attr("onclick", `cambiaNombreFolder(${selectVal}, '${selectTagText}')`);
     if (selectVal !== '') {
         $.ajax({
             type: "GET",
@@ -70,7 +70,7 @@ function getFoldersAndFiles(areaId, nivel) {
                     selectHTML += `</select><br>
                     <button id="btnLevel${level}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${level})"
                     style="display:none;">Agregar carpeta</button>
-                    <button id="btnLevelModify${level}" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder(${selectVal})" style="display:none;">Cambiar nombre a</button>
+                    <button id="btnLevelModify${level}" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder(${selectVal}, '${selectTagText}')" style="display:none;">Cambiar nombre a</button>
                     <input type="file" class="btn btn-warning" id="files_${areaId}_${level}" onchange="newFile(${areaId}, ${level})" multiple style="display:none;"/>`;
                     if ($(`#divNivel${level}`).length) {
                         $(`#divNivel${level}`).html(selectHTML);
@@ -91,6 +91,7 @@ function getFoldersAndFiles(areaId, nivel) {
         });
     } else {
         $(botonNameTag).hide();
+        $(botonNameModifyTag).hide();
         $(botonFilesTag).hide();
     }
 }
@@ -135,6 +136,7 @@ function createFolder() {
     let areaId = $("#areaIdFolder").val();
     let selectTag = `#selectNivel${nivel}`;
     let selectVal = $(selectTag).val();
+    let selectTagText = $(`${selectTag} option:selected`).text();
     if (folderName.trim() !== '') {
         $("#exampleModalLabel").html('Crear nueva carpeta');
         $("#divMsge").html(`<i class="fas fa-circle-notch fa-spin"></i>
@@ -165,7 +167,7 @@ function createFolder() {
                         selectHTML += `</select><br>
                         <button id="btnLevel${nivel}" type="button" class="btn btn-primary form-button" onclick="newFolder(${areaId}, ${nivel})"
                         style="display:none;">Agregar carpeta</button>
-                        <button id="btnLevelModify${nivel}" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder(${selectVal})"
+                        <button id="btnLevelModify${nivel}" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder(${selectVal}, '${selectTagText}')"
                         style="display:none;">Cambiar nombre a</button>
                         <input type="file" class="btn btn-warning" id="files_${areaId}_${nivel}" onchange="newFile(${areaId}, ${nivel})" multiple style="display:none;"/>`;
                             if ($(`#divNivel${nivel}`).length) {
@@ -278,6 +280,47 @@ function deleteFile(documentName, documentId, folderId){
       });
 }
 
-function cambiaNombreFolder(folderId){
-    console.log("el id del folder en la BD es " + folderId);
+function cambiaNombreFolder(folderId, oldName){
+    $("#folderIdModFolder").val(folderId);
+    $("#folderOldName").val(oldName);
+    $("#divMsgeModFolder").html('');
+    $("#taitolModify").html(`Cambiar nombre a la carpeta "${oldName}"`);
+    $("#buttonsModifyName").show();
+    $("#ModalModifyFolder").modal('show');
+}
+
+function modifyNameFolder(){
+    $("#errorFolderModify").html('');
+    let folderId = $("#folderIdModFolder").val();
+    let oldName = $("#folderOldName").val();
+    let newName = $("#inputNameModify").val();
+    let areaId = $("#hiddenAriaId").val();
+    if(newName.trim() !== ''){
+        $("#formFolderx").hide();
+        $("#buttonsModifyName").hide();
+        $("#divMsgeModFolder").html(`<i class="fas fa-circle-notch fa-spin"></i>
+        <br><label class="control-label">Modificando el nombre la carpeta "${oldName}" por "${newName}"</label>`);
+        console.log(`el id del folder que se está modificando es ${folderId}`);
+        $("#divMsgeModFolder").fadeIn();
+        let token = $("input[name=_token]").val();
+        $.ajax({
+            type:'POST',
+            url: `/folder/update/${folderId}`,
+            data: {'_token':token, 'newName': newName, 'areaId':areaId},
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                getFilesLevelZero(folderId);
+                $("#ModalModifyFolder").modal('hide');
+                messageAlert("Operación exitosa!", "success", `Se cambió correctamente el nombre de la carpeta "${oldName}" por el de "${newName}"`);
+            },
+            error: function(data){
+                console.log(data);
+                $("#ModalModifyFolder").modal('hide');
+                messageAlert("Ha ocurrido un problema.", "error", `Ocurrió un problema al cambiar el nombre de la carpeta "${oldName}" por el de "${newName}"`);
+            }
+        });
+    }else{
+        $("#errorFolderModify").html('Debe proporcionar el nombre de la carpeta');
+    }
 }
