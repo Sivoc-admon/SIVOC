@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'mother_last_name' => 'Sanchez',
             'email' => 'jfgils02@gmail.com',
             'password' => Hash::make('123456'),
+            'area_id' => '5',
             'created_at' => date('Y-m-d H:m:s'), 
             'updated_at' => date('Y-m-d H:m:s')
         ]);
