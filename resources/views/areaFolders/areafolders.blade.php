@@ -60,7 +60,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Ruta del archivo</th>
+                                <th>Fecha registro</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
