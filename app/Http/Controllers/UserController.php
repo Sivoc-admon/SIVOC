@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
-use App\UserRole;
+use App\Area;
+
+use Illuminate\Support\Facades\DB;
 use Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -16,12 +19,17 @@ class UserController extends Controller
 
     public function index()
     {
-        //
-        $users = User::get();
+        
+        //$users = User::get();
         $roles = Role::get();
+        $areas = Area::get();
+        $users = DB::table('users')
+            ->join('areas', 'users.area_id', '=', 'areas.id')
+            ->select('users.*', 'areas.name as area_name')
+            ->get();
         
       
-        return view('users.users',compact('users','roles'));
+        return view('users.users',compact('users','roles', 'areas'));
         
         
         //return view('users.users')->with('users', $users);
@@ -132,7 +140,14 @@ class UserController extends Controller
     {
         //
         $user = User::find($id);
-        return view('users.edit')->with('users',$user);
+        //dd(Crypt::decrypt($user->password));
+        //$password = Crypt::decrypt($user->password);
+        $msg="";
+        $error=false;
+        $array=["msg"=>$msg, "error"=>$error, "user"=>$user];
+        return response()->json($array);
+        
+        //return view('users.edit', compact('user','password', 'areas'));
     }
 
     /**

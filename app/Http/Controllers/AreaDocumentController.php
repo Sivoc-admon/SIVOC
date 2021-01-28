@@ -187,8 +187,7 @@ class AreaDocumentController extends Controller
         return response()->json(['data' => array('msje' => "Carpeta \"$folderName\" creada correctamente.")], Response::HTTP_OK);
     }
 
-    private function getPathFolder($folderId)
-    {
+    private function getPathFolder($folderId){
 
         $idPadre = -70;
         $path = '';
@@ -204,8 +203,7 @@ class AreaDocumentController extends Controller
         return '/' . $path;
     }
 
-    public function createFiles($areaId, $nivel, Request $request)
-    {
+    public function createFiles($areaId, $nivel, Request $request){
         sleep(2);
         $idFolder = $request->folderId;
         $area = Area::where('id', $areaId)->get()[0];
@@ -262,5 +260,34 @@ class AreaDocumentController extends Controller
         if (file_exists($pathFile)) {
             return response()->download($pathFile);
         }
+    }
+
+    public function updateFolder($folderId, Request $request){
+        $newName = $request->get('newName');
+        $areaId = $request->get('areaId');
+        $r = $this->getPathFolder($folderId);
+
+        $area = Area::where('id', $areaId)->get()[0];
+        $folderAreaName = $area->name;
+        $oldPath = 'public/Documents/' . $folderAreaName . $r;
+
+        $folderArea = FolderArea::find($folderId);
+        if($folderArea) {
+            $folderArea->name = $newName;
+            $folderArea->save();
+        }
+
+        $r = $this->getPathFolder($folderId);
+        $newPath = 'public/Documents/' . $folderAreaName . $r;
+        Storage::rename($oldPath, $newPath);
+
+        $areaDocuments = AreaDocument::where('folder_area_id', $folderId)->get();
+        if($areaDocuments){
+            $areaDocuments->each(function($d) use($newPath){
+                $d->ruta = 'storage/app/'.$newPath;
+                $d->save();
+            });
+        }
+        return response()->json(['data' => array('msje' => "Operación completada correctamente.")], Response::HTTP_OK);
     }
 }

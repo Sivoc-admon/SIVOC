@@ -251,7 +251,7 @@ return [
         ['header' => 'Administrador'],
         [
             'text' => 'Usuarios',
-            /*'url'  => 'users',*/
+            'url'  => 'users',
             'icon' => 'fas fa-users',
         ],
         [

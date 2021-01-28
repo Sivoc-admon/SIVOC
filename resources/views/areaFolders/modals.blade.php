@@ -48,17 +48,15 @@
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title" id="taitolModify">Cambiar nombre a carpeta</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                 </button>
              </div>
              <div class="modal-body">
                  <div class="container-fluid">
-                     <div id="formFolder">
-                         <form id="formRegisterUser">
+                     <div id="formFolderx">
+                         <form id="formModifyFolder">
                              @csrf
-
-                             <div class="row" style="background-color: #17a2b8">
+                            <input type="hidden" id="folderIdModFolder" value="">
+                            <input type="hidden" id="folderOldName" value="">
+                            <div class="row" style="background-color: #17a2b8">
                                  <div class="col-md-12">
                                      <div class="form-group">
                                          <label for="inputName">Nuevo nombre de la carpeta</label>
@@ -69,14 +67,14 @@
                              </div>
                          </form>
                      </div>
-                     <div id="divMsge" class="text-center">
+                     <div id="divMsgeModFolder" class="text-center">
                          
                      </div>
                  </div>
 
              </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-success" onclick="createFolder()" id="guardaModal">Guardar</button>
+             <div class="modal-footer" id="buttonsModifyName">
+                 <button type="button" class="btn btn-success" onclick="modifyNameFolder()">Guardar</button>
                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
              </div>
          </div>

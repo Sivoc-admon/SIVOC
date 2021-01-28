@@ -15,15 +15,16 @@
                 <div class="card">
                     <div class="card-body">
                         
-                            <span data-toggle="modal" data-target="#ModalRegisterUser">
-                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Usuario">
-                                    <i class="fas fa-user-plus"></i>
-                                </button>
-                            </span>
+                        <span data-toggle="modal" data-target="#ModalRegisterUser">
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Usuario">
+                                <i class="fas fa-user-plus"></i>
+                            </button>
+                        </span>
                         
                         
                         
                         @include('users.register')
+                        @include('users.edit')
 
                     
                     </div>
@@ -39,25 +40,28 @@
                         <table id="tableUsers" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nombre</th>
                                     <th>Apellido Paterno</th>
                                     <th>Apellido Materno</th>
                                     <th>Correo</th>
+                                    <th>Area</th>
                                     <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
                                     <tr>
+                                        <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->last_name }}</td>
                                         <td>{{ $user->mother_last_name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->area_name }}</td>
                                         <td>
+                                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
+                                            
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                            
-                                                <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
-                            
                                                 @csrf
                                                 @method('DELETE')
                                 
@@ -71,11 +75,13 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nombre</th>
                                     <th>Apellido Paterno</th>
                                     <th>Apellido Materno</th>
                                     <th>Correo</th>
                                     <th>Area</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>
