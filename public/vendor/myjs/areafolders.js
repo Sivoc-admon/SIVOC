@@ -11,17 +11,20 @@ $(function() {
 
 function getFilesLevelZero(folderId) {
     let areaId = $("#hiddenAriaId").val();
+
     $.ajax({
         type: "GET",
         url: `/folder2/${areaId}/${folderId}`,
         dataType: 'json',
         success: function(data) {
             let tablaHTML = ``;
-            console.log(data);
+
             for (var k in data) {
+                let date = new Date(data[k].created_at);
+
                 tablaHTML += `<tr>
                 <td>${data[k].name}</td>
-                <td>${data[k].ruta}</td>
+                <td>${date.toLocaleDateString()}</td>
                 <td>
                     <button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data[k].name}', ${data[k].id}, ${data[k].folder_area_id})">
                         <i class="fas fa-times"></i>
