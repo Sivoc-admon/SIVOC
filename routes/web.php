@@ -63,6 +63,7 @@ Route::get('/file/download/{documentId}/{idFolder}', 'AreaDocumentController@dow
 
 //CLIENTES
 Route::post('customers/store', 'CustomerController@store');
+Route::delete('customers/{customer}', 'CustomerController@destroy')->name('customers.destroy');;
 Route::resource('customers', 'CustomerController');
 
 

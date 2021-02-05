@@ -61,10 +61,9 @@
                                         <td>
                                             <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$customer->id}});"><i class="fas fa-edit"></i></a>
                                         
-                                            <form action="{{ route('users.destroy',$customer->id) }}" method="POST">
-                                                @csrf
+                                            <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
                                                 @method('DELETE')
-                                
+                                                @csrf
                                                 <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
                                             </form>
                                             
