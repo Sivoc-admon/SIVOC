@@ -41,7 +41,7 @@
                                 @foreach ($projects as $project)
                                     <tr>
                                         <td>{{ $project->name }}</td>
-                                        <td>{{ $project->client }}</td>
+                                        <td>{{ $project->name_customer }}</td>
                                         <td>{{ $project->status }}</td>
                                         <td><a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a></td>
                                     </tr>

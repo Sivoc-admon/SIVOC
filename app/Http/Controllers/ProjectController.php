@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use App\Project;
+use Illuminate\Support\Facades\DB;
 use App\User;
 
 class ProjectController extends Controller
@@ -16,8 +17,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::get();
+        //$projects = Project::get();
         $customers = Customer::get();
+
+        $projects = DB::table('projects')
+        ->join('customers', 'projects.client', '=', 'customers.id')
+        ->select('projects.*', 'customers.name as name_customer')
+        ->get();
 
         return view('projects.projects', compact('projects','customers'));
         
@@ -46,7 +52,7 @@ class ProjectController extends Controller
         $project = new Project;
        
         $project->name = $request->input('inputProyecto');
-        $project->client = $request->input('inputCliente');
+        $project->client = $request->input('sltCliente');
         $project->status = $request->input('inputEstatus');
         
         $project->save();
