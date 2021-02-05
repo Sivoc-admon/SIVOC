@@ -24,9 +24,10 @@ class User extends Authenticatable
         'mother_last_name',
         'email',
         'password',
-        'gender',
+        'area_id',
+        /*'gender',
         'marital_status',
-        'nss'
+        'nss'*/
     ];
 
     /**

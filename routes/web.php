@@ -61,6 +61,11 @@ Route::post('/file/create/{areaId}/{nivel}', 'AreaDocumentController@createFiles
 Route::post('/file/delete', 'AreaDocumentController@deleteFile');
 Route::get('/file/download/{documentId}/{idFolder}', 'AreaDocumentController@downloadFile');
 
+//CLIENTES
+Route::post('customers/store', 'CustomerController@store');
+Route::resource('customers', 'CustomerController');
+
+
 
 
 /*Auth::routes();

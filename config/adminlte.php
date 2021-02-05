@@ -266,6 +266,11 @@ return [
             'icon' => 'fas fa-project-diagram',
         ],
         [
+            'text' => 'Clientes',
+            'url'  => 'customers',
+            'icon' => 'fas fa-project-diagram',
+        ],
+        [
             'text' => 'Minutas',
             'url'  => 'minutes',
             'icon' => 'fas fa-fw fa-lock',

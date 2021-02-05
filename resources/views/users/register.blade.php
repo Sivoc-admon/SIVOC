@@ -76,7 +76,7 @@
                 </div>
                
 
-                <div class="row">
+                <!-- <div class="row">
                   <h4>Antecedentes Académicos</h4>
                 </div>
                 <div class="row">
@@ -112,7 +112,7 @@
                     </div>
                   </div>
                   
-                </div>
+                </div> -->
 
             </form>
           </div>

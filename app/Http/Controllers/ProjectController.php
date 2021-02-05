@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 use App\Project;
 use App\User;
@@ -16,17 +17,11 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::get();
-        $role = new User;
-        dd($role->hasRole('admin'));
-        
-        if ($role->authorizeRoles(['admin'])) {
-            return view('projects.projects')->with('projects', $projects);
-        }else{
-            return redirect()->route('home');
-        }
+        $customers = Customer::get();
 
+        return view('projects.projects', compact('projects','customers'));
         
-        
+
         
     }
 
