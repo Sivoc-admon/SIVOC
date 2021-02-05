@@ -11,9 +11,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    @if(Auth::user()->hasAnyRole(['admin', 'calidad', 'operaciones', 'manufactura', 'servicio']))
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Nuevo Proyecto
                     </button>
+                    @endif
                     @include('projects.register_project')
 
                     

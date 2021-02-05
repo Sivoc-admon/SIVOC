@@ -29,8 +29,8 @@ class RoleSeeder extends Seeder
             'created_at' => now(), 
             'updated_at' => now()
             ],
-            ['name' => 'control operacional',
-            'description' => 'Perfil de control operacional',
+            ['name' => 'operaciones',
+            'description' => 'Perfil de operaciones',
             'created_at' => now(), 
             'updated_at' => now()
             ],
@@ -66,6 +66,11 @@ class RoleSeeder extends Seeder
             ],
             ['name' => 'ventas',
             'description' => 'Perfil de ventas',
+            'created_at' => now(), 
+            'updated_at' => now()
+            ],
+            ['name' => 'servicio',
+            'description' => 'Perfil de servicio',
             'created_at' => now(), 
             'updated_at' => now()
             ],

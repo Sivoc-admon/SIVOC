@@ -59,14 +59,19 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->area_name }}</td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
+                                            @if ($user->area_name != 'Direccion')
+                                                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
                                             
-                                            <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                
-                                                <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                            </form>
+                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                    
+                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                                </form>
+                                            @else
+                                                
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

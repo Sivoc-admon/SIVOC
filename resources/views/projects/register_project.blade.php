@@ -28,11 +28,10 @@
                           <div class="form-group">
                             <label for="sltCliente">Cliente</label>
                             <select class="form-control" name="sltCliente" id="sltCliente">
-                                <option value="1">francisco</option>
-                                <option value="2" selected>Miguel</option>
-                                <option value="3">Fernando</option>
-                                <option value="4">Isabel</option>
-                                <option value="5">Norma</option>
+                                <option value="0">---</option>
+                                @foreach ($customers as $customer)
+                                 <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                @endforeach
                             </select>
                           </div>
                         </div>
