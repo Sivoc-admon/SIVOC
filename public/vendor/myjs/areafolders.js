@@ -128,6 +128,7 @@ function newFolder(areaId, nivel) {
     $("#divMsge").html('').hide();
     $("#nivelFolder").val(nivel);
     $("#areaIdFolder").val(areaId);
+    $('#guardaModal').attr("disabled", false);
     $("#ModalCreateFolder").modal('show');
 }
 
@@ -145,6 +146,7 @@ function createFolder() {
         $("#divMsge").html(`<i class="fas fa-circle-notch fa-spin"></i>
         <br><label class="control-label">Creando carpeta</label>`);
         $("#formFolder").fadeOut();
+        $('#guardaModal').attr("disabled", true);
         $("#divMsge").fadeIn();
         $.ajax({
                     type: "POST",
