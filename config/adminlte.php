@@ -361,7 +361,7 @@ return [
                     'url'  => '/folder/ventas',
                 ],
                 [
-                    'text' => 'Servicios',
+                    'text' => 'Servicio',
                     'url'  => '/folder/servicios',
                 ],
                 
