@@ -16,7 +16,7 @@
                     <div class="card-body">
                         
                         <span data-toggle="modal" data-target="#ModalRegisterRule">
-                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Cliente">
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Norma">
                                 <i class="fas fa-user-plus"></i>
                             </button>
                         </span>
