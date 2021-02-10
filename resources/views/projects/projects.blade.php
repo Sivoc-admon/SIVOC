@@ -12,11 +12,15 @@
             <div class="card">
                 <div class="card-body">
                     @if(Auth::user()->hasAnyRole(['admin', 'calidad', 'operaciones', 'manufactura', 'servicio']))
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Nuevo Proyecto
-                    </button>
+                    <span data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Proyecto">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </span>
+                   
                     @endif
                     @include('projects.register_project')
+                    @include('projects.board')
 
                     
                 </div>
@@ -30,7 +34,10 @@
                     <table id="tableProjects" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Proyecto</th>
+                                <th>#</th>
+                                <th>Nombre de proyecto</th>
+                                <th>Tipo</th>
+                                <th>Referencia de proyecto</th>
                                 <th>Cliente</th>
                                 <th>Estatus</th>
                                 <th>Accion</th>
@@ -40,10 +47,21 @@
                             @isset($projects)
                                 @foreach ($projects as $project)
                                     <tr>
+                                        <td>{{ $project->id }}</td>
+                                        <td>{{ $project->name_project }}</td>
+                                        <td>{{ $project->type }}</td>
                                         <td>{{ $project->name }}</td>
                                         <td>{{ $project->name_customer }}</td>
                                         <td>{{ $project->status }}</td>
-                                        <td><a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a></td>
+                                        
+                                        <td>
+                                            <span data-toggle="modal" data-target="#ModalRegisterBoard">
+                                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo tablero" onclick="datosTablero({{$project->id}}, '{{$project->name_project}}')">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </span>
+                                            <a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endisset
@@ -53,7 +71,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Proyecto</th>
+                                <th>#</th>
+                                <th>Nombre de proyecto</th>
+                                <th>Tipo</th>
+                                <th>Referencia de proyecto</th>
                                 <th>Cliente</th>
                                 <th>Estatus</th>
                                 <th>Accion</th>
@@ -103,6 +124,7 @@
             
             grafica(1,'donutChart', 'pie');
         } );
-</script>
+    </script>
+    <script src="{{ asset('vendor/myjs/projects.js') }}"></script>
 
 @stop

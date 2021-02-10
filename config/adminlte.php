@@ -287,7 +287,7 @@ return [
         ],
         [
             'text' => 'Normas',
-            'url'  => 'norms',
+            'url'  => 'rules',
             'icon' => 'fas fa-scroll',
         ],
         [
@@ -329,8 +329,8 @@ return [
                     'url'  => '/folder/calidad',
                 ],
                 [
-                    'text' => 'Control Operacional',
-                    'url'  => '/folder/control operacional',
+                    'text' => 'Operaciones',
+                    'url'  => '/folder/operaciones',
                 ],
                 [
                     'text' => 'Compras',
@@ -359,6 +359,10 @@ return [
                 [
                     'text' => 'Ventas',
                     'url'  => '/folder/ventas',
+                ],
+                [
+                    'text' => 'Servicios',
+                    'url'  => '/folder/servicios',
                 ],
                 
             ],

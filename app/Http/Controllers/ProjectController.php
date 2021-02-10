@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use App\Project;
+use App\Board;
 use Illuminate\Support\Facades\DB;
 use App\User;
 
@@ -48,11 +49,40 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        
+        $ano=date('y');
+        $count="000";
+        
+        switch ($request->input('sltTypeProject')) {
+            case 'PE':
+                $projects = DB::table('projects')
+                ->where('type', 'PE')
+                ->orderBy('id')
+                ->get();
+                $count=$count+1+$projects->count();
+
+                $name_project="PE-".$ano."-".$count;
+                break;
+            case 'PO':
+                $projects = DB::table('projects')
+                ->where('type', 'PO')
+                ->orderBy('id')
+                ->get();
+                $count=$count+1+$projects->count();
+
+                $name_project="PO-".$ano."-".$count;
+                break;
+            default:
+                # code...
+                break;
+        }
         $project = new Project;
        
         $project->name = $request->input('inputProyecto');
+        $project->type = $request->input('sltTypeProject');
         $project->client = $request->input('sltCliente');
+        $project->name_project = $name_project;
         $project->status = $request->input('inputEstatus');
         
         $project->save();
@@ -102,8 +132,21 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        $user = Project::find($id);
-        $user->delete();
+        $project = Project::find($id);
+        $project->delete();
         return redirect()->route('projects');
+    }
+
+    public function createBoard(Request $request)
+    {
+        $project = new Board;
+       
+        $project->project_id = $request->input('inputIdProyect');
+        $project->name = $request->input('inputNameBoard');
+        
+        
+        $project->save();
+
+        return redirect()->action([ProjectController::class, 'index']);
     }
 }

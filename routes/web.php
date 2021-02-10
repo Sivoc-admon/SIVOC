@@ -35,6 +35,7 @@ Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');;
 
 
 //PROJECTS
+Route::post('projects/board/createBoard', 'ProjectController@createBoard')->name('projects.createBoard');
 Route::resource('projects', 'ProjectController');
 Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
@@ -63,8 +64,13 @@ Route::get('/file/download/{documentId}/{idFolder}', 'AreaDocumentController@dow
 
 //CLIENTES
 Route::post('customers/store', 'CustomerController@store');
-Route::delete('customers/{customer}', 'CustomerController@destroy')->name('customers.destroy');;
+Route::delete('customers/{customer}', 'CustomerController@destroy')->name('customers.destroy');
 Route::resource('customers', 'CustomerController');
+
+//NORMAS
+Route::post('rules/store', 'RuleController@store');
+Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
+Route::resource('rules', 'RuleController');
 
 
 
