@@ -3,6 +3,7 @@
 @section('title', 'SIVOC-PROYECTOS')
 
 @section('content_header')
+    <link rel="stylesheet" href="{{ asset("vendor/mycss/style.css") }}">
     <h1 class="m-0 text-dark">PROYECTOS</h1>
 @stop
 
@@ -34,6 +35,7 @@
                     <table id="tableProjects" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>#</th>
                                 <th>Nombre de proyecto</th>
                                 <th>Tipo</th>
@@ -47,6 +49,13 @@
                             @isset($projects)
                                 @foreach ($projects as $project)
                                     <tr>
+                                        <td>
+                                            <span data-toggle="modal" data-target="#ModalShowBoard">
+                                                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Mostrar Tableros" onclick="showBoards({{$project->id}})">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </td>
                                         <td>{{ $project->id }}</td>
                                         <td>{{ $project->name_project }}</td>
                                         <td>{{ $project->type }}</td>
@@ -71,6 +80,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th></th>
                                 <th>#</th>
                                 <th>Nombre de proyecto</th>
                                 <th>Tipo</th>
@@ -119,7 +129,18 @@
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf'
-                ]
+                ],
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: -1
+                    }
+                },
+                columnDefs: [ {
+                    className: 'control',
+                    orderable: false,
+                    targets:   -1
+                } ]
             });
             
             grafica(1,'donutChart', 'pie');

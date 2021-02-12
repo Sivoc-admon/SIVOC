@@ -26,6 +26,7 @@ class UserController extends Controller
         $users = DB::table('users')
             ->join('areas', 'users.area_id', '=', 'areas.id')
             ->select('users.*', 'areas.name as area_name')
+            ->whereNull('users.deleted_at')
             ->get();
         
       

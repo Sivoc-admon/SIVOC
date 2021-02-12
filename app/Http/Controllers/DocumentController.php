@@ -20,7 +20,7 @@ class DocumentController extends Controller
             case '1':
                 //nivel 1
                 $folder = Storage::directories('/public/Documents/areas/almacen');
-                foreach ($files as $key) {
+                foreach ($folder as $key) {
                     $temp_array = explode('/', $key);
                     array_push($file, end( $temp_array ));
                 }
@@ -35,24 +35,20 @@ class DocumentController extends Controller
                    $nivel=array("0"=>);
                    $datos = array(	
 	
-                    'nivel_1' => array(
-                        'marca' => "Bic",
-                        'precio'  => "0.75€",
-                        'referencia'  => "552BIC12"
-                    ),
-                    
-                    'Pegamento' => array(
-                        'marca' => "Pritt",
-                        'precio'  => "1.75€",
-                        'referencia'  => "567PRI13"
-                    )
-                );*/
+                        'nivel_1' => array(
+                            'marca' => "Bic",
+                            'precio'  => "0.75€",
+                            'referencia'  => "552BIC12"
+                        ),
+                        
+                        'Pegamento' => array(
+                            'marca' => "Pritt",
+                            'precio'  => "1.75€",
+                            'referencia'  => "567PRI13"
+                        )
+                    );
 
-                }
-                
-                
-
-                
+                }*/
                 
                 return view('documents.documents')->with('files', $file);
                 break;

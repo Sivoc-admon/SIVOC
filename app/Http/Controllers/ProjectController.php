@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Board;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 use App\User;
 
 class ProjectController extends Controller
@@ -139,14 +140,25 @@ class ProjectController extends Controller
 
     public function createBoard(Request $request)
     {
-        $project = new Board;
+        $board = new Board;
        
-        $project->project_id = $request->input('inputIdProyect');
-        $project->name = $request->input('inputNameBoard');
+        $board->project_id = $request->input('inputIdProyect');
+        $board->name = $request->input('inputNameBoard');
         
         
-        $project->save();
+        $board->save();
 
         return redirect()->action([ProjectController::class, 'index']);
+    }
+
+    public function showBoards($id)
+    {   
+        $tableros = DB::table('boards')
+        ->join('projects', 'boards.project_id', '=', 'projects.id')
+        ->select('boards.*', 'projects.name as name_project')
+        ->where('projects.id', $id)
+        ->get();
+
+        return response()->json(['data' => $tableros], Response::HTTP_OK);
     }
 }

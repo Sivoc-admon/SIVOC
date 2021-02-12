@@ -36,9 +36,11 @@ Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');;
 
 //PROJECTS
 Route::post('projects/board/createBoard', 'ProjectController@createBoard')->name('projects.createBoard');
+Route::get('projects/board/showBoards/{tablero}', 'ProjectController@showBoards');
 Route::resource('projects', 'ProjectController');
 Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
+Route::get('projects/board/showBoards/{tablero}', 'ProjectController@showBoards');
 
 //INDICADORES
 Route::resource('indicators', 'IndicatorController');

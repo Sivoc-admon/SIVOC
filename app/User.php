@@ -13,6 +13,8 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
+    protected $dates = ['deleted_at'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +31,7 @@ class User extends Authenticatable
         'marital_status',
         'nss'*/
     ];
+    
 
     /**
      * The attributes that should be hidden for arrays.
@@ -96,5 +99,10 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function Areas()
+    {
+        return $this->hasMany('App\Area');
     }
 }
