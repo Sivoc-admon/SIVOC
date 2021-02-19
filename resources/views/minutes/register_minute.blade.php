@@ -47,7 +47,7 @@
                         <select class="form-control" name="sltParticipantesInternos[]" id="sltParticipantesInternos" multiple aria-label="multiple select example">
                           @isset($minutes)
                             @foreach ($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                <option value="{{$user->id}}">{{$user->name}} {{$user->last_name}} {{$user->mother_last_name}}</option>
                             @endforeach
                           @endisset
                         </select>
