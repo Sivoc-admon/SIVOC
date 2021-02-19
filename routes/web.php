@@ -74,6 +74,13 @@ Route::post('rules/store', 'RuleController@store');
 Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
 Route::resource('rules', 'RuleController');
 
+//MINUTAS
+Route::post('minutes', 'MinuteController@store');
+Route::post('minutes/agreement', 'MinuteController@storeAgreement')->name('minutes.storeAgreement');
+Route::get('minutes/showAgreements/{id}', 'MinuteController@showAgreement')->name('minutes.showAgreement');
+Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->name('minutes.showMinuteFile');
+Route::resource('minutes', 'MinuteController');
+
 
 
 
