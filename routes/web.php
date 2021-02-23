@@ -28,10 +28,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //USERS
+Route::get('/users/restore/{id}', 'UserController@restore')->name('users.restore');
 Route::resource('users', 'UserController');
 Route::post('/register_user', 'UserController@store');
 Route::delete('/users/detele/{id}', 'UserController@destroy')->name('users.destroy');
-Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');;
+Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 
 //PROJECTS

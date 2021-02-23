@@ -17,6 +17,6 @@ class Area extends Model{
 
     public function Users()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
 }

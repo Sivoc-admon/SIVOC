@@ -23,6 +23,7 @@ class UserController extends Controller
         //$users = User::get();
         $roles = Role::get();
         $areas = Area::get();
+        $usersEliminados = User::onlyTrashed()->get();
         $users = DB::table('users')
             ->join('areas', 'users.area_id', '=', 'areas.id')
             ->select('users.*', 'areas.name as area_name')
@@ -30,7 +31,7 @@ class UserController extends Controller
             ->get();
         
       
-        return view('users.users',compact('users','roles', 'areas'));
+        return view('users.users',compact('users','roles', 'areas', 'usersEliminados'));
         
         
         //return view('users.users')->with('users', $users);
@@ -98,16 +99,7 @@ class UserController extends Controller
             
             
             
-            /*$user->name = $request->input('inputName');
-            $user->last_name = $request->input('inputLastName');
-            $user->mother_last_name = $request->input('inputMotherLastName');
-            $user->mail = $request->input('inputEmail');
-            $user->password = Hash::make($request->input('inputPassword'));
-            $user->gender = $request->input('sltGenero');
-            $user->marital_status = $request->input('inputEstadoCivil');
-            $user->nss = $request->input('inputNSS');
             
-            $user->save();*/
         }
 
         $array=["msg"=>$msg, "error"=>$error];
@@ -144,9 +136,12 @@ class UserController extends Controller
         $user = User::find($id);
         //dd(Crypt::decrypt($user->password));
         //$password = Crypt::decrypt($user->password);
+        $roles = Role::get();
+        $areas = Area::get();
+        $roleUser = User::find($id)->roles;
         $msg="";
         $error=false;
-        $array=["msg"=>$msg, "error"=>$error, "user"=>$user];
+        $array=["msg"=>$msg, "error"=>$error, "user"=>$user, "roles"=>$roles, "areas"=>$areas, "roleUser"=>$roleUser];
         return response()->json($array);
         
         //return view('users.edit', compact('user','password', 'areas'));
@@ -162,19 +157,37 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::find($id);
-
-        $user->name = $request->input('name');
-        $user->last_name = $request->input('last_name');
-        $user->mother_last_name = $request->input('mother_last_name');
-        $user->birthday = $request->input('birthday');
-        $user->age = $request->input('age');
-        $user->gender = $request->input('gender');
-        $user->marital_status = $request->input('marital_status');
-        $user->nss = $request->input('nss');
         
-        $user->save();
-        return redirect()->route('users.index');
+        $role= User::find($id)->roles;
+        
+        $user = User::find($id);
+        
+        $user->update([
+            'name' => $request->inputNameEditUser,
+            'last_name' => $request->inputLastNameEditUser,
+            'mother_last_name' => $request->inputMotherLastNameEditUser,
+            'area_id' => $request->sltAreaEditUser,
+            'email' => $request->inputEmailEditUser,
+            'password' => Hash::make($request->inputPassword)
+        ]);
+
+        /*$user->name = $request->inputMotherLastNameEditUser;
+        $user->last_name = $request->inputLastNameEditUser;
+        $user->mother_last_name = $request->inputMotherLastNameEditUser;
+        $user->area_id = $request->sltAreaEditUser;
+        $user->email = $request->inputEmailEditUser;
+        $user->password = Hash::make($request->inputPassword);*/
+        
+        //$user->save();
+        //dd($user);
+
+        
+        
+        $affected = DB::table('role_user')
+              ->where('user_id', $id)
+              ->update(['role_id' => $request->inputRoleEditUser]);
+
+        //return redirect()->route('users.index');
     }
 
     /**
@@ -188,6 +201,14 @@ class UserController extends Controller
         //
         $user = User::find($id);
         $user->delete();
+        return redirect()->route('users.index');
+    }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->where('id', '=', $id)->first();
+       
+        $user->restore();
         return redirect()->route('users.index');
     }
 }

@@ -1,4 +1,4 @@
- <!-- Modal -->
+ <!-- Modal REGISTRO DE USUARIOS -->
  <div class="modal fade" id="ModalRegisterUser" tabindex="-1" aria-labelledby="ModalRegisterUser" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
@@ -124,4 +124,79 @@
         </div>
     </div>
     </div>
+</div>
+
+<!-- Modal RESTAURAR USUARIOS -->
+<div class="modal fade" id="ModalRestoreUser" tabindex="-1" aria-labelledby="ModalRestoreUser" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Restaurar Usuario</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <table id="tableUsers" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Correo</th>
+                    <th>Area</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+              @if (isset($usersEliminados))
+                @foreach ($usersEliminados as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->last_name }}</td>
+                    <td>{{ $user->mother_last_name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->area_name }}</td>
+                    <td>
+                        @if (Auth::user()->hasRole('admin'))
+                            
+                        
+                            <form action="{{ route('users.restore',$user->id) }}" method="GET">
+                                @csrf
+                                @method('GET')
+                
+                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Restaurar"><i class="fas fa-undo"></i></button>
+                            </form>
+                        @endif
+                        
+                    </td>
+                </tr>
+                @endforeach
+              @endif
+                
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Correo</th>
+                    <th>Area</th>
+                    <th>Acción</th>
+                </tr>
+            </tfoot>
+          </table>
+        </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+  </div>
+  </div>
 </div>

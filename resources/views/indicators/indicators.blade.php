@@ -25,7 +25,7 @@
                         </button>
                     </span>
                     <span data-toggle="modal" data-target="#ModalGraficaIndicator">
-                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Graficar">
+                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Graficar">
                             <i class="fas fa-chart-bar"></i>
                         </button>
                     </span>

@@ -12,14 +12,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @if(Auth::user()->hasAnyRole(['admin', 'calidad', 'operaciones', 'manufactura', 'servicio']))
+                    
                     <span data-toggle="modal" data-target="#ModalRegisterMinute">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Minuta">
                             <i class="fas fa-plus"></i>
                         </button>
                     </span>
                    
-                    @endif
                     @include('minutes.register_minute')
                     @include('minutes.register_agreement')
                     
@@ -59,7 +58,7 @@
                                                 </button>
                                             </span>
                                             <span data-toggle="modal" data-target="#ModalShowAgreement">
-                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar acuerdos" onclick="showAgreement({{$minute->id}})">
+                                                <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Mostrar acuerdos" onclick="showAgreement({{$minute->id}})">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
@@ -68,7 +67,7 @@
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
-                                            <a class="btn btn-primary" href="{{ route('minutes.edit',$minute->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                                            <a class="btn btn-success" href="{{ route('minutes.edit',$minute->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
