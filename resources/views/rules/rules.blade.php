@@ -43,6 +43,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
                                     <th>Accion</th>
@@ -52,6 +53,7 @@
                                 @foreach ($rules as $rule)
                                     <tr>
                                         <td>{{ $rule->id }}</td>
+                                        <td>{{ $rule->code }}</td>
                                         <td>{{ $rule->name }}</td>
                                         <td> <a href="{{asset($rule->url) }}" target="_blank">{{ $rule->url }}</a></td>
                                         <td>
@@ -74,6 +76,7 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
+                                    <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
                                     <th>Accion</th>
