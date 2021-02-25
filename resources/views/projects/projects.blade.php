@@ -49,28 +49,39 @@
                             @isset($projects)
                                 @foreach ($projects as $project)
                                     <tr>
-                                        <td>
-                                            <span data-toggle="modal" data-target="#ModalShowBoard">
-                                                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Mostrar Tableros" onclick="showBoards({{$project->id}})">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </span>
-                                        </td>
+                                        @if (Auth::user()->hasAnyRole(['admin', 'calidad', 'operaciones', 'manufactura', 'servicio', 'ventas']))
+                                            <td>
+                                                <span data-toggle="modal" data-target="#ModalShowBoard">
+                                                    <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Mostrar Tableros" onclick="showBoards({{$project->id}})">
+                                                        <i class="fas fa-list"></i>
+                                                    </button>
+                                                </span>
+                                            </td>
+                                        @else
+                                            <td></td>
+                                        @endif
+                                        
                                         <td>{{ $project->id }}</td>
                                         <td>{{ $project->name_project }}</td>
                                         <td>{{ $project->type }}</td>
                                         <td>{{ $project->name }}</td>
                                         <td>{{ $project->name_customer }}</td>
                                         <td>{{ $project->status }}</td>
+
+                                        @if (Auth::user()->hasAnyRole(['admin', 'calidad', 'operaciones', 'manufactura', 'servicio', 'ventas']))
+                                            <td>
+                                                <span data-toggle="modal" data-target="#ModalRegisterBoard">
+                                                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo tablero" onclick="datosTablero({{$project->id}}, '{{$project->name_project}}')">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </span>
+                                                <a class="btn btn-success" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                                            </td>
+                                        @else
+                                            <td></td>
+                                        @endif
                                         
-                                        <td>
-                                            <span data-toggle="modal" data-target="#ModalRegisterBoard">
-                                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo tablero" onclick="datosTablero({{$project->id}}, '{{$project->name_project}}')">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </span>
-                                            <a class="btn btn-primary" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
-                                        </td>
+                                        
                                     </tr>
                                 @endforeach
                             @endisset

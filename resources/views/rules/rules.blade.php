@@ -9,17 +9,19 @@
 @stop
 
 @section('content')
-    @if(Auth::user()->hasRole('admin'))
+    
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        @if(Auth::user()->hasRole(['admin','calidad', 'ingenieria', 'servicio']))
+                            <span data-toggle="modal" data-target="#ModalRegisterRule">
+                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Norma">
+                                    <i class="fas fa-user-plus"></i>
+                                </button>
+                            </span>
+                        @endif
                         
-                        <span data-toggle="modal" data-target="#ModalRegisterRule">
-                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Norma">
-                                <i class="fas fa-user-plus"></i>
-                            </button>
-                        </span>
                         
                         
                         
@@ -41,6 +43,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
                                     <th>Accion</th>
@@ -50,16 +53,19 @@
                                 @foreach ($rules as $rule)
                                     <tr>
                                         <td>{{ $rule->id }}</td>
+                                        <td>{{ $rule->code }}</td>
                                         <td>{{ $rule->name }}</td>
                                         <td> <a href="{{asset($rule->url) }}" target="_blank">{{ $rule->url }}</a></td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$rule->id}});"><i class="fas fa-edit"></i></a>
+                                            @if (Auth::user()->hasRole(['admin','calidad', 'ingenieria', 'servicio']))
+                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$rule->id}});"><i class="fas fa-edit"></i></a>
                                         
-                                            <form action="{{ route('rules.destroy',$rule->id) }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                            </form>
+                                                <form action="{{ route('rules.destroy',$rule->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                                </form>
+                                            @endif
                                             
                                         </td>
                                     </tr>
@@ -70,6 +76,7 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
+                                    <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
                                     <th>Accion</th>
@@ -80,7 +87,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 @stop
 
 @section('js')

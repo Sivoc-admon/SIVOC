@@ -20,9 +20,13 @@
                                 <i class="fas fa-user-plus"></i>
                             </button>
                         </span>
+                        <span data-toggle="modal" data-target="#ModalRestoreUser">
+                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Restaurar usuario">
+                                <i class="fas fa-user-plus"></i>
+                            </button>
+                        </span>
                         
-                        
-                        
+
                         @include('users.register')
                         @include('users.edit')
 
@@ -60,7 +64,7 @@
                                         <td>{{ $user->area_name }}</td>
                                         <td>
                                             @if ($user->area_name != 'Direccion')
-                                                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
+                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
                                             
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
                                                     @csrf

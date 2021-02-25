@@ -10,6 +10,7 @@ class Role extends Model
 {
     //
     use SoftDeletes;
+    
 
     public function users()
     {

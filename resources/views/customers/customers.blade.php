@@ -59,7 +59,7 @@
                                         <td>{{ $customer->phone }}</td>
                                         <td>{{ $customer->email }}</td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$customer->id}});"><i class="fas fa-edit"></i></a>
+                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$customer->id}});"><i class="fas fa-edit"></i></a>
                                         
                                             <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
                                                 @method('DELETE')

@@ -67,29 +67,10 @@ class IndicatorController extends Controller
 
         $indicator->save();
 
-        //obtenemos el campo file definido en el formulario
-       //$file = $request->file('file');
-
-       //obtenemos el nombre del archivo
-       //$nombre = $file->getClientOriginalName();
-
-       //indicamos que queremos guardar un nuevo archivo en el disco local
-      // \Storage::disk('local')->put($nombre,  \File::get($file));
-
-      
-      //$public_path = public_path();
-      //$url = $public_path.'/storage/'.$archivo;
-      //verificamos si el archivo existe y lo retornamos
-      /*if (Storage::exists($archivo))
-      {
-        return response()->download($url);
-      }
-      //si no se encuentra lanzamos un error 404.
-      abort(404);*/
+        
 
         return redirect()->action([IndicatorController::class, 'index']);
-        //return redirect()->route('indicators');
-        //return view('indicators');
+        
     }
 
     //FUNCION PARA CREAR TIPOS DE INDICADORES

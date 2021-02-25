@@ -31,7 +31,6 @@ function saveProject() {
 }
 
 function datosTablero(id, name) {
-    console.log(name);
     $("#inputProyectBoard").val(name);
     $("#inputIdProyect").val(id);
 }

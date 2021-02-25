@@ -103,6 +103,6 @@ class User extends Authenticatable
 
     public function Areas()
     {
-        return $this->hasMany('App\Area');
+        return $this->belongsTo('App\Area');
     }
 }

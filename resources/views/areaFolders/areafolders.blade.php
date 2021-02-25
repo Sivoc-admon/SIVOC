@@ -19,6 +19,41 @@
                     </button>
 
                     <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
+                    
+                    <!--@switch($area)
+                        @case('ventas')
+                            @if (Auth::user()->hasRole(['ventas', 'admin']))
+                                <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
+                                    Agregar carpeta en el primer nivel
+                                </button>
+            
+                                <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
+                            @endif
+                            @break
+                        @case('recursos humanos')
+                            
+                            @break
+                        @case('recursos humanos')
+                            
+                            @break
+                        @default
+                            
+                    @endswitch
+
+                    @if ($area=='ventas' && Auth::user()->hasRole(['ventas', 'admin']) )
+                    <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
+                        Agregar carpeta en el primer nivel
+                    </button>
+
+                    <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
+                    @else
+                        @if ($area=='ventas' && Auth::user()->hasRole(['ventas', 'admin']) )
+                            
+                        @else
+                            
+                        @endif
+                    @endif -->
+                    
                     @include('areafolders.modals')
                 </div>
             </div>
@@ -44,7 +79,7 @@
                           style="display:none;">
                           Cambiar nombre a</button>
                         <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_{{ $folders[0]['nivel'] }}" onchange="newFile({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})" multiple style="display:none;"/>
-                        @endif
+                    @endif
                     </div>
                 </div>
             </div>

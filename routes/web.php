@@ -28,10 +28,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //USERS
+Route::get('/users/restore/{id}', 'UserController@restore')->name('users.restore');
 Route::resource('users', 'UserController');
 Route::post('/register_user', 'UserController@store');
 Route::delete('/users/detele/{id}', 'UserController@destroy')->name('users.destroy');
-Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');;
+Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 
 //PROJECTS
@@ -73,6 +74,13 @@ Route::resource('customers', 'CustomerController');
 Route::post('rules/store', 'RuleController@store');
 Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
 Route::resource('rules', 'RuleController');
+
+//MINUTAS
+Route::post('minutes', 'MinuteController@store');
+Route::post('minutes/agreement', 'MinuteController@storeAgreement')->name('minutes.storeAgreement');
+Route::get('minutes/showAgreements/{id}', 'MinuteController@showAgreement')->name('minutes.showAgreement');
+Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->name('minutes.showMinuteFile');
+Route::resource('minutes', 'MinuteController');
 
 
 

@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <form id="formRegisterUser">
+            <form id="formEditUser">
               @csrf
                 <div class="row">
                   <h4>Datos Empleado</h4>
@@ -20,27 +20,28 @@
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputName">Nombre</label>
-                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nombre" required >
+                        <label for="inputNameEditUser">Nombre</label>
+                        <input type="text" class="form-control" id="inputNameEditUser" name="inputNameEditUser" placeholder="Nombre" required >
+                        <input type="hidden" id="idUser">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputLastName">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Apellido Paterno" required >
+                        <label for="inputLastNameEditUser">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="inputLastNameEditUser" name="inputLastNameEditUser" placeholder="Apellido Paterno" required >
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputMotherLastName">Apellido Materno</label>
-                        <input type="text" class="form-control" id="inputMotherLastName" name="inputMotherLastName" placeholder="Apellido Materno" required >
+                        <label for="inputMotherLastNameEditUser">Apellido Materno</label>
+                        <input type="text" class="form-control" id="inputMotherLastNameEditUser" name="inputMotherLastNameEditUser" placeholder="Apellido Materno" required >
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" required >
+                        <label for="inputEmailEditUser">Email</label>
+                        <input type="email" class="form-control" id="inputEmailEditUser" name="inputEmailEditUser" required >
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -51,24 +52,16 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sltArea">Area</label>
-                        <select class="form-control" id="sltArea" name="sltArea" required>
-                          <option value="0">---</option>
-                          @foreach ($areas as $area)
-                            
-                            <option value="{{ $area->id }}">{{ $area->name }}</option>
-                            
-
-                          @endforeach
+                        <label for="sltAreaEditUser">Area</label>
+                        <select class="form-control" id="sltAreaEditUser" name="sltAreaEditUser" required>
+                          
                         </select>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="inputRole">Role</label>
-                        <select class="form-control" id="inputRole" name="inputRole" required>
-                          <option value="0">---</option>
-                          
+                        <label for="inputRoleEditUser">Role</label>
+                        <select class="form-control" id="inputRoleEditUser" name="inputRoleEditUser" required>
                         </select>
                       </div>
                     </div>
@@ -79,7 +72,7 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" onclick="">Guardar</button>
+          <button type="button" class="btn btn-success" onclick="updateUser()">Guardar</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
     </div>

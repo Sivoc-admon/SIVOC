@@ -37,7 +37,8 @@ class RuleController extends Controller
     public function store(Request $request)
     {
         $rule = new Rule;
-       
+        
+        $rule->code = $request->input('inputClaveRule');
         $rule->name = $request->input('inputNameRule');
         $rule->url = $request->input('inputUrlRule');
         

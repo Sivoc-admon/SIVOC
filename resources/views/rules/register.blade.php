@@ -17,7 +17,12 @@
                 </div>
                   
                 <div class="row" style="background-color: #17a2b8">
-                  
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputClaveRule">Clave</label>
+                      <input type="text" class="form-control" id="inputClaveRule" name="inputClaveRule" placeholder="Clave" required>
+                    </div>
+                  </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputNameRule">Nombre</label>
