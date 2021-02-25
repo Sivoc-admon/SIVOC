@@ -292,7 +292,7 @@ return [
         ],
         [
             'text' => 'Acciones Correctivas',
-            'url'  => 'corrective_actions',
+            'url'  => 'correctiveActions',
             'icon' => 'fas fa-tasks',
         ],
         [

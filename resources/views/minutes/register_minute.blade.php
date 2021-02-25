@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="sltMinuteType">Participantes internos</label>
+                        <label for="sltMinuteType">Tipo</label>
                         <select class="form-control" name="sltMinuteType" id="sltMinuteType">
                          <option value="0">Seleccione</option>
                          <option value="Interna">Interna</option>
