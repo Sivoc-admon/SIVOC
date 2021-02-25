@@ -82,6 +82,11 @@ Route::get('minutes/showAgreements/{id}', 'MinuteController@showAgreement')->nam
 Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->name('minutes.showMinuteFile');
 Route::resource('minutes', 'MinuteController');
 
+//ACCIONES CORRECTIVAS
+Route::get('correctiveActions/edit/{id}', 'CorrectiveActionController@edit')->name('CorrectiveActionController.edit');
+Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActionController@showCorrectiveActionFile')->name('minutes.showCorrectiveActionFile');
+Route::resource('correctiveActions', 'CorrectiveActionController');
+
 
 
 

@@ -160,7 +160,7 @@ class AreaDocumentController extends Controller
     private function getFolderByNivel($areaId, $nivel, $idPadre)
     {
 
-        $folders = FolderArea::where('area_id', $areaId)->where('nivel', $nivel)->where('id_padre', $idPadre)->get();
+        $folders = FolderArea::where('area_id', $areaId)->where('nivel', $nivel)->where('id_padre', $idPadre)->orderBy('name', 'ASC')->get();
         return $folders;
     }
 

@@ -1,7 +1,7 @@
 
 <!-- Modal CREAR TABLERO -->
 <div class="modal fade bd-example-modal-lg" id="ModalRegisterBoard" tabindex="-1" aria-labelledby="ModalRegisterBoard" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Registro de tablero</h5>
@@ -45,15 +45,15 @@
   </div>
 </div>
 
-<!-- Modal CREAR TABLERO -->
+<!-- Modal MOSTRAR TABLEROS -->
 <div class="modal fade bd-example-modal-lg" id="ModalShowBoard" tabindex="-1" aria-labelledby="ModalShowBoard" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-  <div class="modal-content">
+    <div class="modal-content">
       <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Tableros del Proyecto </h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
+        <h5 class="modal-title" id="exampleModalLabel">Tableros del Proyecto </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
           <div class="container-fluid">
@@ -82,5 +82,4 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
   </div>
-</div>
 </div>
