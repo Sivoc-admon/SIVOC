@@ -158,7 +158,7 @@
                                 @endif
                                 @break
                             @case('recursos humanos')
-                                @if (Auth::user()->hasAnyRole(['finanzas', 'admin']))
+                                @if (Auth::user()->hasAnyRole(['recursos humanos', 'admin']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
@@ -174,8 +174,8 @@
                                     <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_{{ $folders[0]['nivel'] }}" onchange="newFile({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})" multiple style="display:none;"/>
                                 @endif
                                 @break
-                            @case('recursos humanos')
-                                @if (Auth::user()->hasAnyRole(['finanzas', 'admin']))
+                            @case('ventas')
+                                @if (Auth::user()->hasAnyRole(['ventas', 'admin']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)

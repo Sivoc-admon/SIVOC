@@ -62,7 +62,7 @@ function getFoldersAndFiles(areaId, nivel) {
             dataType: 'json',
             success: function(data) {
                 getFilesLevelZero(selectVal);
-                if (data.area_id == areaId) {
+                if (data.area_id == areaId || data.area_id == 5) {
                     $(botonNameTag).fadeIn();
                     $(botonNameModifyTag).fadeIn();
                     $(botonFilesTag).fadeIn();
