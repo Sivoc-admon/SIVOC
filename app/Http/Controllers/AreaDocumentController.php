@@ -69,6 +69,7 @@ class AreaDocumentController extends Controller
     {
         $aria = Area::where('id', $area)->take(1)->get();
 
+        $area_user=auth()->user()->area_id;
         $folders = [];
         foreach ($aria as $ariax) {
             $areaId = $ariax->id;
@@ -81,7 +82,7 @@ class AreaDocumentController extends Controller
         });
         
 
-        return response()->json($folders, Response::HTTP_OK);
+        return response()->json(['folders'=>$folders, 'area_user'=>$area_user], Response::HTTP_OK);
     }
 
     /**
@@ -166,12 +167,14 @@ class AreaDocumentController extends Controller
 
     public function getFoldersAndFiles($areaId, $nivel, $idPadre)
     {
+        
+        $area_id=auth()->user()->area_id;
         $nivel = intval($nivel);
         $folders = $this->getFolderByNivel($areaId, $nivel, $idPadre);
         $folders->each(function ($f) {
             $f->areaDocuments;
         });
-        return response()->json(['data' => $folders], Response::HTTP_OK);
+        return response()->json(['data' => $folders, 'area_id'=>$area_id], Response::HTTP_OK);
     }
 
     public function createFolder($areaId, $nivel, Request $request)

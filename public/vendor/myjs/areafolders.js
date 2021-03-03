@@ -19,17 +19,19 @@ function getFilesLevelZero(folderId) {
         success: function(data) {
             let tablaHTML = ``;
 
-            for (var k in data) {
-                let date = new Date(data[k].created_at);
+            for (var k in data.folders) {
+                let date = new Date(data.folders[k].created_at);
 
                 tablaHTML += `<tr>
-                <td>${data[k].name}</td>
+                <td>${data.folders[k].name}</td>
                 <td>${date.toLocaleDateString()}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data[k].name}', ${data[k].id}, ${data[k].folder_area_id})">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <a class="btn btn-sm btn-warning" href="/file/download/${data[k].id}/${data[k].folder_area_id}">
+                <td>`;
+                if (areaId == data.area_user) {
+                    tablaHTML += `<button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data.folders[k].name}', ${data.folders[k].id}, ${data.folders[k].folder_area_id})">
+                    <i class="fas fa-times"></i>
+                    </button>`;
+                }
+                tablaHTML += `<a class="btn btn-sm btn-warning" href="/file/download/${data.folders[k].id}/${data.folders[k].folder_area_id}">
                         <i class="fas fa-download"></i>
                     </a>
                 </td>
@@ -60,9 +62,12 @@ function getFoldersAndFiles(areaId, nivel) {
             dataType: 'json',
             success: function(data) {
                 getFilesLevelZero(selectVal);
-                $(botonNameTag).fadeIn();
-                $(botonNameModifyTag).fadeIn();
-                $(botonFilesTag).fadeIn();
+                if (data.area_id == areaId) {
+                    $(botonNameTag).fadeIn();
+                    $(botonNameModifyTag).fadeIn();
+                    $(botonFilesTag).fadeIn();
+                }
+
                 if (data.data.length > 0) {
                     let folders = data.data;
                     let selectHTML = `<select id="selectNivel${level}" class="form-control" onchange="getFoldersAndFiles(${areaId}, ${level})">
