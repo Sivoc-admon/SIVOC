@@ -115,6 +115,7 @@ function showBoards(tablero) {
 function editProject(id) {
     $("#sltEditTypeProject").empty();
     $("#sltEditCliente").empty();
+    $("#inputEditEstatus").empty();
 
     $.ajaxSetup({
         headers: {
@@ -134,6 +135,7 @@ function editProject(id) {
             } else {
                 let tipo = "";
                 let customerOption = "";
+                let statusOption = "";
                 if (data.project.type == "PE") {
                     tipo = "<option value='PE' selected>PUESTA EN MARCHA</option>" +
                         "<option value='PO'>OPERACIONAL</option>";
@@ -150,12 +152,43 @@ function editProject(id) {
                     };
                 }
 
+                switch (data.project.status) {
+                    case 'Colocado':
+                        statusOption = "<option value='Colocado' selected>Colocado</option>" +
+                            "<option value='Proceso'>Proceso</option>" +
+                            "<option value='Terminado'>Terminado</option>" +
+                            "<option value='Cancelado'>Cancelado</option>";
+                        break;
+                    case 'Proceso':
+                        statusOption = "<option value='Colocado'>Colocado</option>" +
+                            "<option value='Proceso' selected>Proceso</option>" +
+                            "<option value='Terminado'>Terminado</option>" +
+                            "<option value='Cancelado'>Cancelado</option>";
+                        break;
+                    case 'Terminado':
+                        statusOption = "<option value='Colocado'>Colocado</option>" +
+                            "<option value='Proceso'>Proceso</option>" +
+                            "<option value='Terminado' selected>Terminado</option>" +
+                            "<option value='Cancelado'>Cancelado</option>";
+                        break;
+                    case 'Cancelado':
+                        statusOption = "<option value='Colocado'>Colocado</option>" +
+                            "<option value='Proceso'>Proceso</option>" +
+                            "<option value='Terminado'>Terminado</option>" +
+                            "<option value='Cancelado' selected>Cancelado</option>";
+                        break;
+
+                    default:
+                        break;
+                }
+
+
 
                 $("#hideIdProject").val(data.project.id);
                 $("#sltEditTypeProject").append(tipo);
                 $("#sltEditCliente").append(customerOption);
                 $("#inputEditProyecto").val(data.project.name);
-                $("#inputEditEstatus").val(data.project.status);
+                $("#inputEditEstatus").append(statusOption);
 
 
             }

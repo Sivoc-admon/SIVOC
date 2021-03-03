@@ -108,7 +108,9 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="inputEditEstatus">Estatus</label>
-                          <input type="text" class="form-control" id="inputEditEstatus" name="inputEditEstatus" readonly required>
+                          <select class="form-control" name="inputEditEstatus" id="inputEditEstatus">
+                              
+                          </select>
                         </div>
                       </div>
                   </div>

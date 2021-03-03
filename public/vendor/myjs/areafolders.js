@@ -26,7 +26,7 @@ function getFilesLevelZero(folderId) {
                 <td>${data.folders[k].name}</td>
                 <td>${date.toLocaleDateString()}</td>
                 <td>`;
-                if (areaId == data.area_user) {
+                if (areaId == data.area_user || data.area_user == 5) {
                     tablaHTML += `<button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data.folders[k].name}', ${data.folders[k].id}, ${data.folders[k].folder_area_id})">
                     <i class="fas fa-times"></i>
                     </button>`;
