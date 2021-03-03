@@ -114,14 +114,12 @@ class CorrectiveActionController extends Controller
      */
     public function edit($id)
     {
-        $user = CorrectiveAction::find($id);
-        
-        $roles = Role::get();
-        $areas = Area::get();
-        $roleUser = User::find($id)->roles;
+        $correctiveAction = CorrectiveAction::find($id);
+        $users = User::find($correctiveAction->user_id);
+    
         $msg="";
         $error=false;
-        $array=["msg"=>$msg, "error"=>$error, "user"=>$user, "roles"=>$roles, "areas"=>$areas, "roleUser"=>$roleUser];
+        $array=["msg"=>$msg, "error"=>$error, "correctiveAction"=>$correctiveAction, "users"=>$users];
         return response()->json($array);
     }
 
@@ -132,9 +130,9 @@ class CorrectiveActionController extends Controller
      * @param  \App\CorrectiveAction  $correctiveAction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CorrectiveAction $correctiveAction)
+    public function update(Request $request)
     {
-        //
+        
     }
 
     /**

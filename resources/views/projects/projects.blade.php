@@ -75,7 +75,11 @@
                                                         <i class="fas fa-plus"></i>
                                                     </button>
                                                 </span>
-                                                <a class="btn btn-success" href="{{ route('projects.edit',$project->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                                                <span data-toggle="modal" data-target="#ModalEditProyect">
+                                                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar proyecto" onclick="editProject({{$project->id}})">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                </span>
                                             </td>
                                         @else
                                             <td></td>
@@ -153,8 +157,11 @@
                     targets:   -1
                 } ]
             });
+
+            let status= [@json($colocado),@json($proceso),@json($terminado)]
+            console.log(status);
             
-            grafica(1,'donutChart', 'pie');
+            grafica(status,'donutChart', 'pie');
         } );
     </script>
     <script src="{{ asset('vendor/myjs/projects.js') }}"></script>

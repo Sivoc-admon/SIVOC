@@ -115,6 +115,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+    </div>
   </div>
 </div>
 
@@ -130,7 +131,7 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <form id="formRegisterCorrectiveAction">
+            <form id="formEditCorrectiveAction">
               @csrf
                 <div class="row">
                   <h4>Datos Acción Correctiva</h4>
@@ -152,29 +153,24 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                          <label for="inputNameAutor">Autor</label>
-                          <input type="text" class="form-control" id="inputNameAutor" name="inputNameAutor" required value="" readonly>
-                          <input type="hidden" name="inputIdAutor" id="inputIdAutor" value="{{ Auth::user()->id }}" >
+                          <label for="inputEditNameAutor">Autor</label>
+                          <input type="text" class="form-control" id="inputEditNameAutor" name="inputEditNameAutor" required value="" readonly>
+                          
                         </div>
                       </div>
                     
                     <div class="col-md-4">
                         <div class="form-group">
                           <label for="sltEditParticipantesInternos">Participantes internos</label>
-                          <select class="form-control" name="sltEditParticipantesInternos[]" id="sltEditParticipantesInternos" multiple aria-label="multiple select example">
-                            @isset($users)
-                              @foreach ($users as $user)
-                                  <option value="{{$user->id}}">{{$user->name}} {{$user->last_name}} {{$user->mother_last_name}}</option>
-                              @endforeach
-                            @endisset
-                          </select>
+                          <textarea class="form-control" name="sltEditParticipantesInternos" id="sltEditParticipantesInternos" cols="7" rows="5" readonly></textarea>
+                          
                         </div>
                     </div>
                     
                     <div class="col-md-4">
                         <div class="form-group">
-                          <label for="inputStatusCorrectiveAction">Estatus</label>
-                          <select name="sltStatusCorrectiveAction" id="sltStatusCorrectiveAction">
+                          <label for="inputEditStatusCorrectiveAction">Estatus</label>
+                          <select class="form-control" name="inputEditStatusCorrectiveAction" id="inputEditStatusCorrectiveAction">
 
                           </select>
                         </div>
@@ -187,7 +183,7 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" onclick="updateCorrectiveAction();">Guardar</button>
+          <button type="button" class="btn btn-success" onclick="saveEditCorrectiveAction();">Guardar</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
     </div>

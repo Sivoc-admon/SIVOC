@@ -38,10 +38,11 @@ Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 //PROJECTS
 Route::post('projects/board/createBoard', 'ProjectController@createBoard')->name('projects.createBoard');
 Route::get('projects/board/showBoards/{tablero}', 'ProjectController@showBoards');
-Route::resource('projects', 'ProjectController');
-Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
+
+//Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
 Route::get('projects/board/showBoards/{tablero}', 'ProjectController@showBoards');
+Route::resource('projects', 'ProjectController');
 
 //INDICADORES
 Route::resource('indicators', 'IndicatorController');
@@ -83,7 +84,8 @@ Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->n
 Route::resource('minutes', 'MinuteController');
 
 //ACCIONES CORRECTIVAS
-Route::get('correctiveActions/edit/{id}', 'CorrectiveActionController@edit')->name('CorrectiveActionController.edit');
+Route::get('correctiveActions/edit/{id}', 'CorrectiveActionController@edit')->name('correctiveActionController.edit');
+//Route::post('correctiveActions/saveEdit/{id}', 'CorrectiveActionController@saveEdit')->name('correctiveActionController.saveEdit');
 Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActionController@showCorrectiveActionFile')->name('minutes.showCorrectiveActionFile');
 Route::resource('correctiveActions', 'CorrectiveActionController');
 

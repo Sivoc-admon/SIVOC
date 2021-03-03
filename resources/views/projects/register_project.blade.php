@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal  REGISTRAR PROYECTO-->
 <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -61,5 +61,66 @@
         </div>
     </div>
     </div>
+</div>
+
+<!-- Modal EDITAR PROYECTO-->
+<div class="modal fade bd-example-modal-lg" id="modalEditProyect" tabindex="-1" aria-labelledby="modalEditProyect" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar Proyecto</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+              <form method="POST" id="formEditProject">
+                @csrf
+                  <div class="row">
+                    <h4>Datos de Proyecto</h4>
+                  </div>
+                    
+                  <div class="row" style="background-color: rgb(144, 240, 144)">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="sltEditTypeProject">Tipo</label>
+                        <select class="form-control" id="sltEditTypeProject" name="sltEditTypeProject" placeholder="Tipo de proyecto" required>
+                          
+                        </select>
+                      </div>
+                    </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="inputEditProyecto">Referencia de proyecto</label>
+                          <input type="text" class="form-control" id="inputEditProyecto" name="inputEditProyecto" placeholder="Nombre del proyecto" required>
+                          <input type="hidden" name="hideIdProject" id="hideIdProject">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="sltEditCliente">Cliente</label>
+                          <select class="form-control" name="sltEditCliente" id="sltEditCliente">
+                              
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="inputEditEstatus">Estatus</label>
+                          <input type="text" class="form-control" id="inputEditEstatus" name="inputEditEstatus" readonly required>
+                        </div>
+                      </div>
+                  </div>
+
+              </form>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" onclick="updateProject()">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+  </div>
+  </div>
 </div>
 

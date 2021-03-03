@@ -26,8 +26,11 @@ class ProjectController extends Controller
         ->join('customers', 'projects.client', '=', 'customers.id')
         ->select('projects.*', 'customers.name as name_customer')
         ->get();
+        $colocado= Project::where("status","Colocado")->count();
+        $proceso= Project::where("status","Proceso")->count();
+        $terminado= Project::where("status","Terminado")->count();
 
-        return view('projects.projects', compact('projects','customers'));
+        return view('projects.projects', compact('projects','customers', 'colocado', 'proceso', 'terminado'));
         
 
         
@@ -110,7 +113,12 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+        $users = Customer::get();
+
+        $array=["project"=>$project, "users"=>$users];
+        return response()->json($array);
+
     }
 
     /**
@@ -122,7 +130,16 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+
+        
+        $project->update([
+            'name' => $request->inputEditProyecto,
+            'type' => $request->sltEditTypeProject,
+            'client' => $request->sltEditCliente,
+            'status' => $request->inputEditEstatus,
+            
+        ]);
     }
 
     /**
