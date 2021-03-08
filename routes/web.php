@@ -89,7 +89,11 @@ Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActio
 Route::resource('correctiveActions', 'CorrectiveActionController');
 
 //AUDITORIA INTERNA
+Route::get('internalAudits/{internalAudits}/showFiles', 'InternalAuditController@showFiles');
 Route::resource('internalAudits', 'InternalAuditController');
+
+//DOCUMENTOS SGC
+Route::resource('sgc', 'SgcController');
 
 
 

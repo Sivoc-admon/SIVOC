@@ -282,7 +282,7 @@ return [
         ],
         [
             'text' => 'Documentos SGC',
-            'url'  => '/gc',
+            'url'  => 'sgc',
             'icon' => 'fas fa-book',
         ],
         [

@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'SIVOC-AUDITORIA INTERNA')
+@section('title', 'SIVOC-DOCUMENTO SGC')
 
 @section ( ' plugins.Datatables ' , true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">AUDITORIA INTERNA</h1>
+    <h1 class="m-0 text-dark">DOCUMENTOS SGC</h1>
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-body">
                         @if(Auth::user()->hasRole('admin'))
-                        <span data-toggle="modal" data-target="#ModalRegisterInternalAudit">
+                        <span data-toggle="modal" data-target="#ModalRegisterSgc">
                             <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Auditoria">
                                 <i class="fas fa-user-plus"></i>
                             </button>
@@ -24,8 +24,8 @@
                         @endif
                         
 
-                        @include('internalAudits.register')
-                        @include('internalAudits.edit')
+                        @include('sgc.register')
+                        @include('sgc.edit')
 
                     
                     </div>
@@ -38,23 +38,26 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- class="table table-striped table-bordered" -->
-                        <table id="tableInternalAudits" class="table table-striped table-bordered" style="width:100%">
+                        <table id="tableSGC" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Area Evaluada</th>
-                                    <th>Evaluador</th>
-                                    <th>Fecha Evaluacion</th>
+                                    <th>Codigo</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Fecha Actualización</th>
+                                    <th>Responsable</th>
                                     <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($audits as $audit)
+                                @foreach ($sgcs as $sgc)
                                     <tr>
-                                        <td>{{ $audit->id }}</td>
-                                        <td>{{ $audit->area_name }}</td>
-                                        <td>{{ $audit->user_name }} {{ $audit->last_name }} {{ $audit->mother_last_name }}</td>
-                                        <td>{{ $audit->date_register }}</td>
+                                        <td>{{ $sgc->code }}</td>
+                                        <td>{{ $sgc->description }}</td>
+                                        <td>{{ $sgc->create_date }}</td>
+                                        <td>{{ $sgc->update_date }}</td>
+                                        <td>{{ $sgc->user_name }} {{ $audit->last_name }} {{ $audit->mother_last_name }}</td>
                                         <td>
                                             @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
                                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -81,9 +84,11 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Area Evaluada</th>
-                                    <th>Evaluador</th>
-                                    <th>Fecha Evaluacion</th>
+                                    <th>Codigo</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Fecha Actualización</th>
+                                    <th>Responsable</th>
                                     <th>Accion</th>
                                 </tr>
                             </tfoot>
@@ -101,16 +106,17 @@
             var buttonCommon = {
                 exportOptions: {
                     columns: function(column, data, node) {
-                        if (column == 4) {
+                        if (column == 6) {
                             return false;
                         }
                         return true;
                     },
                 }
             };
-            $("#tableInternalAudits").DataTable({
+            $("#tableSGC").DataTable({
                 dom: 'Bfrtip',
                 buttons: [
+                    /*'csv', 'excel', 'pdf',*/
                     $.extend( true, {}, buttonCommon, {
                         extend: 'csv'
                     } ),
@@ -126,6 +132,6 @@
             //table('tableUsers');
         } );
     </script>  
-    <script src="{{ asset('vendor/myjs/internalAudits.js') }}"></script> 
+    <script src="{{ asset('vendor/myjs/sgc.js') }}"></script> 
 @stop
 

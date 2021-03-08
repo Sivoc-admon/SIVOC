@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class InternalAudit extends Model
+class SgcFile extends Model
 {
     use Notifiable;
     use SoftDeletes;
@@ -15,13 +15,14 @@ class InternalAudit extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'area_id', 
-        'user_id', 
-        'date_register',
+        'sgc_id', 
+        'name', 
+        'ruta',
         
     ];
 
-    public function auditFiles(){
-        return $this->hasMany('App\InternalAuditFile', 'internal_audits_id');
+    public function sgc()
+    {
+        return $this->belongsTo('App\Sgc');
     }
 }

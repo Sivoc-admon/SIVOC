@@ -87,3 +87,45 @@ function editInternalAudit(id) {
         }
     });
 }
+
+function showInternalAuditFile(id) {
+    $("#bodyInternalAuditFiles").empty();
+    $.ajax({
+        type: "GET",
+        url: `internalAudits/${id}/showFiles`,
+        //data: { "id": minute },
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                let table = "";
+                for (const i in data.files) {
+                    table += `<tr>"
+                        <td> ${data.files[i].id}</td> 
+                        <td>
+                            <a href="storage/Documents/Auditoria_interna/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
+                        </td>"
+                    </tr>`;
+
+                }
+
+                $("#bodyInternalAuditFiles").append(table);
+
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Sgc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Area;
-use App\InternalAudit;
-use App\InternalAuditFile;
 
-class InternalAuditController extends Controller
+
+class SgcController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +16,15 @@ class InternalAuditController extends Controller
      */
     public function index()
     {
-        
-        $audits = DB::table('internal_audits')
-            ->join('users', 'users.id', '=', 'internal_audits.user_id')
-            ->join('areas', 'areas.id', '=', 'internal_audits.area_id')
-            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'internal_audits.*', 'areas.id as area_id', 'areas.name as area_name')
-            ->whereNull('internal_audits.deleted_at')
+        $sgcs = DB::table('sgc')
+            ->join('users', 'users.id', '=', 'sgc.responsable')
+            ->join('sgc_files', 'sgc_files.sgc_id', '=', 'sgc.id')
+            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'sgc.*', 'sgc_files.*')
+            ->whereNull('sgc.deleted_at')
             ->get();
-        $areas = Area::get();
+        
 
-        return view('internalAudits.internalAudits',compact('audits', 'areas'));
+        return view('sgc.sgc',compact('sgcs'));
     }
 
     /**
@@ -95,10 +93,10 @@ class InternalAuditController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sgc $sgc)
     {
         //
     }
@@ -106,10 +104,10 @@ class InternalAuditController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Sgc $sgc)
     {
         $internalAudit= InternalAudit::find($id);
         $array=["internalAudit"=>$internalAudit];
@@ -121,10 +119,10 @@ class InternalAuditController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Sgc $sgc)
     {
         //
     }
@@ -132,18 +130,9 @@ class InternalAuditController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        
-        $internalAudit = InternalAudit::find($id);
-        
-        $internalAudit->delete();
-        return redirect()->route('internalAudits.index');
-    }
-
     public function showFiles($id)
     {
         $files = InternalAudit::find($id)->auditFiles;
