@@ -277,7 +277,7 @@ return [
         ],
         [
             'text' => 'Auditoria Interna',
-            'url'  => 'internal_audit',
+            'url'  => 'internalAudits',
             'icon' => 'fas fa-user-secret',
         ],
         [

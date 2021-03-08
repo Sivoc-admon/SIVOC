@@ -85,9 +85,11 @@ Route::resource('minutes', 'MinuteController');
 
 //ACCIONES CORRECTIVAS
 Route::get('correctiveActions/edit/{id}', 'CorrectiveActionController@edit')->name('correctiveActionController.edit');
-//Route::post('correctiveActions/saveEdit/{id}', 'CorrectiveActionController@saveEdit')->name('correctiveActionController.saveEdit');
 Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActionController@showCorrectiveActionFile')->name('minutes.showCorrectiveActionFile');
 Route::resource('correctiveActions', 'CorrectiveActionController');
+
+//AUDITORIA INTERNA
+Route::resource('internalAudits', 'InternalAuditController');
 
 
 
