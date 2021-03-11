@@ -18,6 +18,7 @@ class SgcFile extends Model
         'sgc_id', 
         'name', 
         'ruta',
+        'revision'
         
     ];
 

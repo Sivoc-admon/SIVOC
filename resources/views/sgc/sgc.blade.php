@@ -9,14 +9,14 @@
 @stop
 
 @section('content')
-    
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         @if(Auth::user()->hasRole('admin'))
-                        <span data-toggle="modal" data-target="#ModalRegisterSgc">
-                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Auditoria">
+                        <span data-toggle="modal" data-target="#ModalRegisterSGC">
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Documento SGC">
                                 <i class="fas fa-user-plus"></i>
                             </button>
                         </span>
@@ -53,21 +53,22 @@
                             <tbody>
                                 @foreach ($sgcs as $sgc)
                                     <tr>
+                                        <td>{{ $sgc->id }}</td>
                                         <td>{{ $sgc->code }}</td>
                                         <td>{{ $sgc->description }}</td>
                                         <td>{{ $sgc->create_date }}</td>
                                         <td>{{ $sgc->update_date }}</td>
-                                        <td>{{ $sgc->user_name }} {{ $audit->last_name }} {{ $audit->mother_last_name }}</td>
+                                        <td>{{ $sgc->user_name }} {{ $sgc->last_name }} {{ $sgc->mother_last_name }}</td>
                                         <td>
                                             @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editInternalAudit({{$audit->id}});"><i class="fas fa-edit"></i></a></button>
-                                                <span data-toggle="modal" data-target="#ModalShowInternalAuditFiles">
-                                                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" onclick="showInternalAuditFile({{$audit->id}})" data-original-title="Mostrar archivos">
+                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
+                                                <span data-toggle="modal" data-target="#ModalShowSgcFiles">
+                                                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" onclick="showSgcFile({{$sgc->id}})" data-original-title="Mostrar archivos">
                                                         <i class="fas fa-list"></i>
                                                     </button>
                                                 </span>
-                                                <form action="{{ route('internalAudits.destroy',$audit->id) }}" method="POST">
+                                                <form action="{{ route('internalAudits.destroy',$sgc->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                     

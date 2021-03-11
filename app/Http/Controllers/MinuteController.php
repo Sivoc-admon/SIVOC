@@ -188,4 +188,40 @@ class MinuteController extends Controller
 
         return response()->json($array);
     }
+
+    public function uploadFile(Request $request, $minute)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Minutas/'.$minute;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $agreementFile=AgreementFile::create([
+                'minute_id' => $request->minute,
+                'file' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($agreementFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
 }

@@ -77,7 +77,7 @@ Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
 Route::resource('rules', 'RuleController');
 
 //MINUTAS
-Route::post('minutes', 'MinuteController@store');
+Route::post('minutes/{minute}/uploadFile', 'MinuteController@uploadFile')->name('minutes.uploadFile');
 Route::post('minutes/agreement', 'MinuteController@storeAgreement')->name('minutes.storeAgreement');
 Route::get('minutes/showAgreements/{id}', 'MinuteController@showAgreement')->name('minutes.showAgreement');
 Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->name('minutes.showMinuteFile');
@@ -93,6 +93,7 @@ Route::get('internalAudits/{internalAudits}/showFiles', 'InternalAuditController
 Route::resource('internalAudits', 'InternalAuditController');
 
 //DOCUMENTOS SGC
+Route::get('sgc/{sgc}/files', 'SgcController@showFiles')->name('sgc.showFiles');
 Route::resource('sgc', 'SgcController');
 
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Sgc;
+use App\SgcFile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,14 +20,15 @@ class SgcController extends Controller
     public function index()
     {
         $sgcs = DB::table('sgc')
-            ->join('users', 'users.id', '=', 'sgc.responsable')
+            ->join('users', 'users.id', '=', 'sgc.user_id')
             ->join('sgc_files', 'sgc_files.sgc_id', '=', 'sgc.id')
             ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'sgc.*', 'sgc_files.*')
             ->whereNull('sgc.deleted_at')
             ->get();
+        $areas = Area::get();
         
 
-        return view('sgc.sgc',compact('sgcs'));
+        return view('sgc.sgc',compact('sgcs', 'areas'));
     }
 
     /**
@@ -48,23 +52,28 @@ class SgcController extends Controller
         $msg="";
         $error=false;
 
-        $internalAudit=InternalAudit::create([
-            'area_id' => $request->area,            
-            'user_id' => $request->evaluador,
-            'date_register' => $request->fecha,
+        $sgc=Sgc::create([
+            'code' => $request->codigo,   
+            'area_id' => $request->area,         
+            'type' => $request->procedimiento,
+            'description' => $request->description,
+            'create_date' => $request->fechaCreacion,
+            'update_date' => $request->fechaActualizacion,
+            'user_id' => $request->responsable,
             
         ]);
 
-        if ($internalAudit->save()) {
-            $pathFile = 'public/Documents/Auditoria_interna/'.$internalAudit->id;
+        if ($sgc->save()) {
+            $pathFile = 'public/Documents/SGC/'.$sgc->id;
 
             for ($i=0; $i <$request->tamanoFiles ; $i++) { 
                 $nombre="file".$i;
                 $archivo = $request->file($nombre);
-                $internalAuditFile=InternalAuditFile::create([
-                    'internal_audits_id' => $internalAudit->id,
+                $sgcFile=SgcFile::create([
+                    'sgc_id' => $sgc->id,
                     'name' => $archivo->getClientOriginalName(),
                     'ruta' => 'storage/app/' . $pathFile,
+                    'revision' => 1,
     
                 ]);
                 $path = $archivo->storeAs(
@@ -72,7 +81,7 @@ class SgcController extends Controller
                 );
             }
             
-            if ($internalAuditFile->save()) {
+            if ($sgcFile->save()) {
                 $msg="Registro guardado con exito";
             }else {
                 $msg="Error al guardar el archivo";
@@ -107,10 +116,16 @@ class SgcController extends Controller
      * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sgc $sgc)
+    public function edit(Request $request, $id)
     {
-        $internalAudit= InternalAudit::find($id);
-        $array=["internalAudit"=>$internalAudit];
+
+        $sgc = Sgc::find($id);
+        $user = User::find($sgc->user_id);
+        $areas = Area::get();
+        $msg="";
+        $error=false;
+        
+        $array=["msg"=>$msg,"error"=>$error,"sgc"=>$sgc, "user"=>$user, "areas"=>$areas];
        
         return response()->json($array);
     }
@@ -124,7 +139,18 @@ class SgcController extends Controller
      */
     public function update(Request $request, Sgc $sgc)
     {
-        //
+       
+        
+        $sgc = Sgc::find($sgc);
+        
+        $sgc->update([
+            'area_id' => $request->inputNameEditUser,
+            'type' => $request->inputLastNameEditUser,
+            'code' => $request->inputMotherLastNameEditUser,
+            'description' => $request->sltAreaEditUser,
+            'update_date' => $request->inputEmailEditUser
+            
+        ]);
     }
 
     /**
@@ -133,9 +159,19 @@ class SgcController extends Controller
      * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
+
+    public function destroy($id)
+    {
+        
+        $sgc = Sgc::find($id);
+        
+        $sgc->delete();
+        return redirect()->route('sgc.index');
+    }
+
     public function showFiles($id)
     {
-        $files = InternalAudit::find($id)->auditFiles;
+        $files = Sgc::find($id)->sgcFile;
         
         $msg="";
         $error=false;
@@ -145,4 +181,6 @@ class SgcController extends Controller
 
         return response()->json($array);
     }
+
+    
 }

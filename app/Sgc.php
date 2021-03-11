@@ -11,17 +11,17 @@ class Sgc extends Model
     use Notifiable;
     use SoftDeletes;
 
-    
+    protected $table = 'sgc';
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'code', 
+        'area_id',
         'type', 
         'description',
         'create_date',
         'update_date',
-        'responsable',
-        'revision',
+        'user_id',
         
     ];
 
