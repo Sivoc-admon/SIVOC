@@ -230,3 +230,78 @@ function masDocumentos() {
         }
     });
 }
+
+function editMinute(id) {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: `minutes/${id}/edit`,
+        //data: $("#formRegisterUser").serialize(),
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#inputEditDescriptionMinute").val(data.minute.description);
+                $("#sltEditParticipantesInternos").val(data.minute.participant);
+                $("#inputEditExternalParticipant").val(data.minute.external_participant);
+                $("#hIdMinute").val(id);
+
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function updateMinute() {
+
+    let id = $("#hIdMinute").val();
+    $.ajax({
+        type: "PUT",
+        url: `minutes/${id}`,
+        data: $("#formEditMinute").serialize(),
+        //dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalEditMinute").modal('hide');
+
+                messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}

@@ -137,18 +137,18 @@ class SgcController extends Controller
      * @param  \App\Sgc  $sgc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sgc $sgc)
+    public function update(Request $request, $id)
     {
-       
         
-        $sgc = Sgc::find($sgc);
+        $sgc = Sgc::find($id);
         
         $sgc->update([
-            'area_id' => $request->inputNameEditUser,
-            'type' => $request->inputLastNameEditUser,
-            'code' => $request->inputMotherLastNameEditUser,
-            'description' => $request->sltAreaEditUser,
-            'update_date' => $request->inputEmailEditUser
+            'area_id' => $request->sltEditAreaSgc,
+            'type' => $request->sltEditTypeSGC,
+            'code' => $request->inputEditCodigoSgc,
+            'description' => $request->inputEditDescriptionSgc,
+            'create_date' => $request->inputEditCreateSgc,
+            'update_date' => $request->inputEditUpdateSgc
             
         ]);
     }

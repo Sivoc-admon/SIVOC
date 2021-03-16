@@ -109,9 +109,13 @@ class MinuteController extends Controller
      * @param  \App\Minute  $minute
      * @return \Illuminate\Http\Response
      */
-    public function edit(Minute $minute)
+    public function edit($id)
     {
-        //
+        $minute = Minute::find($id);
+
+        $array=["minute"=>$minute];
+        
+        return response()->json($array);
     }
 
     /**
@@ -121,9 +125,18 @@ class MinuteController extends Controller
      * @param  \App\Minute  $minute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Minute $minute)
+    public function update(Request $request, $id)
     {
-        //
+        
+
+        $minute = Minute::find($id);
+        
+        $minute->update([
+            'description' => $request->inputEditDescriptionMinute,
+            'type' => $request->sltEditMinuteType,
+            'status' => $request->sltEditStatusMinute
+            
+        ]);
     }
 
     /**

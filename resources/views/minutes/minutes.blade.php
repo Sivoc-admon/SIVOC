@@ -37,6 +37,7 @@
                                 <th>Minuta</th>
                                 <th>Participantes</th>
                                 <th>Participantes Externos</th>
+                                <th>Tipo</th>
                                 <th>Estatus</th>
                                 <th>Accion</th>
                             </tr>
@@ -49,6 +50,7 @@
                                         <td>{{ $minute->description }}</td>
                                         <td>{{ $minute->participant }}</td>
                                         <td>{{ $minute->external_participant }}</td>
+                                        <td>{{ $minute->type }}</td>
                                         <td>{{ $minute->status }}</td>
                                         
                                         <td>
@@ -67,7 +69,11 @@
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
-                                            <a class="btn btn-success" href="{{ route('minutes.edit',$minute->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                                            <span data-toggle="modal" data-target="#ModalEditMinute">
+                                                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar Minuta" onclick="editMinute({{$minute->id}})">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -80,6 +86,7 @@
                                 <th>Minuta</th>
                                 <th>Participantes</th>
                                 <th>Participantes Externos</th>
+                                <th>Tipo</th>
                                 <th>Estatus</th>
                                 <th>Accion</th>
                             </tr>

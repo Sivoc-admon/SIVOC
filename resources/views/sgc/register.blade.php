@@ -114,6 +114,7 @@
               <div class="row" style="background-color: #17a2b8">
                 <div class="col-md-4">
                   <div class="form-group">
+                    <input type="hidden" name="hIdSgc" id="hIdSgc">
                     <label for="sltEditAreaSgc">Area</label>
                     <select class="form-control" name="sltEditAreaSgc" id="sltEditAreaSgc">
                         <option value="0">Seleccione</option>

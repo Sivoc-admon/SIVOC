@@ -126,6 +126,7 @@ function editSgc(id) {
                 $("#inputEditResponsable").val(data.user.name + " " + data.user.last_name + " " + data.user.mother_last_name);
                 $("#inputEditCodigoSgc").val(data.sgc.code);
                 $("#inputEditDescriptionSgc").val(data.sgc.description);
+                $("#hIdSgc").val(id);
 
 
                 let optionAreas = "<option value='0'>Seleccione</option>";
@@ -160,7 +161,8 @@ function editSgc(id) {
     });
 }
 
-function updateSgc(id) {
+function updateSgc() {
+    let id = $("#hIdSgc").val();
     $.ajax({
         type: "PUT",
         url: `sgc/${id}`,
