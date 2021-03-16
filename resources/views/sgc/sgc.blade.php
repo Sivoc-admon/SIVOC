@@ -62,12 +62,13 @@
                                         <td>
                                             
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
                                                 <span data-toggle="modal" data-target="#ModalShowSgcFiles">
                                                     <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" onclick="showSgcFile({{$sgc->id}})" data-original-title="Mostrar archivos">
                                                         <i class="fas fa-list"></i>
                                                     </button>
                                                 </span>
+                                                @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
+                                                
                                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
                                                 
                                                 <form action="{{ route('internalAudits.destroy',$sgc->id) }}" method="POST">
