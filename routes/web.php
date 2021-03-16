@@ -93,6 +93,7 @@ Route::get('internalAudits/{internalAudits}/showFiles', 'InternalAuditController
 Route::resource('internalAudits', 'InternalAuditController');
 
 //DOCUMENTOS SGC
+Route::post('sgc/{sgc}/uploadFile', 'SgcController@uploadFile')->name('sgc.uploadFile');
 Route::get('sgc/{sgc}/files', 'SgcController@showFiles')->name('sgc.showFiles');
 Route::resource('sgc', 'SgcController');
 

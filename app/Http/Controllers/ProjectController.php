@@ -21,6 +21,7 @@ class ProjectController extends Controller
     {
         //$projects = Project::get();
         $customers = Customer::get();
+        $users = User::get();
 
         $projects = DB::table('projects')
         ->join('customers', 'projects.client', '=', 'customers.id')
@@ -30,7 +31,7 @@ class ProjectController extends Controller
         $proceso= Project::where("status","Proceso")->count();
         $terminado= Project::where("status","Terminado")->count();
 
-        return view('projects.projects', compact('projects','customers', 'colocado', 'proceso', 'terminado'));
+        return view('projects.projects', compact('projects','customers', 'colocado', 'proceso', 'terminado', 'users'));
         
 
         

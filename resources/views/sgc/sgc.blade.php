@@ -60,22 +60,25 @@
                                         <td>{{ $sgc->update_date }}</td>
                                         <td>{{ $sgc->user_name }} {{ $sgc->last_name }} {{ $sgc->mother_last_name }}</td>
                                         <td>
-                                            @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
+                                            
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
+                                                @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
                                                 <span data-toggle="modal" data-target="#ModalShowSgcFiles">
                                                     <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" onclick="showSgcFile({{$sgc->id}})" data-original-title="Mostrar archivos">
                                                         <i class="fas fa-list"></i>
                                                     </button>
                                                 </span>
+                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
+                                                
                                                 <form action="{{ route('internalAudits.destroy',$sgc->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                     
                                                     <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
                                                 </form>
+                                                @endif
                                             </div>
-                                            @endif
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

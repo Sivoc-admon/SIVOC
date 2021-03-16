@@ -189,6 +189,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+        <input type="hidden" name="hideSgcId" id="hideSgcId">
       </div>
       <div class="modal-body">
           <div class="container-fluid">
@@ -211,6 +212,19 @@
                   </tr>
               </tfoot>
             </table>
+            @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="fileUploadSgcFile" class="form-label">Documentos</label>
+                <input class="form-control" type="file" id="fileUploadSgcFile" name="fileUploadSgcFile">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <button type="button" class="btn btn-success" onclick="masDocumentosSgc()">Guardar Documentos</button>
+              </div>
+            </div>
+            @endif
           </div>
       </div>
       <div class="modal-footer">

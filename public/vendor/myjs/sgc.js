@@ -84,9 +84,60 @@ function showSgcFile(id) {
                     </tr>`;
 
                 }
+                $("#hideSgcId").val(id);
 
                 $("#bodySgcFiles").append(table);
 
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function masDocumentosSgc() {
+
+    let sgc = $("#hideSgcId").val();
+    let file = $('#fileUploadSgcFile')[0];
+
+    let data = new FormData();
+    data.append("sgc", sgc);
+    data.append("tamanoFiles", file.files.length);
+    for (let i = 0; i < file.files.length; i++) {
+        data.append('file' + i, file.files[i]);
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: `sgc/${sgc}/uploadFile`,
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowSgcFiles").modal('hide');
+
+                messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
 
             }
 

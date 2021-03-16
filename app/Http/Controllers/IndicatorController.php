@@ -113,7 +113,10 @@ class IndicatorController extends Controller
         ->whereBetween('created_at', [$fechaInicial.' 00:00:00', $fechaFinal.' 23:59:59'])
         ->get();
 
-        return response()->json(["message" => "Exitoso", "grafica" => $grafica], Response::HTTP_OK);
+        $minMax = IndicatorType::find($indicatorType);
+        
+
+        return response()->json(["message" => "Exitoso", "grafica" => $grafica, 'minMax'=>$minMax], Response::HTTP_OK);
     }
 
     /**

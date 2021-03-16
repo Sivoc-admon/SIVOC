@@ -182,5 +182,45 @@ class SgcController extends Controller
         return response()->json($array);
     }
 
+    public function uploadFile(Request $request, $sgc)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/SGC/'.$sgc;
+
+        $count = SgcFile::where('sgc_id', $sgc)->get();
+        $count =$count->count();
+        $count++;
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $sgcFile=SgcFile::create([
+                'sgc_id' => $request->sgc,
+                'name' => $archivo->getClientOriginalName(),
+                'revision' => $count,
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($sgcFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
+
     
 }

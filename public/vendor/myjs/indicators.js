@@ -135,7 +135,7 @@ function graficaIndicador() {
         data: $("#formGraficaIndicador").serialize(),
         //dataType: 'json',
         success: function(data) {
-            console.log(data);
+            console.log(data.minMax.max);
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
@@ -151,7 +151,7 @@ function graficaIndicador() {
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                         datasets: [{
                             label: 'Indicador',
                             data: valores,
@@ -178,7 +178,10 @@ function graficaIndicador() {
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero: true
+                                    display: true,
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: Number.parseInt(data.minMax.max)
                                 }
                             }],
                             xAxes: []
