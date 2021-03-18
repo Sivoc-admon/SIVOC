@@ -84,8 +84,9 @@ Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->n
 Route::resource('minutes', 'MinuteController');
 
 //ACCIONES CORRECTIVAS
+Route::post('correctiveActions/{id}/uploadFile', 'CorrectiveActionController@uploadFile')->name('correctiveActionController.uploadFile');
 Route::get('correctiveActions/edit/{id}', 'CorrectiveActionController@edit')->name('correctiveActionController.edit');
-Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActionController@showCorrectiveActionFile')->name('minutes.showCorrectiveActionFile');
+Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActionController@showCorrectiveActionFile')->name('correctiveActionController.showCorrectiveActionFile');
 Route::resource('correctiveActions', 'CorrectiveActionController');
 
 //AUDITORIA INTERNA
@@ -95,6 +96,7 @@ Route::resource('internalAudits', 'InternalAuditController');
 //DOCUMENTOS SGC
 Route::post('sgc/{sgc}/uploadFile', 'SgcController@uploadFile')->name('sgc.uploadFile');
 Route::get('sgc/{sgc}/files', 'SgcController@showFiles')->name('sgc.showFiles');
+Route::delete('sgc/{sgc}/destroyFile', 'SgcController@destroyFile')->name('sgc.destroyFile');
 Route::resource('sgc', 'SgcController');
 
 

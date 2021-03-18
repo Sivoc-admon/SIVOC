@@ -64,7 +64,7 @@ function editCorrectiveAction(id) {
     });
     $.ajax({
         type: "GET",
-        url: "/correctiveActions/edit/" + id,
+        url: "correctiveActions/edit/" + id,
         //data: $("#formRegisterUser").serialize(),
         dataType: 'json',
         success: function(data) {
@@ -74,6 +74,7 @@ function editCorrectiveAction(id) {
                 messageAlert(data.msg, "error", "");
             } else {
 
+                $("#hIdEditCorrective").val(id);
                 let option = "";
                 switch (data.correctiveAction.status) {
                     case 'Abierta':
@@ -134,31 +135,16 @@ function editCorrectiveAction(id) {
 
 function saveEditCorrectiveAction() {
 
-    let issue = $("#inputIssiueCorrectiveAction").val();
-    let action = $("#inputActionCorrectiveAction").val();
-    let participant = $("#sltParticipantesInternos").val();
-    let status = $("#inputStatusCorrectiveAction").val();
-    let file = $('#fileCorrectiveAction')[0];
-
-    let data = new FormData();
-    data.append("issue", issue);
-    data.append("action", action);
-    data.append("participant", participant);
-    data.append("status", status);
-    data.append("tamanoFiles", file.files.length);
-    for (let i = 0; i < file.files.length; i++) {
-        data.append('file' + i, file.files[i]);
-    }
-
+    let id = $("#hIdEditCorrective").val();
 
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        type: "POST",
-        url: "correctiveActionscorrectiveActions/saveEdit/{id}",
-        data: data,
-        dataType: 'json',
+        type: "PUT",
+        url: `correctiveActions/${id}`,
+        data: $("#formEditCorrectiveAction").serialize(),
+        //dataType: 'json',
         success: function(data) {
 
             if (data.error == true) {
@@ -187,6 +173,7 @@ function saveEditCorrectiveAction() {
 
 function showCorrectiveActionFile(id) {
     $("#bodyCorrectiveActionFiles").empty();
+    $("#hIdCorrectiveAction").val(id);
     $.ajax({
         type: "GET",
         url: `correctiveActions/showCorrectiveActionsFiles/${id}`,
@@ -211,6 +198,56 @@ function showCorrectiveActionFile(id) {
 
                 $("#bodyCorrectiveActionFiles").append(table);
 
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function masDocumentos() {
+
+    let correctiveAction = $("#hIdCorrectiveAction").val();
+    let file = $('#fileUploadCorrectiveFile')[0];
+
+    let data = new FormData();
+    data.append("correctiveAction", correctiveAction);
+    data.append("tamanoFiles", file.files.length);
+    for (let i = 0; i < file.files.length; i++) {
+        data.append('file' + i, file.files[i]);
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: `correctiveActions/${correctiveAction}/uploadFile`,
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowCorrectiveAction").modal('hide');
+
+                messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
 
             }
 

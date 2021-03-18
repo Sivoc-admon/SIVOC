@@ -18,12 +18,12 @@ function getFilesLevelZero(folderId) {
         dataType: 'json',
         success: function(data) {
             let tablaHTML = ``;
-
+            console.log(data);
             for (var k in data.folders) {
                 let date = new Date(data.folders[k].created_at);
 
                 tablaHTML += `<tr>
-                <td>${data.folders[k].name}</td>
+                <td><a href="${data.folders[k].ruta}${data.folders[k].name}" target="_blank">${data.folders[k].name}</a></td>
                 <td>${date.toLocaleDateString()}</td>
                 <td>`;
                 if (areaId == data.area_user || data.area_user == 5) {

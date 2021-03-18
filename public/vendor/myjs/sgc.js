@@ -6,7 +6,7 @@ function saveSgc() {
     let description = $("#inputDescription").val();
     let fechaCreacion = $("#inputCreate").val();
     let fechaActualizacion = $("#inputUpdate").val();
-    let responsable = $("#inputIdAutor").val();
+    let responsable = $("#inputResponsable").val();
     let file = $('#fileSgc')[0];
 
     let data = new FormData();
@@ -80,6 +80,11 @@ function showSgcFile(id) {
                         <td> ${data.files[i].id}</td> 
                         <td>
                             <a href="storage/Documents/SGC/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})"><i class="fas fa-minus-square"></i></button>
+                            </div>
                         </td>"
                     </tr>`;
 
@@ -228,6 +233,45 @@ function updateSgc() {
                 $("#ModalRegisterAgreement").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function eliminarArchivo(id) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        url: `sgc/${id}/destroyFile`,
+        /*data: data,
+        cache: false,
+        contentType: false,
+        processData: false,*/
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowSgcFiles").modal('hide');
+
+                messageAlert("Archivo Eliminado", "success", "");
 
                 location.reload();
 

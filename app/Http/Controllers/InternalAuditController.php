@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Area;
 use App\InternalAudit;
 use App\InternalAuditFile;
+use App\User;
 
 class InternalAuditController extends Controller
 {
@@ -25,8 +26,9 @@ class InternalAuditController extends Controller
             ->whereNull('internal_audits.deleted_at')
             ->get();
         $areas = Area::get();
+        $users = User::get();
 
-        return view('internalAudits.internalAudits',compact('audits', 'areas'));
+        return view('internalAudits.internalAudits',compact('audits', 'areas', 'users'));
     }
 
     /**

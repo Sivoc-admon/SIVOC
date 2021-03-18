@@ -1,7 +1,7 @@
 function saveInternalAudit() {
 
     let area = $("#sltAreaAudit").val();
-    let evaluador = $("#inputIdAutor").val();
+    let evaluador = $("#sltEvaluator").val();
     let fecha = $("#inputDateAudit").val();
     let file = $('#fileInternalAudit')[0];
 

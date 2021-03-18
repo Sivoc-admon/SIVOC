@@ -31,8 +31,12 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputEvaluator">Evaluador</label>
-                        <input type="text" class="form-control" id="inputEvaluator" name="inputEvaluator" required value="{{ Auth::user()->name}} {{Auth::user()->last_name}} {{Auth::user()->mother_last_name }}" readonly>
-                        <input type="hidden" name="inputIdAutor" id="inputIdAutor" value="{{ Auth::user()->id }}" >
+                        <select class="form-control" name="sltEvaluator" id="sltEvaluator">
+                          <option value="0">Selecciona</option>
+                          @foreach ($users as $user)
+                              <option value="{{$user->id}}">{{$user->name}} {{$user->last_name}} {{$user->mother_last_name}}</option>
+                          @endforeach
+                        </select>
                       </div>
                     </div>
                     <div class="col-md-4">

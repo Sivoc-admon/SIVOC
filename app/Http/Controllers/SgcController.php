@@ -26,9 +26,10 @@ class SgcController extends Controller
             ->whereNull('sgc.deleted_at')
             ->get();
         $areas = Area::get();
+        $users = User::get();
         
 
-        return view('sgc.sgc',compact('sgcs', 'areas'));
+        return view('sgc.sgc',compact('sgcs', 'areas', 'users'));
     }
 
     /**
@@ -219,6 +220,18 @@ class SgcController extends Controller
 
         $array=["msg"=>$msg, "error"=>$error];
         
+        return response()->json($array);
+    }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = SgcFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
         return response()->json($array);
     }
 

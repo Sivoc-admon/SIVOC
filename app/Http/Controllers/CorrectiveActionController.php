@@ -130,9 +130,16 @@ class CorrectiveActionController extends Controller
      * @param  \App\CorrectiveAction  $correctiveAction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        $correctiveAction = CorrectiveAction::find($id);
         
+        $correctiveAction->update([
+            'issue' => $request->inputEditIssiueCorrectiveAction,
+            'action' => $request->inputEditActionCorrectiveAction,
+            'status' => $request->inputEditStatusCorrectiveAction
+            
+        ]);
     }
 
     /**
@@ -159,6 +166,42 @@ class CorrectiveActionController extends Controller
 
         $array=["msg"=>$msg, "error"=>$error, "correctiveActionfiles"=>$files];
 
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $correctiveAction)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Accion_Correctiva/'.$correctiveAction;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $correctiveActionFile=CorrectiveActionFiles::create([
+                'corrective_action_id' => $request->correctiveAction,
+                'file' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($correctiveActionFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
         return response()->json($array);
     }
 }
