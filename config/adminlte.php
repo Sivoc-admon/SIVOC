@@ -362,7 +362,7 @@ return [
                 ],
                 [
                     'text' => 'Servicio',
-                    'url'  => '/folder/servicios',
+                    'url'  => '/folder/servicio',
                 ],
                 
             ],

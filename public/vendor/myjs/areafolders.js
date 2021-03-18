@@ -23,7 +23,7 @@ function getFilesLevelZero(folderId) {
                 let date = new Date(data.folders[k].created_at);
 
                 tablaHTML += `<tr>
-                <td><a href="${data.folders[k].ruta}${data.folders[k].name}" target="_blank">${data.folders[k].name}</a></td>
+                <td><a href="..${data.folders[k].ruta}${data.folders[k].name}" target="_blank">${data.folders[k].name}</a></td>
                 <td>${date.toLocaleDateString()}</td>
                 <td>`;
                 if (areaId == data.area_user || data.area_user == 5) {
