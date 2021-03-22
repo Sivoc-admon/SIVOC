@@ -99,6 +99,9 @@ Route::get('sgc/{sgc}/files', 'SgcController@showFiles')->name('sgc.showFiles');
 Route::delete('sgc/{sgc}/destroyFile', 'SgcController@destroyFile')->name('sgc.destroyFile');
 Route::resource('sgc', 'SgcController');
 
+//ACTIVOS
+Route::resource('assets', 'AssetController');
+
 
 
 
