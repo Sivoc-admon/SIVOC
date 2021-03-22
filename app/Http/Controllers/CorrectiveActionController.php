@@ -8,6 +8,7 @@ use App\User;
 use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\DB;
 use App\CorrectiveActionFiles;
+use Illuminate\Support\Facades\Storage;
 
 class CorrectiveActionController extends Controller
 {
@@ -203,5 +204,15 @@ class CorrectiveActionController extends Controller
         $array=["msg"=>$msg, "error"=>$error];
         
         return response()->json($array);
+    }
+
+    public function destroyfile($id)
+    {   
+        $file = CorrectiveActionFiles::where('id', $id)->get();
+        $pathFile = $file->ruta."/".$file->file;
+        Storage::delete($pathFile);
+        CorrectiveActionFiles::find($id)->delete();
+        
+        return redirect()->route('correctiveActions.index');
     }
 }

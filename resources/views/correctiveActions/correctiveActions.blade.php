@@ -70,7 +70,7 @@
                                             <td>
                                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editCorrectiveAction({{$correctiveAction->id}});"><i class="fas fa-edit"></i></a>
                                             
-                                                <form action="{{ route('correctiveActions.destroy',$user->id) }}" method="POST">
+                                                <form action="{{ route('correctiveActions.destroy',$correctiveAction->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                     

@@ -84,6 +84,7 @@ Route::get('minutes/showMinuteFiles/{id}', 'MinuteController@showMinuteFile')->n
 Route::resource('minutes', 'MinuteController');
 
 //ACCIONES CORRECTIVAS
+Route::post('correctiveActions/destroyfile/{id}', 'CorrectiveActionController@destroyfile')->name('correctiveActionController.destroyfile');
 Route::post('correctiveActions/{id}/uploadFile', 'CorrectiveActionController@uploadFile')->name('correctiveActionController.uploadFile');
 Route::get('correctiveActions/edit/{id}', 'CorrectiveActionController@edit')->name('correctiveActionController.edit');
 Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActionController@showCorrectiveActionFile')->name('correctiveActionController.showCorrectiveActionFile');

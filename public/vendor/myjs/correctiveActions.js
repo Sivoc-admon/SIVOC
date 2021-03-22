@@ -174,6 +174,7 @@ function saveEditCorrectiveAction() {
 function showCorrectiveActionFile(id) {
     $("#bodyCorrectiveActionFiles").empty();
     $("#hIdCorrectiveAction").val(id);
+    let csrf_token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         type: "GET",
         url: `correctiveActions/showCorrectiveActionsFiles/${id}`,
@@ -187,11 +188,14 @@ function showCorrectiveActionFile(id) {
 
                 let table = "";
                 for (const i in data.correctiveActionfiles) {
-                    table += `<tr>"
+                    table += `<tr>
                         <td> ${data.correctiveActionfiles[i].id}</td> 
                         <td>
                             <a href="storage/Documents/Accion_Correctiva/${id}/${data.correctiveActionfiles[i].file}" target="_blank">${data.correctiveActionfiles[i].file}</a>
-                        </td>"
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="deleteFile(${data.correctiveActionfiles[i].id});"><i class="fas fa-minus-square"></i></button>
+                        </td>
                     </tr>`;
 
                 }
@@ -244,6 +248,42 @@ function masDocumentos() {
             } else {
 
                 $("#ModalShowCorrectiveAction").modal('hide');
+
+                messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function deleteFile(id) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: `correctiveActions/destroyfile/${id}`,
+        data: {
+            "id": id
+        },
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
 
                 messageAlert("Guardado Correctamente", "success", "");
 

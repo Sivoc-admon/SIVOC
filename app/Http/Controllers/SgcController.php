@@ -21,14 +21,13 @@ class SgcController extends Controller
     {
         $sgcs = DB::table('sgc')
             ->join('users', 'users.id', '=', 'sgc.user_id')
-            ->join('sgc_files', 'sgc_files.sgc_id', '=', 'sgc.id')
-            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'sgc.*', 'sgc_files.*')
+            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'sgc.*')
             ->whereNull('sgc.deleted_at')
             ->get();
         $areas = Area::get();
         $users = User::get();
         
-
+        
         return view('sgc.sgc',compact('sgcs', 'areas', 'users'));
     }
 
