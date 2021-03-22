@@ -101,6 +101,7 @@ Route::delete('sgc/{sgc}/destroyFile', 'SgcController@destroyFile')->name('sgc.d
 Route::resource('sgc', 'SgcController');
 
 //ACTIVOS
+Route::get('assets/showAssetFiles/{asset}', 'AssetController@showAssetFiles')->name('assets.showAssetFiles');
 Route::post('assets/{asset}/uploadFile', 'AssetController@uploadFile')->name('assets.uploadFile');
 Route::get('assets/{asset}/showFiles', 'AssetController@showFiles')->name('assets.showFiles');
 Route::resource('assets', 'AssetController');

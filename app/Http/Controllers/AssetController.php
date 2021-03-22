@@ -156,6 +156,20 @@ class AssetController extends Controller
      */
     public function destroy(Asset $asset)
     {
-        //
+        
+    }
+
+    public function showAssetFiles(Request $request, $asset)
+    {
+        $files = AssetFile::where('asset_id', $asset)->where('type', $request->tipo);
+        dd($files);
+        
+        $msg="";
+        $error=false;
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "assetfiles"=>$files];
+
+        return response()->json($array);
     }
 }

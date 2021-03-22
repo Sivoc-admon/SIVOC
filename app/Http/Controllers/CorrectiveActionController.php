@@ -207,12 +207,13 @@ class CorrectiveActionController extends Controller
     }
 
     public function destroyfile($id)
-    {   
-        $file = CorrectiveActionFiles::where('id', $id)->get();
+    {  
+        $file = CorrectiveActionFiles::find($id);
+        
         $pathFile = $file->ruta."/".$file->file;
         Storage::delete($pathFile);
         CorrectiveActionFiles::find($id)->delete();
-        
+
         return redirect()->route('correctiveActions.index');
     }
 }
