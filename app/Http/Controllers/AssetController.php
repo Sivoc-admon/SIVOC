@@ -55,7 +55,7 @@ class AssetController extends Controller
             for ($i=0; $i <$request->lengthGeneral ; $i++) { 
                 $nombre="generalFile".$i;
                 $archivo = $request->file($nombre);
-                $assetFile=>AssetFile::create([
+                $assetFile=AssetFile::create([
                     'asset_id' => $asset->id,
                     'name' => $archivo->getClientOriginalName(),
                     'ruta' => 'storage/app/' . $pathFile,
@@ -67,7 +67,7 @@ class AssetController extends Controller
                 );
             }
             
-            if ($agreementFile->save()) {
+            if ($assetFile->save()) {
                 $msg="Archivos Generales guardados con exito";
             } else {
                 $error=true;

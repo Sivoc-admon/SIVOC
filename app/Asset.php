@@ -16,7 +16,7 @@ class Asset extends Model
         'costo', 
         'day_buy',
         'calibration',
-        'day_calibration'
+        'date_calibration'
         
     ];
 

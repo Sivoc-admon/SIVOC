@@ -36,18 +36,24 @@
                         <input type="date" class="form-control" id="inputBuyAsset" name="inputBuyAsset" required>
                       </div>
                     </div>
-                    <div class="form-check">
+                    <div class="col-md-4">
+                      <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="checkAsset" name="checkAsset" onclick="muestraOculta('checkAsset', 'divCalibration', 'fileAssetCalibration')">
                         <label class="form-check-label" for="checkAsset">Calibración</label>
+                        
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4" id="divCalibration" style="display: none">
+                      <div class="form-group">
                         <label for="inputCalibrationDayAsset">Fecha de Calibración</label>
                         <input type="date" class="form-control" id="inputCalibrationDayAsset" name="inputCalibrationDayAsset" required>
-                    </div>
-                    <div class="col-md-4" id="divCalibration" style="display: none">
-                        <div class="form-group">
-                          <label for="fileAssetCalibration" class="form-label">Documentos de Calibración</label>
-                          <input class="form-control" type="file" id="fileAssetCalibration" name="fileAssetCalibration" multiple>
-                        </div>
                       </div>
+                      <div class="form-group">
+                        <label for="fileAssetCalibration" class="form-label">Documentos de Calibración</label>
+                        <input class="form-control" type="file" id="fileAssetCalibration" name="fileAssetCalibration" multiple>
+                      </div>
+                    </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="fileAsset" class="form-label">Documentos Generales</label>
@@ -107,17 +113,23 @@
                         <input type="date" class="form-control" id="inputEditBuyAsset" name="inputEditBuyAsset" required>
                       </div>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="checkEditAsset" name="checkEditAsset" onclick="muestraOcultaEdit('checkEditAsset','divEditCalibration', 'fileEditAssetCalibration')">
+                    <div class="col-md-4">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkEditAsset" name="checkEditAsset" onclick="muestraOculta('checkEditAsset','divEditCalibration', 'fileEditAssetCalibration');">
                         <label class="form-check-label" for="checkEditAsset">Calibración</label>
+                        
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4" id="divEditCalibration" style="display:none">
+                      <div class="form-group">
                         <label for="inputEditCalibrationDayAsset">Fecha de Calibración</label>
                         <input type="date" class="form-control" id="inputEditCalibrationDayAsset" name="inputEditCalibrationDayAsset" required>
-                    </div>
-                    <div class="col-md-4" id="divEditCalibration" style="display: none">
-                        <div class="form-group">
-                          <label for="fileEditAssetCalibration" class="form-label">Documentos de Calibración</label>
-                          <input class="form-control" type="file" id="fileEditAssetCalibration" name="fileEditAssetCalibration" multiple>
-                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="fileEditAssetCalibration" class="form-label">Documentos de Calibración</label>
+                        <input class="form-control" type="file" id="fileEditAssetCalibration" name="fileEditAssetCalibration" multiple>
+                      </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">

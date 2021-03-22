@@ -55,7 +55,7 @@
                                             <td>NO</td>
                                         @endif
                                         <td>{{ $asset->day_buy }}</td>
-                                        <td>{{ $asset->day_calibration }}</td>
+                                        <td>{{ $asset->date_calibration }}</td>
                                         
                                         <td>
                                             <span data-toggle="modal" data-target="#ModalEditAsset">
@@ -69,7 +69,7 @@
                                                 </button>
                                             </span>
                                             <span data-toggle="modal" data-target="#ModalShowFilesCalibration">
-                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos de calibración" onclick="showAssetCalibrationFile({{$v->id}})">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos de calibración" onclick="showAssetCalibrationFile({{$asset->id}})">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>

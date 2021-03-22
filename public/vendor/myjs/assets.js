@@ -3,7 +3,7 @@ function saveAsset() {
     let description = $("#inputDescriptionAsset").val();
     let costo = $("#inputCostoAsset").val();
     let buy = $("#inputBuyAsset").val();
-    let check = $("#checkAsset").val();
+    let check = 0;
     let dayCalibration = $("#inputCalibrationDayAsset").val();
     let calibrationFile = $('#fileAssetCalibration')[0];
     let generalFile = $('#fileAsset')[0];
@@ -12,7 +12,14 @@ function saveAsset() {
     data.append("description", description);
     data.append("costo", costo);
     data.append("buy", buy);
-    data.append("check", check);
+
+    if ($("#checkAsset").is(':checked')) {
+        check = 1;
+        data.append("check", check);
+    } else {
+        check = 0;
+        data.append("check", check);
+    }
     data.append("dayCalibration", dayCalibration);
     data.append("lengthCalibration", calibrationFile.files.length);
     data.append("lengthGeneral", generalFile.files.length);
@@ -64,12 +71,12 @@ function saveAsset() {
 }
 
 function muestraOculta(check, div, file) {
-    let calibration = $(check).val();
-
-    if (calibration == 1) {
-        $(div).show();
+    let calibration = $("#" + check).val();
+    console.log($("#" + check).checked);
+    if ($("#" + check).is(':checked')) {
+        $("#" + div).show();
     } else {
-        $(div).hide();
+        $("#" + div).hide();
         $(file).val("");
     }
 }
@@ -95,7 +102,7 @@ function editAsset(id) {
                 $("#inputEditDescriptionAsset").val(data.asset.description);
                 $("#inputEditCostoAsset").val(data.asset.costo);
                 $("#hidAsset").val(data.asset.id);
-                if(data.asset.calibration == 1){
+                if (data.asset.calibration == 1) {
                     $('.checkEditAsset').prop('checked', true);
                     $('#divEditCalibration').show();
                 }
@@ -122,7 +129,7 @@ function updateAsset() {
     let description = $("#inputEditDescriptionAsset").val();
     let costo = $("#inputEditCostoAsset").val();
     let buy = $("#inputEditBuyAsset").val();
-    let check = $("#checkEditAsset").val();
+    let check = 0;
     let dayCalibration = $("#fileEditAssetCalibration").val();
     let calibrationFile = $('#fileAssetCalibration')[0];
     let generalFile = $('#fileEditAsset')[0];
@@ -131,7 +138,13 @@ function updateAsset() {
     data.append("description", description);
     data.append("costo", costo);
     data.append("buy", buy);
-    data.append("check", check);
+    if ($("#checkAsset").is(':checked')) {
+        check = 1;
+        data.append("check", check);
+    } else {
+        check = 0;
+        data.append("check", check);
+    }
     data.append("dayCalibration", dayCalibration);
     data.append("lengthCalibration", calibrationFile.files.length);
     data.append("lengthGeneral", generalFile.files.length);
