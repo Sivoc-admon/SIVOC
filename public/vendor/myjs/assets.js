@@ -192,6 +192,7 @@ function updateAsset() {
 }
 
 function showAssetFile(asset, tipo) {
+    console.log(tipo);
     $("#showAssetFiles").empty();
     $.ajax({
         type: "GET",

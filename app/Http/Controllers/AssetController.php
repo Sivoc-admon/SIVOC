@@ -161,8 +161,7 @@ class AssetController extends Controller
 
     public function showAssetFiles(Request $request, $asset)
     {
-        $files = AssetFile::where('asset_id', $asset)->where('type', $request->tipo);
-        dd($files);
+        $files = AssetFile::where('asset_id', $asset)->where('type', $request->tipo)->get();
         
         $msg="";
         $error=false;

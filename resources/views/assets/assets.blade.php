@@ -64,12 +64,12 @@
                                                 </button>
                                             </span>
                                             <span data-toggle="modal" data-target="#ModalShowFilesAsset">
-                                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showAssetFile({{$asset->id, 'General'}})">
+                                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showAssetFile({{$asset->id}}, 'General')">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
                                             <span data-toggle="modal" data-target="#ModalShowFilesAsset">
-                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos de calibración" onclick="showAssetFile({{$asset->id, 'Calibracion'}})">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos de calibración" onclick="showAssetFile({{$asset->id}}, 'Calibracion')">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
