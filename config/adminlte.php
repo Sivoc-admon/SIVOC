@@ -302,7 +302,7 @@ return [
         ],
         [
             'text' => 'Activos',
-            'url'  => 'active',
+            'url'  => 'assets',
             'icon' => 'far fa-check-square',
         ],
         [

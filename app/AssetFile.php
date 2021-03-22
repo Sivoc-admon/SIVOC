@@ -15,6 +15,8 @@ class AssetFile extends Model
         'asset_id', 
         'name', 
         'ruta',
+        'type'
+
         
     ];
 
