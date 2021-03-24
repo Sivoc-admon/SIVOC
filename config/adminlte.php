@@ -307,12 +307,11 @@ return [
         ],
         [
             'text'    => 'Recursos Humanos',
-            'url'     => 'rh',
             'icon'    => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
                     'text' => 'Empleados',
-                    'url'  => '#',
+                    'url'  => 'rh',
                 ]
             ]
         ],

@@ -1,5 +1,5 @@
  <!-- Modal REGISTRO DE USUARIOS -->
- <div class="modal fade" id="ModalEditUser" tabindex="-1" aria-labelledby="ModalEditUser" aria-hidden="true">
+ <div class="modal fade" id="ModalEditUserRh" tabindex="-1" aria-labelledby="ModalEditUserRh" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
@@ -10,37 +10,38 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <form id="formEditUser">
+            <form id="formEditUserRh">
               @csrf
                 <div class="row">
                   <h4>Datos Empleado</h4>
+                  <input type="hidden" name="hIdRh" id="hIdRh">
                 </div>
                   
                 <div class="row" style="background-color: #17a2b8">
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputName">Nombre</label>
-                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nombre" required>
+                        <label for="inputNameRh">Nombre</label>
+                        <input type="text" class="form-control" id="inputNameRh" name="inputNameRh" placeholder="Nombre" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputLastName">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Apellido Paterno" required>
+                        <label for="inputLastNameRh">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="inputLastNameRh" name="inputLastNameRh" placeholder="Apellido Paterno" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputMotherLastName">Apellido Materno</label>
-                        <input type="text" class="form-control" id="inputMotherLastName" name="inputMotherLastName" placeholder="Apellido Materno" required>
+                        <label for="inputMotherLastNameRh">Apellido Materno</label>
+                        <input type="text" class="form-control" id="inputMotherLastNameRh" name="inputMotherLastNameRh" placeholder="Apellido Materno" required>
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" required>
+                        <label for="inputEmailRh">Email</label>
+                        <input type="email" class="form-control" id="inputEmailRh" name="inputEmailRh" required>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -51,8 +52,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sltArea">Area</label>
-                        <select class="form-control" id="sltArea" name="sltArea" required>
+                        <label for="sltAreaRh">Area</label>
+                        <select class="form-control" id="sltAreaRh" name="sltAreaRh" required>
                           <option value="0">---</option>
                           @foreach ($areas as $area)
                             <option value="{{ $area->id }}">{{ $area->name }}</option>
@@ -63,8 +64,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="inputRole">Role</label>
-                        <select class="form-control" id="inputRole" name="inputRole" required>
+                        <label for="inputRoleRh">Role</label>
+                        <select class="form-control" id="inputRoleRh" name="inputRoleRh" required>
                           <option value="0">---</option>
                           @foreach ($roles as $role)
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -79,7 +80,7 @@
                 <div class="row">
                   <h4>Antecedentes Académicos</h4>
                 </div>
-                <div class="row" style="background-color: #5da1acc2">
+                <div class="row" style="background-color: #17a2b8">
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputEstudios">Ultimo Grado de Estudios</label>
@@ -106,7 +107,7 @@
                   <h4>Datos Personales</h4>
                 </div>
                 
-                <div class="row" style="background-color: #5da1acc2">
+                <div class="row" style="background-color: #17a2b8">
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="inputEdad">Edad</label>
@@ -166,4 +167,60 @@
         </div>
     </div>
     </div>
+</div>
+
+<!-- Modal MOSTRAR ARCHIVOS AUDITORIA INTERNA -->
+<div class="modal fade bd-example-modal-lg" id="ModalShowRHFiles" tabindex="-1" aria-labelledby="ModalShowRHFiles" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ARCHIVOS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <input type="hidden" name="hideRHId" id="hideRHId">
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+            <table id="tableRHFiles" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                  <tr>
+                      
+                      <th>#</th>
+                      <th>Archivo</th>
+                      <th>Accion</th>
+                      
+                  </tr>
+              </thead>
+              <tbody id="bodyRHFiles">
+                  
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <th>#</th>
+                      <th>Archivo</th>
+                      <th>Accion</th>
+                  </tr>
+              </tfoot>
+            </table>
+            @if(Auth::user()->hasAnyRole(['admin', 'rh']))
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="fileUploadRHFile" class="form-label">Documentos</label>
+                <input class="form-control" type="file" id="fileUploadRHFile" name="fileUploadRHFile">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <button type="button" class="btn btn-success" onclick="masDocumentosSgc()">Guardar Documentos</button>
+              </div>
+            </div>
+            @endif
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

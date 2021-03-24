@@ -185,6 +185,7 @@ function editProject(id) {
 
 
                 $("#hideIdProject").val(data.project.id);
+                $("#inputNameProjectEdit").val(data.project.name_project);
                 $("#sltEditTypeProject").append(tipo);
                 $("#sltEditCliente").append(customerOption);
                 $("#inputEditProyecto").val(data.project.name);
@@ -232,6 +233,8 @@ function updateProject() {
 
                 $("#modalEditProyect").modal("hide");
             }
+
+            messageAlert("Guardado Correctamente", "success", "");
 
             location.reload();
 

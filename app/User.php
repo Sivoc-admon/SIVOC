@@ -28,9 +28,14 @@ class User extends Authenticatable
         'email',
         'password',
         'area_id',
-        /*'gender',
+        'gender',
         'marital_status',
-        'nss'*/
+        'nss',
+        'grade',
+        'profession',
+        'street',
+        'telefono',
+        'contacto'
     ];
     
 

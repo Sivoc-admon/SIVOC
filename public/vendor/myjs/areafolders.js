@@ -267,26 +267,31 @@ function deleteFile(documentName, documentId, folderId){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, borrar!',
-        cancelButtonText: 'Cancelar',
+        
       }).then((result) => {
-          if (result) {
-              let token = $("input[name=_token]").val();
-              console.log(`token: ${token}`);
-            $.ajax({
-                type:'POST',
-                url: `/file/delete`,
-                data: {'_token':token, 'documentId': documentId, 'idFolder':folderId},
-                dataType: 'json',
-                success: (data) => {
-                    getFilesLevelZero(folderId);
-                    messageAlert("Operación exitosa!", "success", "Archivo eliminado correctamente");
-                },
-                error: function(data){
-                    console.log(data);
-                    messageAlert("Ha ocurrido un problema.", "error", "Ocurrió un error al eliminar eliminar el archivo, intente mas tarde.");
-                }
-            });
-        }
+          if (result.isConfirmed) {
+                let token = $("input[name=_token]").val();
+                console.log(`token: ${token}`);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                $.ajax({
+                    type:'POST',
+                    url: `/file/delete`,
+                    data: {'_token':token, 'documentId': documentId, 'idFolder':folderId},
+                    dataType: 'json',
+                    success: (data) => {
+                        getFilesLevelZero(folderId);
+                        messageAlert("Operación exitosa!", "success", "Archivo eliminado correctamente");
+                    },
+                    error: function(data){
+                        console.log(data);
+                        messageAlert("Ha ocurrido un problema.", "error", "Ocurrió un error al eliminar eliminar el archivo, intente mas tarde.");
+                    }
+                });
+            }
       });
 }
 

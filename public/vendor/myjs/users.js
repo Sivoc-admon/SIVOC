@@ -148,3 +148,171 @@ function updateUser() {
         }
     });
 }
+
+function editRh(id) {
+
+    $("#sltAreaRh").empty();
+    $("#inputRoleRh").empty();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: "rh/" + id + "/edit",
+        //data: $("#formRegisterUser").serialize(),
+        dataType: 'json',
+        success: function(data) {
+            console.log(data.roleUser[0].id);
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#inputNameRh").val(data.user.name);
+                $("#inputLastNameRh").val(data.user.last_name);
+                $("#inputMotherLastNameRh").val(data.user.mother_last_name);
+                $("#inputEmailRh").val(data.user.email);
+                $("#hIdRh").val(data.user.id);
+
+                let optionAreas = "<option value='0'>Seleccione</option>";
+                let optionRoles = "<option value='0'>Seleccione</option>";
+                for (const i in data.areas) {
+                    if (data.user.area_id == data.areas[i].id) {
+                        optionAreas += `<option value='${data.areas[i].id}' selected>${data.areas[i].name}</option>`
+                    } else {
+                        optionAreas += `<option value='${data.areas[i].id}'>${data.areas[i].name}</option>`;
+                    }
+
+                }
+
+
+                for (const j in data.roles) {
+                    if (data.roleUser[0].id == data.roles[j].id) {
+                        optionRoles += `<option value='${data.roles[j].id}' selected>${data.roles[j].name}</option>`
+                    } else {
+                        optionRoles += `<option value='${data.roles[j].id}'>${data.roles[j].name}</option>`;
+                    }
+
+                }
+
+                $("#sltAreaRh").append(optionAreas);
+                $("#inputRoleRh").append(optionRoles);
+
+                $("#ModalEditUserRh").modal('show');
+
+                //location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function showRHFile(id) {
+    $("#bodyRHFiles").empty();
+    $.ajax({
+        type: "GET",
+        url: `rh/${id}/files`,
+        //data: { "id": minute },
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                let table = "";
+                for (const i in data.files) {
+                    table += `<tr>"
+                        <td> ${data.files[i].id}</td> 
+                        <td>
+                            <a href="storage/Documents/SGC/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})"><i class="fas fa-minus-square"></i></button>
+                            </div>
+                        </td>"
+                    </tr>`;
+
+                }
+                $("#hideRHId").val(id);
+
+                $("#bodyRHFiles").append(table);
+
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function masDocumentosSgc() {
+
+    let sgc = $("#hideSgcId").val();
+    let file = $('#fileUploadSgcFile')[0];
+
+    let data = new FormData();
+    data.append("sgc", sgc);
+    data.append("tamanoFiles", file.files.length);
+    for (let i = 0; i < file.files.length; i++) {
+        data.append('file' + i, file.files[i]);
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: `sgc/${sgc}/uploadFile`,
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowSgcFiles").modal('hide');
+
+                messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}

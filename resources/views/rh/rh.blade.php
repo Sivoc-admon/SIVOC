@@ -50,8 +50,13 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->area_name }}</td>
                                         <td>
+                                            <span data-toggle="modal" data-target="#ModalShowRHFiles">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" onclick="showRHFile({{$user->id}})" data-original-title="Mostrar archivos">
+                                                    <i class="fas fa-list"></i>
+                                                </button>
+                                            </span>
                                             @if (Auth::user()->hasAnyRole(['admin', 'rh']))
-                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
+                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editRh({{$user->id}});"><i class="fas fa-edit"></i></a>
                                             @endif
                                                 
                                             @if ($user->area_name != 'Direccion' && Auth::user()->hasAnyRole(['admin', 'rh']))
@@ -103,6 +108,6 @@
             //table('tableUsers');
         } );
     </script>  
-    <script src="{{ asset('vendor/myjs/rh.js') }}"></script> 
+    <script src="{{ asset('vendor/myjs/users.js') }}"></script> 
 @stop
 

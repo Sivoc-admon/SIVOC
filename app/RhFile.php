@@ -6,17 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class RhFile extends Model
 {
     use Notifiable;
     use SoftDeletes;
 
+    
+   
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
+        'user_id', 
         'name', 
-        'name_project',
-        'type', 
-        'client',
-        'status',
+        'ruta'
         
     ];
 }

@@ -27,29 +27,35 @@
                           </select>
                         </div>
                       </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="inputProyecto">Referencia de proyecto</label>
-                            <input type="text" class="form-control" id="inputProyecto" name="inputProyecto" placeholder="Nombre del proyecto" required>
-                          </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="inputNameProject">Nombre de Proyecto</label>
+                          <input type="text" class="form-control" id="inputNameProject" name="inputNameProject" placeholder="Nombre del proyecto" required>
                         </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="sltCliente">Cliente</label>
-                            <select class="form-control" name="sltCliente" id="sltCliente">
-                                <option value="0">---</option>
-                                @foreach ($customers as $customer)
-                                 <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
-                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="inputProyecto">Referencia de proyecto</label>
+                          <input type="text" class="form-control" id="inputProyecto" name="inputProyecto" placeholder="Referencia de proyecto" required>
                         </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="inputEstatus">Estatus</label>
-                            <input type="text" class="form-control" id="inputEstatus" name="inputEstatus" value="Colocado" readonly required>
-                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="sltCliente">Cliente</label>
+                          <select class="form-control" name="sltCliente" id="sltCliente">
+                              <option value="0">---</option>
+                              @foreach ($customers as $customer)
+                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                              @endforeach
+                          </select>
                         </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="inputEstatus">Estatus</label>
+                          <input type="text" class="form-control" id="inputEstatus" name="inputEstatus" value="Colocado" readonly required>
+                        </div>
+                      </div>
                     </div>
 
                 </form>
@@ -90,10 +96,16 @@
                         </select>
                       </div>
                     </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="inputNameProjectEdit">Nombre de Proyecto</label>
+                        <input type="text" class="form-control" id="inputNameProjectEdit" name="inputNameProjectEdit" placeholder="Nombre del proyecto" required>
+                      </div>
+                    </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="inputEditProyecto">Referencia de proyecto</label>
-                          <input type="text" class="form-control" id="inputEditProyecto" name="inputEditProyecto" placeholder="Nombre del proyecto" required>
+                          <input type="text" class="form-control" id="inputEditProyecto" name="inputEditProyecto" required>
                           <input type="hidden" name="hideIdProject" id="hideIdProject">
                         </div>
                       </div>

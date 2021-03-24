@@ -55,39 +55,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
-        
-        $ano=date('y');
-        $count="000";
-        
-        switch ($request->input('sltTypeProject')) {
-            case 'PE':
-                $projects = DB::table('projects')
-                ->where('type', 'PE')
-                ->orderBy('id')
-                ->get();
-                $count=$count+1+$projects->count();
 
-                $name_project="PE-".$ano."-".$count;
-                break;
-            case 'PO':
-                $projects = DB::table('projects')
-                ->where('type', 'PO')
-                ->orderBy('id')
-                ->get();
-                $count=$count+1+$projects->count();
-
-                $name_project="PO-".$ano."-".$count;
-                break;
-            default:
-                # code...
-                break;
-        }
         $project = new Project;
        
         $project->name = $request->input('inputProyecto');
         $project->type = $request->input('sltTypeProject');
         $project->client = $request->input('sltCliente');
-        $project->name_project = $name_project;
+        $project->name_project = $request->input('inputNameProject');
         $project->status = $request->input('inputEstatus');
         
         $project->save();
@@ -136,6 +110,7 @@ class ProjectController extends Controller
         
         $project->update([
             'name' => $request->inputEditProyecto,
+            'name_project' => $request->inputNameProjectEdit,
             'type' => $request->sltEditTypeProject,
             'client' => $request->sltEditCliente,
             'status' => $request->inputEditEstatus,
