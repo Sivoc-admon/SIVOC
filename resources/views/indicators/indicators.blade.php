@@ -94,7 +94,7 @@
         </div>
         <canvas id="chartIndicator" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 348px;" width="435" height="312" class="chartjs-render-monitor"></canvas>
     </div>-->
-    <div class="row">
+    <div class="row" id="bar">
         <canvas id="chartIndicator"></canvas>
     </div>
 @stop

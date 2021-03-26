@@ -129,6 +129,8 @@ function minMax() {
 }
 
 function graficaIndicador() {
+    $('#bar').html(''); //remove canvas from container
+    $('#bar').html("<canvas id='chartIndicator'></canvas>");
     $.ajax({
         type: "POST",
         url: "/indicators/grafica",
@@ -141,52 +143,74 @@ function graficaIndicador() {
                 messageAlert(data.msg, "error", "");
             } else {
                 let valores = [];
-                data.grafica.forEach(element => {
+                /*data.grafica.forEach(element => {
                     valores.push(element.value);
-                });
+                });*/
+                for (let i = 0; i < 11; i++) {
+                    if (i < data.grafica.length) {
+                        valores.push(data.grafica[i].value);
+                    } else {
+                        valores.push(0);
+                    }
+
+                }
                 console.log(valores);
+                let objetivos = {
+                    label: 'Valor Objetivo',
+                    data: [data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max
+                    ],
+                    backgroundColor: 'rgba(0, 99, 132, 0.6)',
+                    borderColor: 'rgba(0, 99, 132, 1)',
+                    //yAxisID: "y-axis-density"
+                };
+                let obtenidos = {
+                    label: 'Valor Obtenido',
+                    data: valores,
+                    backgroundColor: 'rgba(99, 132, 0, 0.6)',
+                    borderColor: 'rgba(99, 132, 0, 1)',
+                    //yAxisID: "y-axis-gravity"
+                };
+
+                let indicators = {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    datasets: [objetivos, obtenidos]
+                };
+                /* let chartOptions = {
+                    scales: {
+                        xAxes: [{
+                            barPercentage: 1,
+                            categoryPercentage: 0.6
+                        }],
+                        yAxes: [{
+                            id: "y-axis-density"
+                        }, {
+                            id: "y-axis-gravity"
+                        }]
+                    }
+                }; */
+
+
 
                 $("#ModalGraficaIndicator").modal('hide');
-                var ctx = document.getElementById('chartIndicator').getContext('2d');
-                var myChart = new Chart(ctx, {
+
+                let ctx = document.getElementById('chartIndicator').getContext('2d');
+
+
+                let grafica = new Chart(ctx, {
                     type: 'bar',
-                    data: {
-                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                        datasets: [{
-                            label: 'Indicador',
-                            data: valores,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    display: true,
-                                    beginAtZero: true,
-                                    min: 0,
-                                    max: Number.parseInt(data.minMax.max)
-                                }
-                            }],
-                            xAxes: []
-                        }
-                    }
+                    data: indicators,
+                    //options: chartOptions
                 });
 
             }

@@ -269,9 +269,10 @@ function deleteFile(documentName, documentId, folderId){
         confirmButtonText: 'Sí, borrar!',
         
       }).then((result) => {
-          if (result.isConfirmed) {
+          
+          if (result.value==true) {
                 let token = $("input[name=_token]").val();
-                console.log(`token: ${token}`);
+                
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
