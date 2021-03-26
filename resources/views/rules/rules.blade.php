@@ -58,7 +58,7 @@
                                         <td> <a href="{{asset($rule->url) }}" target="_blank">{{ $rule->url }}</a></td>
                                         <td>
                                             @if (Auth::user()->hasRole(['admin','calidad', 'ingenieria', 'servicio']))
-                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$rule->id}});"><i class="fas fa-edit"></i></a>
+                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editRule({{$rule->id}});"><i class="fas fa-edit"></i></a>
                                         
                                                 <form action="{{ route('rules.destroy',$rule->id) }}" method="POST">
                                                     @method('DELETE')

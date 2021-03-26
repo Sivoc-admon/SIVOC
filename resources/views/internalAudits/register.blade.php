@@ -75,6 +75,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+        <input type="hidden" name="hidInternal" id="hidInternal">
       </div>
       <div class="modal-body">
           <div class="container-fluid">
@@ -97,6 +98,17 @@
                   </tr>
               </tfoot>
             </table>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="fileUploadInernal" class="form-label">Documentos</label>
+                <input class="form-control" type="file" id="fileUploadInernal" name="fileUploadInernal" multiple>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <button type="button" class="btn btn-success" onclick="masDocumentos()">Guardar Documentos</button>
+              </div>
+            </div>
           </div>
       </div>
       <div class="modal-footer">

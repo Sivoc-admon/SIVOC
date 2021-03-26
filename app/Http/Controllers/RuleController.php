@@ -38,9 +38,11 @@ class RuleController extends Controller
     {
         $rule = new Rule;
         
-        $rule->code = $request->input('inputClaveRule');
-        $rule->name = $request->input('inputNameRule');
-        $rule->url = $request->input('inputUrlRule');
+        $rule=Rule::create([
+            'code' => $request->input('inputClaveRule'),
+            'name' => $request->input('inputNameRule'),
+            'url' => $request->input('inputUrlRule'),
+        ]);
         
         
         $rule->save();
@@ -65,9 +67,13 @@ class RuleController extends Controller
      * @param  \App\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rule $rule)
+    public function edit($id)
     {
-        //
+        $rule = Rule::find($id);
+
+        $array=["rule"=>$rule];
+        
+        return response()->json($array);
     }
 
     /**
@@ -79,7 +85,14 @@ class RuleController extends Controller
      */
     public function update(Request $request, Rule $rule)
     {
-        //
+        $user = User::find($id);
+        
+        $user->update([
+            'code' => $request->inputEditClaveRule,
+            'name' => $request->inputEditNameRule,
+            'url' => $request->inputEditUrlRule
+            
+        ]);
     }
 
     /**

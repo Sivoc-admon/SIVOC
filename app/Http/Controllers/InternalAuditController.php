@@ -158,4 +158,40 @@ class InternalAuditController extends Controller
 
         return response()->json($array);
     }
+
+    public function uploadFile(Request $request, $id)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Auditoria_interna/'.$id;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $InternalAuditFile=InternalAuditFile::create([
+                'internal_audits_id' => $id,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($InternalAuditFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
 }
