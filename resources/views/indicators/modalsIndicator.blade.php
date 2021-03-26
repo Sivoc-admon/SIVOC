@@ -13,7 +13,7 @@
             <form id="formRegisterTypeIndicador">
               @csrf
                 <div class="row">
-                  <h4>Typo de Indicador</h4>
+                  <h4>Tipo de Indicador</h4>
                 </div>
                   
                 <div class="row" >

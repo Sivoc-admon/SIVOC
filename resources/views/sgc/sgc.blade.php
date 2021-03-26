@@ -69,14 +69,14 @@
                                                 </span>
                                                 @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
                                                 
-                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
-                                                
-                                                <form action="{{ route('internalAudits.destroy',$sgc->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                    
-                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                                </form>
+                                                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
+                                                    
+                                                    <form action="{{ route('internalAudits.destroy',$sgc->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                        
+                                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                                    </form>
                                                 @endif
                                             </div>
                                             
