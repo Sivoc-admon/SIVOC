@@ -31,7 +31,7 @@ function saveRule() {
 }
 
 function editRule(id) {
-    
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -43,7 +43,6 @@ function editRule(id) {
         //data: $("#formRegisterUser").serialize(),
         dataType: 'json',
         success: function(data) {
-            console.log(data.roleUser[0].id);
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
@@ -52,7 +51,7 @@ function editRule(id) {
                 $("#inputEditClaveRule").val(data.rule.code);
                 $("#inputEditNameRule").val(data.rule.name);
                 $("#inputEditUrlRule").val(data.rule.url);
-                
+
 
                 $("#ModalEditRule").modal('show');
 
