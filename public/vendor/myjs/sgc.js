@@ -88,13 +88,10 @@ function showSgcFile(id) {
                             </div>`;
 
                     } else {
-                        table += `<td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})"><i class="fas fa-minus-square"></i></button>
-                            </div>`;
+                        table += `<td>`;
 
                     }
-                    table += ` </tr>`;
+                    table += ` </td></tr>`;
 
 
                 }
