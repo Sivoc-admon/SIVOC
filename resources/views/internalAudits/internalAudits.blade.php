@@ -56,22 +56,25 @@
                                         <td>{{ $audit->user_name }} {{ $audit->last_name }} {{ $audit->mother_last_name }}</td>
                                         <td>{{ $audit->date_register }}</td>
                                         <td>
-                                            @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
+                                            
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editInternalAudit({{$audit->id}});"><i class="fas fa-edit"></i></a></button>
                                                 <span data-toggle="modal" data-target="#ModalShowInternalAuditFiles">
                                                     <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" onclick="showInternalAuditFile({{$audit->id}})" data-original-title="Mostrar archivos">
                                                         <i class="fas fa-list"></i>
                                                     </button>
                                                 </span>
+                                                @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
+                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editInternalAudit({{$audit->id}});"><i class="fas fa-edit"></i></a></button>
+                                                
                                                 <form action="{{ route('internalAudits.destroy',$audit->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                     
                                                     <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
                                                 </form>
+                                                @endif
                                             </div>
-                                            @endif
+                                                
                                         </td>
                                     </tr>
                                 @endforeach
