@@ -80,13 +80,22 @@ function showSgcFile(id) {
                         <td> ${data.files[i].id}</td> 
                         <td>
                             <a href="storage/Documents/SGC/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
-                        </td>
-                        <td>
+                        </td>`;
+                    if (data.eliminaArchivo == True) {
+                        table += `<td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})"><i class="fas fa-minus-square"></i></button>
-                            </div>
-                        </td>"
-                    </tr>`;
+                            </div>`;
+
+                    } else {
+                        table += `<td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})"><i class="fas fa-minus-square"></i></button>
+                            </div>`;
+
+                    }
+                    table += ` </tr>`;
+
 
                 }
                 $("#hideSgcId").val(id);

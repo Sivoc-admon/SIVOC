@@ -27,7 +27,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputCostoAsset">Costo</label>
-                        <input type="number" class="form-control" id="inputCostoAsset" name="inputCostoAsset">
+                        <input type="text" class="form-control" id="inputCostoAsset" name="inputCostoAsset">
                       </div>
                     </div>
                     <div class="col-md-4">

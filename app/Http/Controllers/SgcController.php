@@ -8,6 +8,7 @@ use App\SgcFile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class SgcController extends Controller
@@ -176,8 +177,13 @@ class SgcController extends Controller
         $msg="";
         $error=false;
         
+        $user = new User();
+        $user = $user->find(Auth::user()->id);
+        
+        $eliminaArchivo = $user->hasAnyRole(['admin', 'calidad']);
+        //$user = Auth::user()->with('role')->get();
 
-        $array=["msg"=>$msg, "error"=>$error, "files"=>$files];
+        $array=["msg"=>$msg, "error"=>$error, "files"=>$files, "eliminaArchivo"=>$eliminaArchivo];
 
         return response()->json($array);
     }
