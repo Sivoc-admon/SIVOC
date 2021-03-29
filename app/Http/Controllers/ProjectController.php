@@ -9,6 +9,7 @@ use App\Board;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\User;
+use App\ProjectFile;
 
 class ProjectController extends Controller
 {
@@ -153,5 +154,55 @@ class ProjectController extends Controller
         ->get();
 
         return response()->json(['data' => $tableros], Response::HTTP_OK);
+    }
+
+    public function showFile($id)
+    {
+        
+        $files = Project::find($id)->projectFiles;
+        
+        $msg="";
+        $error=false;
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "projectfiles"=>$files];
+
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $id)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Proyectos/'.$id;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $projectFile=ProjectFile::create([
+                'project_id' => $request->id,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/Documents/Projectos/' . $id,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($projectFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
     }
 }

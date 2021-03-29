@@ -6,22 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class ProjectFile extends Model
 {
     use Notifiable;
     use SoftDeletes;
 
     protected $fillable = [
+        'project_id',
         'name', 
-        'name_project',
-        'type', 
-        'client',
-        'status',
+        'ruta',
+        
         
     ];
 
-    public function projectFiles()
+    public function projects()
     {
-        return $this->hasMany('App\ProjectFile');
+        return $this->belongsTo('App\Project');
     }
 }

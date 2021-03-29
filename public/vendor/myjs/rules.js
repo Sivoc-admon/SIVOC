@@ -51,6 +51,7 @@ function editRule(id) {
                 $("#inputEditClaveRule").val(data.rule.code);
                 $("#inputEditNameRule").val(data.rule.name);
                 $("#inputEditUrlRule").val(data.rule.url);
+                $("#hidRule").val(id);
 
 
                 $("#ModalEditRule").modal('show');
@@ -72,7 +73,7 @@ function editRule(id) {
     });
 }
 
-function updateUser() {
+function updateRule() {
 
     /*$.ajaxSetup({
         headers: {
@@ -82,6 +83,7 @@ function updateUser() {
 
     //e.preventDefault();
     let id = $("#hidRule").val();
+    console.log(id);
     $.ajax({
         type: "PUT",
         url: "rules/" + id,

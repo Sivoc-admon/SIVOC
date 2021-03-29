@@ -138,3 +138,55 @@
   </div>
 </div>
 
+<!-- Modal Mostrar Archivos -->
+<div class="modal fade" id="ModalShowFilesProject" tabindex="-1" aria-labelledby="ModalShowFilesProject" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Archivos</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      <input type="hidden" name="hideModalIdProject" id="hideModalIdProject">
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <table id="tableMinutes" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>archivo</th>
+                  </tr>
+              </thead>
+              <tbody id="showProjectFiles">
+
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <th>#</th>
+                      <th>archivo</th>
+                      
+                  </tr>
+              </tfoot>
+          </table>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="fileUploadProjectFile" class="form-label">Documentos</label>
+              <input class="form-control" type="file" id="fileUploadProjectFile" name="fileUploadProjectFile" multiple>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <button type="button" class="btn btn-success" onclick="masDocumentos()">Guardar Documentos</button>
+            </div>
+          </div>
+        </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+  </div>
+  </div>
+</div>
+

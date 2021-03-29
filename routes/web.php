@@ -36,10 +36,10 @@ Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 
 //PROJECTS
+Route::post('projects/{id}/uploadFile', 'ProjectController@uploadFile')->name('projects.uploadFile');
+Route::get('projects/{project}/showFile', 'ProjectController@showFile')->name('projects.showFile');
 Route::post('projects/board/createBoard', 'ProjectController@createBoard')->name('projects.createBoard');
 Route::get('projects/board/showBoards/{tablero}', 'ProjectController@showBoards');
-
-//Route::get('/projects/{id}', 'ProjectController@edit')->name('projects.edit');
 Route::post('/register_project', 'ProjectController@store');
 Route::get('projects/board/showBoards/{tablero}', 'ProjectController@showBoards');
 Route::resource('projects', 'ProjectController');

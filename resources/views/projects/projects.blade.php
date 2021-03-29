@@ -49,16 +49,22 @@
                             @isset($projects)
                                 @foreach ($projects as $project)
                                     <tr>
+                                        <td>
+                                            <span data-toggle="modal" data-target="#ModalShowFilesProject">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showProjectFile({{$project->id}})">
+                                                    <i class="fas fa-list"></i>
+                                                </button>
+                                            </span>
                                         @if (Auth::user()->hasAnyRole(['admin', 'calidad', 'operaciones', 'manufactura', 'servicio', 'ventas']))
-                                            <td>
-                                                <span data-toggle="modal" data-target="#ModalShowBoard">
-                                                    <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Mostrar Tableros" onclick="showBoards({{$project->id}})">
-                                                        <i class="fas fa-list"></i>
-                                                    </button>
-                                                </span>
-                                            </td>
-                                        @else
-                                            <td></td>
+                                            
+                                            <span data-toggle="modal" data-target="#ModalShowBoard">
+                                                <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Mostrar Tableros" onclick="showBoards({{$project->id}})">
+                                                    <i class="fas fa-list"></i>
+                                                </button>
+                                            </span>
+                                            
+                                        
+                                        </td>
                                         @endif
                                         
                                         <td>{{ $project->id }}</td>

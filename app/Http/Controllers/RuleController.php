@@ -83,9 +83,9 @@ class RuleController extends Controller
      * @param  \App\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rule $rule)
+    public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = Rule::find($id);
         
         $user->update([
             'code' => $request->inputEditClaveRule,
