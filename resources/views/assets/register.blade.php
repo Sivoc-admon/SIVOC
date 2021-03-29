@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputCostoAsset">Costo</label>
+                        <label for="inputCostoAsset">Clasificación</label>
                         <input type="text" class="form-control" id="inputCostoAsset" name="inputCostoAsset">
                       </div>
                     </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputEditCostoAsset">Costo</label>
+                        <label for="inputEditCostoAsset">Clasificación</label>
                         <input type="number" class="form-control" id="inputEditCostoAsset" name="inputEditCostoAsset">
                       </div>
                     </div>
