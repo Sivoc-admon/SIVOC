@@ -188,7 +188,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'inicio',
 
     'logout_url' => 'logout',
 
@@ -253,6 +253,11 @@ return [
             'text' => 'Usuarios',
             'url'  => 'users',
             'icon' => 'fas fa-users',
+        ],
+        [
+            'text' => 'Ventana de Inicio',
+            'url'  => 'inicio/button',
+            'icon' => 'fas fa-cog',
         ],
         [
             'text' => 'change_password',

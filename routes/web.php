@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('inicio/button', 'WelcomeController@buttons')->name('welcome.button');
+Route::resource('inicio', 'WelcomeController');
 
 Auth::routes();
 
