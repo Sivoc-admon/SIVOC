@@ -5,7 +5,7 @@
 @section ( ' plugins.Datatables ' , true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Acciónes Correctivas</h1>
+    <h1 class="m-0 text-dark">Mejora Continua</h1>
 @stop
 
 @section('content')
@@ -40,7 +40,7 @@
                                     <th>#</th>
                                     <th>Problematica</th>
                                     <th>Acción inmediata</th>
-                                    <th>Autor</th>
+                                    <th>Responsable</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
                                     <th>Acción</th>
@@ -89,7 +89,7 @@
                                     <th>#</th>
                                     <th>Problematica</th>
                                     <th>Acción inmediata</th>
-                                    <th>Autor</th>
+                                    <th>Responsable</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
                                     <th>Acción</th>

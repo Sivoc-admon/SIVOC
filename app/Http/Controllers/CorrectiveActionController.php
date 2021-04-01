@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\CorrectiveAction;
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\DB;
 use App\CorrectiveActionFiles;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CorrectiveActionController extends Controller
 {
@@ -160,12 +160,16 @@ class CorrectiveActionController extends Controller
     {
         
         $files = CorrectiveAction::find($correctiveAction)->correctiveActionFile;
+        $user = new User();
+        $user = $user->find(Auth::user()->id);
+        
+        $eliminaArchivo = $user->hasAnyRole(['admin', 'calidad']);
         
         $msg="";
         $error=false;
         
 
-        $array=["msg"=>$msg, "error"=>$error, "correctiveActionfiles"=>$files];
+        $array=["msg"=>$msg, "error"=>$error, "correctiveActionfiles"=>$files, "eliminaArchivo"=>$eliminaArchivo];
 
         return response()->json($array);
     }

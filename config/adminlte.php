@@ -296,7 +296,7 @@ return [
             'icon' => 'fas fa-scroll',
         ],
         [
-            'text' => 'Acciones Correctivas',
+            'text' => 'Mejora Continua',
             'url'  => 'correctiveActions',
             'icon' => 'fas fa-tasks',
         ],

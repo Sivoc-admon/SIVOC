@@ -192,11 +192,18 @@ function showCorrectiveActionFile(id) {
                         <td> ${data.correctiveActionfiles[i].id}</td> 
                         <td>
                             <a href="storage/Documents/Accion_Correctiva/${id}/${data.correctiveActionfiles[i].file}" target="_blank">${data.correctiveActionfiles[i].file}</a>
-                        </td>
-                        <td>
+                        </td>`;
+                    if (data.eliminaArchivo == true) {
+                        table += `<td>
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="deleteFile(${data.correctiveActionfiles[i].id});"><i class="fas fa-minus-square"></i></button>
-                        </td>
-                    </tr>`;
+                        </td>`;
+                    } else {
+                        table += `<td>
+                            
+                        </td>`;
+                    }
+
+                    table += `</tr>`;
 
                 }
 
