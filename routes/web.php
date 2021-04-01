@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::delete('inicio/{id}/destroyFile', 'WelcomeController@destroyFile')->name('welcome.destroyFile');
+Route::post('inicio/{id}/uploadFile', 'WelcomeController@uploadFile')->name('welcome.uploadFile');
+Route::get('inicio/showButtonFile/{id}', 'WelcomeController@showButtonFile')->name('welcome.showButtonFile');
 Route::get('inicio/button', 'WelcomeController@buttons')->name('welcome.button');
 Route::post('inicio/save', 'WelcomeController@store')->name('welcome.store');
 Route::resource('inicio', 'WelcomeController');

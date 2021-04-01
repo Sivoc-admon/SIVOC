@@ -5,6 +5,13 @@ function resetForm(id) {
     document.getElementById(id).reset();
 }
 
+//ventana de carga
+function proceso() {
+    swal.fire({
+        title: 'Procesando...',
+        showLoading: true
+    })
+}
 //ALERTAS
 function messageAlert(title, icon, text) {
     let texto = (text === null || text === '') ? '' : text;

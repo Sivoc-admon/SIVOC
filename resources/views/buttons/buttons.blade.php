@@ -48,10 +48,10 @@
                                 @foreach ($buttons as $button)
                                     <tr>
                                         <td>{{ $button->id }}</td>
-                                        <td>{{ $button->button }}</td>
+                                        <td>{{ $button->name }}</td>
                                         <td>{{ $button->color }}</td>
                                         <td>
-                                            <span data-toggle="modal" data-target="#ModalShowFiles">
+                                            <span data-toggle="modal" data-target="#ModalShowButtonFiles">
                                                 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showButtonFile({{$button->id}})">
                                                     <i class="fas fa-list"></i>
                                                 </button>

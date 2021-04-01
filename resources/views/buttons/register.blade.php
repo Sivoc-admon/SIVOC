@@ -29,7 +29,7 @@
                       <div class="form-group">
                         <label for="sltColorButton">Color</label>
                         <select class="form-control" name="sltColorButton" id="sltColorButton">
-                         <option value="0">Seleccione</option>
+                         <option value="second">Seleccione</option>
                          <option  style="background-color: blue; color:white" value="primary">Primary </option>
                          <option  style="background-color: green; color:white" value="success">Success </option>
                          <option  style="background-color: red; color:white" value="danger">Danger </option>
@@ -92,7 +92,7 @@
                     <div class="form-group">
                       <label for="sltEditColorButton">Color</label>
                       <select class="form-control" name="sltEditColorButton" id="sltEditColorButton">
-                       <option value="0">Seleccione</option>
+                       <option value="second">Seleccione</option>
                        <option  style="background-color: blue" value="primary">Primary </option>
                        <option  style="background-color: green" value="success">Success </option>
                        <option  style="background-color: red" value="danger">Danger </option>
@@ -115,5 +115,61 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
   </div>
+  </div>
+</div>
+
+<!-- Modal MOSTRAR ARCHIVOS Boton -->
+<div class="modal fade bd-example-modal-lg" id="ModalShowButtonFiles" tabindex="-1" aria-labelledby="ModalShowButtonFiles" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ARCHIVOS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <input type="hidden" name="hideButtonId" id="hideButtonId">
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+            <table id="tableButtonFiles" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                  <tr>
+                      
+                      <th>#</th>
+                      <th>Archivo</th>
+                      <th>Acción</th>
+                      
+                  </tr>
+              </thead>
+              <tbody id="bodyButtonFiles">
+                  
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <th>#</th>
+                      <th>Archivo</th>
+                      <th>Acción</th>
+                  </tr>
+              </tfoot>
+            </table>
+            @if(Auth::user()->hasAnyRole(['admin', 'calidad']))
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="fileUploadButtonFile" class="form-label">Documentos</label>
+                <input class="form-control" type="file" id="fileUploadButtonFile" name="fileUploadButtonFile">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <button type="button" class="btn btn-success" onclick="masDocumentosButton()">Guardar Documentos</button>
+              </div>
+            </div>
+            @endif
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

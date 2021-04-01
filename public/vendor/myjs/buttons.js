@@ -3,7 +3,7 @@ function saveButton() {
     let name = $("#inputButton").val();
     let color = $("#sltColorButton").val();
     let file = $('#fileButton')[0];
-
+    proceso();
     let data = new FormData();
     data.append("name", name);
     data.append("color", color);
@@ -51,11 +51,11 @@ function saveButton() {
 }
 
 
-function showButtonFile(minute) {
-    $("#showMinuteFiles").empty();
+function showButtonFile(id) {
+    $("#bodyButtonFiles").empty();
     $.ajax({
         type: "GET",
-        url: `minutes/showMinuteFiles/${minute}`,
+        url: `../inicio/showButtonFile/${id}`,
         //data: { "id": minute },
         dataType: 'json',
         success: function(data) {
@@ -65,18 +65,26 @@ function showButtonFile(minute) {
             } else {
 
                 let table = "";
-                $("#hideModalId").val(minute);
-                for (const i in data.minutefiles) {
-                    table += `<tr>"
-                        <td> ${data.minutefiles[i].id}</td> 
+                $("#hideButtonId").val(id);
+                console.log(data.buttonfiles.id);
+                table += `<tr>
+                        <td> ${data.buttonfiles.id}</td> 
                         <td>
-                            <a href="storage/Documents/Minutas/${minute}/${data.minutefiles[i].file}" target="_blank">${data.minutefiles[i].file}</a>
-                        </td>"
-                    </tr>`;
+                            <a href="storage/Documents/welcome/${id}/${data.buttonfiles.name}" target="_blank">${data.buttonfiles.name}</a>
+                        </td>`;
+                if (data.eliminaArchivo == true) {
+                    table += `<td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.buttonfiles.id})"><i class="fas fa-minus-square"></i></button>
+                                </div>`;
+
+                } else {
+                    table += `<td>`;
 
                 }
+                table += ` </td></tr>`;
 
-                $("#showMinuteFiles").append(table);
+                $("#bodyButtonFiles").append(table);
 
 
             }
@@ -94,13 +102,13 @@ function showButtonFile(minute) {
     });
 }
 
-function masDocumentos() {
+function masDocumentosButton() {
 
-    let minute = $("#hideModalId").val();
-    let file = $('#fileUploadMinuteFile')[0];
+    let id = $("#hideButtonId").val();
+    let file = $('#fileUploadButtonFile')[0];
 
     let data = new FormData();
-    data.append("minute", minute);
+    data.append("id", id);
     data.append("tamanoFiles", file.files.length);
     for (let i = 0; i < file.files.length; i++) {
         data.append('file' + i, file.files[i]);
@@ -111,7 +119,7 @@ function masDocumentos() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: `minutes/${minute}/uploadFile`,
+        url: `../inicio/${id}/uploadFile`,
         data: data,
         cache: false,
         contentType: false,
@@ -153,7 +161,7 @@ function editButton(id) {
     });
     $.ajax({
         type: "GET",
-        url: `inicio/${id}/edit`,
+        url: `../inicio/${id}/edit`,
         //data: $("#formRegisterUser").serialize(),
         dataType: 'json',
         success: function(data) {
@@ -189,7 +197,7 @@ function updateButton() {
     let id = $("#idButon").val();
     $.ajax({
         type: "PUT",
-        url: `inicio/${id}`,
+        url: `../inicio/${id}`,
         data: $("#formEditButton").serialize(),
         //dataType: 'json',
         success: function(data) {
@@ -201,6 +209,45 @@ function updateButton() {
                 $("#ModalEditButton").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function eliminarArchivo(id) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        url: `../inicio/${id}/destroyFile`,
+        /*data: data,
+        cache: false,
+        contentType: false,
+        processData: false,*/
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowButtonFiles").modal('hide');
+
+                messageAlert("Archivo Eliminado", "success", "");
 
                 location.reload();
 

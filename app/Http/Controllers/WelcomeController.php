@@ -6,6 +6,8 @@ use App\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\WelcomeFile;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
@@ -20,7 +22,7 @@ class WelcomeController extends Controller
         $buttons = DB::table('welcome')
             ->join('welcome_files', 'welcome_files.welcome_id', '=', 'welcome.id')
             ->select('welcome.id', 'welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
-            ->whereNull('welcome.deleted_at')
+            ->whereNull('welcome_files.deleted_at')
             ->get();
 
         return view('welcome',compact('buttons'));
@@ -29,11 +31,7 @@ class WelcomeController extends Controller
     public function buttons()
     {
 
-        $buttons = DB::table('welcome')
-            ->join('welcome_files', 'welcome_files.welcome_id', '=', 'welcome.id')
-            ->select('welcome.id', 'welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
-            ->whereNull('welcome.deleted_at')
-            ->get();
+        $buttons = Welcome::get();
 
         return view('buttons.buttons',compact('buttons'));
     }
@@ -115,12 +113,11 @@ class WelcomeController extends Controller
      */
     public function edit($id)
     {
-        $welcome = Welcome::find($id);
-        
+        $button = Welcome::find($id);
         
         $msg="";
         $error=false;
-        $array=["msg"=>$msg, "error"=>$error, "welcome"=>$welcome];
+        $array=["msg"=>$msg, "error"=>$error, "button"=>$button];
         return response()->json($array);
     }
 
@@ -136,7 +133,7 @@ class WelcomeController extends Controller
         
         $button = Welcome::find($id);
         
-        $ubuttonser->update([
+        $button->update([
             'name' => $request->inputEditButton,
             'color' => $request->sltEditColorButton,
             
@@ -149,8 +146,80 @@ class WelcomeController extends Controller
      * @param  \App\Welcome  $welcome
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Welcome $welcome)
+    public function destroy($id)
     {
-        //
+        $button = Welcome::find($id);
+        $button->delete();
+        return redirect()->route('buttons.index');
+    }
+
+    public function showButtonFile($minute)
+    {
+        
+        $files = Welcome::find($minute)->welcomeFile;
+
+        $user = new User();
+        $user = $user->find(Auth::user()->id);
+        
+        $eliminaArchivo = $user->hasAnyRole(['admin', 'calidad']);
+        
+        $msg="";
+        $error=false;
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "buttonfiles"=>$files, "eliminaArchivo"=>$eliminaArchivo];
+
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $id)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/welcome/'.$id;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $welcomeFile=WelcomeFile::create([
+                'welcome_id' => $id,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/Documents/welcome/',
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+            
+            
+           
+        
+        if ($welcomeFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = WelcomeFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
     }
 }

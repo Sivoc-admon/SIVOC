@@ -75,7 +75,10 @@ class AreaDocumentController extends Controller
             $areaId = $ariax->id;
             $folders = AreaDocument::where('area_id', $areaId)->where('folder_area_id', $folderId)->get();
         }
+        
         $folders->each(function($f){
+            
+
             $f->created_at = strval(date('Y-m-d H:i:s', strtotime($f->created_at)));
             $f->updated_at = strval(date('Y-m-d H:i:s', strtotime($f->updated_at)));
             #dd( $f->created_at);
