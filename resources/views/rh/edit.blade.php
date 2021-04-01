@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sltAreaRh">Area</label>
+                        <label for="sltAreaRh">Área</label>
                         <select class="form-control" id="sltAreaRh" name="sltAreaRh" required>
                           <option value="0">---</option>
                           @foreach ($areas as $area)
@@ -144,7 +144,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="inputTelefono">Telefono</label>
+                      <label for="inputTelefono">Teléfono</label>
                       <input type="number" class="form-control" id="inputTelefono" name="inputTelefono">
                     </div>
                   </div>
@@ -188,7 +188,7 @@
                       
                       <th>#</th>
                       <th>Archivo</th>
-                      <th>Accion</th>
+                      <th>Acción</th>
                       
                   </tr>
               </thead>
@@ -199,7 +199,7 @@
                   <tr>
                       <th>#</th>
                       <th>Archivo</th>
-                      <th>Accion</th>
+                      <th>Acción</th>
                   </tr>
               </tfoot>
             </table>

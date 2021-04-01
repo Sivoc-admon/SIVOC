@@ -42,10 +42,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Area Evaluada</th>
+                                    <th>Área Evaluada</th>
                                     <th>Evaluador</th>
-                                    <th>Fecha Evaluacion</th>
-                                    <th>Accion</th>
+                                    <th>Fecha Evaluación</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,10 +84,10 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Area Evaluada</th>
+                                    <th>Área Evaluada</th>
                                     <th>Evaluador</th>
-                                    <th>Fecha Evaluacion</th>
-                                    <th>Accion</th>
+                                    <th>Fecha Evaluación</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

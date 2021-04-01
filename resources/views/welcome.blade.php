@@ -61,7 +61,7 @@
         }
         body {
             height: 100%;
-            background-image: url({{asset('storage/img/SIVOC.jpeg')}});
+            background-image: url({{asset('storage/img/SIVOC.jpg')}});
             
             /* Center and scale the image nicely */
             background-position: center;
@@ -105,11 +105,11 @@
         
         <div>
             @if (Route::has('login'))
-                <div  style="margin-left: 95%; margin-top: 10px; ">
+                <div  style="margin-left: 90%; margin-top: 10px; ">
                     @auth
                         <a href="{{ url('/home') }}" style="color: white; font-size:15px;">Home</a>
                     @else
-                    <a href="{{ route('login') }}" style="color: white; font-size:15px;"><button class="btn btn-primary">Login</button></a>
+                    <a href="{{ route('login') }}" style="font-size:15px;"><button type="button" class="btn btn-lg" style="background-color: #17a2b8">Login</button></a>
 
                         @if (Route::has('register'))
                             <!--<a href="{{ route('register') }}">Register</a> -->
@@ -121,25 +121,27 @@
             <div role="group" aria-label="Basic example" style="margin-top: 550px; padding-inline: 30px;">
                 @foreach ($buttons as $button)
                     
-                <a href="{{asset('storage/Documents/welcome/{{$button->name}}')}}" target="_blank" font-size:12px;"><button class="btn btn-outline-{{$button->color}}"> <b>{{$button->name}}</b></button></a>
+                <a href="storage/Documents/welcome/{{$button->id}}/{{$button->nameFile}}" target="_blank" style="font-size:12px;"><button class="btn btn-{{$button->color}}"> <b style="color: white !important">{{$button->button}}</b></button></a>
                 @endforeach
 
-                <a href="{{asset('storage/Documents/welcome/SIVOC.jpeg')}}" target="_blank" font-size:12px;"><button class="btn btn-outline-primary"> <b>Misión</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank" font-size:12px;"><button><b>Visión</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank" font-size:12px;"><button><b>Politica de Calidad</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/MAPA DE PROCESOS.pdf')}}" target="_blank" font-size:12px;"><button><b>Mapa de procesos</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/POLITICAS SIVOC.pdf')}}" target="_blank" font-size:12px;"><button><b>Objetivos de Calidad</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank" font-size:12px;"><button><b>COVID 19</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank" font-size:12px;"><button><b>Brigadad de Emergencia</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/PROXIMOS EVENTOS.pdf')}}" target="_blank" font-size:12px;"><button><b>Próximos eventos</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/SIVOC.jpeg')}}" target="_blank" font-size:12px;"><button class="btn btn-outline-primary"> <b>Misión</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank" font-size:12px;"><button><b>Visión</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank" font-size:12px;"><button><b>Politica de Calidad</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/MAPA DE PROCESOS.pdf')}}" target="_blank" font-size:12px;"><button><b>Mapa de procesos</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/POLITICAS SIVOC.pdf')}}" target="_blank" font-size:12px;"><button><b>Objetivos de Calidad</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank" font-size:12px;"><button><b>COVID 19</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank" font-size:12px;"><button><b>Brigadad de Emergencia</b></button></a>
-                <a href="{{asset('storage/Documents/welcome/PROXIMOS EVENTOS.pdf')}}" target="_blank" font-size:12px;"><button><b>Próximos eventos</b></button></a>
+                
+
+                <a href="{{asset('storage/Documents/welcome/SIVOC.jpeg')}}" target="_blank" style="font-size:12px;"><button class="btn btn-outline-primary"> <b>Misión</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Visión</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Politica de Calidad</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/MAPA DE PROCESOS.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Mapa de procesos</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/POLITICAS SIVOC.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Objetivos de Calidad</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank" style="font-size:12px;"><button><b>COVID 19</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Brigadad de Emergencia</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/PROXIMOS EVENTOS.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Próximos eventos</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/SIVOC.jpeg')}}" target="_blank" style="font-size:12px;"><button class="btn btn-outline-primary"> <b>Misión</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/VISION.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Visión</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/POLITICA DE CALIDAD.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Politica de Calidad</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/MAPA DE PROCESOS.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Mapa de procesos</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/POLITICAS SIVOC.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Objetivos de Calidad</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/INFORMATE DEL COVID-19.pdf')}}" target="_blank" style="font-size:12px;"><button><b>COVID 19</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/BRIGADA DE EMERGENCIA.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Brigadad de Emergencia</b></button></a>
+                <a href="{{asset('storage/Documents/welcome/PROXIMOS EVENTOS.pdf')}}" target="_blank" style="font-size:12px;"><button><b>Próximos eventos</b></button></a>
             </div>
 
             

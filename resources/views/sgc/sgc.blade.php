@@ -42,12 +42,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Codigo</th>
+                                    <th>Código</th>
                                     <th>Descripción</th>
                                     <th>Fecha Creación</th>
                                     <th>Fecha Actualización</th>
                                     <th>Responsable</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,12 +89,12 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Codigo</th>
+                                    <th>Código</th>
                                     <th>Descripción</th>
                                     <th>Fecha Creación</th>
                                     <th>Fecha Actualización</th>
                                     <th>Responsable</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

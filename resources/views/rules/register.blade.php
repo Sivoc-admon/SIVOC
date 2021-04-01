@@ -32,7 +32,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputUrlRule">URL</label>
-                        <input type="text" class="form-control" id="inputUrlRule" name="inputUrlRule" placeholder="Codigo" required>
+                        <input type="text" class="form-control" id="inputUrlRule" name="inputUrlRule" placeholder="Código" required>
                       </div>
                     </div>
 

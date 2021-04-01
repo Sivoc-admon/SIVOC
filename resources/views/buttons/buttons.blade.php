@@ -41,18 +41,18 @@
                                     <th>#</th>
                                     <th>Nombre</th>
                                     <th>Color</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($buttons as $button)
                                     <tr>
                                         <td>{{ $button->id }}</td>
-                                        <td>{{ $button->name }}</td>
+                                        <td>{{ $button->button }}</td>
                                         <td>{{ $button->color }}</td>
                                         <td>
                                             <span data-toggle="modal" data-target="#ModalShowFiles">
-                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showMinuteFile({{$minute->id}})">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showButtonFile({{$button->id}})">
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
@@ -77,7 +77,7 @@
                                     <th>#</th>
                                     <th>Nombre</th>
                                     <th>Color</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

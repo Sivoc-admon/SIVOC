@@ -19,7 +19,7 @@
                 <div class="row" style="background-color: #17a2b8">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="sltArea">Area</label>
+                      <label for="sltArea">Área</label>
                       <select class="form-control" name="sltArea" id="sltArea">
                           <option value="0">Seleccione</option>
                           @foreach ($areas as $area)
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                          <label for="inputCodigo">Codigo</label>
+                          <label for="inputCodigo">Código</label>
                           <input type="text" class="form-control" id="inputCodigo" name="inputCodigo" required >
                           
                         </div>
@@ -120,7 +120,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <input type="hidden" name="hIdSgc" id="hIdSgc">
-                    <label for="sltEditAreaSgc">Area</label>
+                    <label for="sltEditAreaSgc">Área</label>
                     <select class="form-control" name="sltEditAreaSgc" id="sltEditAreaSgc">
                         <option value="0">Seleccione</option>
                     </select>
@@ -147,7 +147,7 @@
                   </div>
                   <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputEditCodigoSgc">Codigo</label>
+                        <label for="inputEditCodigoSgc">Código</label>
                         <input type="text" class="form-control" id="inputEditCodigoSgc" name="inputEditCodigoSgc" required >
                         
                       </div>
@@ -204,7 +204,7 @@
                       
                       <th>#</th>
                       <th>Archivo</th>
-                      <th>Accion</th>
+                      <th>Acción</th>
                       
                   </tr>
               </thead>
@@ -215,7 +215,7 @@
                   <tr>
                       <th>#</th>
                       <th>Archivo</th>
-                      <th>Accion</th>
+                      <th>Acción</th>
                   </tr>
               </tfoot>
             </table>

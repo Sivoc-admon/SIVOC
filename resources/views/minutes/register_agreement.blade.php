@@ -57,7 +57,7 @@
                     <tr>
                         <th>#</th>
                         <th>Acuerdo</th>
-                        <th>Accion</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody id="showAgreement">
@@ -67,7 +67,7 @@
                     <tr>
                         <th>#</th>
                         <th>Acuerdo</th>
-                        <th>Accion</th>
+                        <th>Acción</th>
                     </tr>
                 </tfoot>
             </table>

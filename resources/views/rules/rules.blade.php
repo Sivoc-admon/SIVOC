@@ -46,7 +46,7 @@
                                     <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,7 +79,7 @@
                                     <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

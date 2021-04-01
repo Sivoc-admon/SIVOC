@@ -42,7 +42,7 @@
                                 <th>Referencia de proyecto</th>
                                 <th>Cliente</th>
                                 <th>Estatus</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,7 +108,7 @@
                                 <th>Referencia de proyecto</th>
                                 <th>Cliente</th>
                                 <th>Estatus</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </tfoot>
                     </table>

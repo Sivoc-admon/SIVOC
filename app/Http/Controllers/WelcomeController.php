@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\WelcomeFile;
 
 class WelcomeController extends Controller
 {
@@ -16,13 +17,11 @@ class WelcomeController extends Controller
     public function index()
     {
 
-        $buttons = "" ; //Welcome::get();
-        
-       /*= DB::table('welcome')
+        $buttons = DB::table('welcome')
             ->join('welcome_files', 'welcome_files.welcome_id', '=', 'welcome.id')
-            ->select('welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
+            ->select('welcome.id', 'welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
             ->whereNull('welcome.deleted_at')
-            ->get();*/
+            ->get();
 
         return view('welcome',compact('buttons'));
     }
@@ -30,12 +29,11 @@ class WelcomeController extends Controller
     public function buttons()
     {
 
-        $buttons = "" ; //Welcome::get();
-        /* DB::table('welcome')
+        $buttons = DB::table('welcome')
             ->join('welcome_files', 'welcome_files.welcome_id', '=', 'welcome.id')
-            ->select('welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
+            ->select('welcome.id', 'welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
             ->whereNull('welcome.deleted_at')
-            ->get();*/
+            ->get();
 
         return view('buttons.buttons',compact('buttons'));
     }
@@ -75,7 +73,7 @@ class WelcomeController extends Controller
                 $archivo = $request->file($nombre);
                 $welcomeFile=WelcomeFile::create([
                     'welcome_id' => $button->id,
-                    'file' => $archivo->getClientOriginalName(),
+                    'name' => $archivo->getClientOriginalName(),
                     'ruta' => 'storage/Documents/welcome/',
     
                 ]);

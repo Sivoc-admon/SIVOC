@@ -30,11 +30,11 @@
                         <label for="sltColorButton">Color</label>
                         <select class="form-control" name="sltColorButton" id="sltColorButton">
                          <option value="0">Seleccione</option>
-                         <option  style="background-color: blue" value="primary">Primary </option>
-                         <option  style="background-color: green" value="success">Success </option>
-                         <option  style="background-color: red" value="danger">Danger </option>
-                         <option  style="background-color: orange" value="warning">Warning </option>
-                         <option  style="background-color: #17a2b8" value="info">Info </option>
+                         <option  style="background-color: blue; color:white" value="primary">Primary </option>
+                         <option  style="background-color: green; color:white" value="success">Success </option>
+                         <option  style="background-color: red; color:white" value="danger">Danger </option>
+                         <option  style="background-color: orange; color:white" value="warning">Warning </option>
+                         <option  style="background-color: #17a2b8; color:white" value="info">Info </option>
                          
                         </select>
                       </div>

@@ -17,7 +17,7 @@ function saveButton() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: "inicio",
+        url: "../inicio",
         data: data,
         cache: false,
         contentType: false,
@@ -51,7 +51,7 @@ function saveButton() {
 }
 
 
-function showMinuteFile(minute) {
+function showButtonFile(minute) {
     $("#showMinuteFiles").empty();
     $.ajax({
         type: "GET",
@@ -164,7 +164,7 @@ function editButton(id) {
             } else {
 
                 $("#inputEditButton").val(data.button.name);
-                
+
                 $("#idButon").val(id);
 
                 $("#ModalEditButton").modal('show')
@@ -184,7 +184,7 @@ function editButton(id) {
     });
 }
 
-function updateMinute() {
+function updateButton() {
 
     let id = $("#idButon").val();
     $.ajax({

@@ -281,7 +281,7 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text' => 'Auditoria Interna',
+            'text' => 'Auditoría Interna',
             'url'  => 'internalAudits',
             'icon' => 'fas fa-user-secret',
         ],
@@ -321,7 +321,7 @@ return [
             ]
         ],
         [
-            'text'    => 'Areas',
+            'text'    => 'Áreas',
             'icon'    => 'fas fa-folder',
             'submenu' => [
                 [

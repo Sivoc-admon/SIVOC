@@ -128,7 +128,14 @@ class InternalAuditController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $internal= InternalAudit::find($id);
+        
+        
+        $internal->update([
+            'area_id' => $request->sltEditAreaAudit,            
+            'user_id' => $request->inputIdAutor,
+            'date_register' => $request->inputEditDateAudit,
+        ]);
     }
 
     /**

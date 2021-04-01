@@ -132,7 +132,7 @@
   </div>
 </div>
 
- <!-- Modal EDITAR ACCION CORRECTIVA-->
+ <!-- Modal EDITAR Acción CORRECTIVA-->
  <div class="modal fade" id="ModalEditCorrectiveAcition" tabindex="-1" aria-labelledby="ModalEditCorrectiveAcition" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">

@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'SIVOC-ACCIONES-CORRECTIVAS')
+@section('title', 'SIVOC-AcciónES-CORRECTIVAS')
 
 @section ( ' plugins.Datatables ' , true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Acciones Correctivas</h1>
+    <h1 class="m-0 text-dark">Acciónes Correctivas</h1>
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
                     <div class="card-body">
                         
                         <span data-toggle="modal" data-target="#ModalRegisterCorrectiveAction">
-                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Accion Correctiva">
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Acción Correctiva">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </span>
@@ -39,11 +39,11 @@
                                     <th>Archivos</th>
                                     <th>#</th>
                                     <th>Problematica</th>
-                                    <th>Accion inmediata</th>
+                                    <th>Acción inmediata</th>
                                     <th>Autor</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,11 +88,11 @@
                                     <th>Archivos</th>
                                     <th>#</th>
                                     <th>Problematica</th>
-                                    <th>Accion inmediata</th>
+                                    <th>Acción inmediata</th>
                                     <th>Autor</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

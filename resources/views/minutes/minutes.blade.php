@@ -39,7 +39,7 @@
                                 <th>Participantes Externos</th>
                                 <th>Tipo</th>
                                 <th>Estatus</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +88,7 @@
                                 <th>Participantes Externos</th>
                                 <th>Tipo</th>
                                 <th>Estatus</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </tfoot>
                     </table>

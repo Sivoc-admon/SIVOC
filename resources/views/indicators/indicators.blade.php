@@ -45,7 +45,7 @@
                     <table id="tableIndicators" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Area</th>
+                                <th>Área</th>
                                 <th>Tipo Indicador</th>
                                 <th>Valor</th>
                                 <th>Archivo</th>
@@ -71,7 +71,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Area</th>
+                                <th>Área</th>
                                 <th>Tipo Indicador</th>
                                 <th>Valor</th>
                                 <th>Fecha Registro</th>

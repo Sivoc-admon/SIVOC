@@ -49,8 +49,8 @@
                                     <th>Apellido Paterno</th>
                                     <th>Apellido Materno</th>
                                     <th>Correo</th>
-                                    <th>Area</th>
-                                    <th>Accion</th>
+                                    <th>Área</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,7 +89,7 @@
                                     <th>Apellido Paterno</th>
                                     <th>Apellido Materno</th>
                                     <th>Correo</th>
-                                    <th>Area</th>
+                                    <th>Área</th>
                                     <th>Acción</th>
                                 </tr>
                             </tfoot>

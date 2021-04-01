@@ -1,4 +1,4 @@
-<!-- Modal REGISTRO DE USUARIOS -->
+<!-- Modal REGISTRO DE AUDITORIA INTERNA -->
 <div class="modal fade" id="ModalRegisterInternalAudit" tabindex="-1" aria-labelledby="ModalRegisterInternalAudit" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
@@ -20,7 +20,7 @@
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputAreaAudit">Area Evaluada</label>
+                        <label for="inputAreaAudit">Área Evaluada</label>
                         <select class="form-control" name="sltAreaAudit" id="sltAreaAudit">
                             @foreach ($areas as $area)
                                 <option value="{{$area->id}}">{{$area->name}}</option>

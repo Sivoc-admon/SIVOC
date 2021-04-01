@@ -11,6 +11,8 @@ class Welcome extends Model
     use Notifiable;
     use SoftDeletes;
 
+    protected $table = 'welcome';
+
     protected $fillable = [
         'name', 
         'color', 

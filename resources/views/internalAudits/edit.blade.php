@@ -6,11 +6,12 @@
         <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
+            <input type="hidden" name="hIdInternanl" id="hIdInternanl">
         </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <form id="formRegisterUser">
+            <form id="formEditInternal">
               @csrf
                 <div class="row">
                   <h4>Datos Auditoria</h4>
@@ -20,7 +21,7 @@
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="sltEditAreaAudit">Area Evaluada</label>
+                        <label for="sltEditAreaAudit">Área Evaluada</label>
                         <select class="form-control" name="sltEditAreaAudit" id="sltEditAreaAudit">
                             @foreach ($areas as $area)
                                 <option value="{{$area->id}}">{{$area->name}}</option>

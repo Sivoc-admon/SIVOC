@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sltArea">Area</label>
+                        <label for="sltArea">Área</label>
                         <select class="form-control" id="sltArea" name="sltArea" required>
                           <option value="0">---</option>
                           @foreach ($areas as $area)
@@ -138,7 +138,7 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <table id="tableUsers" class="table table-striped table-bordered" style="width:100%">
+          <table id="tableUsersRestored" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
@@ -146,8 +146,8 @@
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
                     <th>Correo</th>
-                    <th>Area</th>
-                    <th>Accion</th>
+                    <th>Área</th>
+                    <th>Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -186,7 +186,7 @@
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
                     <th>Correo</th>
-                    <th>Area</th>
+                    <th>Área</th>
                     <th>Acción</th>
                 </tr>
             </tfoot>

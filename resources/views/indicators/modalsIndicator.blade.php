@@ -78,7 +78,7 @@
                 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="sltArea">Area:</label>
+                      <label for="sltArea">Área:</label>
                       <select class="form-control" name="sltArea" id="sltArea">
                         @foreach ($areas as $area)
                           <option value="{{$area->id}}"> {{$area->name}}</option>
@@ -165,7 +165,7 @@
                 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="sltAreaGrafica">Area:</label>
+                      <label for="sltAreaGrafica">Área:</label>
                       <select class="form-control" name="sltAreaGrafica" id="sltAreaGrafica">
                         @foreach ($areas as $area)
                           <option value="{{$area->id}}"> {{$area->name}}</option>

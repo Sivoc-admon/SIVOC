@@ -39,7 +39,7 @@
                                 <th>Calibración</th>
                                 <th>Fecha Compra</th>
                                 <th>Fecha Calibración</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +88,7 @@
                                 <th>Calibración</th>
                                 <th>Fecha Compra</th>
                                 <th>Fecha Calibración</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </tfoot>
                     </table>

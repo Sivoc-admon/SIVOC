@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('inicio/button', 'WelcomeController@buttons')->name('welcome.button');
+Route::post('inicio/save', 'WelcomeController@store')->name('welcome.store');
 Route::resource('inicio', 'WelcomeController');
 
 Auth::routes();
