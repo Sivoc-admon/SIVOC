@@ -98,7 +98,7 @@ function getFoldersAndFiles(areaId, nivel) {
                         $(`#divNivel${level}`).html(selectHTML);
                     } else {
                         let pading = 10 * level;
-                        $(`#divFolders`).append(`<div id="divNivel${level}" style="padding-left: ${pading}px;"><br>${selectHTML}</div>`);
+                        $(`#divFolders`).append(`<div class="row" id="divNivel${level}"><br><div class="col-md">Nivel: ${level}</div><div class="col-md-11">${selectHTML}</div></div>`);
                     }
                 } else {
                     if ($(`#divNivel${level}`).length) {
