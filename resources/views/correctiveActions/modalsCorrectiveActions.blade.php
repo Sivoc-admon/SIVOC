@@ -33,8 +33,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                           <label for="inputNameAutor">Autor</label>
-                          <input type="text" class="form-control" id="inputNameAutor" name="inputNameAutor" required value="{{ Auth::user()->name}} {{Auth::user()->last_name}} {{Auth::user()->mother_last_name }}" readonly>
-                          <input type="hidden" name="inputIdAutor" id="inputIdAutor" value="{{ Auth::user()->id }}" >
+                          <select class="form-control" name="inputIdAutor" id="inputIdAutor" aria-label="multiple select example">
+                            @isset($users)
+                              @foreach ($users as $user)
+                                  <option value="{{$user->id}}">{{$user->name}} {{$user->last_name}} {{$user->mother_last_name}}</option>
+                              @endforeach
+                            @endisset
+                          </select>
                         </div>
                       </div>
                     
@@ -168,8 +173,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                           <label for="inputEditNameAutor">Autor</label>
-                          <input type="text" class="form-control" id="inputEditNameAutor" name="inputEditNameAutor" required value="" readonly>
-                          
+                          <select class="form-control" name="inputEditNameAutor" id="inputEditNameAutor" aria-label="multiple select example">
+                            @isset($users)
+                              @foreach ($users as $user)
+                                  <option value="{{$user->id}}">{{$user->name}} {{$user->last_name}} {{$user->mother_last_name}}</option>
+                              @endforeach
+                            @endisset
+                          </select>
                         </div>
                       </div>
                     

@@ -60,7 +60,7 @@ class CorrectiveActionController extends Controller
             'issue' => $request->issue,            
             'action' => $request->action,
             'involved' => $participantes,
-            'user_id' => $request->user()->id,
+            'user_id' => $request->inputIdAutor,
             'status' => $request->status,
         ]);
 
@@ -138,7 +138,8 @@ class CorrectiveActionController extends Controller
         $correctiveAction->update([
             'issue' => $request->inputEditIssiueCorrectiveAction,
             'action' => $request->inputEditActionCorrectiveAction,
-            'status' => $request->inputEditStatusCorrectiveAction
+            'status' => $request->inputEditStatusCorrectiveAction,
+            'user_id' => $request->inputEditNameAutor,
             
         ]);
     }
