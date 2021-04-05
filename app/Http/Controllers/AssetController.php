@@ -41,7 +41,7 @@ class AssetController extends Controller
     {
         $asset=Asset::create([
             'description' => $request->description, 
-            'clasificacion' => $request->costo,
+            'clasification' => $request->costo,
             'day_buy' => $request->buy,
             'calibration' => $request->check,
             'date_calibration' => $request->dayCalibration,

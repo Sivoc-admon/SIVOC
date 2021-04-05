@@ -13,7 +13,7 @@ class Asset extends Model
 
     protected $fillable = [
         'description', 
-        'clasificacion',
+        'clasification',
         'day_buy',
         'calibration',
         'date_calibration'
