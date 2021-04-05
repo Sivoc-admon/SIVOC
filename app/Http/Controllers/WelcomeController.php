@@ -150,7 +150,7 @@ class WelcomeController extends Controller
     {
         $button = Welcome::find($id);
         $button->delete();
-        return redirect()->route('buttons.index');
+        return redirect()->route('welcome.button');
     }
 
     public function showButtonFile($minute)

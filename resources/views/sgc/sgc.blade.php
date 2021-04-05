@@ -71,7 +71,7 @@
                                                 
                                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editSgc({{$sgc->id}});"><i class="fas fa-edit"></i></a></button>
                                                     
-                                                    <form action="{{ route('internalAudits.destroy',$sgc->id) }}" method="POST">
+                                                    <form action="{{ route('sgc.destroy',$sgc->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                         
