@@ -23,6 +23,7 @@ class WelcomeController extends Controller
             ->join('welcome_files', 'welcome_files.welcome_id', '=', 'welcome.id')
             ->select('welcome.id', 'welcome.name as button', 'welcome.color', 'welcome_files.name as nameFile', 'welcome_files.ruta')
             ->whereNull('welcome_files.deleted_at')
+            ->whereNull('welcome.deleted_at')
             ->get();
 
         return view('welcome',compact('buttons'));

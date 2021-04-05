@@ -24,6 +24,7 @@ class SgcController extends Controller
             ->join('users', 'users.id', '=', 'sgc.user_id')
             ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'sgc.*')
             ->whereNull('sgc.deleted_at')
+            ->orderBy('sgc.code')
             ->get();
         $areas = Area::get();
         $users = User::get();

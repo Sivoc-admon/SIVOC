@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                          <label for="inputNameAutor">Autor</label>
+                          <label for="inputNameAutor">Responsable</label>
                           <select class="form-control" name="inputIdAutor" id="inputIdAutor" aria-label="multiple select example">
                             @isset($users)
                               @foreach ($users as $user)
@@ -172,7 +172,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                          <label for="inputEditNameAutor">Autor</label>
+                          <label for="inputEditNameAutor">Responsable</label>
                           <select class="form-control" name="inputEditNameAutor" id="inputEditNameAutor" aria-label="multiple select example">
                             @isset($users)
                               @foreach ($users as $user)
