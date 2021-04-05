@@ -35,7 +35,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Descripción</th>
-                                <th>costo</th>
                                 <th>Calibración</th>
                                 <th>Fecha Compra</th>
                                 <th>Fecha Calibración</th>
@@ -48,7 +47,6 @@
                                     <tr>
                                         <td>{{ $asset->id }}</td>
                                         <td>{{ $asset->description }}</td>
-                                        <td>$ {{ $asset->costo }}</td>
                                         @if ($asset->calibration == 1)
                                             <td>SI</td>
                                         @else
@@ -84,7 +82,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Descripción</th>
-                                <th>costo</th>
                                 <th>Calibración</th>
                                 <th>Fecha Compra</th>
                                 <th>Fecha Calibración</th>
