@@ -110,6 +110,8 @@ Route::get('assets/{asset}/showFiles', 'AssetController@showFiles')->name('asset
 Route::resource('assets', 'AssetController');
 
 //RH
+Route::post('rh/{empleado}/uploadFile', 'RhController@uploadFile')->name('rh.uploadFile');
+Route::get('rh/{empleado}/files', 'RhController@files')->name('rh.files');
 Route::resource('rh', 'RhController');
 
 

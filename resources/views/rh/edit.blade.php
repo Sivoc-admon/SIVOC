@@ -1,4 +1,4 @@
- <!-- Modal REGISTRO DE USUARIOS -->
+ <!-- Modal Edit DE USUARIOS -->
  <div class="modal fade" id="ModalEditUserRh" tabindex="-1" aria-labelledby="ModalEditUserRh" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
@@ -169,7 +169,7 @@
     </div>
 </div>
 
-<!-- Modal MOSTRAR ARCHIVOS AUDITORIA INTERNA -->
+<!-- Modal MOSTRAR ARCHIVOS de Usuarios -->
 <div class="modal fade bd-example-modal-lg" id="ModalShowRHFiles" tabindex="-1" aria-labelledby="ModalShowRHFiles" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -212,7 +212,7 @@
             </div>
             <div class="col-md-5">
               <div class="form-group">
-                <button type="button" class="btn btn-success" onclick="masDocumentosSgc()">Guardar Documentos</button>
+                <button type="button" class="btn btn-success" onclick="masDocumentosRH()">Guardar Documentos</button>
               </div>
             </div>
             @endif

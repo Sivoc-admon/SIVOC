@@ -267,13 +267,13 @@ function showRHFile(id) {
     });
 }
 
-function masDocumentosSgc() {
+function masDocumentosRH() {
 
-    let sgc = $("#hideSgcId").val();
-    let file = $('#fileUploadSgcFile')[0];
+    let empleado = $("#hideRHId").val();
+    let file = $('#fileUploadRHFile')[0];
 
     let data = new FormData();
-    data.append("sgc", sgc);
+    data.append("empleado", empleado);
     data.append("tamanoFiles", file.files.length);
     for (let i = 0; i < file.files.length; i++) {
         data.append('file' + i, file.files[i]);
@@ -284,7 +284,7 @@ function masDocumentosSgc() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: `sgc/${sgc}/uploadFile`,
+        url: `rh/${empleado}/uploadFile`,
         data: data,
         cache: false,
         contentType: false,

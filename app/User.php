@@ -111,4 +111,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Area');
     }
+
+    public function rhFiles()
+    {
+        return $this->hasMany('App\RhFile');
+    }
 }

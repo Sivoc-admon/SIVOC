@@ -107,7 +107,7 @@ class RhController extends Controller
 
     public function files($id)
     {
-        $files = RhFile::find($id)->sgcFile;
+        $files = User::find($id)->rhFiles;
         
         $msg="";
         $error=false;
@@ -115,6 +115,42 @@ class RhController extends Controller
 
         $array=["msg"=>$msg, "error"=>$error, "files"=>$files];
 
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $empleado)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/RH/'.$empleado;
+        
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $rhFile=RhFile::create([
+                'user_id' => $empleado,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($rhFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
         return response()->json($array);
     }
 }

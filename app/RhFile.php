@@ -25,4 +25,9 @@ class RhFile extends Model
         'ruta'
         
     ];
+
+    public function users()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
