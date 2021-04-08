@@ -177,12 +177,18 @@ function showAssetFile(asset, tipo) {
             } else {
 
                 let table = "";
+                let carpeta = "";
                 $("#hideModalId").val(asset);
                 for (const i in data.assetfiles) {
+                    if (data.assetfiles[i].type == "General") {
+                        carpeta = "General";
+                    } else {
+                        carpeta = "Calibracion";
+                    }
                     table += `<tr>"
                         <td> ${data.assetfiles[i].id}</td> 
                         <td>
-                            <a href="storage/Documents/Minutas/${asset}/${data.assetfiles[i].name}" target="_blank">${data.assetfiles[i].name}</a>
+                            <a href="storage/Documents/Activos/${asset}/${carpeta}/${data.assetfiles[i].name}" target="_blank">${data.assetfiles[i].name}</a>
                         </td>"
                     </tr>`;
 
