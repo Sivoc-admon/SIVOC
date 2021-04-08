@@ -153,4 +153,16 @@ class RhController extends Controller
         
         return response()->json($array);
     }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = RhFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
+    }
 }
