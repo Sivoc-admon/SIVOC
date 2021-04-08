@@ -87,7 +87,7 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <form id="formRegisterMinute">
+            <form id="formEditAsset">
               @csrf
                 <div class="row">
                   <h4>Datos de Activo</h4>
@@ -104,7 +104,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputEditCostoAsset">Clasificación</label>
-                        <input type="number" class="form-control" id="inputEditCostoAsset" name="inputEditCostoAsset">
+                        <input type="text" class="form-control" id="inputEditCostoAsset" name="inputEditCostoAsset">
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -126,17 +126,9 @@
                         <label for="inputEditCalibrationDayAsset">Fecha de Calibración</label>
                         <input type="date" class="form-control" id="inputEditCalibrationDayAsset" name="inputEditCalibrationDayAsset" required>
                       </div>
-                      <div class="form-group">
-                        <label for="fileEditAssetCalibration" class="form-label">Documentos de Calibración</label>
-                        <input class="form-control" type="file" id="fileEditAssetCalibration" name="fileEditAssetCalibration" multiple>
-                      </div>
+                      
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="fileEditAsset" class="form-label">Documentos Generales</label>
-                        <input class="form-control" type="file" id="fileEditAsset" name="fileEditAsset" multiple>
-                      </div>
-                    </div>
+                    
                 </div>
 
             </form>

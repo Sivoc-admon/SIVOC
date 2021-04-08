@@ -100,10 +100,10 @@ function editAsset(id) {
             } else {
 
                 $("#inputEditDescriptionAsset").val(data.asset.description);
-                $("#inputEditCostoAsset").val(data.asset.costo);
+                $("#inputEditCostoAsset").val(data.asset.clasification);
                 $("#hidAsset").val(data.asset.id);
                 if (data.asset.calibration == 1) {
-                    $('.checkEditAsset').prop('checked', true);
+                    $('#checkEditAsset').prop('checked', true);
                     $('#divEditCalibration').show();
                 }
 
@@ -126,45 +126,16 @@ function editAsset(id) {
 function updateAsset() {
 
     let id = $("#hidAsset").val();
-    let description = $("#inputEditDescriptionAsset").val();
-    let costo = $("#inputEditCostoAsset").val();
-    let buy = $("#inputEditBuyAsset").val();
-    let check = 0;
-    let dayCalibration = $("#fileEditAssetCalibration").val();
-    let calibrationFile = $('#fileAssetCalibration')[0];
-    let generalFile = $('#fileEditAsset')[0];
 
-    let data = new FormData();
-    data.append("description", description);
-    data.append("costo", costo);
-    data.append("buy", buy);
-    if ($("#checkAsset").is(':checked')) {
-        check = 1;
-        data.append("check", check);
-    } else {
-        check = 0;
-        data.append("check", check);
-    }
-    data.append("dayCalibration", dayCalibration);
-    data.append("lengthCalibration", calibrationFile.files.length);
-    data.append("lengthGeneral", generalFile.files.length);
 
-    for (let i = 0; i < calibrationFile.files.length; i++) {
-        data.append('calibrationFile' + i, calibrationFile.files[i]);
-    }
-
-    for (let j = 0; j < generalFile.files.length; j++) {
-        data.append('generalFile' + j, generalFile.files[j]);
-    }
     $.ajax({
         type: "PUT",
         url: `assets/${id}`,
-        data: data,
-        cache: false,
-        contentType: false,
-        processData: false,
+        data: $("#formEditAsset").serialize(),
+
         //dataType: 'json',
         success: function(data) {
+
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");

@@ -143,9 +143,32 @@ class AssetController extends Controller
      * @param  \App\Asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asset $asset)
+    public function update(Request $request, $id)
     {
-        //
+        
+        $error=false;
+        $msg="";
+        $check=0;
+
+        $asset = Asset::find($id);
+
+        if($request->checkEditAsset=="on")
+        {
+            $check=1;
+        }else{
+            $check=0;
+        }
+        
+        $asset->update([
+            'description' => $request->inputEditDescriptionAsset, 
+            'clasification' => $request->inputEditCostoAsset,
+            'day_buy' => $request->inputEditBuyAsset,
+            'calibration' => $check,
+            'date_calibration' => $request->inputEditCalibrationDayAsset,
+            
+        ]);
+
+        
     }
 
     /**
