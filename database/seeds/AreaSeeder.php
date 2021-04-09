@@ -22,7 +22,8 @@ class AreaSeeder extends Seeder
             ['name' => 'Ingenieria', 'created_at' => date('Y-m-d H:m:s'), 'updated_at' => date('Y-m-d H:m:s')],
             ['name' => 'Manufactura', 'created_at' => date('Y-m-d H:m:s'), 'updated_at' => date('Y-m-d H:m:s')],
             ['name' => 'Recursos Humanos', 'created_at' => date('Y-m-d H:m:s'), 'updated_at' => date('Y-m-d H:m:s')],
-            ['name' => 'Ventas', 'created_at' => date('Y-m-d H:m:s'), 'updated_at' => date('Y-m-d H:m:s')]
+            ['name' => 'Ventas', 'created_at' => date('Y-m-d H:m:s'), 'updated_at' => date('Y-m-d H:m:s')],
+            ['name' => 'Servicio', 'created_at' => date('Y-m-d H:m:s'), 'updated_at' => date('Y-m-d H:m:s')]
         ];
 
         DB::table('areas')->insert($data);
