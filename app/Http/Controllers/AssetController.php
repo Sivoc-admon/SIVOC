@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Asset;
 use App\AssetFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssetController extends Controller
 {
@@ -15,9 +16,11 @@ class AssetController extends Controller
      */
     public function index()
     {
-        $assets = Asset::get();
+        $assets = DB::table('assets')
+        ->select(DB::raw('assets.*, TIMESTAMPDIFF(MONTH, date_calibration, CURDATE()) as month'))
+        ->get();
        
-
+       
        return view('assets.assets',compact('assets'));
     }
 

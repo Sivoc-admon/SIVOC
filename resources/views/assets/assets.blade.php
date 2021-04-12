@@ -52,8 +52,15 @@
                                         @else
                                             <td>NO</td>
                                         @endif
+
                                         <td>{{ $asset->day_buy }}</td>
-                                        <td>{{ $asset->date_calibration }}</td>
+
+                                        @if ($asset->month >= 11)
+                                            <td><p class="flash">{{ $asset->date_calibration }}</p></td>
+                                        @else
+                                            <td>{{ $asset->date_calibration }}</td>
+                                        @endif
+                                            
                                         
                                         <td>
                                             <span data-toggle="modal" data-target="#ModalEditAsset">

@@ -106,13 +106,17 @@ class IndicatorController extends Controller
         $area = $request->input('sltAreaGrafica');
         $indicatorType = $request->input('inputIndicatorTypeGrafica');
         $fechaInicial = $request->input('fechaInicial');
-        $fechaFinal = $request->input('fechaFinal');
-
-        $grafica = Indicator::where('area_id', $area)
+        
+        
+        $grafica = DB::table('indicators')
+        ->where('area_id', $area)
         ->where('indicator_type_id', $indicatorType)
-        ->whereBetween('created_at', [$fechaInicial.' 00:00:00', $fechaFinal.' 23:59:59'])
+        ->where('registration_date', 'LIKE', $fechaInicial.'%')
+        ->select(DB::raw('indicators.*, month(registration_date) as month'))
+        ->orderBy('month')
         ->get();
 
+        
         $minMax = IndicatorType::find($indicatorType);
         
 

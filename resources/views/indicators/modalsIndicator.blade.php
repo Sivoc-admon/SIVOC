@@ -190,14 +190,8 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="fechaInicial">Fecha Inicial:</label>
-                      <input type="date" class="form-control" id="fechaInicial" name="fechaInicial" >
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="fechaFinal">Fecha Final:</label>
-                      <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" >
+                      <input type="number" class="form-control" id="fechaInicial" name="fechaInicial" min="2019" value="2019">
+                      
                     </div>
                   </div>
                   
