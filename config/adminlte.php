@@ -190,7 +190,7 @@ return [
 
     'dashboard_url' => 'inicio',
 
-    'logout_url' => 'logout',
+    'logout_url' => 'inicio',
 
     'login_url' => 'login',
 
@@ -325,7 +325,7 @@ return [
             'icon'    => 'fas fa-folder',
             'submenu' => [
                 [
-                    'text' => 'Almacen',
+                    'text' => 'Almacén',
                     'url'  => '/folder/almacen',
                 ],
                 [
@@ -341,7 +341,7 @@ return [
                     'url'  => '/folder/compras',
                 ],
                 [
-                    'text' => 'Direccion',
+                    'text' => 'Dirección',
                     'url'  => '/folder/direccion',
                 ],
                 [
@@ -349,7 +349,7 @@ return [
                     'url'  => '/folder/finanzas',
                 ],
                 [
-                    'text' => 'Ingenieria',
+                    'text' => 'Ingeniería',
                     'url'  => '/folder/ingenieria',
                 ],
                 [
