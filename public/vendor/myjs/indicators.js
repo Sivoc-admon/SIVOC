@@ -137,7 +137,7 @@ function graficaIndicador() {
         data: $("#formGraficaIndicador").serialize(),
         //dataType: 'json',
         success: function(data) {
-            console.log(data);
+            console.log(data.grafica);
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
@@ -148,18 +148,22 @@ function graficaIndicador() {
                 });*/
                 for (let i = 0; i < 11; i++) {
                     if (i < data.grafica.length) {
-                        if (i==data.grafica[i].month-1) {
+                        if (i == data.grafica[i].month - 1) {
                             valores[i] = data.grafica[i].value;
                         } else {
-                            valores[data.grafica[i].month-1] = data.grafica[i].value;
-                            valores[i] = 0;
-                            
+                            if (valores[i] == "") {
+                                valores[i] = 0;
+                            }
+
+                            valores[data.grafica[i].month - 1] = data.grafica[i].value;
+
+
                         }
-                        
+
                     } else {
                         valores.push(0);
                     }
-                    
+
 
                 }
                 console.log(valores);

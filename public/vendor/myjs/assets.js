@@ -102,6 +102,7 @@ function editAsset(id) {
                 $("#inputEditDescriptionAsset").val(data.asset.description);
                 $("#inputEditCostoAsset").val(data.asset.clasification);
                 $("#hidAsset").val(data.asset.id);
+                $("#inputEditBuyAsset").val(data.asset.day_buy);
                 if (data.asset.calibration == 1) {
                     $('#checkEditAsset').prop('checked', true);
                     $('#divEditCalibration').show();
