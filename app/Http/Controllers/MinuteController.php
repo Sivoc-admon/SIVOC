@@ -8,7 +8,8 @@ use App\Agreement;
 use App\User;
 use App\AgreementFile;
 use Illuminate\Support\Facades\DB;
-
+use App\Mail\MinutaMailable;
+use Illuminate\Support\Facades\Mail;
 class MinuteController extends Controller
 {
     /**
@@ -80,6 +81,11 @@ class MinuteController extends Controller
             
             
             $agreementFile->save();
+            
+            $correo = new MinutaMailable($minute);
+            Mail::to('jfgils02@gmail.com')->send($correo);
+
+
             $msg="Registro guardado con exito";
             
             
