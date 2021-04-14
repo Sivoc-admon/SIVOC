@@ -74,6 +74,8 @@ Route::delete('customers/{customer}', 'CustomerController@destroy')->name('custo
 Route::resource('customers', 'CustomerController');
 
 //NORMAS
+Route::post('rules/{rule}/uploadFile', 'RuleController@uploadFile')->name('rules.uploadFile');
+Route::get('rules/showRuleFiles/{id}', 'RuleController@showRuleFile')->name('rules.showRuleFile');
 Route::post('rules/store', 'RuleController@store');
 Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
 Route::resource('rules', 'RuleController');

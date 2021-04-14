@@ -21,14 +21,9 @@
                                 </button>
                             </span>
                         @endif
-                        
-                        
-                        
-                        
-                        @include('rules.register')
-                        
 
-                    
+                        @include('rules.register')
+
                     </div>
                 </div>
             </div>
@@ -57,6 +52,11 @@
                                         <td>{{ $rule->name }}</td>
                                         <td> <a href="{{asset($rule->url) }}" target="_blank">{{ $rule->url }}</a></td>
                                         <td>
+                                            <span data-toggle="modal" data-target="#ModalShowFiles">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showRuleFile({{$rule->id}})">
+                                                    <i class="fas fa-list"></i>
+                                                </button>
+                                            </span>
                                             @if (Auth::user()->hasRole(['admin','calidad', 'ingenieria', 'servicio']))
                                             <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editRule({{$rule->id}});"><i class="fas fa-edit"></i></a>
                                         

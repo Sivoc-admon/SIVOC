@@ -149,6 +149,50 @@ function updateUser() {
     });
 }
 
+function updateRH() {
+
+    /*$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });*/
+
+    //e.preventDefault();
+
+    let id = $("#hIdRh").val();
+
+    $.ajax({
+        type: "PUT",
+        url: "rh/"+ id,
+        data: $("#formEditUserRh").serialize(),
+        //dataType: 'json',
+        success: function(data) {
+            
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalEditUserRh").modal('hide');
+
+                messageAlert("Guardado Correctamente", "success", "");
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
 function editRh(id) {
 
     $("#sltAreaRh").empty();
@@ -164,7 +208,7 @@ function editRh(id) {
         //data: $("#formRegisterUser").serialize(),
         dataType: 'json',
         success: function(data) {
-            console.log(data.roleUser[0].id);
+            console.log(data.user);
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
@@ -174,6 +218,16 @@ function editRh(id) {
                 $("#inputLastNameRh").val(data.user.last_name);
                 $("#inputMotherLastNameRh").val(data.user.mother_last_name);
                 $("#inputEmailRh").val(data.user.email);
+                $("#inputProfesion").val(data.user.profession);
+                $("#inputEdad").val(data.user.age);
+                $("#inputEstadoCivil").val(data.user.marital_status);
+                $("#inputNSS").val(data.user.nss);
+                $("#inputRFC").val(data.user.rfc);
+                $("#inputCURP").val(data.user.curp);
+                $("#inputDireccion").val(data.user.street);
+                $("#inputTelefono").val(data.user.telefono);
+                $("#inputCURP").val(data.user.curp);
+
                 $("#hIdRh").val(data.user.id);
 
                 let optionAreas = "<option value='0'>Seleccione</option>";

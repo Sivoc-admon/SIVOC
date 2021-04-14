@@ -91,7 +91,30 @@ class RhController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->input('inputNameRh'),            
+            'last_name' => $request->input('inputLastNameRh'),
+            'mother_last_name' => $request->input('inputMotherLastNameRh'),
+            'area_id' => $request->input('sltAreaRh'),
+            'email' => $request->input('inputEmailRh'),
+            'grade' => $request->input('sltGenero'),
+            'profession' => $request->input('inputEstadoCivil'),
+            'nss' => $request->input('inputNSS'),
+            'age' => $request->input('inputEdad'),
+            'gender' => $request->input('sltGenero'),
+            'marital_status' => $request->input('inputEstadoCivil'),
+            'street' => $request->input('inputDireccion'),
+            'telefono' => $request->input('inputTelefono'),
+            'contacto' => $request->input('inputContacto'),
+            'rfc' => $request->input('inputRFC'),
+            'curp' => $request->input('inputCURP')
+        ]);
+
+        
+        $user->save();
     }
 
     /**

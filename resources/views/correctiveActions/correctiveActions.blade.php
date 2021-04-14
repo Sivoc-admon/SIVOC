@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'SIVOC-AcciónES-CORRECTIVAS')
+@section('title', 'SIVOC-ACCIONES-CORRECTIVAS')
 
 @section ( ' plugins.Datatables ' , true)
 

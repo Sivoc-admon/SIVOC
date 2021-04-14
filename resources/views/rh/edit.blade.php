@@ -47,7 +47,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="inputPassword">Contraseña</label>
-                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" required readonly >
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -138,6 +138,18 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label for="inputRFC">RFC</label>
+                      <input type="text" class="form-control" id="inputRFC" name="inputRFC">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="inputCURP">CURP</label>
+                      <input type="text" class="form-control" id="inputCURP" name="inputCURP">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
                       <label for="inputDireccion">Dirección</label>
                       <input type="number" class="form-control" id="inputDireccion" name="inputDireccion">
                     </div>
@@ -162,7 +174,7 @@
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" onclick="saveUser();">Guardar</button>
+          <button type="button" class="btn btn-success" onclick="updateRH();">Guardar</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
     </div>

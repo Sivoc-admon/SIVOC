@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Rule extends Model
-{   
+class RuleFile extends Model
+{
     use Notifiable;
     use SoftDeletes;
 
     protected $fillable = [
-        'code',
+        'rule_id',
         'name',
-        'url'
+        'ruta'
     ];
 
-    public function ruleFile(){
-        return $this->hasMany('App\RuleFile');
+    public function rule()
+    {
+        return $this->belongsTo('App\Rule');
     }
 }

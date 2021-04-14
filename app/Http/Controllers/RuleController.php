@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rule;
 use Illuminate\Http\Request;
+use App\RuleFile;
 
 class RuleController extends Controller
 {
@@ -106,5 +107,55 @@ class RuleController extends Controller
         $rule = Rule::find($rule);
         $rule->delete();
         return redirect()->route('rules.index');
+    }
+
+    public function showRuleFile($rule)
+    {
+        
+        $files = Rule::find($rule)->ruleFile;
+        
+        $msg="";
+        $error=false;
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "rulefiles"=>$files];
+
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $rule)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Normas/'.$rule;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $ruleFile=RuleFile::create([
+                'rule_id' => $request->rule,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($ruleFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
     }
 }

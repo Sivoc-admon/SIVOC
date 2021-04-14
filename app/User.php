@@ -35,7 +35,10 @@ class User extends Authenticatable
         'profession',
         'street',
         'telefono',
-        'contacto'
+        'contacto',
+        'age',
+        'rfc',
+        'curp'
     ];
     
 

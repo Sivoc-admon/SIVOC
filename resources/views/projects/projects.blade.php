@@ -28,11 +28,12 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="tableProjects" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tableProjects" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th></th>
@@ -132,11 +133,23 @@
                     </button>
                   </div>
                 </div>
-                <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 348px;" width="435" height="312" class="chartjs-render-monitor"></canvas>
+                <div class="card-body">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class="">
+                                </div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+                                <div class="">
+                                </div>
+                                </div>
+                            </div>
+                        <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 348px;" width="435" height="312" class="chartjs-render-monitor">
+                        </canvas>
+                    </div>
                 </div>
                 <!-- /.card-body -->
-              </div>
+            </div>
         </div>
     </div>
 @stop
