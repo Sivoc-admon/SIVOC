@@ -18,6 +18,8 @@ function saveMinute() {
         data.append('file' + i, file.files[i]);
     }
 
+    proceso();
+
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
