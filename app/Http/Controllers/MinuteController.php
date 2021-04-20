@@ -46,6 +46,8 @@ class MinuteController extends Controller
         $arrayIds=explode(",",$request->internalParticipant);
         $users = DB::table('users')
                     ->whereIn('id', $arrayIds)->get();
+        $correos = $users->pluck('email');
+        
         
         $participantes="";
         foreach ($users as $user) {
@@ -83,7 +85,7 @@ class MinuteController extends Controller
             $agreementFile->save();
             
             $correo = new MinutaMailable($minute);
-            Mail::to('jfgils02@gmail.com')->send($correo);
+            Mail::to($correos)->send($correo);
 
 
             $msg="Registro guardado con exito";
