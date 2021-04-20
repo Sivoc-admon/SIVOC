@@ -133,7 +133,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="inputNSS">NSS</label>
-                      <input type="number" class="form-control" id="inputNSS" name="inputNSS">
+                      <input type="text" class="form-control" id="inputNSS" name="inputNSS">
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -151,7 +151,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="inputDireccion">Dirección</label>
-                      <input type="number" class="form-control" id="inputDireccion" name="inputDireccion">
+                      <input type="text" class="form-control" id="inputDireccion" name="inputDireccion">
                     </div>
                   </div>
                   <div class="col-md-4">

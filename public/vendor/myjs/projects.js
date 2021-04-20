@@ -270,7 +270,7 @@ function showProjectFile(id) {
                     table += `<tr>"
                         <td> ${data.projectfiles[i].id}</td> 
                         <td>
-                            <a href="storage/Documents/Proyectos/${id}/${data.projectfiles[i].file}" target="_blank">${data.projectfiles[i].name}</a>
+                            <a href="storage/Documents/Proyectos/${id}/${data.projectfiles[i].name}" target="_blank">${data.projectfiles[i].name}</a>
                         </td>"
                     </tr>`;
 

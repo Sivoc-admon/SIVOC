@@ -227,6 +227,7 @@ function editRh(id) {
                 $("#inputDireccion").val(data.user.street);
                 $("#inputTelefono").val(data.user.telefono);
                 $("#inputCURP").val(data.user.curp);
+                $("#inputContacto").val(data.user.contacto);
 
                 $("#hIdRh").val(data.user.id);
 

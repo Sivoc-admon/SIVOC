@@ -101,7 +101,7 @@ class RhController extends Controller
             'area_id' => $request->input('sltAreaRh'),
             'email' => $request->input('inputEmailRh'),
             'grade' => $request->input('sltGenero'),
-            'profession' => $request->input('inputEstadoCivil'),
+            'profession' => $request->input('inputProfesion'),
             'nss' => $request->input('inputNSS'),
             'age' => $request->input('inputEdad'),
             'gender' => $request->input('sltGenero'),
