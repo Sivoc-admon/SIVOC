@@ -45,7 +45,7 @@ class CorrectiveActionController extends Controller
     {
         $error=false;
         $msg="";
-    
+        
         $arrayIds=explode(",",$request->participant);
         $users = DB::table('users')
                     ->whereIn('id', $arrayIds)->get();
@@ -60,7 +60,7 @@ class CorrectiveActionController extends Controller
             'issue' => $request->issue,            
             'action' => $request->action,
             'involved' => $participantes,
-            'user_id' => $request->inputIdAutor,
+            'user_id' => $request->responsable,
             'status' => $request->status,
         ]);
 

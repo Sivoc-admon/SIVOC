@@ -4,6 +4,7 @@ function saveCorrectiveAction() {
     let action = $("#inputActionCorrectiveAction").val();
     let participant = $("#sltParticipantesInternos").val();
     let status = $("#inputStatusCorrectiveAction").val();
+    let responsable = $("#inputIdAutor").val();
     let file = $('#fileCorrectiveAction')[0];
 
     let data = new FormData();
@@ -11,6 +12,7 @@ function saveCorrectiveAction() {
     data.append("action", action);
     data.append("participant", participant);
     data.append("status", status);
+    data.append("responsable", responsable);
     data.append("tamanoFiles", file.files.length);
     for (let i = 0; i < file.files.length; i++) {
         data.append('file' + i, file.files[i]);
