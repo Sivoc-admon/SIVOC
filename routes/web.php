@@ -95,7 +95,7 @@ Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActio
 Route::resource('correctiveActions', 'CorrectiveActionController');
 
 //AUDITORIA INTERNA
-Route::get('internalAudits/{internalAudits}/uploadFile', 'InternalAuditController@uploadFile')->name('internalAudits.uploadFile');
+Route::post('internalAudits/{internalAudits}/uploadFile', 'InternalAuditController@uploadFile')->name('internalAudits.uploadFile');
 Route::get('internalAudits/{internalAudits}/showFiles', 'InternalAuditController@showFiles')->name('internalAudits.showFiles');;
 Route::resource('internalAudits', 'InternalAuditController');
 

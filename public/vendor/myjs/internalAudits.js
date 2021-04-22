@@ -148,6 +148,7 @@ function showInternalAuditFile(id) {
                     </tr>`;
 
                 }
+                $("#hidInternal").val(id);
 
                 $("#bodyInternalAuditFiles").append(table);
 
