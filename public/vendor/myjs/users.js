@@ -229,6 +229,9 @@ function editRh(id) {
                 $("#inputCURP").val(data.user.curp);
                 $("#inputContacto").val(data.user.contacto);
 
+                $("#inputEstudios option[value='"+ data.user.grade +"']").attr("selected",true);
+                $("#sltGenero option[value='"+ data.user.gender +"']").attr("selected",true);
+
                 $("#hIdRh").val(data.user.id);
 
                 let optionAreas = "<option value='0'>Seleccione</option>";

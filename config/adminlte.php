@@ -190,7 +190,7 @@ return [
 
     'dashboard_url' => 'inicio',
 
-    'logout_url' => 'inicio',
+    'logout_url' => 'logout',
 
     'login_url' => 'login',
 
