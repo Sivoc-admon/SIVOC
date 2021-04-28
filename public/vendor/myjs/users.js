@@ -295,7 +295,7 @@ function showRHFile(id) {
                     table += `<tr>"
                         <td> ${data.files[i].id}</td> 
                         <td>
-                            <a href="storage/Documents/SGC/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
+                            <a href="storage/Documents/RH/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
                         </td>
                         <td>
                             <div class="btn-group">

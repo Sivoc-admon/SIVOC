@@ -39,7 +39,7 @@
                                     <th>Archivos</th>
                                     <th>#</th>
                                     <th>Problematica</th>
-                                    <th>Acción inmediata</th>
+                                    <th>Tipo de acción</th>
                                     <th>Responsable</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
