@@ -118,9 +118,20 @@ class IndicatorController extends Controller
 
         
         $minMax = IndicatorType::find($indicatorType);
-        
 
-        return response()->json(["message" => "Exitoso", "grafica" => $grafica, 'minMax'=>$minMax], Response::HTTP_OK);
+        
+        $indicators = DB::table('indicators')
+        ->join('areas', 'indicators.area_id', '=', 'areas.id')
+        ->join('indicator_type', 'indicators.indicator_type_id', '=', 'indicator_type.id')
+        ->where('indicators.area_id', $area)
+        ->where('indicators.indicator_type_id', $indicatorType)
+        ->where('indicators.registration_date', 'LIKE', $fechaInicial.'%')
+        ->select('indicators.*', 'areas.name as area', 'indicator_type.name as tipo_indicador')
+        ->get();
+
+
+
+        return response()->json(["message" => "Exitoso", "grafica" => $grafica, "minMax"=>$minMax, "indicatorsGraph"=>$indicators], Response::HTTP_OK);
     }
 
     /**

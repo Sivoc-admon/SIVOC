@@ -108,7 +108,7 @@
             var buttonCommon = {
                 exportOptions: {
                     columns: function(column, data, node) {
-                        if (column == 5) {
+                        if (column == 4) {
                             return false;
                         }
                         return true;
@@ -119,7 +119,7 @@
             $("#tableMinutes").DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    /*'csv', 'excel', 'pdf',*/
+                    
                     $.extend( true, {}, buttonCommon, {
                         extend: 'csv'
                     } ),

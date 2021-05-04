@@ -20,7 +20,7 @@
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputIssiueCorrectiveAction">Problematica</label>
+                        <label for="inputIssiueCorrectiveAction">Descripción</label>
                         <textarea class="form-control" name="inputIssiueCorrectiveAction" id="inputIssiueCorrectiveAction" cols="7" rows="5"></textarea>
                       </div>
                     </div>

@@ -52,7 +52,7 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <table id="tableMinutes" class="table table-striped table-bordered" style="width:100%">
+            <table id="tableAgrement" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -94,7 +94,7 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <table id="tableMinutes" class="table table-striped table-bordered" style="width:100%">
+          <table id="tableMinuteFiles" class="table table-striped table-bordered" style="width:100%">
               <thead>
                   <tr>
                       <th>#</th>

@@ -256,6 +256,7 @@ function editMinute(id) {
                 $("#sltEditParticipantesInternos").val(data.minute.participant);
                 $("#inputEditExternalParticipant").val(data.minute.external_participant);
                 $("#hIdMinute").val(id);
+                $("#sltEditMinuteType option[value='"+ data.minute.type +"']").attr("selected",true);
 
 
             }

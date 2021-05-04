@@ -129,6 +129,7 @@ function minMax() {
 }
 
 function graficaIndicador() {
+    $("#bodyIndicatorsDos").empty();
     $('#bar').html(''); //remove canvas from container
     $('#bar').html("<canvas id='chartIndicator'></canvas>");
     $.ajax({
@@ -137,15 +138,35 @@ function graficaIndicador() {
         data: $("#formGraficaIndicador").serialize(),
         //dataType: 'json',
         success: function(data) {
-            console.log(data.grafica);
+            console.log(data.indicatorsGraph);
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
             } else {
                 let valores = [];
-                /*data.grafica.forEach(element => {
-                    valores.push(element.value);
-                });*/
+                let table = "";
+                
+                //datos de graficacion
+                for (const i in data.indicatorsGraph) {
+                    table += `<tr>"
+                        <td> ${data.indicatorsGraph[i].area}</td>
+                        <td> ${data.indicatorsGraph[i].tipo_indicador}</td>
+                        <td> ${data.indicatorsGraph[i].value}</td> 
+                        <td>
+                            <a href="storage/Documents/Indicadores/${data.indicatorsGraph[i].file_name}" target="_blank">${data.indicatorsGraph[i].file_name}</a>
+                        </td>"
+                        <td> ${data.indicatorsGraph[i].registration_date}</td> 
+                    </tr>`;
+
+                }
+
+                $("#bodyIndicatorsDos").append(table);
+                $("#tableIndicatorsDos").show();
+
+
+
+
+                //datos para graficar
                 for (let i = 0; i < 11; i++) {
                     if (i < data.grafica.length) {
                         if (i == data.grafica[i].month - 1) {
@@ -166,7 +187,6 @@ function graficaIndicador() {
 
 
                 }
-                console.log(valores);
                 let objetivos = {
                     label: 'Valor Objetivo',
                     data: [data.minMax.max,

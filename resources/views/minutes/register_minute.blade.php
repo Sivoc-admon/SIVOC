@@ -32,6 +32,7 @@
                          <option value="Interna">Interna</option>
                          <option value="Interna">Externa</option>
                          <option value="Interna">Dirección</option>
+                         <option value="Cambio SGC">Cambio SGC</option>
                         </select>
                       </div>
                     </div>
@@ -113,6 +114,7 @@
                        <option value="Interna">Interna</option>
                        <option value="Externa">Externa</option>
                        <option value="Direccion">Dirección</option>
+                       <option value="Cambio SGC">Cambio SGC</option>
                       </select>
                     </div>
                   </div>

@@ -70,7 +70,7 @@ function showButtonFile(id) {
                 table += `<tr>
                         <td> ${data.buttonfiles.id}</td> 
                         <td>
-                            <a href="storage/Documents/welcome/${id}/${data.buttonfiles.name}" target="_blank">${data.buttonfiles.name}</a>
+                            <a href="../storage/Documents/welcome/${id}/${data.buttonfiles.name}" target="_blank">${data.buttonfiles.name}</a>
                         </td>`;
                 if (data.eliminaArchivo == true) {
                     table += `<td>

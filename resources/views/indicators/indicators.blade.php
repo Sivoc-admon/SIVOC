@@ -41,6 +41,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <h3 style="text-align-last:center">Tabla de indicadores</h3>
                     <!-- class="table table-striped table-bordered" -->
                     <table id="tableIndicators" class="table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -74,6 +75,40 @@
                                 <th>Área</th>
                                 <th>Tipo Indicador</th>
                                 <th>Valor</th>
+                                <th>Fecha Registro</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 style="text-align-last:center">Resultados de Graficacion</h3>
+                    <!-- class="table table-striped table-bordered" -->
+                    <table id="tableIndicatorsDos" class="table table-striped table-bordered" style="width:100%; display:none">
+                        <thead>
+                            <tr>
+                                <th>Área</th>
+                                <th>Tipo Indicador</th>
+                                <th>Valor</th>
+                                <th>Archivo</th>
+                                <th>Fecha Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyIndicatorsDos">
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Área</th>
+                                <th>Tipo Indicador</th>
+                                <th>Valor</th>
+                                <th>Archivo</th>
                                 <th>Fecha Registro</th>
                             </tr>
                         </tfoot>
