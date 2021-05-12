@@ -241,5 +241,22 @@ class SgcController extends Controller
         return response()->json($array);
     }
 
-    
+    public function updateFile(Request $request, $id)
+    {
+        $file = SgcFile::find($id);
+        
+        $msg="";
+        $error=false;
+        
+        $file->update([
+            'revision' => $request->revision,
+            
+        ]);
+        
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "file"=>$file];
+
+        return response()->json($array);
+    }
 }

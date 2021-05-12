@@ -204,6 +204,7 @@
                       
                       <th>#</th>
                       <th>Archivo</th>
+                      <th>No. Revision</th>
                       <th>Acción</th>
                       
                   </tr>
@@ -215,6 +216,7 @@
                   <tr>
                       <th>#</th>
                       <th>Archivo</th>
+                      <th>No. Revision</th>
                       <th>Acción</th>
                   </tr>
               </tfoot>

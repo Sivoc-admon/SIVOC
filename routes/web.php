@@ -100,6 +100,7 @@ Route::get('internalAudits/{internalAudits}/showFiles', 'InternalAuditController
 Route::resource('internalAudits', 'InternalAuditController');
 
 //DOCUMENTOS SGC
+Route::put('sgc/{sgc}/updateFile', 'SgcController@updateFile')->name('sgc.updateFile');
 Route::post('sgc/{sgc}/uploadFile', 'SgcController@uploadFile')->name('sgc.uploadFile');
 Route::get('sgc/{sgc}/files', 'SgcController@showFiles')->name('sgc.showFiles');
 Route::delete('sgc/{sgc}/destroyFile', 'SgcController@destroyFile')->name('sgc.destroyFile');

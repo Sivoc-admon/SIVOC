@@ -167,7 +167,6 @@ function showMinuteFile(minute) {
 
                 $("#showMinuteFiles").append(table);
 
-
             }
 
         },
