@@ -198,9 +198,11 @@ class SgcController extends Controller
         $pathFile = 'public/Documents/SGC/'.$sgc;
 
         $count = SgcFile::where('sgc_id', $sgc)->get();
-        $count =$count->count();
-        $count++;
+        //dd($count);
+        $count =$count[$count->count()-1]->revision;
+        
         for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $count++;
             $nombre="file".$i;
             $archivo = $request->file($nombre);
             $sgcFile=SgcFile::create([
