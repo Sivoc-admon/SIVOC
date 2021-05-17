@@ -75,7 +75,7 @@ class SgcController extends Controller
                     'sgc_id' => $sgc->id,
                     'name' => $archivo->getClientOriginalName(),
                     'ruta' => 'storage/app/' . $pathFile,
-                    'revision' => 1,
+                    'revision' => 0,
     
                 ]);
                 $path = $archivo->storeAs(

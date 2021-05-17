@@ -80,16 +80,30 @@ function showSgcFile(id) {
                         <td> ${data.files[i].id}</td> 
                         <td>
                             <a href="storage/Documents/SGC/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
-                        </td>
-                        <td>
+                        </td>`;
+                    if ((data.files.length - 1) == i) {
+                        table += `<td>
                             <input type="number" id="inputRevision_${i}" value="${data.files[i].revision}"></input>
                         </td>
                         `;
+                    } else {
+                        table += `<td></td>`;
+                    }
+
                     if (data.eliminaArchivo == true) {
                         table += `<td>
-                            <div class="btn-group">
-                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editFile(${data.files[i].id}, ${i});"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})"><i class="fas fa-minus-square"></i></button>
+                            <div class="btn-group">`;
+
+                        if ((data.files.length - 1) == i) {
+                            table += `<button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editFile(${data.files[i].id}, ${i});">
+                                <i class="fas fa-edit"></i>
+                            </button>`;
+                        } else {
+
+                        }
+                        table += `<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})">
+                                    <i class="fas fa-minus-square"></i>
+                                </button>
                             </div>`;
 
                     } else {
@@ -302,8 +316,8 @@ function eliminarArchivo(id) {
 }
 
 function editFile(id, consecutivo) {
-    let revision = $("#inputRevision_"+consecutivo).val();
-    
+    let revision = $("#inputRevision_" + consecutivo).val();
+
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
