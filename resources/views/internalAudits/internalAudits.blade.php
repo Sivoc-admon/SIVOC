@@ -42,7 +42,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Área Evaluada</th>
+                                    <th>Área</th>
                                     <th>Evaluador</th>
                                     <th>Fecha Evaluación</th>
                                     <th>Acción</th>
@@ -84,7 +84,7 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Área Evaluada</th>
+                                    <th>Área</th>
                                     <th>Evaluador</th>
                                     <th>Fecha Evaluación</th>
                                     <th>Acción</th>
