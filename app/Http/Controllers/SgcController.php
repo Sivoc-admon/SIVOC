@@ -199,8 +199,14 @@ class SgcController extends Controller
 
         $count = SgcFile::where('sgc_id', $sgc)->get();
         //dd($count);
-        $count =$count[$count->count()-1]->revision;
+        if($count->count()>0){
+            $count =$count[$count->count()-1]->revision;
         
+            
+        }else{
+            $count = -1;
+        }
+
         for ($i=0; $i <$request->tamanoFiles ; $i++) { 
             $count++;
             $nombre="file".$i;
@@ -216,6 +222,7 @@ class SgcController extends Controller
                 $pathFile, $archivo->getClientOriginalName()
             );
         }
+        
         
         if ($sgcFile->save()) {
             $msg="Registro guardado con exito";
