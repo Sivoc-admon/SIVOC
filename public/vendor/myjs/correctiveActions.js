@@ -100,14 +100,14 @@ function editCorrectiveAction(id) {
                             "<option value='Validación'>Validación</option>" +
                             "<option value='Desfasada'>Desfasada</option>";
                         break;
-                    case 'Validacion':
+                    case 'Validación':
                         option = "<option value='Abierta'>Abierta</option>" +
                             "<option value='Cerrada'>Cerrada</option>" +
                             "<option value='Proceso'>Proceso</option>" +
                             "<option value='Validación' selected>Validación</option>" +
                             "<option value='Desfasada'>Desfasada</option>";
                         break;
-                    case 'Desfazada':
+                    case 'Desfasada':
                         option = "<option value='Abierta' selected>Abierta</option>" +
                             "<option value='Cerrada'>Cerrada</option>" +
                             "<option value='Proceso'>Proceso</option>" +
