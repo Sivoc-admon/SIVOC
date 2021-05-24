@@ -139,14 +139,22 @@
                           <option value="PRF">Formato de Procedimiento</option>
                           <option value="IT">Instructivo de Trabajo</option>
                           <option value="ITF">Formato de Instructivo de Trabajo</option>
+                          <option value="DI">Diagrama</option>
+                          <option value="MA">Manual</option>
+                          <option value="AV">Ayuda Visual</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="inputEditResponsable">Responsable</label>
-                      <input type="text" class="form-control" id="inputEditResponsable" name="inputEditResponsable" required readonly>
-                      <input type="hidden" name="inputEditIdAutor" id="inputEditIdAutor" value="{{ Auth::user()->id }}" >
+                      
+                      <select class="form-control" name="inputEditResponsable" id="inputEditResponsable">
+                        <option value="0">Seleccione responsable</option>
+                      @foreach ($users as $user)
+                          <option value="{{$user->id}}">{{$user->name}} {{$user->last_name}} {{$user->mother_last_name}}</option>
+                      @endforeach
+                    </select>
                     </div>
                   </div>
                   <div class="col-md-4">

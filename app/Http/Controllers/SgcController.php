@@ -150,7 +150,8 @@ class SgcController extends Controller
             'code' => $request->inputEditCodigoSgc,
             'description' => $request->inputEditDescriptionSgc,
             'create_date' => $request->inputEditCreateSgc,
-            'update_date' => $request->inputEditUpdateSgc
+            'update_date' => $request->inputEditUpdateSgc,
+            'user_id' => $request->inputEditResponsable,
             
         ]);
     }

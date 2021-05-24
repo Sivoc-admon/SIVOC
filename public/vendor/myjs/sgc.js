@@ -208,6 +208,7 @@ function editSgc(id) {
                 $("#inputEditCodigoSgc").val(data.sgc.code);
                 $("#inputEditDescriptionSgc").val(data.sgc.description);
                 $("#hIdSgc").val(id);
+                $("#inputEditResponsable option[value='" + data.user.id + "']").attr("selected", true);
 
 
                 let optionAreas = "<option value='0'>Seleccione</option>";
