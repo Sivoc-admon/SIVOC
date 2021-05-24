@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Acción Correctiva</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Registro de Acciones</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -13,7 +13,7 @@
             <form id="formRegisterCorrectiveAction">
               @csrf
                 <div class="row">
-                  <h4>Datos Acción Correctiva</h4>
+                  <h4>Datos de Acciones</h4>
                 </div>
                   
                 <div class="row" style="background-color: #17a2b8">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputActionCorrectiveAction">Acción Inmediata</label>
+                        <label for="inputActionCorrectiveAction">Tipo de acción</label>
                         <textarea class="form-control" name="inputActionCorrectiveAction" id="inputActionCorrectiveAction" cols="7" rows="5"></textarea>
                       </div>
                     </div>

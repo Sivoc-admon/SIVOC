@@ -37,7 +37,8 @@ Route::delete('/users/detele/{id}', 'UserController@destroy')->name('users.destr
 Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 
-//PROJECTS
+//PROJECTS+
+Route::delete('projects/{id}/destroyFile', 'ProjectController@destroyFile')->name('projects.destroyFile');
 Route::post('projects/{id}/uploadFile', 'ProjectController@uploadFile')->name('projects.uploadFile');
 Route::get('projects/{project}/showFile', 'ProjectController@showFile')->name('projects.showFile');
 Route::post('projects/board/createBoard', 'ProjectController@createBoard')->name('projects.createBoard');
@@ -81,6 +82,7 @@ Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
 Route::resource('rules', 'RuleController');
 
 //MINUTAS
+Route::delete('minutes/{minute}/destroyFile', 'MinuteController@destroyFile')->name('minutes.destroyFile');
 Route::post('minutes/{minute}/uploadFile', 'MinuteController@uploadFile')->name('minutes.uploadFile');
 Route::post('minutes/agreement', 'MinuteController@storeAgreement')->name('minutes.storeAgreement');
 Route::get('minutes/showAgreements/{id}', 'MinuteController@showAgreement')->name('minutes.showAgreement');
@@ -119,35 +121,4 @@ Route::get('rh/{empleado}/files', 'RhController@files')->name('rh.files');
 Route::resource('rh', 'RhController');
 
 
-
-
-/*Auth::routes();
- 
-Route::get('/home', 'HomeController@index')->name('home');
- 
-//Roles y Permisos
- 
-Route::middleware(['auth'])->group(function(){
- 
-	//Products
-	Route::post('products/store', 'ProductController@store')->name('products.store')
-		->middleware('permission:products.create');
- 
-	Route::get('products', 'ProductController@index')->name('products.index')
-		->middleware('permission:products.index');
- 
-	Route::get('products/create', 'ProductController@create')->name('products.create')
-		->middleware('permission:products.create');
- 
-	Route::put('products/{product}', 'ProductController@update')->name('products.update')
-		->middleware('permission:products.edit');
- 
-	Route::get('products/{product}', 'ProductController@show')->name('products.show')
-		->middleware('permission:products.show');
- 
-	Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')
-		->middleware('permission:products.destroy');
- 
-	Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
-		->middleware('permission:products.edit'); */
 

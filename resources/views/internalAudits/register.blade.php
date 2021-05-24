@@ -20,7 +20,7 @@
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputAreaAudit">Área Evaluada</label>
+                        <label for="inputAreaAudit">Área</label>
                         <select class="form-control" name="sltAreaAudit" id="sltAreaAudit">
                             @foreach ($areas as $area)
                                 <option value="{{$area->id}}">{{$area->name}}</option>

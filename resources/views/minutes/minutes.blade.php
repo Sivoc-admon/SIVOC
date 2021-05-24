@@ -38,6 +38,7 @@
                                 <th>Participantes</th>
                                 <th>Participantes Externos</th>
                                 <th>Tipo</th>
+                                <th>Fecha</th>
                                 <th>Estatus</th>
                                 <th>Acción</th>
                             </tr>
@@ -51,6 +52,7 @@
                                         <td>{{ $minute->participant }}</td>
                                         <td>{{ $minute->external_participant }}</td>
                                         <td>{{ $minute->type }}</td>
+                                        <td>{{ $minute->created_at }}</td>
                                         <td>{{ $minute->status }}</td>
                                         
                                         <td>
@@ -87,6 +89,7 @@
                                 <th>Participantes</th>
                                 <th>Participantes Externos</th>
                                 <th>Tipo</th>
+                                <th>Fecha</th>
                                 <th>Estatus</th>
                                 <th>Acción</th>
                             </tr>

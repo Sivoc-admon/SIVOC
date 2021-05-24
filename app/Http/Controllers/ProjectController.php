@@ -205,4 +205,16 @@ class ProjectController extends Controller
         
         return response()->json($array);
     }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = ProjectFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
+    }
 }

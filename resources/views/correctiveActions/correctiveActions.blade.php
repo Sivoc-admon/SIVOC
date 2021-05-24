@@ -87,7 +87,7 @@
                                 <tr>
                                     <th>Archivos</th>
                                     <th>#</th>
-                                    <th>Descripción</th>
+                                    <th>Problematica</th>
                                     <th>Tipo de acción</th>
                                     <th>Responsable</th>
                                     <th>Involucrados</th>

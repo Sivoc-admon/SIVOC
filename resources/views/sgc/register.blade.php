@@ -37,6 +37,10 @@
                             <option value="PRF">Formato de Procedimiento</option>
                             <option value="IT">Instructivo de Trabajo</option>
                             <option value="ITF">Formato de Instructivo de Trabajo</option>
+                            <option value="DI">Diagrama</option>
+                            <option value="MA">Manual</option>
+                            <option value="AV">Ayuda Visual</option>
+
                         </select>
                       </div>
                     </div>
