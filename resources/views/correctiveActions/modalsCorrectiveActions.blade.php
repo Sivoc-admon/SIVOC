@@ -142,7 +142,7 @@
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Acciónes</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar Acciones</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -153,7 +153,7 @@
             <form id="formEditCorrectiveAction">
               @csrf
                 <div class="row">
-                  <h4>Datos Acción Correctiva</h4>
+                  <h4>Datos de Acciones</h4>
                 </div>
                   
                 <div class="row" style="background-color: #17a2b8">

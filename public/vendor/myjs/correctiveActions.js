@@ -83,36 +83,36 @@ function editCorrectiveAction(id) {
                         option = "<option value='Abierta' selected>Abierta</option>" +
                             "<option value='Cerrada'>Cerrada</option>" +
                             "<option value='Proceso'>Proceso</option>" +
-                            "<option value='Validacion'>Validación</option>" +
-                            "<option value='Desfasada'>Desfazada</option>";
+                            "<option value='Validación'>Validación</option>" +
+                            "<option value='Desfasada'>Desfasada</option>";
                         break;
                     case 'Cerrada':
                         option = "<option value='Abierta'>Abierta</option>" +
                             "<option value='Cerrada' selected>Cerrada</option>" +
                             "<option value='Proceso'>Proceso</option>" +
-                            "<option value='Validacion'>Validación</option>" +
-                            "<option value='Desfasada'>Desfazada</option>";
+                            "<option value='Validación'>Validación</option>" +
+                            "<option value='Desfasada'>Desfasada</option>";
                         break;
                     case 'Proceso':
                         option = "<option value='Abierta' selected>Abierta</option>" +
                             "<option value='Cerrada'>Cerrada</option>" +
                             "<option value='Proceso' selected>Proceso</option>" +
-                            "<option value='Validacion'>Validación</option>" +
-                            "<option value='Desfasada'>Desfazada</option>";
+                            "<option value='Validación'>Validación</option>" +
+                            "<option value='Desfasada'>Desfasada</option>";
                         break;
                     case 'Validacion':
                         option = "<option value='Abierta'>Abierta</option>" +
                             "<option value='Cerrada'>Cerrada</option>" +
                             "<option value='Proceso'>Proceso</option>" +
-                            "<option value='Validacion' selected>Validación</option>" +
-                            "<option value='Desfasada'>Desfazada</option>";
+                            "<option value='Validación' selected>Validación</option>" +
+                            "<option value='Desfasada'>Desfasada</option>";
                         break;
                     case 'Desfazada':
                         option = "<option value='Abierta' selected>Abierta</option>" +
                             "<option value='Cerrada'>Cerrada</option>" +
                             "<option value='Proceso'>Proceso</option>" +
-                            "<option value='Validacion'>Validación</option>" +
-                            "<option value='Desfasada' selected>Desfazada</option>";
+                            "<option value='Validación'>Validación</option>" +
+                            "<option value='Desfasada' selected>Desfasada</option>";
                         break;
 
                     default:
