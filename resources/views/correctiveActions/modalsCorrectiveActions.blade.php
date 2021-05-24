@@ -142,7 +142,7 @@
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Acción Correctiva</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar Acciónes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -160,13 +160,13 @@
                   
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputEditIssiueCorrectiveAction">Problematica</label>
+                        <label for="inputEditIssiueCorrectiveAction">Descripción</label>
                         <textarea class="form-control" name="inputEditIssiueCorrectiveAction" id="inputEditIssiueCorrectiveAction" cols="7" rows="5"></textarea>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputEditActionCorrectiveAction">Acción Inmediata</label>
+                        <label for="inputEditActionCorrectiveAction">Tipo de Acción</label>
                         <textarea class="form-control" name="inputEditActionCorrectiveAction" id="inputEditActionCorrectiveAction" cols="7" rows="5"></textarea>
                       </div>
                     </div>

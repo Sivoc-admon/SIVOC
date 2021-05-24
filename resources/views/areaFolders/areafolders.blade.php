@@ -5,7 +5,14 @@
 @section ( ' plugins.Datatables ' , true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">{{ ucwords($area) }}</h1>
+    @if ($area=="direccion")
+        <h1 class="m-0 text-dark">Dirección</h1>
+    @elseif($area=="ingenieria")
+        <h1 class="m-0 text-dark">Ingeniería</h1>
+    @else
+        <h1 class="m-0 text-dark">{{ ucwords($area) }}</h1>
+    @endif
+    
 @stop
 
 @section('content')
