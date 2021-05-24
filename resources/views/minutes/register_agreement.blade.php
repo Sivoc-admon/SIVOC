@@ -98,7 +98,8 @@
               <thead>
                   <tr>
                       <th>#</th>
-                      <th>archivo</th>
+                      <th>Archivo</th>
+                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody id="showMinuteFiles">
@@ -108,7 +109,7 @@
                   <tr>
                       <th>#</th>
                       <th>archivo</th>
-                      
+                      <th>Acción</th>
                   </tr>
               </tfoot>
           </table>

@@ -155,7 +155,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>archivo</th>
+                        <th>Archivo</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody id="showProjectFiles">
@@ -164,8 +165,8 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>archivo</th>
-                        
+                        <th>Archivo</th>
+                        <th>Acción</th>
                     </tr>
                 </tfoot>
             </table>

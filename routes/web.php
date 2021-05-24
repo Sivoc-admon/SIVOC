@@ -37,7 +37,8 @@ Route::delete('/users/detele/{id}', 'UserController@destroy')->name('users.destr
 Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 
-//PROJECTS
+//PROJECTS+
+Route::delete('projects/{id}/destroyFile', 'ProjectController@destroyFile')->name('projects.destroyFile');
 Route::post('projects/{id}/uploadFile', 'ProjectController@uploadFile')->name('projects.uploadFile');
 Route::get('projects/{project}/showFile', 'ProjectController@showFile')->name('projects.showFile');
 Route::post('projects/board/createBoard', 'ProjectController@createBoard')->name('projects.createBoard');
@@ -81,6 +82,7 @@ Route::delete('rules/{rule}', 'RuleController@destroy')->name('rules.destroy');
 Route::resource('rules', 'RuleController');
 
 //MINUTAS
+Route::delete('minutes/{minute}/destroyFile', 'MinuteController@destroyFile')->name('minutes.destroyFile');
 Route::post('minutes/{minute}/uploadFile', 'MinuteController@uploadFile')->name('minutes.uploadFile');
 Route::post('minutes/agreement', 'MinuteController@storeAgreement')->name('minutes.storeAgreement');
 Route::get('minutes/showAgreements/{id}', 'MinuteController@showAgreement')->name('minutes.showAgreement');

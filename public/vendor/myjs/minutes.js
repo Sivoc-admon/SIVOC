@@ -161,7 +161,13 @@ function showMinuteFile(minute) {
                         <td>
                             <a href="storage/Documents/Minutas/${minute}/${data.minutefiles[i].file}" target="_blank">${data.minutefiles[i].file}</a>
                         </td>"
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.minutefiles[i].id})">
+                                <i class="fas fa-minus-square"></i>
+                            </button>
+                        </td>
                     </tr>`;
+                    
 
                 }
 
@@ -290,6 +296,45 @@ function updateMinute() {
                 $("#ModalEditMinute").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function eliminarArchivo(id) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        url: `minutes/${id}/destroyFile`,
+        /*data: data,
+        cache: false,
+        contentType: false,
+        processData: false,*/
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowFiles").modal('hide');
+
+                messageAlert("Archivo Eliminado", "success", "");
 
                 location.reload();
 
