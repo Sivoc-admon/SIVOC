@@ -140,11 +140,16 @@ function showInternalAuditFile(id) {
 
                 let table = "";
                 for (const i in data.files) {
-                    table += `<tr>"
+                    table += `<tr>
                         <td> ${data.files[i].id}</td> 
                         <td>
                             <a href="storage/Documents/Auditoria_interna/${id}/${data.files[i].name}" target="_blank">${data.files[i].name}</a>
-                        </td>"
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.files[i].id})">
+                                <i class="fas fa-minus-square"></i>
+                            </button>
+                        </td>
                     </tr>`;
 
                 }
@@ -200,6 +205,45 @@ function masDocumentos() {
                 $("#ModalShowInternalAuditFiles").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function eliminarArchivo(id) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        url: `internalAudits/${id}/destroyFile`,
+        /*data: data,
+        cache: false,
+        contentType: false,
+        processData: false,*/
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowInternalAuditFiles").modal('hide');
+
+                messageAlert("Archivo Eliminado", "success", "");
 
                 location.reload();
 

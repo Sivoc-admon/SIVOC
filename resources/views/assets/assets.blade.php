@@ -63,22 +63,31 @@
                                             
                                         
                                         <td>
-                                            <span data-toggle="modal" data-target="#ModalEditAsset">
-                                                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar Activo" onclick="editAsset({{$asset->id}})">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </span>
-                                            <span data-toggle="modal" data-target="#ModalShowFilesAsset">
-                                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showAssetFile({{$asset->id}}, 'General')">
-                                                    <i class="fas fa-list"></i>
-                                                </button>
-                                            </span>
-                                            <span data-toggle="modal" data-target="#ModalShowFilesAsset">
-                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos de calibración" onclick="showAssetFile({{$asset->id}}, 'Calibracion')">
-                                                    <i class="fas fa-list"></i>
-                                                </button>
-                                            </span>
-                                            
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <span data-toggle="modal" data-target="#ModalEditAsset">
+                                                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar Activo" onclick="editAsset({{$asset->id}})">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                </span>
+                                                <span data-toggle="modal" data-target="#ModalShowFilesAsset">
+                                                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showAssetFile({{$asset->id}}, 'General')">
+                                                        <i class="fas fa-list"></i>
+                                                    </button>
+                                                </span>
+                                                <span data-toggle="modal" data-target="#ModalShowFilesAsset">
+                                                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos de calibración" onclick="showAssetFile({{$asset->id}}, 'Calibracion')">
+                                                        <i class="fas fa-list"></i>
+                                                    </button>
+                                                </span>
+                                                @if (Auth::user()->hasRole('admin'))
+                                                    <form action="{{ route('assets.destroy',$asset->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                        
+                                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                                    </form>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

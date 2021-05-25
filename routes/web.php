@@ -37,7 +37,8 @@ Route::delete('/users/detele/{id}', 'UserController@destroy')->name('users.destr
 Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 
-//PROJECTS+
+//PROJECTS
+Route::delete('projects/{id}/destroyBoard', 'ProjectController@destroyBoard')->name('projects.destroyBoard');
 Route::delete('projects/{id}/destroyFile', 'ProjectController@destroyFile')->name('projects.destroyFile');
 Route::post('projects/{id}/uploadFile', 'ProjectController@uploadFile')->name('projects.uploadFile');
 Route::get('projects/{project}/showFile', 'ProjectController@showFile')->name('projects.showFile');
@@ -97,6 +98,7 @@ Route::get('correctiveActions/showCorrectiveActionsFiles/{id}', 'CorrectiveActio
 Route::resource('correctiveActions', 'CorrectiveActionController');
 
 //AUDITORIA INTERNA
+Route::delete('internalAudits/{internalAudits}/destroyFile', 'InternalAuditController@destroyFile')->name('internalAudits.destroyFile');
 Route::post('internalAudits/{internalAudits}/uploadFile', 'InternalAuditController@uploadFile')->name('internalAudits.uploadFile');
 Route::get('internalAudits/{internalAudits}/showFiles', 'InternalAuditController@showFiles')->name('internalAudits.showFiles');;
 Route::resource('internalAudits', 'InternalAuditController');

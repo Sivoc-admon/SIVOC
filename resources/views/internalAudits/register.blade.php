@@ -85,7 +85,7 @@
                       
                       <th>#</th>
                       <th>Archivo</th>
-                      
+                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody id="bodyInternalAuditFiles">
@@ -95,6 +95,7 @@
                   <tr>
                       <th>#</th>
                       <th>Archivo</th>
+                      <th>Acción</th>
                   </tr>
               </tfoot>
             </table>

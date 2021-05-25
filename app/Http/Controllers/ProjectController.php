@@ -151,6 +151,7 @@ class ProjectController extends Controller
         ->join('projects', 'boards.project_id', '=', 'projects.id')
         ->select('boards.*', 'projects.name as name_project')
         ->where('projects.id', $id)
+        ->whereNull('boards.deleted_at')
         ->get();
 
         return response()->json(['data' => $tableros], Response::HTTP_OK);
@@ -212,6 +213,18 @@ class ProjectController extends Controller
         $error=false;
 
         $file = ProjectFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
+    }
+
+    public function destroyBoard($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = Board::find($id);
         $file->delete();
         $array=["msg"=>$msg, "error"=>$error];
 

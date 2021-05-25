@@ -18,6 +18,7 @@ class AssetController extends Controller
     {
         $assets = DB::table('assets')
         ->select(DB::raw('assets.*, TIMESTAMPDIFF(MONTH, date_calibration, CURDATE()) as month'))
+        ->whereNull('assets.deleted_at')
         ->get();
        
        
@@ -180,9 +181,11 @@ class AssetController extends Controller
      * @param  \App\Asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asset $asset)
+    public function destroy($id)
     {
-        
+        $asset = Asset::find($id);
+        $asset->delete();
+        return redirect()->route('assets.index');
     }
 
     public function showAssetFiles(Request $request, $asset)

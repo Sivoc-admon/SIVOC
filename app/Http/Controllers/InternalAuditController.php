@@ -201,4 +201,16 @@ class InternalAuditController extends Controller
         
         return response()->json($array);
     }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = InternalAuditFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
+    }
 }

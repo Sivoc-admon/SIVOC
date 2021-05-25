@@ -86,6 +86,11 @@ function showBoards(tablero) {
                         table += `<tr>
                             <td>${ data[i][j].id }</td>
                             <td>${ data[i][j].name }</td>
+                            <td>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarTablero(${data[i][j].id})">
+                                <i class="fas fa-minus-square"></i>
+                            </button>
+                        </td>
                         </tr>`;
                     }
 
@@ -368,6 +373,45 @@ function eliminarArchivo(id) {
             } else {
 
                 $("#ModalShowFilesProject").modal('hide');
+
+                messageAlert("Archivo Eliminado", "success", "");
+
+                location.reload();
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function eliminarTablero(id) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        url: `projects/${id}/destroyBoard`,
+        /*data: data,
+        cache: false,
+        contentType: false,
+        processData: false,*/
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+
+                $("#ModalShowBoard").modal('hide');
 
                 messageAlert("Archivo Eliminado", "success", "");
 

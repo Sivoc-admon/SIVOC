@@ -63,7 +63,7 @@
                       
                       <th>#</th>
                       <th>Nombre de tablero</th>
-                      
+                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody id="bodyProjectBoards">
@@ -73,6 +73,7 @@
                   <tr>
                       <th>#</th>
                       <th>Nombre de proyecto</th>
+                      <th>Acción</th>
                   </tr>
               </tfoot>
             </table>
