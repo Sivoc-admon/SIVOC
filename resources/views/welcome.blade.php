@@ -107,9 +107,9 @@
             @if (Route::has('login'))
                 <div  style="margin-left: 90%; margin-top: 10px; ">
                     @auth
-                        <a href="{{ url('/home') }}" style="color: white; font-size:15px;">Home</a>
+                        <a href="{{ url('/home') }}" style="font-size:15px;"><button type="button" class="btn btn-lg" style="background-color: #17a2b8">Home</button></a>
                     @else
-                    <a href="{{ route('login') }}" style="font-size:15px;"><button type="button" class="btn btn-lg" style="background-color: #17a2b8">Login</button></a>
+                        <a href="{{ route('login') }}" style="font-size:15px;"><button type="button" class="btn btn-lg" style="background-color: #17a2b8">Login</button></a>
 
                         @if (Route::has('register'))
                             <!--<a href="{{ route('register') }}">Register</a> -->
