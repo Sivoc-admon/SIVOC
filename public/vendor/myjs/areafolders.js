@@ -69,6 +69,7 @@ function getFoldersAndFiles(areaId, nivel) {
     $(botonNameTag).html(`Agregar carpeta dentro de "${selectTagText}"`);
     $(botonNameModifyTag).html(`Cambiar nombre a la carpeta "${selectTagText}"`);
     $(botonNameModifyTag).attr("onclick", `cambiaNombreFolder(${selectVal}, '${selectTagText}')`);
+    
     if (selectVal !== '') {
         $.ajax({
             type: "GET",
@@ -76,7 +77,8 @@ function getFoldersAndFiles(areaId, nivel) {
             dataType: 'json',
             success: function(data) {
                 getFilesLevelZero(selectVal);
-                if (data.area_id == areaId || data.area_id == 5) {
+                
+                if (data.area_id == areaId || data.area_id == 5 ||) {
                     $(botonNameTag).fadeIn();
                     $(botonNameModifyTag).fadeIn();
                     $(botonFilesTag).fadeIn();
