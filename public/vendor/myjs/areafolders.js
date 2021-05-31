@@ -78,11 +78,11 @@ function getFoldersAndFiles(areaId, nivel) {
             success: function(data) {
                 getFilesLevelZero(selectVal);
                 
-                if (data.area_id == areaId || data.area_id == 5 ||) {
+                //if (data.area_id == areaId || data.area_id == 5 || data.area_id == 4) {
                     $(botonNameTag).fadeIn();
                     $(botonNameModifyTag).fadeIn();
                     $(botonFilesTag).fadeIn();
-                }
+                //}
 
                 if (data.data.length > 0) {
                     let folders = data.data;
