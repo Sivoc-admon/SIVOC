@@ -77,12 +77,45 @@ function getFoldersAndFiles(areaId, nivel) {
             dataType: 'json',
             success: function(data) {
                 getFilesLevelZero(selectVal);
+
+                switch (areaId) {
+                    case 6: //AREA FINANZAS
+                        if (data.idRoleUser == 1 || data.idRoleUser ==  7) { //ADMIN, FINANZAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+                    case 10: //AREA VENTAS
+                        if (data.idRoleUser == 1 || data.idRoleUser ==  7 || data.idRoleUser ==  11) { //ADMIN, FINANZAS, VENTAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+                    case 10: //AREA INGENIERIA
+                        if (data.idRoleUser == 1 || data.idRoleUser ==  8) { //ADMIN, FINANZAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+                    case 4: //AREA COMPRAS
+                        if (data.idRoleUser == 1 || data.idRoleUser ==  5 || data.idRoleUser ==  7) { //ADMIN, FINANZAS, COMPRAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
                 
-                //if (data.area_id == areaId || data.area_id == 5 || data.area_id == 4) {
-                    $(botonNameTag).fadeIn();
-                    $(botonNameModifyTag).fadeIn();
-                    $(botonFilesTag).fadeIn();
-                //}
+                    default:
+                        $(botonNameTag).fadeIn();
+                        $(botonNameModifyTag).fadeIn();
+                        $(botonFilesTag).fadeIn();
+                        break;
+                }
+                
+                
 
                 if (data.data.length > 0) {
                     let folders = data.data;

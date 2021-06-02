@@ -171,14 +171,15 @@ class AreaDocumentController extends Controller
 
     public function getFoldersAndFiles($areaId, $nivel, $idPadre)
     {
-        
+        $roleUser =auth()->user()->roles;
+        $idRoleUser = $roleUser[0]->id;
         $area_id=auth()->user()->area_id;
         $nivel = intval($nivel);
         $folders = $this->getFolderByNivel($areaId, $nivel, $idPadre);
         $folders->each(function ($f) {
             $f->areaDocuments;
         });
-        return response()->json(['data' => $folders, 'area_id'=>$area_id], Response::HTTP_OK);
+        return response()->json(['data' => $folders, 'area_id'=>$area_id, 'idRoleUser'=>$idRoleUser], Response::HTTP_OK);
     }
 
     public function createFolder($areaId, $nivel, Request $request)
