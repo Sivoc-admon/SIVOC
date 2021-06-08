@@ -93,8 +93,8 @@ function getFoldersAndFiles(areaId, nivel) {
                             $(botonFilesTag).fadeIn();
                         }
                         break;
-                    case 10: //AREA INGENIERIA
-                        if (data.idRoleUser == 1 || data.idRoleUser ==  8) { //ADMIN, FINANZAS
+                    case 7: //AREA INGENIERIA
+                        if (data.idRoleUser == 1 || data.idRoleUser ==  8 ) { //ADMIN, FINANZAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
