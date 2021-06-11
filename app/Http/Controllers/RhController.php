@@ -99,7 +99,6 @@ class RhController extends Controller
             'last_name' => $request->input('inputLastNameRh'),
             'mother_last_name' => $request->input('inputMotherLastNameRh'),
             'area_id' => $request->input('sltAreaRh'),
-            'email' => $request->input('inputEmailRh'),
             'grade' => $request->input('inputEstudios'),
             'profession' => $request->input('inputProfesion'),
             'nss' => $request->input('inputNSS'),
