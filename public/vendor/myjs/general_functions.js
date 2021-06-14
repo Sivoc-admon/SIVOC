@@ -9,7 +9,8 @@ function resetForm(id) {
 function proceso() {
     swal.fire({
         title: 'Procesando...',
-        showLoading: true
+        showLoading: true,
+        timer: 3000,
     })
 }
 //ALERTAS

@@ -11,7 +11,7 @@ $(function() {
 
 function getFilesLevelZero(folderId) {
     let areaId = $("#hiddenAriaId").val();
-
+    proceso();
     $.ajax({
         type: "GET",
         url: `/folder2/${areaId}/${folderId}`,
@@ -69,7 +69,7 @@ function getFoldersAndFiles(areaId, nivel) {
     $(botonNameTag).html(`Agregar carpeta dentro de "${selectTagText}"`);
     $(botonNameModifyTag).html(`Cambiar nombre a la carpeta "${selectTagText}"`);
     $(botonNameModifyTag).attr("onclick", `cambiaNombreFolder(${selectVal}, '${selectTagText}')`);
-    
+    proceso();
     if (selectVal !== '') {
         $.ajax({
             type: "GET",
@@ -202,6 +202,7 @@ function createFolder() {
         $("#formFolder").fadeOut();
         $('#guardaModal').attr("disabled", true);
         $("#divMsge").fadeIn();
+        proceso();
         $.ajax({
                     type: "POST",
                     url: `/folder/create/${areaId}/${nivel}`,
@@ -283,6 +284,7 @@ function newFile(areaId, nivel){
         $("#formFolder").hide();
         $("#divMsge").show();
         $("#ModalCreateFolder").modal('show');
+        proceso();
         $.ajax({
             type:'POST',
             url: `/file/create/${areaId}/${nivel}`,
@@ -368,6 +370,7 @@ function modifyNameFolder(){
         console.log(`el id del folder que se está modificando es ${folderId}`);
         $("#divMsgeModFolder").fadeIn();
         let token = $("input[name=_token]").val();
+        proceso();
         $.ajax({
             type:'POST',
             url: `/folder/update/${folderId}`,
