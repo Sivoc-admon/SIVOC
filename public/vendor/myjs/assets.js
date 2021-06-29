@@ -179,7 +179,8 @@ function showAssetFile(asset, tipo) {
 
                 let table = "";
                 let carpeta = "";
-                $("#hideModalId").val(asset);
+                $("#hideModalIdAsset").val(asset);
+                $("#tipoFile").val(tipo);
                 for (const i in data.assetfiles) {
                     if (data.assetfiles[i].type == "General") {
                         carpeta = "General";
@@ -215,12 +216,14 @@ function showAssetFile(asset, tipo) {
 
 function masDocumentos() {
 
-    let minute = $("#hideModalId").val();
-    let file = $('#fileUploadMinuteFile')[0];
+    let asset = $("#hideModalIdAsset").val();
+    let file = $('#fileUploadAssetFile')[0];
+    let tipo = $("#tipoFile").val();
 
     let data = new FormData();
-    data.append("minute", minute);
+    data.append("asset", asset);
     data.append("tamanoFiles", file.files.length);
+    data.append("tipo", tipo);
     for (let i = 0; i < file.files.length; i++) {
         data.append('file' + i, file.files[i]);
     }
@@ -230,7 +233,7 @@ function masDocumentos() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: `minutes/${minute}/uploadFile`,
+        url: `assets/${asset}/uploadFile`,
         data: data,
         cache: false,
         contentType: false,
@@ -242,7 +245,7 @@ function masDocumentos() {
                 messageAlert(data.msg, "error", "");
             } else {
 
-                $("#ModalShowFiles").modal('hide');
+                $("#ModalShowFilesAsset").modal('hide');
 
                 messageAlert("Guardado Correctamente", "success", "");
 

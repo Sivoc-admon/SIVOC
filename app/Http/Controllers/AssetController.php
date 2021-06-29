@@ -200,4 +200,41 @@ class AssetController extends Controller
 
         return response()->json($array);
     }
+
+    public function uploadFile(Request $request, $asset)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Activos/'.$asset.'/'.$request->tipo;
+        //SE GUARDAN LOS ARCHIVOS GENERALES
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $assetFile=AssetFile::create([
+                'asset_id' => $asset,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+                'type' => $request->tipo,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($assetFile->save()) {
+            $msg="Archivos Generales guardados con exito";
+        } else {
+            $error=true;
+            $msg="No se pudieron guardar Archivos Generales";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
 }

@@ -153,6 +153,7 @@
           <span aria-hidden="true">&times;</span>
       </button>
       <input type="hidden" name="hideModalIdAsset" id="hideModalIdAsset">
+      <input type="hidden" name="tipoFile" id="tipoFile">
       </div>
       <div class="modal-body">
         <div class="container-fluid">
