@@ -233,16 +233,29 @@ class AreaDocumentController extends Controller
                     $path = $file->storeAs(
                         $pathFile, $file->getClientOriginalName()
                     );
-                    $name = $file->getClientOriginalName();
-                    $areaDocument = new AreaDocument;
-                    $areaDocument->area_id = $areaId;
-                    $areaDocument->folder_area_id = $idFolder;
-                    $areaDocument->name = $name;
-                    $areaDocument->ruta = 'storage/app/' . $pathFile;
-                    $areaDocument->save();
+                    if(Storage::disk('public')->exists('Documents/' . $folderAreaName . $r.'/'.$file->getClientOriginalName())){
+                        
+                        $name = $file->getClientOriginalName();
+                        $areaDocument = new AreaDocument;
+                        $areaDocument->area_id = $areaId;
+                        $areaDocument->folder_area_id = $idFolder;
+                        $areaDocument->name = $name;
+                        $areaDocument->ruta = 'storage/app/' . $pathFile;
+                    
+                        if($areaDocument->save()){
+                            return response()->json(['success' => 'Subida de archivos correcta.']);
+                        }else{
+                            return response()->json(["message" => "No se recibió ningún archivo."], Response::HTTP_INTERNAL_SERVER_ERROR);
+                        }
+                    }else{
+                        return response()->json(["message" => "No se recibió ningún archivo."], Response::HTTP_INTERNAL_SERVER_ERROR);
+                    }
+                    
+                }else{
+                    return response()->json(["message" => "No se recibió ningún archivo."], Response::HTTP_INTERNAL_SERVER_ERROR);
                 }
             }
-            return response()->json(['success' => 'Subida de archivos correcta.']);
+            
         } else {
             return response()->json(["message" => "No se recibió ningún archivo."], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

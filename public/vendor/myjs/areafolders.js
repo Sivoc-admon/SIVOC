@@ -80,42 +80,42 @@ function getFoldersAndFiles(areaId, nivel) {
 
                 switch (areaId) {
                     case 6: //AREA FINANZAS
-                        if (data.idRoleUser == 1 || data.idRoleUser ==  7) { //ADMIN, FINANZAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 7) { //ADMIN, FINANZAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
                         }
                         break;
                     case 10: //AREA VENTAS
-                        if (data.idRoleUser == 1 || data.idRoleUser ==  7 || data.idRoleUser ==  11) { //ADMIN, FINANZAS, VENTAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 7 || data.idRoleUser == 11) { //ADMIN, FINANZAS, VENTAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
                         }
                         break;
                     case 7: //AREA INGENIERIA
-                        if (data.idRoleUser == 1 || data.idRoleUser ==  8 ) { //ADMIN, FINANZAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 8) { //ADMIN, FINANZAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
                         }
                         break;
                     case 4: //AREA COMPRAS
-                        if (data.idRoleUser == 1 || data.idRoleUser ==  5 || data.idRoleUser ==  7) { //ADMIN, FINANZAS, COMPRAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 5 || data.idRoleUser == 7) { //ADMIN, FINANZAS, COMPRAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
                         }
                         break;
-                
+
                     default:
                         $(botonNameTag).fadeIn();
                         $(botonNameModifyTag).fadeIn();
                         $(botonFilesTag).fadeIn();
                         break;
                 }
-                
-                
+
+
 
                 if (data.data.length > 0) {
                     let folders = data.data;
@@ -283,6 +283,7 @@ function newFile(areaId, nivel){
         <br><label class="control-label">Cargando archivos</label>`);
         $("#formFolder").hide();
         $("#divMsge").show();
+        $( "#guardaModal" ).prop( "disabled", true );
         $("#ModalCreateFolder").modal('show');
         proceso();
         $.ajax({
@@ -294,9 +295,11 @@ function newFile(areaId, nivel){
             processData: false,
             dataType: 'json',
             success: (data) => {
+                console.log(data);
                 getFilesLevelZero(folderId);
                 $(tagInputFiles).val(null);
                 $("#ModalCreateFolder").modal('hide');
+                $( "#guardaModal" ).prop( "disabled", false );
                 messageAlert("Operación exitosa!", "success", data.success);
             },
             error: function(data){
