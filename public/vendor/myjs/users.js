@@ -76,16 +76,6 @@ function editUser(id) {
 
                 }
 
-
-                for (const j in data.roles) {
-                    if (data.roleUser[0].id == data.roles[j].id) {
-                        optionRoles += `<option value='${data.roles[j].id}' selected>${data.roles[j].name}</option>`
-                    } else {
-                        optionRoles += `<option value='${data.roles[j].id}'>${data.roles[j].name}</option>`;
-                    }
-
-                }
-
                 $("#sltAreaEditUser").append(optionAreas);
                 $("#inputRoleEditUser").append(optionRoles);
 
