@@ -236,7 +236,6 @@ class AreaDocumentController extends Controller
                         $pathFile, $file->getClientOriginalName()
                     );
                     
-
                     if(Storage::disk('public')->exists('Documents/' . $folderAreaName . $r.'/'.$file->getClientOriginalName())){
                         
                         $name = $file->getClientOriginalName();
@@ -248,7 +247,6 @@ class AreaDocumentController extends Controller
                     
                         $areaDocument->save();
                             
-                        
                     }
                     
                 }
