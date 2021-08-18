@@ -276,13 +276,22 @@ function showProjectFile(id) {
                         <td> ${data.projectfiles[i].id}</td> 
                         <td>
                             <a href="storage/Documents/Proyectos/${id}/${data.projectfiles[i].name}" target="_blank">${data.projectfiles[i].name}</a>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.projectfiles[i].id})">
-                                <i class="fas fa-minus-square"></i>
-                            </button>
-                        </td>
-                    </tr>`;
+                        </td>`;
+                        for (const key in data.rolesUser) {
+                            if (data.rolesUser[key].id == 1 || data.rolesUser[key].id == 12) {
+                                table += `<td>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.projectfiles[i].id})">
+                                        <i class="fas fa-minus-square"></i>
+                                    </button>
+                                </td>`;
+                                
+                            }else{
+                                table += `<td>
+                                    
+                                </td>`;
+                            }
+                        }
+                        table += `</tr>`;
 
                 }
 

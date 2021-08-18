@@ -152,7 +152,8 @@ function showMinuteFile(minute) {
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
             } else {
-
+                
+                
                 let table = "";
                 $("#hideModalId").val(minute);
                 for (const i in data.minutefiles) {
@@ -160,13 +161,24 @@ function showMinuteFile(minute) {
                         <td> ${data.minutefiles[i].id}</td> 
                         <td>
                             <a href="storage/Documents/Minutas/${minute}/${data.minutefiles[i].file}" target="_blank">${data.minutefiles[i].file}</a>
-                        </td>"
-                        <td>
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.minutefiles[i].id})">
-                                <i class="fas fa-minus-square"></i>
-                            </button>
-                        </td>
-                    </tr>`;
+                        </td>`;
+                    for (const key in data.rolesUser) {
+                        if (data.rolesUser[key].id == 1 || data.rolesUser[key].id == 12) {
+
+                            table += `<td>
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"  onClick="eliminarArchivo(${data.minutefiles[i].id})">
+                                    <i class="fas fa-minus-square"></i>
+                                </button>
+                            </td>`;
+                        }else{
+                            table += `<td>
+                                
+                            </td>`;
+                        }
+                        
+                    }
+                        
+                    table += `</tr>`;
                     
 
                 }

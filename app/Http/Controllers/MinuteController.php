@@ -198,14 +198,17 @@ class MinuteController extends Controller
 
     public function showMinuteFile($minute)
     {
-        
+        $rolesUser =auth()->user()->roles;
+        //dd($roleUser);
+        $idRoleUser = $rolesUser[0]->id;
+
         $files = Minute::find($minute)->agreementFiles;
         
         $msg="";
         $error=false;
         
 
-        $array=["msg"=>$msg, "error"=>$error, "minutefiles"=>$files];
+        $array=["msg"=>$msg, "error"=>$error, "minutefiles"=>$files, 'rolesUser'=>$rolesUser];
 
         return response()->json($array);
     }

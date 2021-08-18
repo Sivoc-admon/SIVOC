@@ -20,7 +20,7 @@ class CorrectiveActionController extends Controller
     public function index()
     {
         $correctiveActions = CorrectiveAction::get();
-        $users = User::get();
+        $users = User::withTrashed()->get();
 
         return view('correctiveActions.correctiveActions',compact('correctiveActions', 'users'));
     }
@@ -116,7 +116,8 @@ class CorrectiveActionController extends Controller
     public function edit($id)
     {
         $correctiveAction = CorrectiveAction::find($id);
-        $users = User::find($correctiveAction->user_id);
+        $users = User::withTrashed()->find($correctiveAction->user_id);
+        
     
         $msg="";
         $error=false;

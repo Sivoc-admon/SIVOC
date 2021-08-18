@@ -159,14 +159,14 @@ class ProjectController extends Controller
 
     public function showFile($id)
     {
-        
+        $rolesUser =auth()->user()->roles;
         $files = Project::find($id)->projectFiles;
         
         $msg="";
         $error=false;
         
 
-        $array=["msg"=>$msg, "error"=>$error, "projectfiles"=>$files];
+        $array=["msg"=>$msg, "error"=>$error, "projectfiles"=>$files, "rolesUser"=>$rolesUser];
 
         return response()->json($array);
     }
