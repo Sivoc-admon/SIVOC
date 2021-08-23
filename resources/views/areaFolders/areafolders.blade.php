@@ -29,6 +29,10 @@
 
                     <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
                 -->
+
+                <!--
+                    Genera carpetas en el primer nivel del area
+                -->
                     @switch($area)
                         @case('almacen')
                             @if (Auth::user()->hasAnyRole(['almacen', 'admin']))
@@ -122,17 +126,29 @@
                             @break
                         @case('servicio')
                             @if (Auth::user()->hasAnyRole(['servicio', 'admin']))
-                            <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
-                                Agregar carpeta en el primer nivel
-                            </button>
-        
-                            <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
-                        @endif
-                        @break
+                                <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
+                                    Agregar carpeta en el primer nivel
+                                </button>
+            
+                                <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
+                            @endif
+                        
+                            @break
+                        @case('desarrollo')
+                            @if (Auth::user()->hasAnyRole(['rh', 'admin']))
+                                <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
+                                    Agregar carpeta en el primer nivel
+                                </button>
+            
+                                <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_0" onchange="newFile({{ $folders[0]['area_id'] }}, 0)" multiple />
+                            @endif
+                        
                             @break
                         @default
                             
                     @endswitch
+
+                   
 
                     
                     
@@ -141,6 +157,10 @@
             </div>
         </div>
     </div>
+
+    <!--
+        LISTA LAS DEMAS OPCIONES DEL AREA
+    -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -217,6 +237,26 @@
                                 @endif
 
                                 @if (Auth::user()->hasAnyRole(['compras', 'admin', 'finanzas']))
+                                    <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
+                                    style="display:none;">
+                                    Agregar carpeta</button>
+                                    <button id="btnLevelModify1" type="button" class="btn btn-info form-button" onclick="cambiaNombreFolder({{$folders[0]['id']}})"
+                                    style="display:none;">
+                                    Cambiar nombre a</button>
+                                    <input type="file" class="btn btn-warning" id="files_{{ $folders[0]['area_id'] }}_{{ $folders[0]['nivel'] }}" onchange="newFile({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})" multiple style="display:none;"/>
+                                @endif
+                                @break
+                            @case('desarrollo')
+                                @if (Auth::user()->hasAnyRole(['admin', 'rh']))
+                                    <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
+                                        <option value="">Seleccione</option>
+                                        @foreach($folders as $folder)
+                                        <option value="{{ $folder['id'] }}">{{ $folder['name'] }}</option>
+                                        @endforeach
+                                    </select><br>
+                                @endif
+
+                                @if (Auth::user()->hasAnyRole(['rh', 'admin']))
                                     <button id="btnLevel1" type="button" class="btn btn-primary form-button" onclick="newFolder({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})"
                                     style="display:none;">
                                     Agregar carpeta</button>

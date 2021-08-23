@@ -20,7 +20,7 @@ class AreaDocumentController extends Controller
      */
     public function index($area)
     {
-        $ariasValidas = ['almacen', 'calidad', 'operaciones', 'compras', 'direccion', 'finanzas', 'ingenieria', 'manufactura', 'recursos humanos', 'ventas', 'servicio'];
+        $ariasValidas = ['almacen', 'calidad', 'operaciones', 'compras', 'direccion', 'finanzas', 'ingenieria', 'manufactura', 'recursos humanos', 'ventas', 'servicio', 'desarrollo'];
         $aria = Area::where('name', 'like', '%' . $area . '%')->take(1)->get();
         
         $folders = [];
