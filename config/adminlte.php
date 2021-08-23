@@ -317,6 +317,10 @@ return [
                 [
                     'text' => 'Empleados',
                     'url'  => 'rh',
+                ],
+                [
+                    'text' => 'Desarrollo Organizacional',
+                    'url'  => 'folder/desarrollo',
                 ]
             ]
         ],

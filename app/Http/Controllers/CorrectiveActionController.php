@@ -20,9 +20,10 @@ class CorrectiveActionController extends Controller
     public function index()
     {
         $correctiveActions = CorrectiveAction::get();
-        $users = User::withTrashed()->get();
+        $allUsers = User::withTrashed()->get(); //todos los usuarios activos e inactivos
+        $users = User::get(); //usuarios activos
 
-        return view('correctiveActions.correctiveActions',compact('correctiveActions', 'users'));
+        return view('correctiveActions.correctiveActions',compact('correctiveActions', 'users', 'allUsers'));
     }
 
     /**

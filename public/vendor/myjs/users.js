@@ -76,6 +76,15 @@ function editUser(id) {
 
                 }
 
+                for (const i in data.roles) {
+                    if (data.roleUser.role_id == data.roles[i].id) {
+                        optionRoles += `<option value='${data.roles[i].id}' selected>${data.roles[i].name}</option>`
+                    } else {
+                        optionRoles += `<option value='${data.roles[i].id}'>${data.roles[i].name}</option>`;
+                    }
+
+                }
+
                 $("#sltAreaEditUser").append(optionAreas);
                 $("#inputRoleEditUser").append(optionRoles);
 
@@ -153,11 +162,11 @@ function updateRH() {
 
     $.ajax({
         type: "PUT",
-        url: "rh/"+ id,
+        url: "rh/" + id,
         data: $("#formEditUserRh").serialize(),
         //dataType: 'json',
         success: function(data) {
-            
+
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
@@ -219,8 +228,8 @@ function editRh(id) {
                 $("#inputCURP").val(data.user.curp);
                 $("#inputContacto").val(data.user.contacto);
 
-                $("#inputEstudios option[value='"+ data.user.grade +"']").attr("selected",true);
-                $("#sltGenero option[value='"+ data.user.gender +"']").attr("selected",true);
+                $("#inputEstudios option[value='" + data.user.grade + "']").attr("selected", true);
+                $("#sltGenero option[value='" + data.user.gender + "']").attr("selected", true);
 
                 $("#hIdRh").val(data.user.id);
 

@@ -60,9 +60,9 @@
                                             <td>{{ $correctiveAction->id }}</td>
                                             <td>{{ $correctiveAction->issue }}</td>
                                             <td>{{ $correctiveAction->action }}</td>
-                                            @foreach ($users as $user)
-                                                @if ($correctiveAction->user_id == $user->id)
-                                                    <td>{{ $user->name }} {{ $user->last_name }} {{ $user->mother_last_name }}</td>
+                                            @foreach ($allUsers as $allUser)
+                                                @if ($correctiveAction->user_id == $allUser->id)
+                                                    <td>{{ $allUser->name }} {{ $allUser->last_name }} {{ $allUser->mother_last_name }}</td>
                                                 @endif
                                             @endforeach
                                             <td>{{ $correctiveAction->involved }}</td>
