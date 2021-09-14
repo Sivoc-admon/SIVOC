@@ -261,7 +261,6 @@ function createFolder() {
 
 function newFile(areaId, nivel){
     let token = $("input[name=_token]").val();
-    console.log("ya cambio el input;)");
     let tagInputFiles = `#files_${areaId}_${nivel}`;
     var formData = new FormData();
     let TotalFiles = $(tagInputFiles)[0].files.length; //Total files

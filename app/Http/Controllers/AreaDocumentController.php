@@ -249,6 +249,8 @@ class AreaDocumentController extends Controller
                             
                     }
                     
+                }else{
+                    return response()->json(["message" => "No se pudo guardar el archivo, ".$request->file('files' . $x)->getClientOriginalName()], Response::HTTP_INTERNAL_SERVER_ERROR);
                 }
             }
             return response()->json(['success' => 'Subida de archivos correcta.']);
