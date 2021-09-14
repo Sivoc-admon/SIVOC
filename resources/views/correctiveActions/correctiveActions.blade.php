@@ -69,13 +69,15 @@
                                             <td>{{ $correctiveAction->status }}</td>
                                             <td>
                                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editCorrectiveAction({{$correctiveAction->id}});"><i class="fas fa-edit"></i></a>
-                                            
-                                                <form action="{{ route('correctiveActions.destroy',$correctiveAction->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                    
-                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                                </form>
+                                                @if (Auth::user()->hasAnyRole(['admin']))
+                                                    <form action="{{ route('correctiveActions.destroy',$correctiveAction->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                        
+                                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                                    </form>
+                                                @endif
+                                                
 
                                             </td>
                                         </tr>
