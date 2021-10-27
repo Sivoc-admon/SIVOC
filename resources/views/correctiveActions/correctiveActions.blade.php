@@ -43,6 +43,7 @@
                                     <th>Responsable</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
+                                    <th>Fecha</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -67,6 +68,7 @@
                                             @endforeach
                                             <td>{{ $correctiveAction->involved }}</td>
                                             <td>{{ $correctiveAction->status }}</td>
+                                            <td>{{ $correctiveAction->created_at }}</td>
                                             <td>
                                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editCorrectiveAction({{$correctiveAction->id}});"><i class="fas fa-edit"></i></a>
                                                 @if (Auth::user()->hasAnyRole(['admin']))
