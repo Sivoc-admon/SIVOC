@@ -111,7 +111,7 @@
             var buttonCommon = {
                 exportOptions: {
                     columns: function(column, data, node) {
-                        if (column == 4) {
+                        if (column == 7) {
                             return false;
                         }
                         return true;
