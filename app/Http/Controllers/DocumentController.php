@@ -14,9 +14,9 @@ class DocumentController extends Controller
      */
     public function index($id)
     {
-        
-        
-        switch ($id) {
+
+
+       /* switch ($id) {
             case '1':
                 //nivel 1
                 $folder = Storage::directories('/public/Documents/areas/almacen');
@@ -25,41 +25,20 @@ class DocumentController extends Controller
                     array_push($file, end( $temp_array ));
                 }
                 $files = Storage::files('public/Documents/areas/almacen/carpeta 1');
-                
-                
 
-                /*foreach ($folder as $key) {
-                    
-                    $temp_array = explode('/', $key);
-                   array_push($nivel1, end( $temp_array ));
-                   $nivel=array("0"=>);
-                   $datos = array(	
-	
-                        'nivel_1' => array(
-                            'marca' => "Bic",
-                            'precio'  => "0.75€",
-                            'referencia'  => "552BIC12"
-                        ),
-                        
-                        'Pegamento' => array(
-                            'marca' => "Pritt",
-                            'precio'  => "1.75€",
-                            'referencia'  => "567PRI13"
-                        )
-                    );
 
-                }*/
-                
+
+
                 return view('documents.documents')->with('files', $file);
                 break;
-            
+
             default:
                 # code...
                 break;
-        }
-        
-        
-        
+        }*/
+
+
+
     }
 
     /**

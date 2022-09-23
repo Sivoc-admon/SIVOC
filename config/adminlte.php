@@ -372,7 +372,11 @@ return [
                     'text' => 'Servicio',
                     'url'  => '/folder/servicio',
                 ],
-                
+                [
+                    'text' => 'Pruebas',
+                    'url'  => '/folder/pruebas',
+                ],
+
             ],
         ],
         /*['header' => 'labelsx'],
@@ -476,7 +480,7 @@ return [
                     'asset' => true,
                     'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
                 ],
-                
+
             ],
         ],
         'Select2' => [
