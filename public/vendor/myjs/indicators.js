@@ -251,20 +251,6 @@ function graficaIndicador() {
                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                     datasets: [obtenidos, objetivos, min]
                 };
-                /* let chartOptions = {
-                    scales: {
-                        xAxes: [{
-                            barPercentage: 1,
-                            categoryPercentage: 0.6
-                        }],
-                        yAxes: [{
-                            id: "y-axis-density"
-                        }, {
-                            id: "y-axis-gravity"
-                        }]
-                    }
-                }; */
-
 
 
                 $("#ModalGraficaIndicator").modal('hide');
