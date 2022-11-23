@@ -197,7 +197,7 @@
                                 @endif
                                 @break
                             @case('ventas')
-                                @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'ingenieria', 'finanzas', 'operaciones', 'servicio', 'calidad']))
+                                @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'ingenieria', 'finanzas', 'operaciones', 'servicio', 'calidad', 'pruebas']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
@@ -217,7 +217,7 @@
                                 @endif
                                 @break
                             @case('ingenieria')
-                                @if (Auth::user()->hasAnyRole(['ingenieria', 'admin', 'manufactura', 'almacen', 'compras', 'operaciones', 'servicio', 'calidad']))
+                                @if (Auth::user()->hasAnyRole(['ingenieria', 'admin', 'manufactura', 'almacen', 'compras', 'operaciones', 'servicio', 'calidad', 'pruebas']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
@@ -237,7 +237,7 @@
                                 @endif
                                 @break
                             @case('compras')
-                                @if (Auth::user()->hasAnyRole(['compras', 'admin', 'finanzas', 'operaciones', 'calidad']))
+                                @if (Auth::user()->hasAnyRole(['compras', 'admin', 'finanzas', 'operaciones', 'calidad', 'compras']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
