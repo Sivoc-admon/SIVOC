@@ -11,7 +11,7 @@ $(function() {
 
 function getFilesLevelZero(folderId) {
     let areaId = $("#hiddenAriaId").val();
-
+    proceso();
     $.ajax({
         type: "GET",
         url: `/folder2/${areaId}/${folderId}`,
@@ -19,17 +19,33 @@ function getFilesLevelZero(folderId) {
         success: function(data) {
             let tablaHTML = ``;
 
-            for (var k in data) {
-                let date = new Date(data[k].created_at);
+            for (var k in data.folders) {
+                let date = new Date(data.folders[k].created_at);
+
+                s = data.folders[k].ruta.split("/");
+                let cadena = ""
+
+                for (let i = 0; i < s.length - 1; i++) {
+                    if (i == 1 || i == 2) {
+
+                    } else {
+                        cadena = cadena + s[i] + "/";
+                    }
+
+
+                }
+
 
                 tablaHTML += `<tr>
-                <td>${data[k].name}</td>
+                <td><a href="../${cadena}${data.folders[k].name}" target="_blank">${data.folders[k].name}</a></td>
                 <td>${date.toLocaleDateString()}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data[k].name}', ${data[k].id}, ${data[k].folder_area_id})">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <a class="btn btn-sm btn-warning" href="/file/download/${data[k].id}/${data[k].folder_area_id}">
+                <td>`;
+                if (areaId == data.area_user || data.area_user == 5) {
+                    tablaHTML += `<button type="button" class="btn btn-sm btn-danger" onclick="deleteFile('${data.folders[k].name}', ${data.folders[k].id}, ${data.folders[k].folder_area_id})">
+                    <i class="fas fa-times"></i>
+                    </button>`;
+                }
+                tablaHTML += `<a class="btn btn-sm btn-warning" href="/file/download/${data.folders[k].id}/${data.folders[k].folder_area_id}">
                         <i class="fas fa-download"></i>
                     </a>
                 </td>
@@ -53,6 +69,7 @@ function getFoldersAndFiles(areaId, nivel) {
     $(botonNameTag).html(`Agregar carpeta dentro de "${selectTagText}"`);
     $(botonNameModifyTag).html(`Cambiar nombre a la carpeta "${selectTagText}"`);
     $(botonNameModifyTag).attr("onclick", `cambiaNombreFolder(${selectVal}, '${selectTagText}')`);
+    proceso();
     if (selectVal !== '') {
         $.ajax({
             type: "GET",
@@ -60,9 +77,46 @@ function getFoldersAndFiles(areaId, nivel) {
             dataType: 'json',
             success: function(data) {
                 getFilesLevelZero(selectVal);
-                $(botonNameTag).fadeIn();
-                $(botonNameModifyTag).fadeIn();
-                $(botonFilesTag).fadeIn();
+
+                switch (areaId) {
+                    case 6: //AREA FINANZAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 7) { //ADMIN, FINANZAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+                    case 10: //AREA VENTAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 7 || data.idRoleUser == 11) { //ADMIN, FINANZAS, VENTAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+                    case 7: //AREA INGENIERIA
+                        if (data.idRoleUser == 1 || data.idRoleUser == 8) { //ADMIN, FINANZAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+                    case 4: //AREA COMPRAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 5 || data.idRoleUser == 7) { //ADMIN, FINANZAS, COMPRAS
+                            $(botonNameTag).fadeIn();
+                            $(botonNameModifyTag).fadeIn();
+                            $(botonFilesTag).fadeIn();
+                        }
+                        break;
+
+                    default:
+                        $(botonNameTag).fadeIn();
+                        $(botonNameModifyTag).fadeIn();
+                        $(botonFilesTag).fadeIn();
+                        break;
+                }
+
+
+
                 if (data.data.length > 0) {
                     let folders = data.data;
                     let selectHTML = `<select id="selectNivel${level}" class="form-control" onchange="getFoldersAndFiles(${areaId}, ${level})">
@@ -79,7 +133,7 @@ function getFoldersAndFiles(areaId, nivel) {
                         $(`#divNivel${level}`).html(selectHTML);
                     } else {
                         let pading = 10 * level;
-                        $(`#divFolders`).append(`<div id="divNivel${level}" style="padding-left: ${pading}px;"><br>${selectHTML}</div>`);
+                        $(`#divFolders`).append(`<div class="row" id="divNivel${level}"><br><div class="col-md">Nivel: ${level}</div><div class="col-md-11">${selectHTML}</div></div>`);
                     }
                 } else {
                     if ($(`#divNivel${level}`).length) {
@@ -148,6 +202,7 @@ function createFolder() {
         $("#formFolder").fadeOut();
         $('#guardaModal').attr("disabled", true);
         $("#divMsge").fadeIn();
+        proceso();
         $.ajax({
                     type: "POST",
                     url: `/folder/create/${areaId}/${nivel}`,
@@ -206,7 +261,6 @@ function createFolder() {
 
 function newFile(areaId, nivel){
     let token = $("input[name=_token]").val();
-    console.log("ya cambio el input;)");
     let tagInputFiles = `#files_${areaId}_${nivel}`;
     var formData = new FormData();
     let TotalFiles = $(tagInputFiles)[0].files.length; //Total files
@@ -228,7 +282,9 @@ function newFile(areaId, nivel){
         <br><label class="control-label">Cargando archivos</label>`);
         $("#formFolder").hide();
         $("#divMsge").show();
+        $( "#guardaModal" ).prop( "disabled", true );
         $("#ModalCreateFolder").modal('show');
+        proceso();
         $.ajax({
             type:'POST',
             url: `/file/create/${areaId}/${nivel}`,
@@ -238,9 +294,11 @@ function newFile(areaId, nivel){
             processData: false,
             dataType: 'json',
             success: (data) => {
+                console.log(data);
                 getFilesLevelZero(folderId);
                 $(tagInputFiles).val(null);
                 $("#ModalCreateFolder").modal('hide');
+                $( "#guardaModal" ).prop( "disabled", false );
                 messageAlert("Operación exitosa!", "success", data.success);
             },
             error: function(data){
@@ -262,26 +320,32 @@ function deleteFile(documentName, documentId, folderId){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, borrar!',
-        cancelButtonText: 'Cancelar',
+        
       }).then((result) => {
-          if (result) {
-              let token = $("input[name=_token]").val();
-              console.log(`token: ${token}`);
-            $.ajax({
-                type:'POST',
-                url: `/file/delete`,
-                data: {'_token':token, 'documentId': documentId, 'idFolder':folderId},
-                dataType: 'json',
-                success: (data) => {
-                    getFilesLevelZero(folderId);
-                    messageAlert("Operación exitosa!", "success", "Archivo eliminado correctamente");
-                },
-                error: function(data){
-                    console.log(data);
-                    messageAlert("Ha ocurrido un problema.", "error", "Ocurrió un error al eliminar eliminar el archivo, intente mas tarde.");
-                }
-            });
-        }
+          
+          if (result.value==true) {
+                let token = $("input[name=_token]").val();
+                
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                $.ajax({
+                    type:'POST',
+                    url: `/file/delete`,
+                    data: {'_token':token, 'documentId': documentId, 'idFolder':folderId},
+                    dataType: 'json',
+                    success: (data) => {
+                        getFilesLevelZero(folderId);
+                        messageAlert("Operación exitosa!", "success", "Archivo eliminado correctamente");
+                    },
+                    error: function(data){
+                        console.log(data);
+                        messageAlert("Ha ocurrido un problema.", "error", "Ocurrió un error al eliminar eliminar el archivo, intente mas tarde.");
+                    }
+                });
+            }
       });
 }
 
@@ -308,6 +372,7 @@ function modifyNameFolder(){
         console.log(`el id del folder que se está modificando es ${folderId}`);
         $("#divMsgeModFolder").fadeIn();
         let token = $("input[name=_token]").val();
+        proceso();
         $.ajax({
             type:'POST',
             url: `/folder/update/${folderId}`,

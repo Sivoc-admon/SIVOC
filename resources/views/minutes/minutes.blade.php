@@ -37,8 +37,10 @@
                                 <th>Minuta</th>
                                 <th>Participantes</th>
                                 <th>Participantes Externos</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
                                 <th>Estatus</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +51,8 @@
                                         <td>{{ $minute->description }}</td>
                                         <td>{{ $minute->participant }}</td>
                                         <td>{{ $minute->external_participant }}</td>
+                                        <td>{{ $minute->type }}</td>
+                                        <td>{{ $minute->created_at }}</td>
                                         <td>{{ $minute->status }}</td>
                                         
                                         <td>
@@ -67,14 +71,16 @@
                                                     <i class="fas fa-list"></i>
                                                 </button>
                                             </span>
-                                            <a class="btn btn-success" href="{{ route('minutes.edit',$minute->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                                            <span data-toggle="modal" data-target="#ModalEditMinute">
+                                                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar Minuta" onclick="editMinute({{$minute->id}})">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
                             @endisset
-                            
-                            
-                            
+
                         </tbody>
                         <tfoot>
                             <tr>
@@ -82,63 +88,54 @@
                                 <th>Minuta</th>
                                 <th>Participantes</th>
                                 <th>Participantes Externos</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
                                 <th>Estatus</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </tfoot>
                     </table>
+                    
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- GRAFICA DE MINUTAS
-    <div class="row">
-        <div class="col-md6">
-            <div class="card card-danger">
-                <div class="card-header">
-                  <h3 class="card-title">Estatus de Proyecto</h3>
-  
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 348px;" width="435" height="312" class="chartjs-render-monitor"></canvas>
-                </div>
-                
-              </div>
-        </div>
-    </div> -->
+
 @stop
 
 @section('js')
     <script>
         $(document).ready(function() {
             let statusGrafica="";
+            var buttonCommon = {
+                exportOptions: {
+                    columns: function(column, data, node) {
+                        if (column == 7) {
+                            return false;
+                        }
+                        return true;
+                    },
+                }
+            };
 
             $("#tableMinutes").DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    'csv', 'excel', 'pdf'
-                ],
-                responsive: {
-                    details: {
-                        type: 'column',
-                        target: -1
-                    }
-                },
-                columnDefs: [ {
-                    className: 'control',
-                    orderable: false,
-                    targets:   -1
-                } ]
+                    
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'csv'
+                    } ),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'excel'
+                    } ),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'pdf'
+                    } )
+                ]
+                
             });
+            
             
             //grafica(1,'donutChart', 'pie');
         } );

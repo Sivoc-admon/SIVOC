@@ -9,6 +9,7 @@ use App\Board;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\User;
+use App\ProjectFile;
 
 class ProjectController extends Controller
 {
@@ -21,13 +22,17 @@ class ProjectController extends Controller
     {
         //$projects = Project::get();
         $customers = Customer::get();
+        $users = User::get();
 
         $projects = DB::table('projects')
         ->join('customers', 'projects.client', '=', 'customers.id')
         ->select('projects.*', 'customers.name as name_customer')
         ->get();
+        $colocado= Project::where("status","Colocado")->count();
+        $proceso= Project::where("status","Proceso")->count();
+        $terminado= Project::where("status","Terminado")->count();
 
-        return view('projects.projects', compact('projects','customers'));
+        return view('projects.projects', compact('projects','customers', 'colocado', 'proceso', 'terminado', 'users'));
         
 
         
@@ -51,39 +56,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
-        
-        $ano=date('y');
-        $count="000";
-        
-        switch ($request->input('sltTypeProject')) {
-            case 'PE':
-                $projects = DB::table('projects')
-                ->where('type', 'PE')
-                ->orderBy('id')
-                ->get();
-                $count=$count+1+$projects->count();
 
-                $name_project="PE-".$ano."-".$count;
-                break;
-            case 'PO':
-                $projects = DB::table('projects')
-                ->where('type', 'PO')
-                ->orderBy('id')
-                ->get();
-                $count=$count+1+$projects->count();
-
-                $name_project="PO-".$ano."-".$count;
-                break;
-            default:
-                # code...
-                break;
-        }
         $project = new Project;
        
         $project->name = $request->input('inputProyecto');
         $project->type = $request->input('sltTypeProject');
         $project->client = $request->input('sltCliente');
-        $project->name_project = $name_project;
+        $project->name_project = $request->input('inputNameProject');
         $project->status = $request->input('inputEstatus');
         
         $project->save();
@@ -110,7 +89,12 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+        $users = Customer::get();
+
+        $array=["project"=>$project, "users"=>$users];
+        return response()->json($array);
+
     }
 
     /**
@@ -122,7 +106,17 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+
+        
+        $project->update([
+            'name' => $request->inputEditProyecto,
+            'name_project' => $request->inputNameProjectEdit,
+            'type' => $request->sltEditTypeProject,
+            'client' => $request->sltEditCliente,
+            'status' => $request->inputEditEstatus,
+            
+        ]);
     }
 
     /**
@@ -157,8 +151,83 @@ class ProjectController extends Controller
         ->join('projects', 'boards.project_id', '=', 'projects.id')
         ->select('boards.*', 'projects.name as name_project')
         ->where('projects.id', $id)
+        ->whereNull('boards.deleted_at')
         ->get();
 
         return response()->json(['data' => $tableros], Response::HTTP_OK);
+    }
+
+    public function showFile($id)
+    {
+        $rolesUser =auth()->user()->roles;
+        $files = Project::find($id)->projectFiles;
+        
+        $msg="";
+        $error=false;
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "projectfiles"=>$files, "rolesUser"=>$rolesUser];
+
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $id)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Proyectos/'.$id;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $projectFile=ProjectFile::create([
+                'project_id' => $request->id,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/Documents/Projectos/' . $id,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($projectFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = ProjectFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
+    }
+
+    public function destroyBoard($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = Board::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
+
+        return response()->json($array);
     }
 }

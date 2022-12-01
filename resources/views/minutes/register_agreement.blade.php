@@ -52,12 +52,12 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <table id="tableMinutes" class="table table-striped table-bordered" style="width:100%">
+            <table id="tableAgrement" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Acuerdo</th>
-                        <th>Accion</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody id="showAgreement">
@@ -67,7 +67,7 @@
                     <tr>
                         <th>#</th>
                         <th>Acuerdo</th>
-                        <th>Accion</th>
+                        <th>Acción</th>
                     </tr>
                 </tfoot>
             </table>
@@ -90,14 +90,16 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
       </button>
+      <input type="hidden" name="hideModalId" id="hideModalId">
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <table id="tableMinutes" class="table table-striped table-bordered" style="width:100%">
+          <table id="tableMinuteFiles" class="table table-striped table-bordered" style="width:100%">
               <thead>
                   <tr>
                       <th>#</th>
-                      <th>archivo</th>
+                      <th>Archivo</th>
+                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody id="showMinuteFiles">
@@ -107,10 +109,21 @@
                   <tr>
                       <th>#</th>
                       <th>archivo</th>
-                      
+                      <th>Acción</th>
                   </tr>
               </tfoot>
           </table>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="fileUploadMinuteFile" class="form-label">Documentos</label>
+              <input class="form-control" type="file" id="fileUploadMinuteFile" name="fileUploadMinuteFile" multiple>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <button type="button" class="btn btn-success" onclick="masDocumentos()">Guardar Documentos</button>
+            </div>
+          </div>
         </div>
           
       </div>

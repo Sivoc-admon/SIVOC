@@ -21,14 +21,9 @@
                                 </button>
                             </span>
                         @endif
-                        
-                        
-                        
-                        
-                        @include('rules.register')
-                        
 
-                    
+                        @include('rules.register')
+
                     </div>
                 </div>
             </div>
@@ -46,7 +41,7 @@
                                     <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,8 +52,13 @@
                                         <td>{{ $rule->name }}</td>
                                         <td> <a href="{{asset($rule->url) }}" target="_blank">{{ $rule->url }}</a></td>
                                         <td>
+                                            <span data-toggle="modal" data-target="#ModalShowFiles">
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Mostrar archivos" onclick="showRuleFile({{$rule->id}})">
+                                                    <i class="fas fa-list"></i>
+                                                </button>
+                                            </span>
                                             @if (Auth::user()->hasRole(['admin','calidad', 'ingenieria', 'servicio']))
-                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$rule->id}});"><i class="fas fa-edit"></i></a>
+                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editRule({{$rule->id}});"><i class="fas fa-edit"></i></a>
                                         
                                                 <form action="{{ route('rules.destroy',$rule->id) }}" method="POST">
                                                     @method('DELETE')
@@ -79,7 +79,7 @@
                                     <th>Clave</th>
                                     <th>Nombre</th>
                                     <th>URL</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

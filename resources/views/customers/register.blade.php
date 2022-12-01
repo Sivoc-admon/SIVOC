@@ -26,20 +26,20 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputCodeCustomer">Codigo</label>
-                        <input type="text" class="form-control" id="inputCodeCustomer" name="inputCodeCustomer" placeholder="Codigo" required>
+                        <label for="inputCodeCustomer">Código</label>
+                        <input type="text" class="form-control" id="inputCodeCustomer" name="inputCodeCustomer" placeholder="Código" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="inputAddressCustomer">Direccion</label>
-                        <input type="text" class="form-control" id="inputAddressCustomer" name="inputAddressCustomer" placeholder="Direccion" required>
+                        <label for="inputAddressCustomer">Dirección</label>
+                        <input type="text" class="form-control" id="inputAddressCustomer" name="inputAddressCustomer" placeholder="Dirección" required>
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="inputPhoneCustomer">Telefono</label>
+                        <label for="inputPhoneCustomer">Teléfono</label>
                         <input type="text" class="form-control" id="inputPhoneCustomer" name="inputPhoneCustomer" required>
                       </div>
                     </div>

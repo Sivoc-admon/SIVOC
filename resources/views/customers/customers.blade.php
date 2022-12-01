@@ -42,11 +42,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>Codigo</th>
-                                    <th>Direccion</th>
-                                    <th>Telefono</th>
+                                    <th>Código</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
                                     <th>Correo</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,11 +77,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>Codigo</th>
-                                    <th>Direccion</th>
-                                    <th>Telefono</th>
+                                    <th>Código</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
                                     <th>Correo</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

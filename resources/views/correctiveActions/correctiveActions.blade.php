@@ -5,7 +5,7 @@
 @section ( ' plugins.Datatables ' , true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Acciones Correctivas</h1>
+    <h1 class="m-0 text-dark">Mejora Continua</h1>
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
                     <div class="card-body">
                         
                         <span data-toggle="modal" data-target="#ModalRegisterCorrectiveAction">
-                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Accion Correctiva">
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Acción Correctiva">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </span>
@@ -38,12 +38,13 @@
                                 <tr>
                                     <th>Archivos</th>
                                     <th>#</th>
-                                    <th>Problematica</th>
-                                    <th>Accion inmediata</th>
-                                    <th>Autor</th>
+                                    <th>Descripción</th>
+                                    <th>Tipo de acción</th>
+                                    <th>Responsable</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
-                                    <th>Accion</th>
+                                    <th>Fecha</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,22 +61,25 @@
                                             <td>{{ $correctiveAction->id }}</td>
                                             <td>{{ $correctiveAction->issue }}</td>
                                             <td>{{ $correctiveAction->action }}</td>
-                                            @foreach ($users as $user)
-                                                @if ($correctiveAction->user_id == $user->id)
-                                                    <td>{{ $user->name }} {{ $user->last_name }} {{ $user->mother_last_name }}</td>
+                                            @foreach ($allUsers as $allUser)
+                                                @if ($correctiveAction->user_id == $allUser->id)
+                                                    <td>{{ $allUser->name }} {{ $allUser->last_name }} {{ $allUser->mother_last_name }}</td>
                                                 @endif
                                             @endforeach
                                             <td>{{ $correctiveAction->involved }}</td>
                                             <td>{{ $correctiveAction->status }}</td>
+                                            <td>{{ $correctiveAction->created_at }}</td>
                                             <td>
                                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editCorrectiveAction({{$correctiveAction->id}});"><i class="fas fa-edit"></i></a>
-                                            
-                                                <form action="{{ route('correctiveActions.destroy',$user->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                    
-                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                                </form>
+                                                @if (Auth::user()->hasAnyRole(['admin']))
+                                                    <form action="{{ route('correctiveActions.destroy',$correctiveAction->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                        
+                                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                                    </form>
+                                                @endif
+                                                
 
                                             </td>
                                         </tr>
@@ -88,11 +92,11 @@
                                     <th>Archivos</th>
                                     <th>#</th>
                                     <th>Problematica</th>
-                                    <th>Accion inmediata</th>
-                                    <th>Autor</th>
+                                    <th>Tipo de acción</th>
+                                    <th>Responsable</th>
                                     <th>Involucrados</th>
                                     <th>Estatus</th>
-                                    <th>Accion</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>

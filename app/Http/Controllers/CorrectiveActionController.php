@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\CorrectiveAction;
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\DB;
 use App\CorrectiveActionFiles;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CorrectiveActionController extends Controller
 {
@@ -19,9 +20,10 @@ class CorrectiveActionController extends Controller
     public function index()
     {
         $correctiveActions = CorrectiveAction::get();
-        $users = User::get();
+        $allUsers = User::withTrashed()->get(); //todos los usuarios activos e inactivos
+        $users = User::get(); //usuarios activos
 
-        return view('correctiveActions.correctiveActions',compact('correctiveActions', 'users'));
+        return view('correctiveActions.correctiveActions',compact('correctiveActions', 'users', 'allUsers'));
     }
 
     /**
@@ -44,7 +46,7 @@ class CorrectiveActionController extends Controller
     {
         $error=false;
         $msg="";
-    
+        
         $arrayIds=explode(",",$request->participant);
         $users = DB::table('users')
                     ->whereIn('id', $arrayIds)->get();
@@ -59,7 +61,7 @@ class CorrectiveActionController extends Controller
             'issue' => $request->issue,            
             'action' => $request->action,
             'involved' => $participantes,
-            'user_id' => $request->user()->id,
+            'user_id' => $request->responsable,
             'status' => $request->status,
         ]);
 
@@ -114,14 +116,13 @@ class CorrectiveActionController extends Controller
      */
     public function edit($id)
     {
-        $user = CorrectiveAction::find($id);
+        $correctiveAction = CorrectiveAction::find($id);
+        $users = User::withTrashed()->find($correctiveAction->user_id);
         
-        $roles = Role::get();
-        $areas = Area::get();
-        $roleUser = User::find($id)->roles;
+    
         $msg="";
         $error=false;
-        $array=["msg"=>$msg, "error"=>$error, "user"=>$user, "roles"=>$roles, "areas"=>$areas, "roleUser"=>$roleUser];
+        $array=["msg"=>$msg, "error"=>$error, "correctiveAction"=>$correctiveAction, "users"=>$users];
         return response()->json($array);
     }
 
@@ -132,9 +133,17 @@ class CorrectiveActionController extends Controller
      * @param  \App\CorrectiveAction  $correctiveAction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CorrectiveAction $correctiveAction)
+    public function update(Request $request, $id)
     {
-        //
+        $correctiveAction = CorrectiveAction::find($id);
+        
+        $correctiveAction->update([
+            'issue' => $request->inputEditIssiueCorrectiveAction,
+            'action' => $request->inputEditActionCorrectiveAction,
+            'status' => $request->inputEditStatusCorrectiveAction,
+            'user_id' => $request->inputEditNameAutor,
+            
+        ]);
     }
 
     /**
@@ -154,13 +163,64 @@ class CorrectiveActionController extends Controller
     {
         
         $files = CorrectiveAction::find($correctiveAction)->correctiveActionFile;
+        $user = new User();
+        $user = $user->find(Auth::user()->id);
+        
+        $eliminaArchivo = $user->hasAnyRole(['admin', 'calidad']);
         
         $msg="";
         $error=false;
         
 
-        $array=["msg"=>$msg, "error"=>$error, "correctiveActionfiles"=>$files];
+        $array=["msg"=>$msg, "error"=>$error, "correctiveActionfiles"=>$files, "eliminaArchivo"=>$eliminaArchivo];
 
         return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $correctiveAction)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Accion_Correctiva/'.$correctiveAction;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $correctiveActionFile=CorrectiveActionFiles::create([
+                'corrective_action_id' => $request->correctiveAction,
+                'file' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($correctiveActionFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
+
+    public function destroyfile($id)
+    {  
+        $file = CorrectiveActionFiles::find($id);
+        
+        $pathFile = $file->ruta."/".$file->file;
+        Storage::delete($pathFile);
+        CorrectiveActionFiles::find($id)->delete();
+
+        return redirect()->route('correctiveActions.index');
     }
 }

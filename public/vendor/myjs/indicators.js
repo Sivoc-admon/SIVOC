@@ -129,61 +129,139 @@ function minMax() {
 }
 
 function graficaIndicador() {
+    $("#bodyIndicatorsDos").empty();
+    $('#bar').html(''); //remove canvas from container
+    $('#bar').html("<canvas id='chartIndicator'></canvas>");
     $.ajax({
         type: "POST",
         url: "/indicators/grafica",
         data: $("#formGraficaIndicador").serialize(),
         //dataType: 'json',
         success: function(data) {
-            console.log(data);
+            console.log(data.indicatorsGraph);
 
             if (data.error == true) {
                 messageAlert(data.msg, "error", "");
             } else {
                 let valores = [];
-                data.grafica.forEach(element => {
-                    valores.push(element.value);
-                });
-                console.log(valores);
+                let table = "";
+
+                //datos de graficacion
+                for (const i in data.indicatorsGraph) {
+                    table += `<tr>"
+                        <td> ${data.indicatorsGraph[i].area}</td>
+                        <td> ${data.indicatorsGraph[i].tipo_indicador}</td>
+                        <td> ${data.indicatorsGraph[i].value}</td>
+                        <td>
+                            <a href="storage/Documents/Indicadores/${data.indicatorsGraph[i].file_name}" target="_blank">${data.indicatorsGraph[i].file_name}</a>
+                        </td>"
+                        <td> ${data.indicatorsGraph[i].registration_date}</td>
+                    </tr>`;
+
+                }
+
+                $("#bodyIndicatorsDos").append(table);
+                $("#tableIndicatorsDos").show();
+
+
+
+
+                //datos para graficar
+                for (let i = 0; i < 11; i++) {
+                    if (i < data.grafica.length) {
+                        if (i == data.grafica[i].month - 1) {
+                            valores[i] = data.grafica[i].value;
+                        } else {
+                            if (valores[i] == "") {
+                                valores[i] = 0;
+                            }
+
+                            valores[data.grafica[i].month - 1] = data.grafica[i].value;
+
+
+                        }
+
+                    } else {
+                        valores.push(0);
+                    }
+
+
+                }
+                //maximos
+                let objetivos = {
+                    type: 'line',
+                    label: 'Valor Objetivo',
+                    data: [data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max,
+                        data.minMax.max
+                    ],
+                    order: 2,
+                    fill: false,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgba(0, 99, 132, 1)',
+                    //backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                    borderColor: 'rgba(0, 99, 132)',
+                    //yAxisID: "y-axis-density"
+                };
+                //minimos
+                let min = {
+                    type: 'line',
+                    label: 'Valor Minimo',
+                    data: [data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min,
+                        data.minMax.min
+                    ],
+                    order: 1,
+                    fill: false,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgba(255, 0, 0, 1)',
+                    //backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                    borderColor: 'rgba(255, 0, 0)',
+                    //yAxisID: "y-axis-density"
+                };
+                let obtenidos = {
+                    label: 'Valor Obtenido',
+                    data: valores,
+                    order: 0,
+                    backgroundColor: 'rgba(99, 152, 0, 0.5)',
+                    borderColor: 'rgba(99, 152, 0, 1)',
+                    borderWidth: 1,
+                    //yAxisID: "y-axis-gravity"
+                };
+
+                let indicators = {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    datasets: [obtenidos, objetivos, min]
+                };
+
 
                 $("#ModalGraficaIndicator").modal('hide');
-                var ctx = document.getElementById('chartIndicator').getContext('2d');
-                var myChart = new Chart(ctx, {
+
+                let ctx = document.getElementById('chartIndicator').getContext('2d');
+
+
+                let grafica = new Chart(ctx, {
                     type: 'bar',
-                    data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        datasets: [{
-                            label: 'Indicador',
-                            data: valores,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }],
-                            xAxes: []
-                        }
-                    }
+                    data: indicators,
+                    //options: chartOptions
                 });
 
             }

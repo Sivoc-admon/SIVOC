@@ -20,7 +20,7 @@ class AreaDocumentController extends Controller
      */
     public function index($area)
     {
-        $ariasValidas = ['almacen', 'calidad', 'operaciones', 'compras', 'direccion', 'finanzas', 'ingenieria', 'manufactura', 'recursos humanos', 'ventas', 'servicios'];
+        $ariasValidas = ['almacen', 'calidad', 'operaciones', 'compras', 'direccion', 'finanzas', 'ingenieria', 'manufactura', 'recursos humanos', 'ventas', 'servicio', 'desarrollo', 'pruebas'];
         $aria = Area::where('name', 'like', '%' . $area . '%')->take(1)->get();
 
         $folders = [];
@@ -52,15 +52,16 @@ class AreaDocumentController extends Controller
                         $f['nivel'] = 0;
                         $f['empty'] = true;
                         array_push($aux, $f);
-                    }                    
+                    }
                     $folders = $aux;
                 }
             }
         } else {
             $area = 'almacen';
         }
-        
+
         if(!is_array($folders))$folders = $folders->toArray();
+
 
         return view('areafolders.areafolders')->with('folders', $folders)->with('area', $area);
     }
@@ -69,19 +70,23 @@ class AreaDocumentController extends Controller
     {
         $aria = Area::where('id', $area)->take(1)->get();
 
+        $area_user=auth()->user()->area_id;
         $folders = [];
         foreach ($aria as $ariax) {
             $areaId = $ariax->id;
             $folders = AreaDocument::where('area_id', $areaId)->where('folder_area_id', $folderId)->get();
         }
+
         $folders->each(function($f){
+
+
             $f->created_at = strval(date('Y-m-d H:i:s', strtotime($f->created_at)));
             $f->updated_at = strval(date('Y-m-d H:i:s', strtotime($f->updated_at)));
             #dd( $f->created_at);
         });
-        
 
-        return response()->json($folders, Response::HTTP_OK);
+
+        return response()->json(['folders'=>$folders, 'area_user'=>$area_user], Response::HTTP_OK);
     }
 
     /**
@@ -166,12 +171,15 @@ class AreaDocumentController extends Controller
 
     public function getFoldersAndFiles($areaId, $nivel, $idPadre)
     {
+        $roleUser =auth()->user()->roles;
+        $idRoleUser = $roleUser[0]->id;
+        $area_id=auth()->user()->area_id;
         $nivel = intval($nivel);
         $folders = $this->getFolderByNivel($areaId, $nivel, $idPadre);
         $folders->each(function ($f) {
             $f->areaDocuments;
         });
-        return response()->json(['data' => $folders], Response::HTTP_OK);
+        return response()->json(['data' => $folders, 'area_id'=>$area_id, 'idRoleUser'=>$idRoleUser], Response::HTTP_OK);
     }
 
     public function createFolder($areaId, $nivel, Request $request)
@@ -221,17 +229,28 @@ class AreaDocumentController extends Controller
 
             for ($x = 0; $x < $request->TotalFiles; $x++) {
                 if ($request->hasFile('files' . $x)) {
+
+
                     $file = $request->file('files' . $x);
                     $path = $file->storeAs(
                         $pathFile, $file->getClientOriginalName()
                     );
-                    $name = $file->getClientOriginalName();
-                    $areaDocument = new AreaDocument;
-                    $areaDocument->area_id = $areaId;
-                    $areaDocument->folder_area_id = $idFolder;
-                    $areaDocument->name = $name;
-                    $areaDocument->ruta = 'storage/app/' . $pathFile;
-                    $areaDocument->save();
+
+                    if(Storage::disk('public')->exists('Documents/' . $folderAreaName . $r.'/'.$file->getClientOriginalName())){
+
+                        $name = $file->getClientOriginalName();
+                        $areaDocument = new AreaDocument;
+                        $areaDocument->area_id = $areaId;
+                        $areaDocument->folder_area_id = $idFolder;
+                        $areaDocument->name = $name;
+                        $areaDocument->ruta = 'storage/app/' . $pathFile;
+
+                        $areaDocument->save();
+
+                    }
+
+                }else{
+                    return response()->json(["message" => "No se pudo guardar el archivo, ".$request->file('files' . $x)->getClientOriginalName()], Response::HTTP_INTERNAL_SERVER_ERROR);
                 }
             }
             return response()->json(['success' => 'Subida de archivos correcta.']);

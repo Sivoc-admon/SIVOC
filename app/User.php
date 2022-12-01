@@ -13,6 +13,7 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
+    
     protected $dates = ['deleted_at'];
 
     /**
@@ -27,9 +28,17 @@ class User extends Authenticatable
         'email',
         'password',
         'area_id',
-        /*'gender',
+        'gender',
         'marital_status',
-        'nss'*/
+        'nss',
+        'grade',
+        'profession',
+        'street',
+        'telefono',
+        'contacto',
+        'age',
+        'rfc',
+        'curp'
     ];
     
 
@@ -104,5 +113,10 @@ class User extends Authenticatable
     public function Areas()
     {
         return $this->belongsTo('App\Area');
+    }
+
+    public function rhFiles()
+    {
+        return $this->hasMany('App\RhFile');
     }
 }

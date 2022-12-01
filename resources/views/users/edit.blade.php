@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sltAreaEditUser">Area</label>
+                        <label for="sltAreaEditUser">Área</label>
                         <select class="form-control" id="sltAreaEditUser" name="sltAreaEditUser" required>
                           
                         </select>

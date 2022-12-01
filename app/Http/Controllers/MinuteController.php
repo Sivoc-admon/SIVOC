@@ -8,7 +8,8 @@ use App\Agreement;
 use App\User;
 use App\AgreementFile;
 use Illuminate\Support\Facades\DB;
-
+use App\Mail\MinutaMailable;
+use Illuminate\Support\Facades\Mail;
 class MinuteController extends Controller
 {
     /**
@@ -45,6 +46,8 @@ class MinuteController extends Controller
         $arrayIds=explode(",",$request->internalParticipant);
         $users = DB::table('users')
                     ->whereIn('id', $arrayIds)->get();
+        $correos = $users->pluck('email');
+        
         
         $participantes="";
         foreach ($users as $user) {
@@ -80,6 +83,11 @@ class MinuteController extends Controller
             
             
             $agreementFile->save();
+            
+            $correo = new MinutaMailable($minute);
+            Mail::to($correos)->send($correo);
+
+
             $msg="Registro guardado con exito";
             
             
@@ -109,9 +117,13 @@ class MinuteController extends Controller
      * @param  \App\Minute  $minute
      * @return \Illuminate\Http\Response
      */
-    public function edit(Minute $minute)
+    public function edit($id)
     {
-        //
+        $minute = Minute::find($id);
+
+        $array=["minute"=>$minute];
+        
+        return response()->json($array);
     }
 
     /**
@@ -121,9 +133,18 @@ class MinuteController extends Controller
      * @param  \App\Minute  $minute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Minute $minute)
+    public function update(Request $request, $id)
     {
-        //
+        
+
+        $minute = Minute::find($id);
+        
+        $minute->update([
+            'description' => $request->inputEditDescriptionMinute,
+            'type' => $request->sltEditMinuteType,
+            'status' => $request->sltEditStatusMinute
+            
+        ]);
     }
 
     /**
@@ -177,14 +198,65 @@ class MinuteController extends Controller
 
     public function showMinuteFile($minute)
     {
-        
+        $rolesUser =auth()->user()->roles;
+        //dd($roleUser);
+        $idRoleUser = $rolesUser[0]->id;
+
         $files = Minute::find($minute)->agreementFiles;
         
         $msg="";
         $error=false;
         
 
-        $array=["msg"=>$msg, "error"=>$error, "minutefiles"=>$files];
+        $array=["msg"=>$msg, "error"=>$error, "minutefiles"=>$files, 'rolesUser'=>$rolesUser];
+
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $minute)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Minutas/'.$minute;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $agreementFile=AgreementFile::create([
+                'minute_id' => $request->minute,
+                'file' => $archivo->getClientOriginalName(),
+                'ruta' => 'storage/app/' . $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($agreementFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
+    }
+
+    public function destroyFile($id)
+    {
+        $msg="";
+        $error=false;
+
+        $file = AgreementFile::find($id);
+        $file->delete();
+        $array=["msg"=>$msg, "error"=>$error];
 
         return response()->json($array);
     }

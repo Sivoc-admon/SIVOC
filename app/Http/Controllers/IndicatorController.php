@@ -28,7 +28,7 @@ class IndicatorController extends Controller
         ->get();
 
         return view('indicators.indicators')->with('areas', $areas)->with('indicators', $indicators)->with('indicatorTypes', $indicatorTypes);
-        
+
     }
 
     /**
@@ -53,7 +53,7 @@ class IndicatorController extends Controller
         $indicator = new Indicator;
         $pathFile = 'public/Documents/Indicadores';
         $file = $request->files;
-        
+
         $indicator->area_id = $request->idArea;
         $indicator->indicator_type_id = $request->typeIndicator;
         $indicator->value = $request->valorOptenido;
@@ -67,10 +67,10 @@ class IndicatorController extends Controller
 
         $indicator->save();
 
-        
+
 
         return redirect()->action([IndicatorController::class, 'index']);
-        
+
     }
 
     //FUNCION PARA CREAR TIPOS DE INDICADORES
@@ -78,26 +78,26 @@ class IndicatorController extends Controller
     {
         $indicatorType = new IndicatorType;
 
-        
+
         $indicatorType->name = $request->input('inputName');
         $indicatorType->formula = $request->input('inputFormula');
         $indicatorType->min = $request->input('inputMinimo');
         $indicatorType->max = $request->input('inputMaximo');
-        
+
 
         $indicatorType->save();
 
-        
+
         return redirect()->action([IndicatorController::class, 'index']);
-        
+
     }
 
     public function getMinMax(Request $request)
     {
-        
-        $indicatorType = $request->indicatorType; 
+
+        $indicatorType = $request->indicatorType;
         $minMax = IndicatorType::where('id', $indicatorType)->get();
-        
+
         return response()->json(["message" => "Exitoso.", "minMax" => $minMax], Response::HTTP_OK);
     }
 
@@ -106,14 +106,32 @@ class IndicatorController extends Controller
         $area = $request->input('sltAreaGrafica');
         $indicatorType = $request->input('inputIndicatorTypeGrafica');
         $fechaInicial = $request->input('fechaInicial');
-        $fechaFinal = $request->input('fechaFinal');
 
-        $grafica = Indicator::where('area_id', $area)
+
+        $grafica = DB::table('indicators')
+        ->where('area_id', $area)
         ->where('indicator_type_id', $indicatorType)
-        ->whereBetween('created_at', [$fechaInicial.' 00:00:00', $fechaFinal.' 23:59:59'])
+        ->where('registration_date', 'LIKE', $fechaInicial.'%')
+        ->select(DB::raw('indicators.*, month(registration_date) as month'))
+        ->orderBy('month')
         ->get();
 
-        return response()->json(["message" => "Exitoso", "grafica" => $grafica], Response::HTTP_OK);
+
+        $minMax = IndicatorType::find($indicatorType);
+
+
+        $indicators = DB::table('indicators')
+        ->join('areas', 'indicators.area_id', '=', 'areas.id')
+        ->join('indicator_type', 'indicators.indicator_type_id', '=', 'indicator_type.id')
+        ->where('indicators.area_id', $area)
+        ->where('indicators.indicator_type_id', $indicatorType)
+        ->where('indicators.registration_date', 'LIKE', $fechaInicial.'%')
+        ->select('indicators.*', 'areas.name as area', 'indicator_type.name as tipo_indicador')
+        ->get();
+
+
+
+        return response()->json(["message" => "Exitoso", "grafica" => $grafica, "minMax"=>$minMax, "indicatorsGraph"=>$indicators], Response::HTTP_OK);
     }
 
     /**
@@ -158,6 +176,8 @@ class IndicatorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $indicator = Indicator::find($id);
+        $indicator->delete();
+        return redirect()->route('indicators.index');
     }
 }

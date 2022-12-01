@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CampoCorrectiveActionFileId extends Migration
+class UpdateCalibration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CampoCorrectiveActionFileId extends Migration
      */
     public function up()
     {
-        Schema::table('corrective_action_files', function (Blueprint $table) {
-            $table->integer('corrective_action_id')->after('id');
+        Schema::table('assets', function ($table) {
+            $table->renameColumn('date_caibration', 'date_calibration');
+            
         });
     }
 

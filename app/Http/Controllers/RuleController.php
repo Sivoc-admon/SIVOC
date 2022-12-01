@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rule;
 use Illuminate\Http\Request;
+use App\RuleFile;
 
 class RuleController extends Controller
 {
@@ -38,9 +39,11 @@ class RuleController extends Controller
     {
         $rule = new Rule;
         
-        $rule->code = $request->input('inputClaveRule');
-        $rule->name = $request->input('inputNameRule');
-        $rule->url = $request->input('inputUrlRule');
+        $rule=Rule::create([
+            'code' => $request->input('inputClaveRule'),
+            'name' => $request->input('inputNameRule'),
+            'url' => $request->input('inputUrlRule'),
+        ]);
         
         
         $rule->save();
@@ -65,9 +68,13 @@ class RuleController extends Controller
      * @param  \App\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rule $rule)
+    public function edit($id)
     {
-        //
+        $rule = Rule::find($id);
+
+        $array=["rule"=>$rule];
+        
+        return response()->json($array);
     }
 
     /**
@@ -77,9 +84,16 @@ class RuleController extends Controller
      * @param  \App\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rule $rule)
+    public function update(Request $request, $id)
     {
-        //
+        $user = Rule::find($id);
+        
+        $user->update([
+            'code' => $request->inputEditClaveRule,
+            'name' => $request->inputEditNameRule,
+            'url' => $request->inputEditUrlRule
+            
+        ]);
     }
 
     /**
@@ -93,5 +107,55 @@ class RuleController extends Controller
         $rule = Rule::find($rule);
         $rule->delete();
         return redirect()->route('rules.index');
+    }
+
+    public function showRuleFile($rule)
+    {
+        
+        $files = Rule::find($rule)->ruleFile;
+        
+        $msg="";
+        $error=false;
+        
+
+        $array=["msg"=>$msg, "error"=>$error, "rulefiles"=>$files];
+
+        return response()->json($array);
+    }
+
+    public function uploadFile(Request $request, $rule)
+    {
+        $error=false;
+        $msg="";
+        
+        
+        $pathFile = 'public/Documents/Normas/'.$rule;
+
+        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            $nombre="file".$i;
+            $archivo = $request->file($nombre);
+            $ruleFile=RuleFile::create([
+                'rule_id' => $request->rule,
+                'name' => $archivo->getClientOriginalName(),
+                'ruta' => $pathFile,
+
+            ]);
+            $path = $archivo->storeAs(
+                $pathFile, $archivo->getClientOriginalName()
+            );
+        }
+        
+        if ($ruleFile->save()) {
+            $msg="Registro guardado con exito";
+        }else{
+            $error=true;
+            $msg="Error al guardar archvio";
+        }
+            
+            
+
+        $array=["msg"=>$msg, "error"=>$error];
+        
+        return response()->json($array);
     }
 }

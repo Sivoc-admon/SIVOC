@@ -13,7 +13,7 @@
             <form id="formRegisterTypeIndicador">
               @csrf
                 <div class="row">
-                  <h4>Typo de Indicador</h4>
+                  <h4>Tipo de Indicador</h4>
                 </div>
                   
                 <div class="row" >
@@ -78,7 +78,7 @@
                 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="sltArea">Area:</label>
+                      <label for="sltArea">Área:</label>
                       <select class="form-control" name="sltArea" id="sltArea">
                         @foreach ($areas as $area)
                           <option value="{{$area->id}}"> {{$area->name}}</option>
@@ -165,7 +165,7 @@
                 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="sltAreaGrafica">Area:</label>
+                      <label for="sltAreaGrafica">Área:</label>
                       <select class="form-control" name="sltAreaGrafica" id="sltAreaGrafica">
                         @foreach ($areas as $area)
                           <option value="{{$area->id}}"> {{$area->name}}</option>
@@ -190,14 +190,8 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="fechaInicial">Fecha Inicial:</label>
-                      <input type="date" class="form-control" id="fechaInicial" name="fechaInicial" >
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="fechaFinal">Fecha Final:</label>
-                      <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" >
+                      <input type="number" class="form-control" id="fechaInicial" name="fechaInicial" min="2019" value="2019">
+                      
                     </div>
                   </div>
                   

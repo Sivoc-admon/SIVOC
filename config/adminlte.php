@@ -188,7 +188,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'inicio',
 
     'logout_url' => 'logout',
 
@@ -255,6 +255,11 @@ return [
             'icon' => 'fas fa-users',
         ],
         [
+            'text' => 'Ventana de Inicio',
+            'url'  => 'inicio/button',
+            'icon' => 'fas fa-cog',
+        ],
+        [
             'text' => 'change_password',
             /*'url'  => 'admin/settings',*/
             'icon' => 'fas fa-fw fa-lock',
@@ -276,13 +281,13 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text' => 'Auditoria Interna',
-            'url'  => 'internal_audit',
+            'text' => 'Auditoría Interna',
+            'url'  => 'internalAudits',
             'icon' => 'fas fa-user-secret',
         ],
         [
             'text' => 'Documentos SGC',
-            'url'  => '/gc',
+            'url'  => 'sgc',
             'icon' => 'fas fa-book',
         ],
         [
@@ -291,7 +296,7 @@ return [
             'icon' => 'fas fa-scroll',
         ],
         [
-            'text' => 'Acciones Correctivas',
+            'text' => 'Mejora Continua',
             'url'  => 'correctiveActions',
             'icon' => 'fas fa-tasks',
         ],
@@ -302,26 +307,29 @@ return [
         ],
         [
             'text' => 'Activos',
-            'url'  => 'active',
+            'url'  => 'assets',
             'icon' => 'far fa-check-square',
         ],
         [
             'text'    => 'Recursos Humanos',
-            'url'     => 'rh',
             'icon'    => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
                     'text' => 'Empleados',
-                    'url'  => '#',
+                    'url'  => 'rh',
+                ],
+                [
+                    'text' => 'Desarrollo Organizacional',
+                    'url'  => 'folder/desarrollo',
                 ]
             ]
         ],
         [
-            'text'    => 'Areas',
+            'text'    => 'Áreas',
             'icon'    => 'fas fa-folder',
             'submenu' => [
                 [
-                    'text' => 'Almacen',
+                    'text' => 'Almacén',
                     'url'  => '/folder/almacen',
                 ],
                 [
@@ -337,7 +345,7 @@ return [
                     'url'  => '/folder/compras',
                 ],
                 [
-                    'text' => 'Direccion',
+                    'text' => 'Dirección',
                     'url'  => '/folder/direccion',
                 ],
                 [
@@ -345,7 +353,7 @@ return [
                     'url'  => '/folder/finanzas',
                 ],
                 [
-                    'text' => 'Ingenieria',
+                    'text' => 'Ingeniería',
                     'url'  => '/folder/ingenieria',
                 ],
                 [
@@ -362,9 +370,13 @@ return [
                 ],
                 [
                     'text' => 'Servicio',
-                    'url'  => '/folder/servicios',
+                    'url'  => '/folder/servicio',
                 ],
-                
+                [
+                    'text' => 'Pruebas',
+                    'url'  => '/folder/pruebas',
+                ],
+
             ],
         ],
         /*['header' => 'labelsx'],
@@ -468,7 +480,7 @@ return [
                     'asset' => true,
                     'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
                 ],
-                
+
             ],
         ],
         'Select2' => [
