@@ -13,9 +13,13 @@ class CreateRuleFilesTable extends Migration
      */
     public function up()
     {
+        Schema::table('rules', function (Blueprint $table) {
+            $table->increments('id')->change();
+        });
+
         Schema::create('rule_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('rule_id')->unsigned();
+            $table->unsignedInteger('rule_id');
             $table->foreign('rule_id')
             ->references('id')
             ->on('rules')
