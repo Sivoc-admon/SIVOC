@@ -62,16 +62,16 @@
         body {
             height: 100%;
             background-image: url({{asset('storage/img/SIVOC.jpg')}});
-            
+
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            
+
         }
-    
+
         */
-        
+
     </style>
 
     {{-- Favicon --}}
@@ -102,7 +102,7 @@
 <body>
 
     <div class="container-fluid">
-        
+
         <div>
             @if (Route::has('login'))
                 <div  style="margin-left: 90%; margin-top: 10px; ">
@@ -118,15 +118,61 @@
                 </div>
             @endif
 
-            <div role="group" aria-label="Basic example" style="margin-top: 550px; padding-inline: 30px;">
-                @foreach ($buttons as $button)
-                    
-                <a href="storage/Documents/welcome/{{$button->id}}/{{$button->nameFile}}" target="_blank" style="font-size:12px;"><button class="btn btn-{{$button->color}}"> <b style="color: white !important">{{$button->button}}</b></button></a>
-                @endforeach
-
+            <div class="row justify-content-md-center" style="margin-top: 150px" >
+                <div class="col-md-5"></div>
+                <div class="col-md-7">
+                    <div class="card w-75" >
+                      <div class="card-header">
+                        <h3 class="card-title" >EVENTOS</h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                               @foreach($images as $img)
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="{{($loop->index === 0)? 'active' : '' }}"></li>
+                                @endforeach
+                            </ol>
+                          <div class="carousel-inner">
+                                @foreach($images as $img)
+                                    <div class="carousel-item {{($loop->index === 0) ? 'active' : ''}}">
+                                        <img class="d-block w-100" src="{{asset($img->path.'/'.$img->id.'-'.$img->name)}}">
+                                    </div>
+                                @endforeach
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-custom-icon" aria-hidden="true">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-custom-icon" aria-hidden="true">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                  <!-- /.col -->
+                </div>
             </div>
 
-            
+            <div class="row mt-4 mb-4">
+                <div role="group" aria-label="Basic example" >
+                    @foreach ($buttons as $button)
+
+                    <a href="storage/Documents/welcome/{{$button->id}}/{{$button->nameFile}}" target="_blank" style="font-size:12px;"><button class="btn btn-{{$button->color}}"> <b style="color: white !important">{{$button->button}}</b></button></a>
+                    @endforeach
+
+                </div>
+            </div>
+
+
         </div>
     </div>
 
