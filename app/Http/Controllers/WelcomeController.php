@@ -36,6 +36,7 @@ class WelcomeController extends Controller
 
         //get Images records
         $images = ImagesResource::all();
+        dd($images);
 
         return view('welcome',compact('buttons','images'));
     }
@@ -44,8 +45,10 @@ class WelcomeController extends Controller
     {
 
         $buttons = Welcome::get();
+        //get Images records
+        $images = ImagesResource::all();
 
-        return view('buttons.buttons',compact('buttons'));
+        return view('buttons.buttons',compact('buttons', 'images'));
     }
 
     /**
