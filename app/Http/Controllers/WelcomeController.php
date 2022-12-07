@@ -36,7 +36,6 @@ class WelcomeController extends Controller
 
         //get Images records
         $images = ImagesResource::all();
-        dd($images);
 
         return view('welcome',compact('buttons','images'));
     }
