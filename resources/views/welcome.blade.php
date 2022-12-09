@@ -119,7 +119,7 @@
             @endif
 
             <div class="row" style="margin-top: 20px" >
-                <div class="col-md-7">
+                <div class="col-md-4">
                     <div class="card w-75" >
                       <div class="card-header">
                         <h3 class="card-title" >EVENTOS</h3>
