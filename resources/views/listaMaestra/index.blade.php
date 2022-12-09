@@ -56,12 +56,12 @@
             <div class="card">
                 <div class="card-body">
                     @if(Auth::user()->hasAnyRole(['admin', 'calidad', 'compras', 'tesoreria', 'manufactura', 'servicio', 'ventas', 'lider calidad', 'lider compras', 'lider recursos humanos', 'lider tesoreria', 'lider ventas', 'lider servicio']))
-                    <span data-toggle="modal" data-target="#exampleModal">
+                    <span data-toggle="modal" data-target="#modalCreateFolder">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Lista Maestra">
                             <i class="fas fa-plus"></i>
                         </button>
                     </span>
-                    <span >
+                    <!-- <span >
                         <button type="button" class="btn btn-info" onclick="showDiv('divProject')" title="Mostrar Proyectos">
                             <i class="fas fa-project-diagram"></i>
                         </button>
@@ -70,11 +70,12 @@
                         <button type="button" class="btn btn-success" onclick="showDiv('divFiles')" title="Archivos">
                             <i class="fas fa-folder"></i>
                         </button>
-                    </span>
+                    </span> -->
 
                     @endif
 
-
+                    @include('listaMaestra.create_folder')
+                    @include('listaMaestra.upload_file')
 
                 </div>
             </div>
@@ -82,11 +83,14 @@
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
                     <div id="listasMaestras">
-                        <ul>
+                        @isset($folders)
+                            <?php echo $folders; ?>
+                        @endisset
+                        <!-- <ul>
                             <li >nodo 1</li>
                             <li >nodo 2
                                 <ul>
@@ -94,8 +98,27 @@
                                     <li data-jstree='{"opened":false, "type":"file"}'>subnodo 2</li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div id="informacion">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span data-toggle="modal" data-target="#modalUploadFile">
+                            <button type="button" id="btnAgregarArchivo" style="display: none" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Agregar Archivo">
+                                <i class="fas fa-file"></i>
+                            </button>
+                        </span>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -119,6 +142,20 @@
                 },
                 "plugins" : ["types"]
             });
+            $('#listasMaestras').on("changed.jstree", function (e, data) {
+                var i, j, r = [];
+                for(i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]).text);
+                }
+                console.log(data.selected);
+                console.log(r);
+                console.log("seleccion: " + r.join(', '));
+                $('#informacion').html('Seleccinado: ' + r.join(', '));
+                $("#hiddenAddFilefolder").val(r.join(', '));
+                $("#btnAgregarArchivo").show();
+            });
+
+
 
 
             $("#tableProjects").DataTable({

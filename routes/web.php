@@ -182,6 +182,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 //LISTA MAESTRA
 Route::middleware(['auth', 'verified'])->group(function(){
+    Route::post('listaMaestra/{carpeta}/uploadFile', 'ListaMaestraController@uploadFile')->name('listaMaestra.uploadFile');
+    Route::post('listaMaestra/{proyecto}/createFolder','ListaMaestraController@createFolder')->name('listaMaestra.createFolder');
     Route::resource('listaMaestra','ListaMaestraController');
 });
 

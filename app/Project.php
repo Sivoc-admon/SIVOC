@@ -12,16 +12,21 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 
+        'name',
         'name_project',
-        'type', 
+        'type',
         'client',
         'status',
-        
+
     ];
 
     public function projectFiles()
     {
         return $this->hasMany('App\ProjectFile');
+    }
+
+    public function projectFolders()
+    {
+        return $this->hasMany('App\ProjectFolder');
     }
 }
