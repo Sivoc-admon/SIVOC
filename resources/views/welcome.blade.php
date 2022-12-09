@@ -118,8 +118,7 @@
                 </div>
             @endif
 
-            <div class="row justify-content-md-center" style="margin-top: 150px" >
-                <div class="col-md-5"></div>
+            <div class="row" style="margin-top: 20px" >
                 <div class="col-md-7">
                     <div class="card w-75" >
                       <div class="card-header">
@@ -160,6 +159,8 @@
                   </div>
                   <!-- /.col -->
                 </div>
+                <div class="col-md-5"></div>
+
             </div>
 
             <div class="row mt-4 mb-4">
