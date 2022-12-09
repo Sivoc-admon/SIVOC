@@ -119,7 +119,7 @@
             @endif
 
             <div class="row" style="margin-top: 20px" >
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card w-75" >
                       <div class="card-header">
                         <h3 class="card-title" >EVENTOS</h3>
@@ -167,7 +167,7 @@
                 <div role="group" aria-label="Basic example" >
                     @foreach ($buttons as $button)
 
-                    <a href="storage/Documents/welcome/{{$button->id}}/{{$button->nameFile}}" target="_blank" style="font-size:12px;"><button class="btn btn-{{$button->color}}"> <b style="color: white !important">{{$button->button}}</b></button></a>
+                    <a href="storage/Documents/welcome/{{$button->id}}/{{$button->nameFile}}" target="_blank" style="font-size:12px;"><button class="btn btn-{{$button->color}} btn-sm"> <b style="color: white !important">{{$button->button}}</b></button></a>
                     @endforeach
 
                 </div>
