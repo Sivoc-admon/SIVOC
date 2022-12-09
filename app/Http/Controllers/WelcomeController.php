@@ -44,8 +44,10 @@ class WelcomeController extends Controller
     {
 
         $buttons = Welcome::get();
+        //get Images records
+        $images = ImagesResource::all();
 
-        return view('buttons.buttons',compact('buttons'));
+        return view('buttons.buttons',compact('buttons', 'images'));
     }
 
     /**
