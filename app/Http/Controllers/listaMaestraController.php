@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Project;
 use App\ListaMaterialesFolder;
 use App\ListaMaterialesFile;
+use App\Imports\MaterialesImport;
+use App\ListaMateriales;
 
 class listaMaestraController extends Controller
 {
@@ -26,35 +28,42 @@ class listaMaestraController extends Controller
     {
         $error=false;
         $msg="";
-
-        $folder = ListaMaterialesFolder::where('name','=', $nameProject)->first();
-        //$r = $this->getPathFolder($request->folder);
-        $pathFile = 'public/Documents/Lista_Maestra/'.$nameProject.'/';
-        //dd($folder);
-
-
-        for ($i=0; $i <$request->tamanoFiles ; $i++) {
-            $nombre="file".$i;
-            $archivo = $request->file($nombre);
+        if ($request->hasFile('file0')) {
+            $folder = ListaMaterialesFolder::where('name','=', $nameProject)->first();
+            //$r = $this->getPathFolder($request->folder);
+            $pathFile = 'public/Documents/Lista_Maestra/'.$nameProject.'/';
+            //dd($folder);
 
 
-            $listaMaterialesFile=ListaMaterialesFile::create([
-                'id_lista_materiales_folder' => $folder->id,
-                'name' => $archivo->getClientOriginalName(),
-                'ruta' => 'storage/Documents/Lista_Maestra/'.$nameProject.'/',
+            for ($i=0; $i <$request->tamanoFiles ; $i++) {
+                $nombre="file".$i;
+                $archivo = $request->file($nombre);
 
-            ]);
-            $path = $archivo->storeAs(
-                $pathFile, $archivo->getClientOriginalName()
-            );
-        }
 
-        if ($listaMaterialesFile->save()) {
-            $msg="Registro guardado con exito";
+                $listaMaterialesFile=ListaMaterialesFile::create([
+                    'id_lista_materiales_folder' => $folder->id,
+                    'name' => $archivo->getClientOriginalName(),
+                    'ruta' => 'storage/Documents/Lista_Maestra/'.$nameProject.'/',
+
+                ]);
+                $path = $archivo->storeAs(
+                    $pathFile, $archivo->getClientOriginalName()
+                );
+            }
+
+            if ($listaMaterialesFile->save()) {
+                $msg="Registro guardado con exito";
+            }else{
+                $error=true;
+                $msg="Error al guardar archvio";
+            }
+            (new MaterialesImport($folder->id_project))->import($path);
         }else{
             $error=true;
-            $msg="Error al guardar archvio";
+            $msg="No selecciono ningun archivo";
         }
+
+
 
 
 
@@ -164,5 +173,23 @@ class listaMaestraController extends Controller
             } while ($idPadre != 0);
         }
         return '/' . $path;
+    }
+
+    public function show($name_project)
+    {
+        $project = Project::where('name_project', '=', $name_project)->first();
+        /*$listaMateriales = ListaMateriales::where('id_project', '=', $project->id)
+        ->groupBy('folio')
+        ->selectRaw('*, sum(cantidad)')->get(); */
+
+        $listaMateriales = DB::table('lista_materiales')
+                ->selectRaw('folio, description, modelo, fabricante, SUM(cantidad) as cantidad, unidad')
+                ->where('id_project', '=', $project->id)
+                ->groupByRaw('folio')
+                ->get();
+        $msg="";
+        $error =false;
+        $array=["msg"=>$msg, "error"=>$error, 'listaMateriales'=>$listaMateriales];
+        return response()->json($array);
     }
 }

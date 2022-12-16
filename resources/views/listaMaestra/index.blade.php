@@ -56,11 +56,11 @@
             <div class="card">
                 <div class="card-body">
                     @if(Auth::user()->hasAnyRole(['admin', 'calidad', 'compras', 'tesoreria', 'manufactura', 'servicio', 'ventas', 'lider calidad', 'lider compras', 'lider recursos humanos', 'lider tesoreria', 'lider ventas', 'lider servicio']))
-                    <span data-toggle="modal" data-target="#modalCreateFolder">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Lista Maestra">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </span>
+
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Lista Maestra" onclick="show('divCarpetas')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+
                     <!-- <span >
                         <button type="button" class="btn btn-info" onclick="showDiv('divProject')" title="Mostrar Proyectos">
                             <i class="fas fa-project-diagram"></i>
@@ -82,11 +82,17 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="divCarpetas">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <div id="listasMaestras">
+                    <span data-toggle="modal" data-target="#modalCreateFolder">
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Lista Maestra">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </span>
+                    <div class="row"></div>
+                    <div class="row" id="listasMaestras">
                         @isset($folders)
                             <?php echo $folders; ?>
                         @endisset
@@ -113,12 +119,44 @@
                     </div>
                     <div class="row">
                         <span data-toggle="modal" data-target="#modalUploadFile">
-                            <button type="button" id="btnAgregarArchivo" style="display: none" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Agregar Archivo">
+                            <button type="button" id="btnAgregarArchivo" style="display: none" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Agregar Archivo">
                                 <i class="fas fa-file"></i>
                             </button>
                         </span>
+
+                        <button type="button" id="btnMostrarListaMaestra" style="display: none" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lista Maestra" onclick="show('divListaMaestra')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="divListaMaestra" style="display: none">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table id="tblListaMaestra" class="table table-striped table-bordered display" style="width:100%">
+                        <thead>
+                            <th>Folio</th>
+                            <th>Descripcion</th>
+                            <th>Modelo</th>
+                            <th>Fabricante</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                        </thead>
+                        <tfoot>
+                            <th>Folio</th>
+                            <th>Descripcion</th>
+                            <th>Modelo</th>
+                            <th>Fabricante</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
@@ -153,6 +191,7 @@
                 $('#informacion').html('Seleccinado: ' + r.join(', '));
                 $("#hiddenAddFilefolder").val(r.join(', '));
                 $("#btnAgregarArchivo").show();
+                $("#btnMostrarListaMaestra").show();
             });
 
 
