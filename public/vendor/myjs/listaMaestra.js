@@ -112,8 +112,6 @@ function show(div) {
                 if (data.error == true) {
                     messageAlert(data.msg, "error", "");
                 } else {
-
-
                     console.log(data.listaMateriales);
                     $("#tblListaMaestra").DataTable({
                         dom: 'Bfrtip',
