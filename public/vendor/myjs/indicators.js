@@ -167,7 +167,9 @@ function graficaIndicador() {
 
 
                 //datos para graficar
-                for (let i = 0; i < 11; i++) {
+
+                for (let i = 0; i < 12; i++) {
+
                     if (i < data.grafica.length) {
                         if (i == data.grafica[i].month - 1) {
                             valores[i] = data.grafica[i].value;
