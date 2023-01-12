@@ -16,10 +16,13 @@ class MaterialesImport implements ToModel, WithHeadingRow, WithValidation, Skips
     use Importable;
 
     public $id_project;
+    public $id_seccion;
 
-    public function __construct($id_project)
+    public function __construct($id_project, $id_seccion)
     {
         $this->id_project = $id_project;
+        $this->id_seccion = $id_seccion;
+
     }
 
     /**
@@ -32,6 +35,7 @@ class MaterialesImport implements ToModel, WithHeadingRow, WithValidation, Skips
     {
         return new ListaMateriales([
             'id_project' => $this->id_project,
+            'id_seccion' => $this->id_seccion,
             'folio' => $row['folio'],
             'description' => $row['descripcion'],
             'modelo' => $row['modelo'],

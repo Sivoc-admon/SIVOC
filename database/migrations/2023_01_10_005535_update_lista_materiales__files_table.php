@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateListaMaterialesTable extends Migration
+class UpdateListaMaterialesFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,6 @@ class UpdateListaMaterialesTable extends Migration
             ->references('id')
             ->on('lista_materiales_files')
             ->onDelete('cascade');
-
         });
     }
 

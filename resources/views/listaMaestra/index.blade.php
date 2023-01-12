@@ -139,24 +139,53 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="tblListaMaestra" class="table table-striped table-bordered display" style="width:100%">
-                        <thead>
-                            <th>Folio</th>
-                            <th>Descripcion</th>
-                            <th>Modelo</th>
-                            <th>Fabricante</th>
-                            <th>Cantidad</th>
-                            <th>Unidad</th>
-                        </thead>
-                        <tfoot>
-                            <th>Folio</th>
-                            <th>Descripcion</th>
-                            <th>Modelo</th>
-                            <th>Fabricante</th>
-                            <th>Cantidad</th>
-                            <th>Unidad</th>
-                        </tfoot>
-                    </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inputEmail4">Proyecto</label>
+                                            <input type="text" id="txtProyect" class="form-control" readonly>
+                                        </div>
+                                        <div class="col">
+                                            <label for="inputEmail4">Fecha de Creación</label>
+                                            <input type="text" id="dateCreacionProject" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inputState">Sección</label>
+                                            <select id="sltSeccion" class="form-control" onchange="listaSeccion()">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table id="tblListaMaestra" class="table table-striped table-bordered display nowrap" style="width:100%; font-size: 12px;">
+                            <thead>
+                                <th>Folio</th>
+                                <th>Descripcion</th>
+                                <th>Modelo</th>
+                                <th>Fabricante</th>
+                                <th>Cantidad</th>
+                                <th>Unidad</th>
+                                <th>Accion</th>
+                            </thead>
+                            <tfoot>
+                                <th>Folio</th>
+                                <th>Descripcion</th>
+                                <th>Modelo</th>
+                                <th>Fabricante</th>
+                                <th>Cantidad</th>
+                                <th>Unidad</th>
+                                <th>Accion</th>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

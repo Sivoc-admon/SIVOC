@@ -108,13 +108,24 @@ function show(div) {
             //data: { "id": minute },
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+
                 if (data.error == true) {
                     messageAlert(data.msg, "error", "");
                 } else {
-                    console.log(data.listaMateriales);
+                    console.log(data);
+                    $("#txtProyect").val(data.project);
+                    $("#dateCreacionProject").val(data.project_date);
+                    let secciones = "<option value='0'>Seleccion Sección</option>";
+
+                    for (const key in data.secciones) {
+                        const element = data.secciones[key].id;
+                        secciones += `<option value="${data.secciones[key].id}">${data.secciones[key].name}</option>`;
+                    }
+                    $("#sltSeccion").append(secciones);
                     $("#tblListaMaestra").DataTable({
                         dom: 'Bfrtip',
+                        //retrieve: true,
+                        bDestroy: true,
                         data: data.listaMateriales,
                         buttons: [
                             'csv', 'excel', 'pdf'
@@ -126,6 +137,15 @@ function show(div) {
                             { data: 'fabricante' },
                             { data: 'cantidad' },
                             { data: 'unidad' },
+                            {
+                                data: 'accion',
+                                render: function(data, type, row) {
+                                    //console.log(row);
+                                    return `<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Cambiar" onClick="accion(${row})"><i class="fas fa-file"></i></button>`;
+
+                                }
+                            },
+                            /*{ defaultContent: "<select class='form-control'><option value='0' selected>Accion</option><option value='Cambio'>Cambio</option><option value='Editar'>Editar</option> </select>" },*/
 
                         ],
                         responsive: {
@@ -134,11 +154,11 @@ function show(div) {
                                 target: -1
                             }
                         },
-                        columnDefs: [{
-                            className: 'control',
-                            orderable: false,
-                            targets: -1
-                        }]
+                        columnDefs: [
+                            { "width": "50%", "targets": 5 }
+                        ],
+                        scrollX: true,
+
                     });
 
                 }
@@ -155,5 +175,81 @@ function show(div) {
             }
         });
     }
+
+}
+
+//Mostrar lista de materiales por seccion y las acciones correspondientes
+function listaSeccion() {
+    let seccion = $("#sltSeccion").val();
+    if (seccion <= 0) {
+        return;
+    }
+    $.ajax({
+        type: "GET",
+        url: `listaMaestra/seccion/${seccion}`,
+        //data: { "id": minute },
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.error == true) {
+                messageAlert(data.msg, "error", "");
+            } else {
+                console.log(data);
+
+                $("#tblListaMaestra").DataTable({
+                    dom: 'Bfrtip',
+                    //retrieve: true,
+                    bDestroy: true,
+                    data: data.listaMateriales,
+                    buttons: [
+                        'csv', 'excel', 'pdf'
+                    ],
+                    columns: [
+                        { data: 'folio' },
+                        { data: 'description' },
+                        { data: 'modelo' },
+                        { data: 'fabricante' },
+                        { data: 'cantidad' },
+                        { data: 'unidad' },
+                        {
+                            data: 'accion',
+                            render: function(data, type, row) {
+                                console.log(row);
+                                return `<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Cambiar" onClick="accion(${row})"><i class="fas fa-file"></i></button>`;
+
+                            }
+                        },
+                        /*{ defaultContent: "<select class='form-control'><option value='0' selected>Accion</option><option value='Cambio'>Cambio</option><option value='Editar'>Editar</option> </select>" },*/
+
+                    ],
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: -1
+                        }
+                    },
+                    columnDefs: [
+                        { "width": "50%", "targets": 5 }
+                    ],
+                    scrollX: true,
+
+                });
+
+            }
+
+        },
+        error: function(data) {
+            console.log(data.responseJSON);
+            if (data.responseJSON.message == "The given data was invalid.") {
+                messageAlert("Datos incompletos.", "warning");
+            } else {
+                messageAlert("Ha ocurrido un problema.", "error", "");
+            }
+            //messageAlert("Datos incompletos", "error", `${data.responseJSON.errors.apellido_paterno}` + "\n" + `${data.responseJSON.errors.name}`);
+        }
+    });
+}
+
+function accion(accion) {
 
 }

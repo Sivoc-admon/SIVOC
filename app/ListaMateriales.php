@@ -13,6 +13,7 @@ class ListaMateriales extends Model
 
     protected $fillable = [
         'id_project',
+        'id_seccion',
         'folio',
         'description',
         'modelo',

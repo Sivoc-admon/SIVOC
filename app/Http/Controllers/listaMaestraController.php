@@ -57,7 +57,7 @@ class listaMaestraController extends Controller
                 $error=true;
                 $msg="Error al guardar archvio";
             }
-            (new MaterialesImport($folder->id_project))->import($path);
+            (new MaterialesImport($folder->id_project, $listaMaterialesFile->id))->import($path);
         }else{
             $error=true;
             $msg="No selecciono ningun archivo";
@@ -183,12 +183,36 @@ class listaMaestraController extends Controller
         ->selectRaw('*, sum(cantidad)')->get(); */
 
         $listaMateriales = DB::table('lista_materiales')
-                ->selectRaw('folio, description, modelo, fabricante, SUM(cantidad) as cantidad, unidad')
+                ->selectRaw('id, folio, description, modelo, fabricante, SUM(cantidad) as cantidad, unidad')
                 ->where('id_project', '=', $project->id)
                 ->groupByRaw('folio')
                 ->get();
+        $secciones = DB::table('lista_materiales_files as f')
+        ->join('lista_materiales_folders as m', 'f.id_lista_materiales_folder', '=', 'm.id')
+        ->select('f.name', 'f.id')
+        ->where('m.id_project', '=', $project->id)
+        ->get();
+        $d =$project->created_at;
+        $d->format('d/m/Y');
         $msg="";
+        //dd($d->format('d/m/Y'));
         $error =false;
+        $array=["msg"=>$msg, "error"=>$error, 'listaMateriales'=>$listaMateriales, 'project'=>$name_project, 'project_date'=> $d->format('d/m/Y'), 'secciones'=>$secciones];
+        return response()->json($array);
+    }
+
+    //se obtiene la lista de materiales por seccion
+    public function GetSeccion($id)
+    {
+        $listaMateriales = DB::table('lista_materiales')
+                ->selectRaw('id , folio, description, modelo, fabricante, SUM(cantidad) as cantidad, unidad')
+                ->where('id_seccion', '=', $id)
+                ->groupByRaw('folio')
+                ->get();
+        $msg="";
+
+        $error =false;
+
         $array=["msg"=>$msg, "error"=>$error, 'listaMateriales'=>$listaMateriales];
         return response()->json($array);
     }
