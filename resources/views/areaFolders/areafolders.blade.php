@@ -237,7 +237,7 @@
                                 @endif
                                 @break
                             @case('compras')
-                                @if (Auth::user()->hasAnyRole(['compras', 'admin', 'finanzas', 'operaciones', 'calidad', 'compras']))
+                                @if (Auth::user()->hasAnyRole(['compras', 'admin', 'finanzas', 'operaciones', 'calidad', 'pruebas', 'direccion']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
