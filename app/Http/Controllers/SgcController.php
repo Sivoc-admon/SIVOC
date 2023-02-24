@@ -22,14 +22,14 @@ class SgcController extends Controller
     {
         $sgcs = DB::table('sgc')
             ->join('users', 'users.id', '=', 'sgc.user_id')
-            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'sgc.*')
+            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'users.area_id as area_responsable', 'sgc.*')
             ->whereNull('sgc.deleted_at')
             ->orderByDESC('sgc.code')
             ->get();
         $areas = Area::get();
         $users = User::get();
-        
-        
+
+
         return view('sgc.sgc',compact('sgcs', 'areas', 'users'));
     }
 
@@ -55,20 +55,20 @@ class SgcController extends Controller
         $error=false;
 
         $sgc=Sgc::create([
-            'code' => $request->codigo,   
-            'area_id' => $request->area,         
+            'code' => $request->codigo,
+            'area_id' => $request->area,
             'type' => $request->procedimiento,
             'description' => $request->description,
             'create_date' => $request->fechaCreacion,
             'update_date' => $request->fechaActualizacion,
             'user_id' => $request->responsable,
-            
+
         ]);
 
         if ($sgc->save()) {
             $pathFile = 'public/Documents/SGC/'.$sgc->id;
 
-            for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+            for ($i=0; $i <$request->tamanoFiles ; $i++) {
                 $nombre="file".$i;
                 $archivo = $request->file($nombre);
                 $sgcFile=SgcFile::create([
@@ -76,28 +76,28 @@ class SgcController extends Controller
                     'name' => $archivo->getClientOriginalName(),
                     'ruta' => 'storage/app/' . $pathFile,
                     'revision' => 0,
-    
+
                 ]);
                 $path = $archivo->storeAs(
                     $pathFile, $archivo->getClientOriginalName()
                 );
             }
-            
+
             if ($sgcFile->save()) {
                 $msg="Registro guardado con exito";
             }else {
                 $msg="Error al guardar el archivo";
                 $error=true;
             }
-            
-            
+
+
         }else{
             $msg="Error al guardar el registro";
             $error=true;
         }
 
         $array=["msg"=>$msg, "error"=>$error];
-       
+
         return response()->json($array);
     }
 
@@ -126,9 +126,9 @@ class SgcController extends Controller
         $areas = Area::get();
         $msg="";
         $error=false;
-        
+
         $array=["msg"=>$msg,"error"=>$error,"sgc"=>$sgc, "user"=>$user, "areas"=>$areas];
-       
+
         return response()->json($array);
     }
 
@@ -141,9 +141,9 @@ class SgcController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $sgc = Sgc::find($id);
-        
+
         $sgc->update([
             'area_id' => $request->sltEditAreaSgc,
             'type' => $request->sltEditTypeSGC,
@@ -152,7 +152,7 @@ class SgcController extends Controller
             'create_date' => $request->inputEditCreateSgc,
             'update_date' => $request->inputEditUpdateSgc,
             'user_id' => $request->inputEditResponsable,
-            
+
         ]);
     }
 
@@ -165,9 +165,9 @@ class SgcController extends Controller
 
     public function destroy($id)
     {
-        
+
         $sgc = Sgc::find($id);
-        
+
         $sgc->delete();
         return redirect()->route('sgc.index');
     }
@@ -175,13 +175,13 @@ class SgcController extends Controller
     public function showFiles($id)
     {
         $files = Sgc::find($id)->sgcFile;
-        
+
         $msg="";
         $error=false;
-        
+
         $user = new User();
         $user = $user->find(Auth::user()->id);
-        
+
         $eliminaArchivo = $user->hasAnyRole(['admin', 'calidad']);
         //$user = Auth::user()->with('role')->get();
 
@@ -194,21 +194,21 @@ class SgcController extends Controller
     {
         $error=false;
         $msg="";
-        
-        
+
+
         $pathFile = 'public/Documents/SGC/'.$sgc;
 
         $count = SgcFile::where('sgc_id', $sgc)->get();
         //dd($count);
         if($count->count()>0){
             $count =$count[$count->count()-1]->revision;
-        
-            
+
+
         }else{
             $count = -1;
         }
 
-        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+        for ($i=0; $i <$request->tamanoFiles ; $i++) {
             $count++;
             $nombre="file".$i;
             $archivo = $request->file($nombre);
@@ -223,19 +223,19 @@ class SgcController extends Controller
                 $pathFile, $archivo->getClientOriginalName()
             );
         }
-        
-        
+
+
         if ($sgcFile->save()) {
             $msg="Registro guardado con exito";
         }else{
             $error=true;
             $msg="Error al guardar archvio";
         }
-            
-            
+
+
 
         $array=["msg"=>$msg, "error"=>$error];
-        
+
         return response()->json($array);
     }
 
@@ -254,16 +254,16 @@ class SgcController extends Controller
     public function updateFile(Request $request, $id)
     {
         $file = SgcFile::find($id);
-        
+
         $msg="";
         $error=false;
-        
+
         $file->update([
             'revision' => $request->revision,
-            
+
         ]);
-        
-        
+
+
 
         $array=["msg"=>$msg, "error"=>$error, "file"=>$file];
 

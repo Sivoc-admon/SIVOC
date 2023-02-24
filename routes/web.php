@@ -185,6 +185,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('listaMaestra/{carpeta}/uploadFile', 'ListaMaestraController@uploadFile')->name('listaMaestra.uploadFile');
     Route::post('listaMaestra/{proyecto}/createFolder','ListaMaestraController@createFolder')->name('listaMaestra.createFolder');
     Route::get('listaMaestra/seccion/{seccion}', 'ListaMaestraController@getSeccion')->name('listaMaestra.getSeccion');
+    Route::get('listaMaestra/material/{id}', 'ListaMaestraController@getMaterial')->name('listaMaestra.getMaterial');
+    Route::post('listaMaestra/material/{id}', 'ListaMaestraController@createMaterialModificacion')->name('listaMaestra.createMaterialModificacion');
     Route::resource('listaMaestra','ListaMaestraController');
 });
 

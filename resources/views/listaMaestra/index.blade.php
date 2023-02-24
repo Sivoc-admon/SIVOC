@@ -165,6 +165,18 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <span class="badge badge-primary">Editar</span>
+                            <span class="badge badge-warning">Cambiar</span>
+                            <span class="badge badge-danger">Eliminar</span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <h5>Tabla de Cambios</h5>
+                        </div>
+
                         <table id="tblListaMaestra" class="table table-striped table-bordered display nowrap" style="width:100%; font-size: 12px;">
                             <thead>
                                 <th>Folio</th>
@@ -185,6 +197,11 @@
                                 <th>Accion</th>
                             </tfoot>
                         </table>
+                    </div>
+                    <br>
+
+                    <div class="row" id="rowTablasDinamicas">
+
                     </div>
                 </div>
             </div>
