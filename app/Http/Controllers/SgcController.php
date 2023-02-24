@@ -22,7 +22,7 @@ class SgcController extends Controller
     {
         $sgcs = DB::table('sgc')
             ->join('users', 'users.id', '=', 'sgc.user_id')
-            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'users.id_area as area_responsable', 'sgc.*')
+            ->select('users.name as user_name', 'users.last_name', 'users.mother_last_name', 'users.id', 'users.area_id as area_responsable', 'sgc.*')
             ->whereNull('sgc.deleted_at')
             ->orderByDESC('sgc.code')
             ->get();
