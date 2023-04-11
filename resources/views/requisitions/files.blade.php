@@ -1,0 +1,125 @@
+<!-- Modal  REGISTRAR PROYECTO-->
+<div class="modal fade bd-example-modal-lg" id="modalFilesRequisition" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Archivos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="hidden" name="hiddeIdRequisicion" id="hiddeIdRequisicion">
+                            <input type="file" class="form-control" name="inputFile" id="inputFile" multiple>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="uploadFiles('normal')">Guardar archivo</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="divFactura" style="display:none">
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="inputFileFactura" id="inputFileFactura" multiple>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="uploadFiles('factura')">Guardar Archivo de Pago</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <h3>Archivos Generales</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Comentarios</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyFiles"></tbody>
+                </table>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modalFilesRequisitionItems" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Archivos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <input type="hidden" name="hiddeIdRequisitionitem" id="hiddeIdRequisitionitem">
+                    <input type="hidden" name="hiddeIditem" id="hiddeIditem">
+                    <div class="col-md-4" id="divArchivosItem">
+
+                        @if (!Auth::user()->hasAnyRole(['finanzas']))
+                            <div class="form-group">
+                                <input type="file" class="form-control" name="inputFileItem" id="inputFileItem">
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="uploadFilesItem('item')">Guardar archivo</button>
+                            </div>
+                        @endif
+
+                    </div>
+                    <div class="col-md-4" id="divFacturaItem" style="display:none">
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="inputFileFacturaItem" id="inputFileFacturaItem" multiple>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="uploadFilesItem('factura')">Guardar Archivo de Pago</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4" id="divEntregado" style="display:none">
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="inputFileEntregadoItem" id="inputFileEntregadoItem" multiple>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="uploadFilesItem('entregado')">Guardar Archivo de Entrega</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <h3>Archivos Generales</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Comentarios</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyFilesItem"></tbody>
+                </table>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+</div>

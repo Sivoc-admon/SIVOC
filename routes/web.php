@@ -180,6 +180,26 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 });
 
+//REQUISICIONES
+Route::middleware(['auth', 'verified'])->group(function(){
+
+    Route::post('requisitions/{requisition}/uploadFile', 'RequisitionController@uploadFile')->name('requisitions.uploadFile');
+    Route::post('requisitions/{requisition}/uploadFileItem', 'RequisitionController@uploadFileItem')->name('requisitions.uploadFileItem');
+    Route::get('requisitions/{requisition}/files', 'RequisitionController@files')->name('requisitions.files');
+    Route::get('requisitions/{requisitionDetails}/filesItems', 'RequisitionController@filesItems')->name('requisitions.filesItems');
+    Route::get('requisitions/{detail}/providers/', 'RequisitionController@providers')->name('requisitions.providers');
+    Route::post('requisitions/providers/', 'RequisitionController@saveProvider')->name('requisitions.saveProvider');
+    Route::post('requisitions/providers/{id}', 'RequisitionController@deleteProvider')->name('requisitions.deleteProvider');
+    Route::post('requisitions/{id}/customUpdate', 'RequisitionController@customUpdate')->name('requisitions.customUpdate');
+    Route::post('requisitions/{id}/updateStatusRequisition', 'RequisitionController@updateStatusRequisition')->name('requisitions.updateStatusRequisition');
+    Route::delete('requisitions/{id}/deleteFile', 'RequisitionController@deleteFile')->name('requisitions.deleteFile');
+    Route::get('requisitions/newRequisition', 'RequisitionController@newRequisition')->name('requisitions.newRequisition');
+    Route::post('requisitions/{id}/comment', 'RequisitionController@saveComment')->name('requisitions.saveComment');
+    Route::get('requisitions/history/{id}', 'RequisitionController@history')->name('requisitions.history');
+    Route::get('requisitions/lista', 'RequisitionController@listaRequisiciones')->name('requisitions.listaRequisiciones');
+    Route::resource('requisitions', 'RequisitionController');
+});
+
 
 
 
