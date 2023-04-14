@@ -308,7 +308,7 @@ return [
         [
             'text' => 'Requisiciones',
             'url'  => '/requisitions',
-            'icon' => 'fas fa-chart-bar',
+            'icon' => 'fas fa-shopping-cart',
         ],
         [
             'text' => 'Activos',
