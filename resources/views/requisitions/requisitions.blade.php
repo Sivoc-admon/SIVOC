@@ -115,7 +115,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @if(Auth::user()->hasAnyRole(['admin', 'almacen', 'finanzas ', 'calidad', 'compras', 'tesoreria', 'servicio', 'ventas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador de finanzas', 'coordinador de calidad']))
+                    @if(Auth::user()->hasAnyRole(['admin', 'almacen', 'finanzas ', 'calidad', 'compras', 'tesoreria', 'servicio', 'manufactura', 'ventas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador de finanzas', 'coordinador de calidad']))
 
                     <span data-toggle="modal" data-target="#modalCreateRequisition" data-backdrop='static'>
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Requisición" onclick="newRequisition()">
