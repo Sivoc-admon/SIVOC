@@ -520,6 +520,19 @@ class RequisitionController extends Controller
                     $requisicion->status = "Entregada Parcial";
                     $requisicion->update();
                 }
+                //se crea registro para el historial
+                $requisitionHistory = new RequisitionHistory();
+                $requisitionHistory->requisition_id = $request->id;
+                $requisitionHistory->status = $requisicion->status;
+                $requisitionHistory->user_id = auth()->id();
+                //si se realiza seguimiento parcial
+                if($text !=""){
+                    $requisitionHistory->comment = $text ." ". $detalleRequisicion->num_item;
+                }else{
+                    $requisitionHistory->comment = '';
+                }
+
+                $requisitionHistory->save();
             }elseif($request->tipo == "entregado"){
                 $detalleRequisicion = DetailRequisition::find($tipo);
                 $detalleRequisicion->status = "Entregada";
@@ -545,20 +558,21 @@ class RequisitionController extends Controller
                     $requisicion->status = "Entregada Parcial";
                     $requisicion->update();
                 }
-            }
-             //se crea registro para el historial
-             $requisitionHistory = new RequisitionHistory();
-             $requisitionHistory->requisition_id = $request->id;
-             $requisitionHistory->status = $requisicion->status;
-             $requisitionHistory->user_id = auth()->id();
-             //si se realiza seguimiento parcial
-             if($text !=""){
-                 $requisitionHistory->comment = $text ." ". $detalleRequisicion->num_item;
-             }else{
-                 $requisitionHistory->comment = '';
-             }
+                //se crea registro para el historial
+                $requisitionHistory = new RequisitionHistory();
+                $requisitionHistory->requisition_id = $request->id;
+                $requisitionHistory->status = $requisicion->status;
+                $requisitionHistory->user_id = auth()->id();
+                //si se realiza seguimiento parcial
+                if($text !=""){
+                    $requisitionHistory->comment = $text ." ". $detalleRequisicion->num_item;
+                }else{
+                    $requisitionHistory->comment = '';
+                }
 
-             $requisitionHistory->save();
+                $requisitionHistory->save();
+            }
+
 
         }else{
             $error=true;
