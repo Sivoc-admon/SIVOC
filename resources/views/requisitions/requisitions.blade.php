@@ -657,7 +657,7 @@
                                                                 @break
                                                                 @case(13)
 
-                                                                        @if (($requisiton->role == 15 || $requisiton->name_role == 'coordinador comercial' ) && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
+                                                                        @if (($requisiton->role == 15 || $requisiton->name_role == 'coordinador operacional' ) && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
                                                                             <span >
                                                                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
                                                                                     <i class="fas fa-reply"></i>
@@ -669,7 +669,7 @@
                                                                                 </button>
                                                                             </span>
 
-                                                                        @elseif ($requisiton->role != 15 && (Auth::user()->hasAnyRole('coordinador comercial') || Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
+                                                                        @elseif ($requisiton->role != 15 && (Auth::user()->hasAnyRole('coordinador operacional') || Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
                                                                             <span>
                                                                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
                                                                                     <i class="fas fa-reply"></i>
