@@ -184,7 +184,7 @@
                                         <td>{{ $requisiton->comment }}</td>
 
 
-                                        @if (Auth::user()->hasAnyRole(['admin', 'almacen', 'calidad', 'compras', 'manufactura', 'pruebas', 'ingenieria', 'rh', 'ventas', 'finanzas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador finanzas', 'coordinador de calidad']))
+                                        @if (Auth::user()->hasAnyRole(['admin', 'almacen', 'calidad', 'compras', 'manufactura', 'pruebas', 'ingenieria', 'rh', 'ventas', 'finanzas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador de finanzas', 'coordinador de calidad']))
                                             <td>
                                                 <span data-toggle="modal" data-target="#modalCreateRequisition" data-backdrop='static'>
                                                     <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar requisicion" onclick="showRequisition({{$requisiton->id}})">
@@ -201,7 +201,7 @@
                                                         <i class="fas fa-clock"></i>
                                                     </button>
                                                 </span>
-                                                @if (Auth::user()->hasAnyRole(['admin', 'direccion', 'almacen', 'calidad', 'finanzas', 'pruebas', 'ingenieria', 'ventas', 'rh', 'finanzas', 'manufactura', 'coordinador comercial', 'coordinador operacional', 'coordinador finanzas', 'coordinador de calidad', 'compras']))
+                                                @if (Auth::user()->hasAnyRole(['admin', 'direccion', 'almacen', 'calidad', 'finanzas', 'pruebas', 'ingenieria', 'ventas', 'rh', 'finanzas', 'manufactura', 'coordinador comercial', 'coordinador operacional', 'coordinador de finanzas', 'coordinador de calidad', 'compras']))
                                                     @switch($requisiton->status)
                                                         @case("Creada")
                                                                 @switch($requisiton->id_area)
