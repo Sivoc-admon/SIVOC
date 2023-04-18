@@ -1012,7 +1012,7 @@ class RequisitionController extends Controller
     }
 
     public function saveComment(Request $request, $id){
-        $file = RequisitionFile::find($id);
+        $file = RequisitionFileItem::find($id);
         $file->comment = $request->comment;
         $error = false;
         $msg = "";
