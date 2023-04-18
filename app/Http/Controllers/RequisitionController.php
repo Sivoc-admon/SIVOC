@@ -548,7 +548,7 @@ class RequisitionController extends Controller
             }
              //se crea registro para el historial
              $requisitionHistory = new RequisitionHistory();
-             $requisitionHistory->requisition_id = $requisicion->id;
+             $requisitionHistory->requisition_id = $request->id;
              $requisitionHistory->status = $requisicion->status;
              $requisitionHistory->user_id = auth()->id();
              //si se realiza seguimiento parcial

@@ -321,7 +321,7 @@
                                                                     @default
                                                                 @endswitch
                                                             @break
-                                                            @case("Solicitada")
+                                                        @case("Solicitada")
                                                             @switch($requisiton->id_area)
                                                                 @case(1)
 
@@ -565,9 +565,8 @@
                                                                     </button>
                                                                 </span>
                                                             @endif
-                                                        @break
+                                                            @break
                                                         @case("Cotizada")
-
                                                                 @if (Auth::user()->hasAnyRole('direccion'))
                                                                     <span>
                                                                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Aprobar" onclick="aprobar({{$requisiton->id}}, 'Aprobada')">
