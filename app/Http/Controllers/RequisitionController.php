@@ -89,11 +89,11 @@ class RequisitionController extends Controller
             ->join('roles', 'roles.id', '=', 'role_user.role_id')
             //->join('projects', 'requisitions.id_project', '=', 'projects.id')
             ->select('requisitions.*', 'users.name', 'users.last_name', 'role_user.role_id as role', 'roles.name as name_role')
-            ->where('requisitions.id_area', $user->area_id)
+
             ->whereNull('requisitions.deleted_at')
             ->orderByDesc('id')->get();
         }
-        //dd($requisitions);
+
 
         $areas = Area::all();
         $areaUser = Area::find($user->area_id);
