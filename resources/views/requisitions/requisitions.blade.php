@@ -510,7 +510,7 @@
                                                                     @endif
                                                                     @break
                                                                 @case(6)
-                                                                    @if (($requisiton->role == 16 || $requisiton->name_role == 'coordinador comercial' ) && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
+                                                                    @if (($requisiton->role == 16 || $requisiton->name_role == 'coordinador de finanzas' ) && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
                                                                         <span >
                                                                             <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
                                                                                 <i class="fas fa-reply"></i>
@@ -522,7 +522,7 @@
                                                                             </button>
                                                                         </span>
 
-                                                                    @elseif ($requisiton->role != 16 && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
+                                                                    @elseif ($requisiton->role != 16 && (Auth::user()->hasAnyRole('coordinador de finanzas') || Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
                                                                         <span>
                                                                             <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
                                                                                 <i class="fas fa-reply"></i>
