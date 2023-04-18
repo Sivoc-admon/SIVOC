@@ -304,6 +304,20 @@
                                                                             </span>
                                                                         @endif
                                                                         @break
+                                                                    @case(9)
+                                                                        @if ($requisiton->id_user == auth()->user()->id || Auth::user()->hasAnyRole(['admin']))
+                                                                            <span >
+                                                                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Aprobar" onclick="aprobar({{$requisiton->id}}, 'Solicitada')">
+                                                                                    <i class="fas fa-check"></i>
+                                                                                </button>
+                                                                            </span>
+                                                                            <span >
+                                                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="regresar({{$requisiton->id}}, 'Cancelada')">
+                                                                                    <i class="fas fa-minus-square"></i>
+                                                                                </button>
+                                                                            </span>
+                                                                        @endif
+                                                                        @break
                                                                     @case(10)
                                                                         @if ($requisiton->id_user == auth()->user()->id || Auth::user()->hasAnyRole('admin'))
                                                                             <span >
@@ -505,6 +519,32 @@
                                                                         </span>
 
                                                                     @elseif ($requisiton->role != 15 && (Auth::user()->hasAnyRole('coordinador comercial') || Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
+                                                                        <span>
+                                                                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
+                                                                                <i class="fas fa-reply"></i>
+                                                                            </button>
+                                                                        </span>
+                                                                        <span >
+                                                                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Aprobar" onclick="aprobar({{$requisiton->id}}, 'Procesada')">
+                                                                                <i class="fas fa-check"></i>
+                                                                            </button>
+                                                                        </span>
+                                                                    @endif
+                                                                    @break
+                                                                @case(9)
+                                                                    @if (($requisiton->role == 6 || $requisiton->name_role == 'direccion' ) && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
+                                                                        <span >
+                                                                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
+                                                                                <i class="fas fa-reply"></i>
+                                                                            </button>
+                                                                        </span>
+                                                                        <span >
+                                                                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Aprobar" onclick="aprobar({{$requisiton->id}}, 'Procesada')">
+                                                                                <i class="fas fa-check"></i>
+                                                                            </button>
+                                                                        </span>
+
+                                                                    @elseif ($requisiton->role != 6 && (Auth::user()->hasAnyRole('admin') || Auth::user()->hasAnyRole('direccion')))
                                                                         <span>
                                                                             <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Regresar" onclick="aprobar({{$requisiton->id}}, 'Creada')">
                                                                                 <i class="fas fa-reply"></i>
