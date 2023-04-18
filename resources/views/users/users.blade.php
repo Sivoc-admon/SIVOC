@@ -63,17 +63,14 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->area_name }}</td>
                                         <td>
-                                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
+                                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" onclick="editUser({{$user->id}});"><i class="fas fa-edit"></i></a>
 
-                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                            <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
-                                                </form>
-
-                                            @endif
-
+                                                <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
