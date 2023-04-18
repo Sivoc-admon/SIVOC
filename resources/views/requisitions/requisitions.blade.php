@@ -115,7 +115,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @if(Auth::user()->hasAnyRole(['admin', 'almacen', 'finanzas ', 'calidad', 'compras', 'finanzas', 'rh', 'manufactura', 'pruebas', 'ingenieria', 'ventas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador de finanzas', 'coordinador de calidad']))
+                    @if(Auth::user()->hasAnyRole(['admin', 'almacen', 'finanzas', 'calidad', 'compras', 'rh', 'manufactura', 'pruebas', 'ingenieria', 'ventas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador de finanzas', 'coordinador de calidad']))
 
                     <span data-toggle="modal" data-target="#modalCreateRequisition" data-backdrop='static'>
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nueva Requisición" onclick="newRequisition()">
@@ -184,7 +184,7 @@
                                         <td>{{ $requisiton->comment }}</td>
 
 
-                                        @if (Auth::user()->hasAnyRole(['admin', 'almacen', 'calidad', 'compras', 'manufactura', 'pruebas', 'ingenieria', 'rh', 'ventas', 'finanzas', 'direccion', 'finanzas', 'coordinador comercial', 'coordinador operacional', 'coordinador finanzas', 'coordinador de calidad']))
+                                        @if (Auth::user()->hasAnyRole(['admin', 'almacen', 'calidad', 'compras', 'manufactura', 'pruebas', 'ingenieria', 'rh', 'ventas', 'finanzas', 'direccion', 'coordinador comercial', 'coordinador operacional', 'coordinador finanzas', 'coordinador de calidad']))
                                             <td>
                                                 <span data-toggle="modal" data-target="#modalCreateRequisition" data-backdrop='static'>
                                                     <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar requisicion" onclick="showRequisition({{$requisiton->id}})">
