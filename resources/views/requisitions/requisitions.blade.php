@@ -600,11 +600,11 @@
                                                             @break
                                                         @case("Pagada")
                                                             @if (Auth::user()->hasAnyRole('lider compras') || Auth::user()->hasAnyRole('compras') )
-                                                                <span >
+                                                                <!-- <span >
                                                                     <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Entregar" onclick="aprobar({{$requisiton->id}}, 'Entregada')">
                                                                         <i class="fas fa-check"></i>
                                                                     </button>
-                                                                </span>
+                                                                </span> -->
                                                             @endif
                                                         @break
                                                         @case("Entregada")
