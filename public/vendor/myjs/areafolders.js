@@ -78,6 +78,7 @@ function getFoldersAndFiles(areaId, nivel) {
             success: function(data) {
                 getFilesLevelZero(selectVal);
 
+                //PODER EDITAR
                 switch (areaId) {
                     case 6: //AREA FINANZAS
                         if (data.idRoleUser == 1 || data.idRoleUser == 7) { //ADMIN, FINANZAS
@@ -101,7 +102,7 @@ function getFoldersAndFiles(areaId, nivel) {
                         }
                         break;
                     case 4: //AREA COMPRAS
-                        if (data.idRoleUser == 1 || data.idRoleUser == 5 || data.idRoleUser == 7) { //ADMIN, FINANZAS, COMPRAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 5 || data.idRoleUser == 7, || data.idRoleUser == 16) { //ADMIN, FINANZAS, COMPRAS, COORDINADOR FINANZAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
@@ -271,7 +272,7 @@ function newFile(areaId, nivel){
     formData.append('TotalFiles', TotalFiles);
     formData.append('_token', token);
     for (var pair of formData.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]); 
+        console.log(pair[0]+ ', ' + pair[1]);
     }
     let selectNivelTag = `#selectNivel${nivel}`;
     let folderId = (nivel != 0)? $(selectNivelTag).val():0;
@@ -320,12 +321,12 @@ function deleteFile(documentName, documentId, folderId){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, borrar!',
-        
+
       }).then((result) => {
-          
+
           if (result.value==true) {
                 let token = $("input[name=_token]").val();
-                
+
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
