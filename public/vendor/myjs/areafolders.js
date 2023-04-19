@@ -102,7 +102,7 @@ function getFoldersAndFiles(areaId, nivel) {
                         }
                         break;
                     case 4: //AREA COMPRAS
-                        if (data.idRoleUser == 1 || data.idRoleUser == 5 || data.idRoleUser == 7, || data.idRoleUser == 16) { //ADMIN, FINANZAS, COMPRAS, COORDINADOR FINANZAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 5 || data.idRoleUser == 7 || data.idRoleUser == 16) { //ADMIN, FINANZAS, COMPRAS, COORDINADOR FINANZAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
