@@ -81,14 +81,14 @@ function getFoldersAndFiles(areaId, nivel) {
                 //PODER EDITAR
                 switch (areaId) {
                     case 6: //AREA FINANZAS
-                        if (data.idRoleUser == 1 || data.idRoleUser == 7) { //ADMIN, FINANZAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 7 || data.idRoleUser == 16) { //ADMIN, FINANZAS, COORDINADOR FINANZAS
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
                         }
                         break;
                     case 10: //AREA VENTAS
-                        if (data.idRoleUser == 1 || data.idRoleUser == 7 || data.idRoleUser == 11) { //ADMIN, FINANZAS, VENTAS
+                        if (data.idRoleUser == 1 || data.idRoleUser == 7 || data.idRoleUser == 11 || data.idRoleUser == 14) { //ADMIN, FINANZAS, VENTAS, COORDINADOR COMERCIAL
                             $(botonNameTag).fadeIn();
                             $(botonNameModifyTag).fadeIn();
                             $(botonFilesTag).fadeIn();
