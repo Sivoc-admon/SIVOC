@@ -180,7 +180,7 @@
                     @if(!isset($folders[0]['empty']))
                         @switch($area)
                             @case('finanzas')
-                                @if (Auth::user()->hasAnyRole(['finanzas', 'admin', 'calidad', 'coordinador de finanzas']))
+                                @if (Auth::user()->hasAnyRole(['finanzas', 'admin', 'calidad', 'coordinador de finanzas', 'coordinador operacional']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
@@ -197,7 +197,7 @@
                                 @endif
                                 @break
                             @case('ventas')
-                                @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'ingenieria', 'finanzas', 'operaciones', 'servicio', 'calidad', 'pruebas', 'coordinador comercial']))
+                                @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'ingenieria', 'finanzas', 'operaciones', 'servicio', 'calidad', 'pruebas', 'coordinador comercial', 'coordinador operacional']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
