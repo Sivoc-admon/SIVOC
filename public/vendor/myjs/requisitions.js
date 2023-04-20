@@ -302,6 +302,7 @@ function showRequisition(id) {
                         $('#name_project').val(data.no_requisition);
                         $('#requisition_').val(data.requisition);
                         $('#slt_project_id').val(data.id_project);
+                        $('#commentPrincipal').val(data.comment);
                         console.log(data);
                         items = [];
                         for (const key in data.detailRequisition) {

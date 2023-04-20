@@ -361,6 +361,7 @@ class RequisitionController extends Controller
             'requisition'=>$requisition['id'],
             'requisition_status'=> $requisition->status,
             'no_requisition'=>$requisition['no_requisition'],
+            'comment'=>$requisition->comment,
             'id_area'=>$requisition['id_area'],
             'id_user'=>$requisition['id_user'],
             'id_project'=>$requisition['id_project'],
