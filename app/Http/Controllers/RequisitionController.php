@@ -126,8 +126,7 @@ class RequisitionController extends Controller
         $msg = "";
         $error = false;
 
-        $newRequisitionsCount = Requisition::orWhere('requisitions.deleted_at', null)
-        ->whereNull('requisitions.deleted_at')
+        $newRequisitionsCount = Requisition::withTrashed()
         ->orderByDesc('requisitions.id')
         ->first();
         //dd($newRequisitionsCount);
