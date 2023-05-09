@@ -355,7 +355,7 @@ class RequisitionController extends Controller
                 break;
         }
         $response = [
-            'permission' => $user->hasAnyRole(['compras']),
+            'permission' => $user->hasAnyRole(['compras', 'direccion']),
             'currentUser' => $user->id,
             'requisition'=>$requisition['id'],
             'requisition_status'=> $requisition->status,
