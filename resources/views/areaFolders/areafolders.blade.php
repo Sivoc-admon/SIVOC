@@ -116,7 +116,7 @@
                             @endif
                             @break
                         @case('ventas')
-                            @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'finanzas', 'coordinador comercial']))
+                            @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'finanzas', 'coordinador comercial', 'direccion']))
                                 <button type="button" class="btn btn-primary" onclick="newFolder({{ $folders[0]['area_id'] }}, 0)">
                                     Agregar carpeta en el primer nivel
                                 </button>
@@ -197,7 +197,7 @@
                                 @endif
                                 @break
                             @case('ventas')
-                                @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'ingenieria', 'finanzas', 'operaciones', 'servicio', 'calidad', 'pruebas', 'coordinador comercial', 'coordinador operacional']))
+                                @if (Auth::user()->hasAnyRole(['ventas', 'admin', 'ingenieria', 'finanzas', 'operaciones', 'servicio', 'calidad', 'pruebas', 'coordinador comercial', 'coordinador operacional', 'direccion']))
                                     <select id="selectNivel{{ $folders[0]['nivel'] }}" class="form-control" onchange="getFoldersAndFiles({{ $folders[0]['area_id'] }}, {{ $folders[0]['nivel'] }})">
                                         <option value="">Seleccione</option>
                                         @foreach($folders as $folder)
