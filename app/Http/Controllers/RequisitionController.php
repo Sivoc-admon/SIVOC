@@ -130,7 +130,10 @@ class RequisitionController extends Controller
         ->orderByDesc('requisitions.id')
         ->first();
         //dd($newRequisitionsCount);
-        $newRequisition = ($newRequisitionsCount != null) ? $newRequisitionsCount->id + 1 : 1;
+        $arrayR = explode('-', $newRequisitionsCount->no_requisition);
+
+        $requi = $arrayR[1] + 1;
+        $newRequisition = ($newRequisitionsCount != null) ? $requi + 1 : 1;
         $array=["msg"=>$msg, "error"=>$error, 'newRequisition'=>$newRequisition];
 
         return response()->json($array);
