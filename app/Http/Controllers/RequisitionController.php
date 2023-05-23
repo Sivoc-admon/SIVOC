@@ -133,7 +133,7 @@ class RequisitionController extends Controller
         $arrayR = explode('-', $newRequisitionsCount->no_requisition);
         $requi=0;
         $requi = $arrayR[1] + 1;
-        $newRequisition = ($newRequisitionsCount != null) ? $requi + 1 : 1;
+        $newRequisition = ($newRequisitionsCount != null) ? $requi : 1;
         $array=["msg"=>$msg, "error"=>$error, 'newRequisition'=>$newRequisition];
 
         return response()->json($array);
