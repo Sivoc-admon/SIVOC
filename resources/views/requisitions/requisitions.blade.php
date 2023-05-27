@@ -708,9 +708,6 @@
                                                                         </span>
                                                                     @endif
                                                                 @break
-                                                                @case(2)
-
-                                                                    @break
                                                                 @default
                                                                         @if (Auth::user()->hasAnyRole('coordinador comercial'))
                                                                             <span >
