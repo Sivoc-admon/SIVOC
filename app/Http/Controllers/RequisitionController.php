@@ -278,6 +278,15 @@ class RequisitionController extends Controller
             case 2:
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'lider tesoreria'])) {
                     $userAdmin=true;
+                }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Cotizada' ||
+                        $requisition->status=='Cotizada Parcial' ||
+                        $requisition->status=='Aprobada Parcial' ||
+                        $requisition->status=='Pagada Parcial' ||
+                        $requisition->status=='Entregada Parcial' ||
+                        $requisition->status=='Pagada') &&
+                        $user->hasAnyRole(['admin', 'direccion', 'compras'])) {
+                        $userAdmin=true;
                 }elseif ($requisition->status=='Procesada' && $user->hasAnyRole(['admin', 'lider compras', 'compras'])) {
                     $userAdmin=true;
                 }elseif ($requisition->status=='Cotizada' && $user->hasAnyRole(['admin', 'direccion'])) {
@@ -293,6 +302,15 @@ class RequisitionController extends Controller
             case 3:
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'lider compras'])) {
                     $userAdmin=true;
+                }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Cotizada' ||
+                        $requisition->status=='Cotizada Parcial' ||
+                        $requisition->status=='Aprobada Parcial' ||
+                        $requisition->status=='Pagada Parcial' ||
+                        $requisition->status=='Entregada Parcial' ||
+                        $requisition->status=='Pagada') &&
+                        $user->hasAnyRole(['admin', 'direccion', 'compras'])) {
+                        $userAdmin=true;
                 }elseif ($requisition->status=='Procesada' && $user->hasAnyRole(['admin', 'lider compras', 'compras'])) {
                     $userAdmin=true;
                 }elseif ($requisition->status=='Cotizada' && $user->hasAnyRole(['admin', 'direccion'])) {
@@ -309,6 +327,15 @@ class RequisitionController extends Controller
             case 5:
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'lider recursos humanos'])) {
                     $userAdmin=true;
+                        }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Cotizada' ||
+                        $requisition->status=='Cotizada Parcial' ||
+                        $requisition->status=='Aprobada Parcial' ||
+                        $requisition->status=='Pagada Parcial' ||
+                        $requisition->status=='Entregada Parcial' ||
+                        $requisition->status=='Pagada') &&
+                        $user->hasAnyRole(['admin', 'direccion', 'compras'])) {
+                        $userAdmin=true;
                 }elseif ($requisition->status=='Procesada' && $user->hasAnyRole(['admin', 'lider compras', 'compras'])) {
                     $userAdmin=true;
                 }elseif ($requisition->status=='Cotizada' && $user->hasAnyRole(['admin', 'direccion'])) {
@@ -324,6 +351,15 @@ class RequisitionController extends Controller
             case 6:
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'lider ventas'])) {
                     $userAdmin=true;
+                }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Cotizada' ||
+                        $requisition->status=='Cotizada Parcial' ||
+                        $requisition->status=='Aprobada Parcial' ||
+                        $requisition->status=='Pagada Parcial' ||
+                        $requisition->status=='Entregada Parcial' ||
+                        $requisition->status=='Pagada') &&
+                        $user->hasAnyRole(['admin', 'direccion', 'compras'])) {
+                        $userAdmin=true;
                 }elseif ($requisition->status=='Procesada' && $user->hasAnyRole(['admin', 'lider compras', 'compras'])) {
                     $userAdmin=true;
                 }elseif ($requisition->status=='Cotizada' && $user->hasAnyRole(['admin', 'direccion'])) {
@@ -339,6 +375,15 @@ class RequisitionController extends Controller
             case 7:
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'lider servicio'])) {
                     $userAdmin=true;
+                }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Cotizada' ||
+                        $requisition->status=='Cotizada Parcial' ||
+                        $requisition->status=='Aprobada Parcial' ||
+                        $requisition->status=='Pagada Parcial' ||
+                        $requisition->status=='Entregada Parcial' ||
+                        $requisition->status=='Pagada') &&
+                        $user->hasAnyRole(['admin', 'direccion', 'compras'])) {
+                        $userAdmin=true;
                 }elseif ($requisition->status=='Procesada' && $user->hasAnyRole(['admin', 'lider compras', 'compras'])) {
                     $userAdmin=true;
                 }elseif ($requisition->status=='Cotizada' && $user->hasAnyRole(['admin', 'direccion'])) {
