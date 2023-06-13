@@ -81,6 +81,7 @@ class RequisitionController extends Controller
             ->select('requisitions.*', 'users.id as id_user','users.name', 'users.last_name', 'role_user.role_id as role', 'roles.name as name_role')
             ->where('requisitions.status', 'Aprobada')
             ->orWhere('requisitions.status', 'Creada')
+            ->orWhere('requisitions.status', 'Solicitada')
             ->orWhere('requisitions.status', 'Aprobada Parcial')
             ->orWhere('requisitions.status', 'Pagada Parcial')
             ->orWhere('requisitions.status', 'Entregada Parcial')
