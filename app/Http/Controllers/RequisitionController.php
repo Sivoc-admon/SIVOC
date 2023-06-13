@@ -406,7 +406,7 @@ class RequisitionController extends Controller
 
 
             default:
-                # code...
+                $userAdmin=true;
                 break;
         }
         $response = [
