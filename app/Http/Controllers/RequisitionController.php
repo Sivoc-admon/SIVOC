@@ -150,7 +150,7 @@ class RequisitionController extends Controller
     {
         $error = false;
         $msg = "";
-        $trueDireccion="false";
+        $trueDireccion=false;
 
         $id_user = auth()->user()->id;
         $petition = $request->all();
@@ -180,7 +180,7 @@ class RequisitionController extends Controller
         foreach (auth()->user()->roles as $roles) {
             if($roles->name == 'direccion' || $roles->name == 'admin'){
                 $requisition->status = "Procesada";
-                $trueDireccion="true";
+                $trueDireccion=true;
                 break;
             }else{
                 $requisition->status = "Creada";
