@@ -257,6 +257,7 @@ class RequisitionController extends Controller
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'almacen'])) {
                     $userAdmin=true;
                 }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Solicitada' ||
                         $requisition->status=='Cotizada' ||
                         $requisition->status=='Cotizada Parcial' ||
                         $requisition->status=='Aprobada Parcial' ||
@@ -280,6 +281,7 @@ class RequisitionController extends Controller
                     $userAdmin=true;
                 }elseif (($requisition->status=='Procesada' ||
                         $requisition->status=='Cotizada' ||
+                        $requisition->status=='Solicitada' ||
                         $requisition->status=='Cotizada Parcial' ||
                         $requisition->status=='Aprobada Parcial' ||
                         $requisition->status=='Pagada Parcial' ||
@@ -304,6 +306,7 @@ class RequisitionController extends Controller
                     $userAdmin=true;
                 }elseif (($requisition->status=='Procesada' ||
                         $requisition->status=='Cotizada' ||
+                        $requisition->status=='Solicitada' ||
                         $requisition->status=='Cotizada Parcial' ||
                         $requisition->status=='Aprobada Parcial' ||
                         $requisition->status=='Pagada Parcial' ||
@@ -329,6 +332,7 @@ class RequisitionController extends Controller
                     $userAdmin=true;
                         }elseif (($requisition->status=='Procesada' ||
                         $requisition->status=='Cotizada' ||
+                        $requisition->status=='Solicitada' ||
                         $requisition->status=='Cotizada Parcial' ||
                         $requisition->status=='Aprobada Parcial' ||
                         $requisition->status=='Pagada Parcial' ||
@@ -352,6 +356,7 @@ class RequisitionController extends Controller
                 if ($requisition->status=='Creada' && $user->hasAnyRole(['admin', 'direccion', 'lider ventas'])) {
                     $userAdmin=true;
                 }elseif (($requisition->status=='Procesada' ||
+                        $requisition->status=='Solicitada' ||
                         $requisition->status=='Cotizada' ||
                         $requisition->status=='Cotizada Parcial' ||
                         $requisition->status=='Aprobada Parcial' ||
@@ -377,6 +382,7 @@ class RequisitionController extends Controller
                     $userAdmin=true;
                 }elseif (($requisition->status=='Procesada' ||
                         $requisition->status=='Cotizada' ||
+                        $requisition->status=='Solicitada' ||
                         $requisition->status=='Cotizada Parcial' ||
                         $requisition->status=='Aprobada Parcial' ||
                         $requisition->status=='Pagada Parcial' ||
