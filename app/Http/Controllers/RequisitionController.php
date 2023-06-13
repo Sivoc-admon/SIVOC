@@ -363,7 +363,7 @@ class RequisitionController extends Controller
                         $requisition->status=='Pagada Parcial' ||
                         $requisition->status=='Entregada Parcial' ||
                         $requisition->status=='Pagada') &&
-                        $user->hasAnyRole(['admin', 'direccion', 'compras'])) {
+                        $user->hasAnyRole(['admin', 'direccion', 'compras', 'finanzas'])) {
                         $userAdmin=true;
                 }elseif ($requisition->status=='Procesada' && $user->hasAnyRole(['admin', 'lider compras', 'compras'])) {
                     $userAdmin=true;
