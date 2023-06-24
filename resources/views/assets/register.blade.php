@@ -15,9 +15,9 @@
                 <div class="row">
                   <h4>Datos de Activo</h4>
                 </div>
-                  
+
                 <div class="row" style="background-color: #17a2b8">
-                  
+
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputDescriptionAsset">Descripción</label>
@@ -40,10 +40,10 @@
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="checkAsset" name="checkAsset" onclick="muestraOculta('checkAsset', 'divCalibration', 'fileAssetCalibration')">
                         <label class="form-check-label" for="checkAsset">Calibración</label>
-                        
+
                       </div>
                     </div>
-                    
+
                     <div class="col-md-4" id="divCalibration" style="display: none">
                       <div class="form-group">
                         <label for="inputCalibrationDayAsset">Fecha de Calibración</label>
@@ -64,7 +64,7 @@
 
             </form>
           </div>
-            
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" onclick="saveAsset();">Guardar</button>
@@ -92,9 +92,9 @@
                 <div class="row">
                   <h4>Datos de Activo</h4>
                 </div>
-                  
+
                 <div class="row" style="background-color: #17a2b8">
-                  
+
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="inputEditDescriptionAsset">Descripción</label>
@@ -117,23 +117,23 @@
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="checkEditAsset" name="checkEditAsset" onclick="muestraOculta('checkEditAsset','divEditCalibration', 'fileEditAssetCalibration');">
                         <label class="form-check-label" for="checkEditAsset">Calibración</label>
-                        
+
                       </div>
                     </div>
-                    
+
                     <div class="col-md-4" id="divEditCalibration" style="display:none">
                       <div class="form-group">
                         <label for="inputEditCalibrationDayAsset">Fecha de Calibración</label>
                         <input type="date" class="form-control" id="inputEditCalibrationDayAsset" name="inputEditCalibrationDayAsset" required>
                       </div>
-                      
+
                     </div>
-                    
+
                 </div>
 
             </form>
           </div>
-            
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" onclick="updateAsset();">Guardar</button>
@@ -171,7 +171,7 @@
                   <tr>
                       <th>#</th>
                       <th>archivo</th>
-                      
+
                   </tr>
               </tfoot>
           </table>
@@ -187,7 +187,7 @@
             </div>
           </div>
         </div>
-          
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -195,3 +195,75 @@
   </div>
   </div>
 </div>
+
+<!-- Modal RESTAURAR Asset -->
+<div class="modal fade" id="ModalRestoreAsset" tabindex="-1" aria-labelledby="ModalRestoreAsset" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Restaurar Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <table id="tableUsersRestored" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descripción</th>
+                        <th>Calibración</th>
+                        <th>Fecha Compra</th>
+                        <th>Fecha Calibración</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @if (isset($assetEliminados))
+                    @foreach ($assetEliminados as $asset)
+                    <tr>
+                        <td>{{ $asset->id }}</td>
+                        <td>{{ $asset->description }}</td>
+                        <td>{{ $asset->calibration }}</td>
+                        <td>{{ $asset->day_buy }}</td>
+                        <td>{{ $asset->date_calibration }}</td>
+                        <td>
+                            @if (Auth::user()->hasRole('admin'))
+
+
+                                <form action="{{ route('assets.restore',$asset->id) }}" method="GET">
+                                    @csrf
+                                    @method('GET')
+
+                                    <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Restaurar"><i class="fas fa-undo"></i></button>
+                                </form>
+                            @endif
+
+                        </td>
+                    </tr>
+                    @endforeach
+                  @endif
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Descripción</th>
+                        <th>Calibración</th>
+                        <th>Fecha Compra</th>
+                        <th>Fecha Calibración</th>
+                        <th>Acción</th>
+                    </tr>
+                </tfoot>
+              </table>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+  </div>

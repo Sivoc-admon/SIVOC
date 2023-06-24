@@ -165,6 +165,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('assets/showAssetFiles/{asset}', 'AssetController@showAssetFiles')->name('assets.showAssetFiles');
     Route::post('assets/{asset}/uploadFile', 'AssetController@uploadFile')->name('assets.uploadFile');
     Route::get('assets/{asset}/showFiles', 'AssetController@showFiles')->name('assets.showFiles');
+    Route::get('assets/restore/{id}', 'AssetController@restore')->name('assets.restore');
     Route::resource('assets', 'AssetController');
 
 });

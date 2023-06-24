@@ -20,9 +20,10 @@ class AssetController extends Controller
         ->select(DB::raw('assets.*, TIMESTAMPDIFF(MONTH, date_calibration, CURDATE()) as month'))
         ->whereNull('assets.deleted_at')
         ->get();
-       
-       
-       return view('assets.assets',compact('assets'));
+        $assetEliminados = Asset::onlyTrashed()->get();
+
+
+       return view('assets.assets',compact('assets', 'assetEliminados'));
     }
 
     /**
@@ -44,7 +45,7 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         $asset=Asset::create([
-            'description' => $request->description, 
+            'description' => $request->description,
             'clasification' => $request->costo,
             'day_buy' => $request->buy,
             'calibration' => $request->check,
@@ -52,11 +53,11 @@ class AssetController extends Controller
         ]);
         $error=false;
         $msg="";
-        
+
         if ($asset->save()) {
             $pathFile = 'public/Documents/Activos/'.$asset->id.'/General';
             //SE GUARDAN LOS ARCHIVOS GENERALES
-            for ($i=0; $i <$request->lengthGeneral ; $i++) { 
+            for ($i=0; $i <$request->lengthGeneral ; $i++) {
                 $nombre="generalFile".$i;
                 $archivo = $request->file($nombre);
                 $assetFile=AssetFile::create([
@@ -64,13 +65,13 @@ class AssetController extends Controller
                     'name' => $archivo->getClientOriginalName(),
                     'ruta' => 'storage/app/' . $pathFile,
                     'type' => 'General',
-    
+
                 ]);
                 $path = $archivo->storeAs(
                     $pathFile, $archivo->getClientOriginalName()
                 );
             }
-            
+
             if ($assetFile->save()) {
                 $msg="Archivos Generales guardados con exito";
             } else {
@@ -81,7 +82,7 @@ class AssetController extends Controller
             if ($request->check == 1) {
                 $pathFile = 'public/Documents/Activos/'.$asset->id.'/Calibracion';
                 //SE GUARDA LOS ARCHIVOS DE CALIBRACION
-                for ($i=0; $i <$request->lengthCalibration ; $i++) { 
+                for ($i=0; $i <$request->lengthCalibration ; $i++) {
                     $nombre="calibrationFile".$i;
                     $archivo = $request->file($nombre);
                     $assetFile2=AssetFile::create([
@@ -89,13 +90,13 @@ class AssetController extends Controller
                         'name' => $archivo->getClientOriginalName(),
                         'ruta' => 'storage/app/' . $pathFile,
                         'type' => 'Calibracion',
-        
+
                     ]);
                     $path = $archivo->storeAs(
                         $pathFile, $archivo->getClientOriginalName()
                     );
                 }
-                
+
                 if ($assetFile2->save()) {
                     $msg="Archivos Generales guardados con exito";
                 } else {
@@ -103,14 +104,14 @@ class AssetController extends Controller
                     $msg="No se pudieron guardar Archivos de calibracion";
                 }
             }
- 
+
         }else{
             $error=true;
             $msg="No se guardo el registro";
         }
 
         $array=["msg"=>$msg, "error"=>$error];
-        
+
         return response()->json($array);
     }
 
@@ -136,7 +137,7 @@ class AssetController extends Controller
         $asset = Asset::find($id);
 
         $array=["asset"=>$asset];
-        
+
         return response()->json($array);
     }
 
@@ -149,7 +150,7 @@ class AssetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $error=false;
         $msg="";
         $check=0;
@@ -162,17 +163,17 @@ class AssetController extends Controller
         }else{
             $check=0;
         }
-        
+
         $asset->update([
-            'description' => $request->inputEditDescriptionAsset, 
+            'description' => $request->inputEditDescriptionAsset,
             'clasification' => $request->inputEditCostoAsset,
             'day_buy' => $request->inputEditBuyAsset,
             'calibration' => $check,
             'date_calibration' => $request->inputEditCalibrationDayAsset,
-            
+
         ]);
 
-        
+
     }
 
     /**
@@ -191,10 +192,10 @@ class AssetController extends Controller
     public function showAssetFiles(Request $request, $asset)
     {
         $files = AssetFile::where('asset_id', $asset)->where('type', $request->tipo)->get();
-        
+
         $msg="";
         $error=false;
-        
+
 
         $array=["msg"=>$msg, "error"=>$error, "assetfiles"=>$files];
 
@@ -205,11 +206,11 @@ class AssetController extends Controller
     {
         $error=false;
         $msg="";
-        
-        
+
+
         $pathFile = 'public/Documents/Activos/'.$asset.'/'.$request->tipo;
         //SE GUARDAN LOS ARCHIVOS GENERALES
-        for ($i=0; $i <$request->tamanoFiles ; $i++) { 
+        for ($i=0; $i <$request->tamanoFiles ; $i++) {
             $nombre="file".$i;
             $archivo = $request->file($nombre);
             $assetFile=AssetFile::create([
@@ -223,18 +224,26 @@ class AssetController extends Controller
                 $pathFile, $archivo->getClientOriginalName()
             );
         }
-        
+
         if ($assetFile->save()) {
             $msg="Archivos Generales guardados con exito";
         } else {
             $error=true;
             $msg="No se pudieron guardar Archivos Generales";
         }
-            
-            
+
+
 
         $array=["msg"=>$msg, "error"=>$error];
-        
+
         return response()->json($array);
+    }
+
+    public function restore($id)
+    {
+        $user = Asset::withTrashed()->where('id', '=', $id)->first();
+
+        $user->restore();
+        return redirect()->route('assets.index');
     }
 }

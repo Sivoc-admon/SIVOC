@@ -12,16 +12,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    
+
                     <span data-toggle="modal" data-target="#ModalRegisterAsset">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Activo">
                             <i class="fas fa-plus"></i>
                         </button>
                     </span>
-                   
+                    <span data-toggle="modal" data-target="#ModalRestoreAsset">
+                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Restaurar activo">
+                            <i class="fas fa-check-square "></i>
+                        </button>
+                    </span>
+
                     @include('assets.register')
-                    
-                    
+
+
                 </div>
             </div>
         </div>
@@ -60,8 +65,8 @@
                                         @else
                                             <td>{{ $asset->date_calibration }}</td>
                                         @endif
-                                            
-                                        
+
+
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <span data-toggle="modal" data-target="#ModalEditAsset">
@@ -83,7 +88,7 @@
                                                     <form action="{{ route('assets.destroy',$asset->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                        
+
                                                         <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-minus-square"></i></button>
                                                     </form>
                                                 @endif
@@ -105,7 +110,7 @@
                             </tr>
                         </tfoot>
                     </table>
-                    
+
                 </div>
             </div>
         </div>
@@ -143,10 +148,10 @@
                         extend: 'pdf'
                     } )
                 ]
-                
+
             });
-            
-            
+
+
             //grafica(1,'donutChart', 'pie');
         } );
     </script>
